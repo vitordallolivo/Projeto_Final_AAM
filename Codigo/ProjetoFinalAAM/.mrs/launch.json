@@ -5,7 +5,7 @@
 			"type": "mrs-debugger",
 			"request": "launch",
 			"name": "ProjetoFinalAAM",
-			"cwd": "/home/vitor/mounriver-studio-projects/ProjetoFinalAAM",
+			"cwd": "/home/kali/Faculdade/Disciplinas/AAM/Projeto_Final_AAM/Codigo/ProjetoFinalAAM",
 			"openOCDCfg": {
 				"useLocalOpenOCD": true,
 				"executable": "/usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/OpenOCD/OpenOCD/bin/openocd",
@@ -39,8 +39,8 @@
 					"additionalCommands": []
 				},
 				"loadedFiles": {
-					"executableFile": "/home/vitor/mounriver-studio-projects/ProjetoFinalAAM/obj/ProjetoFinalAAM.elf",
-					"symbolFile": "/home/vitor/mounriver-studio-projects/ProjetoFinalAAM/obj/ProjetoFinalAAM.elf",
+					"executableFile": "/home/kali/Faculdade/Disciplinas/AAM/Projeto_Final_AAM/Codigo/ProjetoFinalAAM/obj/ProjetoFinalAAM.elf",
+					"symbolFile": "/home/kali/Faculdade/Disciplinas/AAM/Projeto_Final_AAM/Codigo/ProjetoFinalAAM/obj/ProjetoFinalAAM.elf",
 					"executableFileOffset": 0,
 					"symbolFileOffset": 0
 				},

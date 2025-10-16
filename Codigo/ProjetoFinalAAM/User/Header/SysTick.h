@@ -5,7 +5,7 @@
 #include "SysTick_prm.h"
 
 // =============================================================================
-// DEFINI??ES CORRETAS BASEADAS NO MANUAL
+// DEFINICOES BASEADAS NO MANUAL
 // =============================================================================
 
 // SysTick Control Register (STK_CTLR) bits - CORRIGIDOS
