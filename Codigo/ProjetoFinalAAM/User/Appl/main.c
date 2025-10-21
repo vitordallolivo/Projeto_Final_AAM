@@ -36,7 +36,6 @@ int main(void)
     {
         ALL_SLOTS_TASKS();
 
-
         switch(Slot){
 			
 			case SLOT_1:

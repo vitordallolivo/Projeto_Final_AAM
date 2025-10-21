@@ -8,6 +8,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include User/System/subdir.mk
 -include User/Hal/subdir.mk
 -include User/Drivers/subdir.mk
 -include User/Appl/subdir.mk
@@ -58,7 +59,7 @@ main-build: ProjetoFinalAAM.elf secondary-outputs
 
 # Tool invocations
 ProjetoFinalAAM.elf: $(OBJS) $(USER_OBJS)
-	@	riscv-none-embed-gcc -march=rv32ecxw -mabi=ilp32e -msmall-data-limit=0 -msave-restore -fmax-errors=20 -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized -g -T "/home/vitor/mounriver-studio-projects/ProjetoFinalAAM/Ld/Link.ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"ProjetoFinalAAM.map" --specs=nano.specs --specs=nosys.specs -o "ProjetoFinalAAM.elf" $(OBJS)  $(LIBS) -lprintf
+	@	riscv-none-embed-gcc -march=rv32ecxw -mabi=ilp32e -msmall-data-limit=0 -msave-restore -fmax-errors=20 -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized -g -T "/home/kali/Faculdade/Disciplinas/AAM/Projeto_Final_AAM/Codigo/ProjetoFinalAAM/Ld/Link.ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"ProjetoFinalAAM.map" --specs=nano.specs --specs=nosys.specs -o "ProjetoFinalAAM.elf" $(OBJS)  $(LIBS) -lprintf
 ProjetoFinalAAM.hex: ProjetoFinalAAM.elf
 	@	riscv-none-embed-objcopy -O ihex "ProjetoFinalAAM.elf" "ProjetoFinalAAM.hex"
 ProjetoFinalAAM.lst: ProjetoFinalAAM.elf

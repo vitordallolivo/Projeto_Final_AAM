@@ -20,9 +20,14 @@
 				"parentLogicPath": "",
 				"type": "file",
 				"name": "*.wvproj"
+			},
+			{
+				"name": "PWM.c",
+				"parentLogicPath": "User/Header",
+				"type": "file"
 			}
 		],
-		"projectName": "CH32V003F4P6",
+		"projectName": "ProjetoFinalAAM",
 		"architecture": "RISC-V",
 		"projectType": "c"
 	},
@@ -311,11 +316,11 @@
 		]
 	},
 	"flashConfig": {
-		"mcutype": "CH32V003",
+		"mcutype": "CH32V00x",
 		"address": "0x08000000",
-		"target_path": "obj/CH32V003F4P6.hex",
+		"target_path": "obj/ProjetoFinalAAM.hex",
 		"clkSpeed": "High",
-		"debug_interface_mode": "",
+		"debug_interface_mode": "1-wire serial",
 		"erase": true,
 		"program": true,
 		"verify": true,
@@ -392,8 +397,8 @@
 			"showDebugOutputTimestamps": true
 		},
 		"reserve": {
-			"PROGRAM_NAME": "obj/CH32V003F4P6.elf",
-			"PROJECT_ATTR": "CH32V003F4P6",
+			"PROGRAM_NAME": "obj/ProjetoFinalAAM.elf",
+			"PROJECT_ATTR": "ProjetoFinalAAM",
 			"PROJECT_BUILD_CONFIG_AUTO_ATTR": true,
 			"PROJECT_BUILD_CONFIG_ID_ATTR": "",
 			"ATTR_BUILD_BEFORE_LAUNCH_ATTR": 2,

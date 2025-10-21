@@ -1,16 +1,31 @@
 Archive member included to satisfy reference by file (symbol)
 
 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(save-restore.o)
-                              ./User/Hal/Hal.o (__riscv_save_2)
+                              ./User/System/SysTick.o (__riscv_save_2)
 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(muldi3.o)
-                              ./Debug/debug.o (__mulsi3)
+                              ./User/Drivers/PWM.o (__mulsi3)
 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(div.o)
-                              ./Peripheral/src/ch32v00x_usart.o (__divsi3)
+                              ./User/Drivers/PWM.o (__divsi3)
 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/../../../../riscv-none-embed/lib/rv32ecxw/ilp32e/libg_nano.a(lib_a-memset.o)
                               ./User/Drivers/ADC.o (memset)
 
 Discarded input sections
 
+ .text          0x0000000000000000        0x0 ./User/System/SysTick.o
+ .data          0x0000000000000000        0x0 ./User/System/SysTick.o
+ .bss           0x0000000000000000        0x0 ./User/System/SysTick.o
+ .text.SysTick_Init_HCLK
+                0x0000000000000000       0x62 ./User/System/SysTick.o
+ .text.SysTick_DeInit
+                0x0000000000000000       0x30 ./User/System/SysTick.o
+ .text.SysTick_Delay
+                0x0000000000000000       0x3e ./User/System/SysTick.o
+ .text.SysTick_SetCallback
+                0x0000000000000000        0xa ./User/System/SysTick.o
+ .text.SysTick_GetCurrentValue
+                0x0000000000000000        0x8 ./User/System/SysTick.o
+ .text.SysTick_SetCurrentValue
+                0x0000000000000000        0xc ./User/System/SysTick.o
  .text          0x0000000000000000        0x0 ./User/Hal/Hal.o
  .data          0x0000000000000000        0x0 ./User/Hal/Hal.o
  .bss           0x0000000000000000        0x0 ./User/Hal/Hal.o
@@ -25,21 +40,9 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./User/Drivers/ADC.o
  .text.ADC__ConfigModes
                 0x0000000000000000       0x7c ./User/Drivers/ADC.o
- .text          0x0000000000000000        0x0 ./User/Drivers/SysTick.o
- .data          0x0000000000000000        0x0 ./User/Drivers/SysTick.o
- .bss           0x0000000000000000        0x0 ./User/Drivers/SysTick.o
- .text.SysTick_Init_HCLK
-                0x0000000000000000       0x62 ./User/Drivers/SysTick.o
- .text.SysTick_DeInit
-                0x0000000000000000       0x30 ./User/Drivers/SysTick.o
- .text.SysTick_Delay
-                0x0000000000000000       0x3e ./User/Drivers/SysTick.o
- .text.SysTick_SetCallback
-                0x0000000000000000        0xa ./User/Drivers/SysTick.o
- .text.SysTick_GetCurrentValue
-                0x0000000000000000        0x8 ./User/Drivers/SysTick.o
- .text.SysTick_SetCurrentValue
-                0x0000000000000000        0xc ./User/Drivers/SysTick.o
+ .text          0x0000000000000000        0x0 ./User/Drivers/PWM.o
+ .data          0x0000000000000000        0x0 ./User/Drivers/PWM.o
+ .bss           0x0000000000000000        0x0 ./User/Drivers/PWM.o
  .text          0x0000000000000000        0x0 ./User/Appl/main.o
  .data          0x0000000000000000        0x0 ./User/Appl/main.o
  .bss           0x0000000000000000        0x0 ./User/Appl/main.o
@@ -128,8 +131,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x48 ./Peripheral/src/ch32v00x_dbgmcu.o
  .debug_ranges  0x0000000000000000       0x50 ./Peripheral/src/ch32v00x_dbgmcu.o
- .debug_line    0x0000000000000000      0x408 ./Peripheral/src/ch32v00x_dbgmcu.o
- .debug_str     0x0000000000000000      0x656 ./Peripheral/src/ch32v00x_dbgmcu.o
+ .debug_line    0x0000000000000000      0x438 ./Peripheral/src/ch32v00x_dbgmcu.o
+ .debug_str     0x0000000000000000      0x66e ./Peripheral/src/ch32v00x_dbgmcu.o
  .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_dbgmcu.o
  .debug_frame   0x0000000000000000       0x70 ./Peripheral/src/ch32v00x_dbgmcu.o
  .text          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_dma.o
@@ -176,8 +179,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x50 ./Peripheral/src/ch32v00x_exti.o
  .debug_ranges  0x0000000000000000       0x40 ./Peripheral/src/ch32v00x_exti.o
- .debug_line    0x0000000000000000      0x661 ./Peripheral/src/ch32v00x_exti.o
- .debug_str     0x0000000000000000      0x79d ./Peripheral/src/ch32v00x_exti.o
+ .debug_line    0x0000000000000000      0x6a9 ./Peripheral/src/ch32v00x_exti.o
+ .debug_str     0x0000000000000000      0x7b5 ./Peripheral/src/ch32v00x_exti.o
  .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_exti.o
  .debug_frame   0x0000000000000000       0x90 ./Peripheral/src/ch32v00x_exti.o
  .text          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_flash.o
@@ -253,8 +256,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000      0x110 ./Peripheral/src/ch32v00x_flash.o
  .debug_ranges  0x0000000000000000      0x100 ./Peripheral/src/ch32v00x_flash.o
- .debug_line    0x0000000000000000     0x1cba ./Peripheral/src/ch32v00x_flash.o
- .debug_str     0x0000000000000000      0xac5 ./Peripheral/src/ch32v00x_flash.o
+ .debug_line    0x0000000000000000     0x1d02 ./Peripheral/src/ch32v00x_flash.o
+ .debug_str     0x0000000000000000      0xadd ./Peripheral/src/ch32v00x_flash.o
  .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_flash.o
  .debug_frame   0x0000000000000000      0x324 ./Peripheral/src/ch32v00x_flash.o
  .text          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_gpio.o
@@ -362,8 +365,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000      0x108 ./Peripheral/src/ch32v00x_i2c.o
  .debug_ranges  0x0000000000000000       0xf8 ./Peripheral/src/ch32v00x_i2c.o
- .debug_line    0x0000000000000000     0x110f ./Peripheral/src/ch32v00x_i2c.o
- .debug_str     0x0000000000000000      0xac2 ./Peripheral/src/ch32v00x_i2c.o
+ .debug_line    0x0000000000000000     0x1157 ./Peripheral/src/ch32v00x_i2c.o
+ .debug_str     0x0000000000000000      0xada ./Peripheral/src/ch32v00x_i2c.o
  .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_i2c.o
  .debug_frame   0x0000000000000000      0x254 ./Peripheral/src/ch32v00x_i2c.o
  .text          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_iwdg.o
@@ -387,8 +390,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x48 ./Peripheral/src/ch32v00x_iwdg.o
  .debug_ranges  0x0000000000000000       0x38 ./Peripheral/src/ch32v00x_iwdg.o
- .debug_line    0x0000000000000000      0x480 ./Peripheral/src/ch32v00x_iwdg.o
- .debug_str     0x0000000000000000      0x709 ./Peripheral/src/ch32v00x_iwdg.o
+ .debug_line    0x0000000000000000      0x4c8 ./Peripheral/src/ch32v00x_iwdg.o
+ .debug_str     0x0000000000000000      0x721 ./Peripheral/src/ch32v00x_iwdg.o
  .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_iwdg.o
  .debug_frame   0x0000000000000000       0x70 ./Peripheral/src/ch32v00x_iwdg.o
  .text          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_misc.o
@@ -412,8 +415,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x38 ./Peripheral/src/ch32v00x_opa.o
  .debug_ranges  0x0000000000000000       0x28 ./Peripheral/src/ch32v00x_opa.o
- .debug_line    0x0000000000000000      0x476 ./Peripheral/src/ch32v00x_opa.o
- .debug_str     0x0000000000000000      0x67d ./Peripheral/src/ch32v00x_opa.o
+ .debug_line    0x0000000000000000      0x4be ./Peripheral/src/ch32v00x_opa.o
+ .debug_str     0x0000000000000000      0x695 ./Peripheral/src/ch32v00x_opa.o
  .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_opa.o
  .debug_frame   0x0000000000000000       0x50 ./Peripheral/src/ch32v00x_opa.o
  .text          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_pwr.o
@@ -441,8 +444,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x58 ./Peripheral/src/ch32v00x_pwr.o
  .debug_ranges  0x0000000000000000       0x90 ./Peripheral/src/ch32v00x_pwr.o
- .debug_line    0x0000000000000000      0x7d4 ./Peripheral/src/ch32v00x_pwr.o
- .debug_str     0x0000000000000000      0x80f ./Peripheral/src/ch32v00x_pwr.o
+ .debug_line    0x0000000000000000      0x81c ./Peripheral/src/ch32v00x_pwr.o
+ .debug_str     0x0000000000000000      0x827 ./Peripheral/src/ch32v00x_pwr.o
  .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_pwr.o
  .debug_frame   0x0000000000000000       0xb8 ./Peripheral/src/ch32v00x_pwr.o
  .text          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_rcc.o
@@ -469,8 +472,6 @@ Discarded input sections
  .text.RCC_LSICmd
                 0x0000000000000000       0x14 ./Peripheral/src/ch32v00x_rcc.o
  .text.RCC_AHBPeriphClockCmd
-                0x0000000000000000       0x1e ./Peripheral/src/ch32v00x_rcc.o
- .text.RCC_APB1PeriphClockCmd
                 0x0000000000000000       0x1e ./Peripheral/src/ch32v00x_rcc.o
  .text.RCC_APB1PeriphResetCmd
                 0x0000000000000000       0x1e ./Peripheral/src/ch32v00x_rcc.o
@@ -536,8 +537,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0xb8 ./Peripheral/src/ch32v00x_spi.o
  .debug_ranges  0x0000000000000000       0xa8 ./Peripheral/src/ch32v00x_spi.o
- .debug_line    0x0000000000000000      0xa62 ./Peripheral/src/ch32v00x_spi.o
- .debug_str     0x0000000000000000      0x949 ./Peripheral/src/ch32v00x_spi.o
+ .debug_line    0x0000000000000000      0xaaa ./Peripheral/src/ch32v00x_spi.o
+ .debug_str     0x0000000000000000      0x961 ./Peripheral/src/ch32v00x_spi.o
  .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_spi.o
  .debug_frame   0x0000000000000000      0x15c ./Peripheral/src/ch32v00x_spi.o
  .text          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_tim.o
@@ -549,12 +550,8 @@ Discarded input sections
                 0x0000000000000000       0x70 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_DeInit
                 0x0000000000000000       0x5c ./Peripheral/src/ch32v00x_tim.o
- .text.TIM_TimeBaseInit
-                0x0000000000000000       0x4e ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_OC1Init
                 0x0000000000000000       0x6a ./Peripheral/src/ch32v00x_tim.o
- .text.TIM_OC2Init
-                0x0000000000000000       0x96 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_OC3Init
                 0x0000000000000000       0x94 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_OC4Init
@@ -569,7 +566,6 @@ Discarded input sections
                 0x0000000000000000       0x16 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_BDTRStructInit
                 0x0000000000000000       0x1e ./Peripheral/src/ch32v00x_tim.o
- .text.TIM_Cmd  0x0000000000000000       0x18 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_CtrlPWMOutputs
                 0x0000000000000000       0x16 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_ITConfig
@@ -608,8 +604,6 @@ Discarded input sections
                 0x0000000000000000       0x10 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_ForcedOC4Config
                 0x0000000000000000       0x14 ./Peripheral/src/ch32v00x_tim.o
- .text.TIM_ARRPreloadConfig
-                0x0000000000000000       0x1a ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_SelectCOM
                 0x0000000000000000       0x18 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_SelectCCDMA
@@ -618,8 +612,6 @@ Discarded input sections
                 0x0000000000000000       0x18 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_OC1PreloadConfig
                 0x0000000000000000        0xe ./Peripheral/src/ch32v00x_tim.o
- .text.TIM_OC2PreloadConfig
-                0x0000000000000000       0x16 ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_OC3PreloadConfig
                 0x0000000000000000        0xe ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_OC4PreloadConfig
@@ -722,16 +714,6 @@ Discarded input sections
                 0x0000000000000000        0xc ./Peripheral/src/ch32v00x_tim.o
  .text.TIM_IndicateCaptureLevelCmd
                 0x0000000000000000       0x12 ./Peripheral/src/ch32v00x_tim.o
- .debug_info    0x0000000000000000     0x297f ./Peripheral/src/ch32v00x_tim.o
- .debug_abbrev  0x0000000000000000      0x408 ./Peripheral/src/ch32v00x_tim.o
- .debug_loc     0x0000000000000000     0x1936 ./Peripheral/src/ch32v00x_tim.o
- .debug_aranges
-                0x0000000000000000      0x2d8 ./Peripheral/src/ch32v00x_tim.o
- .debug_ranges  0x0000000000000000      0x2f8 ./Peripheral/src/ch32v00x_tim.o
- .debug_line    0x0000000000000000     0x30ea ./Peripheral/src/ch32v00x_tim.o
- .debug_str     0x0000000000000000     0x127b ./Peripheral/src/ch32v00x_tim.o
- .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_tim.o
- .debug_frame   0x0000000000000000      0x624 ./Peripheral/src/ch32v00x_tim.o
  .text          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_usart.o
  .data          0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_usart.o
  .bss           0x0000000000000000        0x0 ./Peripheral/src/ch32v00x_usart.o
@@ -814,8 +796,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x58 ./Peripheral/src/ch32v00x_wwdg.o
  .debug_ranges  0x0000000000000000       0x48 ./Peripheral/src/ch32v00x_wwdg.o
- .debug_line    0x0000000000000000      0x524 ./Peripheral/src/ch32v00x_wwdg.o
- .debug_str     0x0000000000000000      0x6c2 ./Peripheral/src/ch32v00x_wwdg.o
+ .debug_line    0x0000000000000000      0x56c ./Peripheral/src/ch32v00x_wwdg.o
+ .debug_str     0x0000000000000000      0x6da ./Peripheral/src/ch32v00x_wwdg.o
  .comment       0x0000000000000000       0x34 ./Peripheral/src/ch32v00x_wwdg.o
  .debug_frame   0x0000000000000000       0xa4 ./Peripheral/src/ch32v00x_wwdg.o
  .text          0x0000000000000000        0x0 ./Debug/debug.o
@@ -885,7 +867,6 @@ Discarded input sections
  .data          0x0000000000000000        0x0 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(save-restore.o)
  .bss           0x0000000000000000        0x0 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(save-restore.o)
  .eh_frame      0x0000000000000000       0x68 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(save-restore.o)
- .text          0x0000000000000000       0x18 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(muldi3.o)
  .data          0x0000000000000000        0x0 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(muldi3.o)
  .bss           0x0000000000000000        0x0 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(muldi3.o)
  .data          0x0000000000000000        0x0 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(div.o)
@@ -902,9 +883,10 @@ RAM              0x0000000020000000 0x0000000000000800 xrw
 
 Linker script and memory map
 
+LOAD ./User/System/SysTick.o
 LOAD ./User/Hal/Hal.o
 LOAD ./User/Drivers/ADC.o
-LOAD ./User/Drivers/SysTick.o
+LOAD ./User/Drivers/PWM.o
 LOAD ./User/Appl/main.o
 LOAD ./User/ch32v00x_it.o
 LOAD ./User/system_ch32v00x.o
@@ -968,7 +950,7 @@ END GROUP
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                PROVIDE (_highcode_vma_end = .)
 
-.text           0x00000000000000a0      0xb88
+.text           0x00000000000000a0      0xe88
                 0x00000000000000a0                . = ALIGN (0x4)
  *(.text)
  .text          0x00000000000000a0       0x14 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(save-restore.o)
@@ -978,185 +960,218 @@ END GROUP
                 0x00000000000000aa                __riscv_restore_2
                 0x00000000000000aa                __riscv_restore_0
                 0x00000000000000aa                __riscv_restore_1
- .text          0x00000000000000b4       0x7e /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(div.o)
-                0x00000000000000b4                __divsi3
-                0x00000000000000bc                __udivsi3
-                0x00000000000000e8                __umodsi3
-                0x000000000000010c                __modsi3
- .text          0x0000000000000132       0xa8 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/../../../../riscv-none-embed/lib/rv32ecxw/ilp32e/libg_nano.a(lib_a-memset.o)
-                0x0000000000000132                memset
+ .text          0x00000000000000b4       0x16 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(muldi3.o)
+                0x00000000000000b4                __mulsi3
+ *fill*         0x00000000000000ca        0x2 
+ .text          0x00000000000000cc       0x7e /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/rv32ecxw/ilp32e/libgcc.a(div.o)
+                0x00000000000000cc                __divsi3
+                0x00000000000000d4                __udivsi3
+                0x0000000000000100                __umodsi3
+                0x0000000000000124                __modsi3
+ .text          0x000000000000014a       0xa8 /usr/share/MRS2/MRS-linux-x64/resources/app/resources/linux/components/WCH/Toolchain/RISC-V Embedded GCC/bin/../lib/gcc/riscv-none-embed/8.2.0/../../../../riscv-none-embed/lib/rv32ecxw/ilp32e/libg_nano.a(lib_a-memset.o)
+                0x000000000000014a                memset
  *(.text.*)
- .text.ADProcess
-                0x00000000000001da       0x98 ./User/Hal/Hal.o
-                0x00000000000001da                ADProcess
- .text.Hal__BackgroundHandler
-                0x0000000000000272        0x8 ./User/Hal/Hal.o
-                0x0000000000000272                Hal__BackgroundHandler
- .text.ADC__Initialize
-                0x000000000000027a      0x166 ./User/Drivers/ADC.o
-                0x000000000000027a                ADC__Initialize
- .text.ADC_Handler
-                0x00000000000003e0       0x5e ./User/Drivers/ADC.o
-                0x00000000000003e0                ADC_Handler
- .text.ADC__GetValue
-                0x000000000000043e       0x18 ./User/Drivers/ADC.o
-                0x000000000000043e                ADC__GetValue
  .text.SysTick_Init
-                0x0000000000000456       0x4e ./User/Drivers/SysTick.o
-                0x0000000000000456                SysTick_Init
+                0x00000000000001f2       0x56 ./User/System/SysTick.o
+                0x00000000000001f2                SysTick_Init
  .text.SysTick_GetTick
-                0x00000000000004a4        0x6 ./User/Drivers/SysTick.o
-                0x00000000000004a4                SysTick_GetTick
+                0x0000000000000248        0xa ./User/System/SysTick.o
+                0x0000000000000248                SysTick_GetTick
  .text.SysTick_GetElapsedTime
-                0x00000000000004aa       0x18 ./User/Drivers/SysTick.o
-                0x00000000000004aa                SysTick_GetElapsedTime
+                0x0000000000000252       0x20 ./User/System/SysTick.o
+                0x0000000000000252                SysTick_GetElapsedTime
  .text.SysTick_Handler
-                0x00000000000004c2       0x1e ./User/Drivers/SysTick.o
-                0x00000000000004c2                SysTick_Handler
+                0x0000000000000272       0x22 ./User/System/SysTick.o
+                0x0000000000000272                SysTick_Handler
+ .text.ADProcess
+                0x0000000000000294       0x8c ./User/Hal/Hal.o
+                0x0000000000000294                ADProcess
+ .text.Hal__BackgroundHandler
+                0x0000000000000320        0x8 ./User/Hal/Hal.o
+                0x0000000000000320                Hal__BackgroundHandler
+ .text.ADC__Initialize
+                0x0000000000000328      0x16a ./User/Drivers/ADC.o
+                0x0000000000000328                ADC__Initialize
+ .text.ADC_Handler
+                0x0000000000000492       0x5e ./User/Drivers/ADC.o
+                0x0000000000000492                ADC_Handler
+ .text.ADC__GetValue
+                0x00000000000004f0       0x18 ./User/Drivers/ADC.o
+                0x00000000000004f0                ADC__GetValue
+ .text.Pwm__SetTCFrequency
+                0x0000000000000508       0xac ./User/Drivers/PWM.o
+                0x0000000000000508                Pwm__SetTCFrequency
+ .text.Pwm__SetDutyCycle
+                0x00000000000005b4       0x66 ./User/Drivers/PWM.o
+                0x00000000000005b4                Pwm__SetDutyCycle
+ .text.Pwm__Initialize
+                0x000000000000061a       0x68 ./User/Drivers/PWM.o
+                0x000000000000061a                Pwm__Initialize
  .text.startup.main
-                0x00000000000004e0       0x6c ./User/Appl/main.o
-                0x00000000000004e0                main
+                0x0000000000000682       0x70 ./User/Appl/main.o
+                0x0000000000000682                main
  .text.NMI_Handler
-                0x000000000000054c        0x2 ./User/ch32v00x_it.o
-                0x000000000000054c                NMI_Handler
+                0x00000000000006f2        0x2 ./User/ch32v00x_it.o
+                0x00000000000006f2                NMI_Handler
  .text.HardFault_Handler
-                0x000000000000054e       0x10 ./User/ch32v00x_it.o
-                0x000000000000054e                HardFault_Handler
+                0x00000000000006f4       0x10 ./User/ch32v00x_it.o
+                0x00000000000006f4                HardFault_Handler
  .text.SystemInit
-                0x000000000000055e      0x132 ./User/system_ch32v00x.o
-                0x000000000000055e                SystemInit
+                0x0000000000000704      0x134 ./User/system_ch32v00x.o
+                0x0000000000000704                SystemInit
  .text.SystemCoreClockUpdate
-                0x0000000000000690       0x68 ./User/system_ch32v00x.o
-                0x0000000000000690                SystemCoreClockUpdate
+                0x0000000000000838       0x6c ./User/system_ch32v00x.o
+                0x0000000000000838                SystemCoreClockUpdate
  .text.vector_handler
-                0x00000000000006f8        0x2 ./Startup/startup_ch32v00x.o
-                0x00000000000006f8                TIM1_CC_IRQHandler
-                0x00000000000006f8                PVD_IRQHandler
-                0x00000000000006f8                SPI1_IRQHandler
-                0x00000000000006f8                AWU_IRQHandler
-                0x00000000000006f8                EXTI7_0_IRQHandler
-                0x00000000000006f8                DMA1_Channel4_IRQHandler
-                0x00000000000006f8                ADC1_IRQHandler
-                0x00000000000006f8                DMA1_Channel7_IRQHandler
-                0x00000000000006f8                I2C1_EV_IRQHandler
-                0x00000000000006f8                DMA1_Channel6_IRQHandler
-                0x00000000000006f8                RCC_IRQHandler
-                0x00000000000006f8                TIM1_TRG_COM_IRQHandler
-                0x00000000000006f8                DMA1_Channel1_IRQHandler
-                0x00000000000006f8                DMA1_Channel5_IRQHandler
-                0x00000000000006f8                DMA1_Channel3_IRQHandler
-                0x00000000000006f8                TIM1_UP_IRQHandler
-                0x00000000000006f8                WWDG_IRQHandler
-                0x00000000000006f8                TIM2_IRQHandler
-                0x00000000000006f8                SW_Handler
-                0x00000000000006f8                TIM1_BRK_IRQHandler
-                0x00000000000006f8                DMA1_Channel2_IRQHandler
-                0x00000000000006f8                FLASH_IRQHandler
-                0x00000000000006f8                USART1_IRQHandler
-                0x00000000000006f8                I2C1_ER_IRQHandler
+                0x00000000000008a4        0x2 ./Startup/startup_ch32v00x.o
+                0x00000000000008a4                TIM1_CC_IRQHandler
+                0x00000000000008a4                PVD_IRQHandler
+                0x00000000000008a4                SPI1_IRQHandler
+                0x00000000000008a4                AWU_IRQHandler
+                0x00000000000008a4                EXTI7_0_IRQHandler
+                0x00000000000008a4                DMA1_Channel4_IRQHandler
+                0x00000000000008a4                ADC1_IRQHandler
+                0x00000000000008a4                DMA1_Channel7_IRQHandler
+                0x00000000000008a4                I2C1_EV_IRQHandler
+                0x00000000000008a4                DMA1_Channel6_IRQHandler
+                0x00000000000008a4                RCC_IRQHandler
+                0x00000000000008a4                TIM1_TRG_COM_IRQHandler
+                0x00000000000008a4                DMA1_Channel1_IRQHandler
+                0x00000000000008a4                DMA1_Channel5_IRQHandler
+                0x00000000000008a4                DMA1_Channel3_IRQHandler
+                0x00000000000008a4                TIM1_UP_IRQHandler
+                0x00000000000008a4                WWDG_IRQHandler
+                0x00000000000008a4                TIM2_IRQHandler
+                0x00000000000008a4                SW_Handler
+                0x00000000000008a4                TIM1_BRK_IRQHandler
+                0x00000000000008a4                DMA1_Channel2_IRQHandler
+                0x00000000000008a4                FLASH_IRQHandler
+                0x00000000000008a4                USART1_IRQHandler
+                0x00000000000008a4                I2C1_ER_IRQHandler
  .text.handle_reset
-                0x00000000000006fa       0xb0 ./Startup/startup_ch32v00x.o
-                0x00000000000006fa                handle_reset
+                0x00000000000008a6       0xb0 ./Startup/startup_ch32v00x.o
+                0x00000000000008a6                handle_reset
  .text.ADC_DeInit
-                0x00000000000007aa       0x26 ./Peripheral/src/ch32v00x_adc.o
-                0x00000000000007aa                ADC_DeInit
+                0x0000000000000956       0x26 ./Peripheral/src/ch32v00x_adc.o
+                0x0000000000000956                ADC_DeInit
  .text.ADC_Init
-                0x00000000000007d0       0x4e ./Peripheral/src/ch32v00x_adc.o
-                0x00000000000007d0                ADC_Init
- .text.ADC_Cmd  0x000000000000081e       0x10 ./Peripheral/src/ch32v00x_adc.o
-                0x000000000000081e                ADC_Cmd
+                0x000000000000097c       0x4e ./Peripheral/src/ch32v00x_adc.o
+                0x000000000000097c                ADC_Init
+ .text.ADC_Cmd  0x00000000000009ca       0x10 ./Peripheral/src/ch32v00x_adc.o
+                0x00000000000009ca                ADC_Cmd
  .text.ADC_DMACmd
-                0x000000000000082e       0x12 ./Peripheral/src/ch32v00x_adc.o
-                0x000000000000082e                ADC_DMACmd
+                0x00000000000009da       0x12 ./Peripheral/src/ch32v00x_adc.o
+                0x00000000000009da                ADC_DMACmd
  .text.ADC_ResetCalibration
-                0x0000000000000840        0xa ./Peripheral/src/ch32v00x_adc.o
-                0x0000000000000840                ADC_ResetCalibration
+                0x00000000000009ec        0xa ./Peripheral/src/ch32v00x_adc.o
+                0x00000000000009ec                ADC_ResetCalibration
  .text.ADC_GetResetCalibrationStatus
-                0x000000000000084a        0x8 ./Peripheral/src/ch32v00x_adc.o
-                0x000000000000084a                ADC_GetResetCalibrationStatus
+                0x00000000000009f6        0x8 ./Peripheral/src/ch32v00x_adc.o
+                0x00000000000009f6                ADC_GetResetCalibrationStatus
  .text.ADC_StartCalibration
-                0x0000000000000852        0xa ./Peripheral/src/ch32v00x_adc.o
-                0x0000000000000852                ADC_StartCalibration
+                0x00000000000009fe        0xa ./Peripheral/src/ch32v00x_adc.o
+                0x00000000000009fe                ADC_StartCalibration
  .text.ADC_GetCalibrationStatus
-                0x000000000000085c        0x8 ./Peripheral/src/ch32v00x_adc.o
-                0x000000000000085c                ADC_GetCalibrationStatus
+                0x0000000000000a08        0x8 ./Peripheral/src/ch32v00x_adc.o
+                0x0000000000000a08                ADC_GetCalibrationStatus
  .text.ADC_SoftwareStartConvCmd
-                0x0000000000000864       0x18 ./Peripheral/src/ch32v00x_adc.o
-                0x0000000000000864                ADC_SoftwareStartConvCmd
+                0x0000000000000a10       0x18 ./Peripheral/src/ch32v00x_adc.o
+                0x0000000000000a10                ADC_SoftwareStartConvCmd
  .text.ADC_RegularChannelConfig
-                0x000000000000087c       0xba ./Peripheral/src/ch32v00x_adc.o
-                0x000000000000087c                ADC_RegularChannelConfig
- .text.DMA_Cmd  0x0000000000000936       0x14 ./Peripheral/src/ch32v00x_dma.o
-                0x0000000000000936                DMA_Cmd
+                0x0000000000000a28       0xba ./Peripheral/src/ch32v00x_adc.o
+                0x0000000000000a28                ADC_RegularChannelConfig
+ .text.DMA_Cmd  0x0000000000000ae2       0x14 ./Peripheral/src/ch32v00x_dma.o
+                0x0000000000000ae2                DMA_Cmd
  .text.DMA_GetFlagStatus
-                0x000000000000094a        0xe ./Peripheral/src/ch32v00x_dma.o
-                0x000000000000094a                DMA_GetFlagStatus
+                0x0000000000000af6        0xe ./Peripheral/src/ch32v00x_dma.o
+                0x0000000000000af6                DMA_GetFlagStatus
  .text.DMA_ClearFlag
-                0x0000000000000958        0x8 ./Peripheral/src/ch32v00x_dma.o
-                0x0000000000000958                DMA_ClearFlag
+                0x0000000000000b04        0x8 ./Peripheral/src/ch32v00x_dma.o
+                0x0000000000000b04                DMA_ClearFlag
  .text.GPIO_Init
-                0x0000000000000960       0x7c ./Peripheral/src/ch32v00x_gpio.o
-                0x0000000000000960                GPIO_Init
+                0x0000000000000b0c       0x7c ./Peripheral/src/ch32v00x_gpio.o
+                0x0000000000000b0c                GPIO_Init
  .text.NVIC_PriorityGroupConfig
-                0x00000000000009dc        0x6 ./Peripheral/src/ch32v00x_misc.o
-                0x00000000000009dc                NVIC_PriorityGroupConfig
+                0x0000000000000b88        0x6 ./Peripheral/src/ch32v00x_misc.o
+                0x0000000000000b88                NVIC_PriorityGroupConfig
  .text.RCC_AdjustHSICalibrationValue
-                0x00000000000009e2       0x12 ./Peripheral/src/ch32v00x_rcc.o
-                0x00000000000009e2                RCC_AdjustHSICalibrationValue
+                0x0000000000000b8e       0x12 ./Peripheral/src/ch32v00x_rcc.o
+                0x0000000000000b8e                RCC_AdjustHSICalibrationValue
  .text.RCC_ADCCLKConfig
-                0x00000000000009f4       0x14 ./Peripheral/src/ch32v00x_rcc.o
-                0x00000000000009f4                RCC_ADCCLKConfig
+                0x0000000000000ba0       0x14 ./Peripheral/src/ch32v00x_rcc.o
+                0x0000000000000ba0                RCC_ADCCLKConfig
  .text.RCC_GetClocksFreq
-                0x0000000000000a08       0xa2 ./Peripheral/src/ch32v00x_rcc.o
-                0x0000000000000a08                RCC_GetClocksFreq
+                0x0000000000000bb4       0xa2 ./Peripheral/src/ch32v00x_rcc.o
+                0x0000000000000bb4                RCC_GetClocksFreq
  .text.RCC_APB2PeriphClockCmd
-                0x0000000000000aaa       0x1e ./Peripheral/src/ch32v00x_rcc.o
-                0x0000000000000aaa                RCC_APB2PeriphClockCmd
+                0x0000000000000c56       0x1e ./Peripheral/src/ch32v00x_rcc.o
+                0x0000000000000c56                RCC_APB2PeriphClockCmd
+ .text.RCC_APB1PeriphClockCmd
+                0x0000000000000c74       0x1e ./Peripheral/src/ch32v00x_rcc.o
+                0x0000000000000c74                RCC_APB1PeriphClockCmd
  .text.RCC_APB2PeriphResetCmd
-                0x0000000000000ac8       0x1e ./Peripheral/src/ch32v00x_rcc.o
-                0x0000000000000ac8                RCC_APB2PeriphResetCmd
+                0x0000000000000c92       0x1e ./Peripheral/src/ch32v00x_rcc.o
+                0x0000000000000c92                RCC_APB2PeriphResetCmd
+ .text.TIM_TimeBaseInit
+                0x0000000000000cb0       0x4e ./Peripheral/src/ch32v00x_tim.o
+                0x0000000000000cb0                TIM_TimeBaseInit
+ .text.TIM_OC2Init
+                0x0000000000000cfe       0x96 ./Peripheral/src/ch32v00x_tim.o
+                0x0000000000000cfe                TIM_OC2Init
+ .text.TIM_Cmd  0x0000000000000d94       0x18 ./Peripheral/src/ch32v00x_tim.o
+                0x0000000000000d94                TIM_Cmd
+ .text.TIM_ARRPreloadConfig
+                0x0000000000000dac       0x1a ./Peripheral/src/ch32v00x_tim.o
+                0x0000000000000dac                TIM_ARRPreloadConfig
+ .text.TIM_OC2PreloadConfig
+                0x0000000000000dc6       0x16 ./Peripheral/src/ch32v00x_tim.o
+                0x0000000000000dc6                TIM_OC2PreloadConfig
  .text.USART_Init
-                0x0000000000000ae6       0xcc ./Peripheral/src/ch32v00x_usart.o
-                0x0000000000000ae6                USART_Init
+                0x0000000000000ddc       0xcc ./Peripheral/src/ch32v00x_usart.o
+                0x0000000000000ddc                USART_Init
  .text.USART_Cmd
-                0x0000000000000bb2       0x16 ./Peripheral/src/ch32v00x_usart.o
-                0x0000000000000bb2                USART_Cmd
+                0x0000000000000ea8       0x16 ./Peripheral/src/ch32v00x_usart.o
+                0x0000000000000ea8                USART_Cmd
  .text.USART_Printf_Init
-                0x0000000000000bc8       0x54 ./Debug/debug.o
-                0x0000000000000bc8                USART_Printf_Init
+                0x0000000000000ebe       0x54 ./Debug/debug.o
+                0x0000000000000ebe                USART_Printf_Init
  *(.rodata)
  *(.rodata*)
- *fill*         0x0000000000000c1c        0x0 
+ *fill*         0x0000000000000f12        0x2 
  .rodata.Adc_Enable_Table
-                0x0000000000000c1c        0x9 ./User/Drivers/ADC.o
-                0x0000000000000c1c                Adc_Enable_Table
+                0x0000000000000f14        0x9 ./User/Drivers/ADC.o
+                0x0000000000000f14                Adc_Enable_Table
+ *fill*         0x0000000000000f1d        0x3 
+ .rodata.PWM_Enable_Table
+                0x0000000000000f20        0x6 ./User/Drivers/PWM.o
+                0x0000000000000f20                PWM_Enable_Table
  *(.gnu.linkonce.t.*)
-                0x0000000000000c28                . = ALIGN (0x4)
- *fill*         0x0000000000000c25        0x3 
+                0x0000000000000f28                . = ALIGN (0x4)
+ *fill*         0x0000000000000f26        0x2 
 
-.rela.dyn       0x0000000000000c28        0x0
- .rela.init     0x0000000000000c28        0x0 ./User/Hal/Hal.o
+.rela.dyn       0x0000000000000f28        0x0
+ .rela.init     0x0000000000000f28        0x0 ./User/System/SysTick.o
  .rela.text.handle_reset
-                0x0000000000000c28        0x0 ./User/Hal/Hal.o
+                0x0000000000000f28        0x0 ./User/System/SysTick.o
 
-.fini           0x0000000000000c28        0x0
+.fini           0x0000000000000f28        0x0
  *(SORT_NONE(.fini))
-                0x0000000000000c28                . = ALIGN (0x4)
+                0x0000000000000f28                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (_etext = .)
                 [!provide]                        PROVIDE (_eitcm = .)
 
-.preinit_array  0x0000000000000c28        0x0
+.preinit_array  0x0000000000000f28        0x0
                 [!provide]                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
                 [!provide]                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x0000000000000c28        0x0
+.init_array     0x0000000000000f28        0x0
                 [!provide]                        PROVIDE (__init_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
  *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
                 [!provide]                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x0000000000000c28        0x0
+.fini_array     0x0000000000000f28        0x0
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
  *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
@@ -1176,15 +1191,15 @@ END GROUP
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
 
-.dalign         0x0000000020000000        0x0 load address 0x0000000000000c28
+.dalign         0x0000000020000000        0x0 load address 0x0000000000000f28
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                PROVIDE (_data_vma = .)
 
-.dlalign        0x0000000000000c28        0x0
-                0x0000000000000c28                . = ALIGN (0x4)
-                0x0000000000000c28                PROVIDE (_data_lma = .)
+.dlalign        0x0000000000000f28        0x0
+                0x0000000000000f28                . = ALIGN (0x4)
+                0x0000000000000f28                PROVIDE (_data_lma = .)
 
-.data           0x0000000020000000       0x38 load address 0x0000000000000c28
+.data           0x0000000020000000       0x38 load address 0x0000000000000f28
                 0x0000000020000000                . = ALIGN (0x4)
  *(.gnu.linkonce.r.*)
  *(.data .data.*)
@@ -1213,57 +1228,61 @@ END GROUP
                 0x0000000020000038                . = ALIGN (0x4)
                 0x0000000020000038                PROVIDE (_edata = .)
 
-.bss            0x0000000020000038       0x54 load address 0x0000000000000c60
+.bss            0x0000000020000038       0x68 load address 0x0000000000000f60
                 0x0000000020000038                . = ALIGN (0x4)
                 0x0000000020000038                PROVIDE (_sbss = .)
  *(.sbss*)
  *(.gnu.linkonce.sb.*)
  *(.bss*)
- .bss.AD_Accumulator
-                0x0000000020000038        0x4 ./User/Hal/Hal.o
-                0x0000000020000038                AD_Accumulator
- .bss.AD_Channel
-                0x000000002000003c        0x4 ./User/Hal/Hal.o
-                0x000000002000003c                AD_Channel
- .bss.AD_Counter
-                0x0000000020000040        0x2 ./User/Hal/Hal.o
-                0x0000000020000040                AD_Counter
- *fill*         0x0000000020000042        0x2 
- .bss.AD_Sample
-                0x0000000020000044        0x4 ./User/Hal/Hal.o
-                0x0000000020000044                AD_Sample
- .bss.Hal_Analog_Inputs
-                0x0000000020000048        0x4 ./User/Hal/Hal.o
-                0x0000000020000048                Hal_Analog_Inputs
- .bss.ADC_Buffer
-                0x000000002000004c       0x12 ./User/Drivers/ADC.o
-                0x000000002000004c                ADC_Buffer
- *fill*         0x000000002000005e        0x2 
- .bss.DMA_Buffer
-                0x0000000020000060       0x12 ./User/Drivers/ADC.o
-                0x0000000020000060                DMA_Buffer
- *fill*         0x0000000020000072        0x2 
  .bss.SysTick_Count
-                0x0000000020000074        0x4 ./User/Drivers/SysTick.o
-                0x0000000020000074                SysTick_Count
+                0x0000000020000038        0x4 ./User/System/SysTick.o
+                0x0000000020000038                SysTick_Count
  .bss.SysTick_State
-                0x0000000020000078        0x4 ./User/Drivers/SysTick.o
-                0x0000000020000078                SysTick_State
+                0x000000002000003c        0x4 ./User/System/SysTick.o
+                0x000000002000003c                SysTick_State
  .bss.User_Callback
-                0x000000002000007c        0x4 ./User/Drivers/SysTick.o
- .bss.Slot      0x0000000020000080        0x4 ./User/Appl/main.o
-                0x0000000020000080                Slot
+                0x0000000020000040        0x4 ./User/System/SysTick.o
+ .bss.AD_Accumulator
+                0x0000000020000044        0x4 ./User/Hal/Hal.o
+                0x0000000020000044                AD_Accumulator
+ .bss.AD_Channel
+                0x0000000020000048        0x4 ./User/Hal/Hal.o
+                0x0000000020000048                AD_Channel
+ .bss.AD_Counter
+                0x000000002000004c        0x2 ./User/Hal/Hal.o
+                0x000000002000004c                AD_Counter
+ *fill*         0x000000002000004e        0x2 
+ .bss.AD_Sample
+                0x0000000020000050        0x4 ./User/Hal/Hal.o
+                0x0000000020000050                AD_Sample
+ .bss.Hal_Analog_Inputs
+                0x0000000020000054        0x4 ./User/Hal/Hal.o
+                0x0000000020000054                Hal_Analog_Inputs
+ .bss.ADC_Buffer
+                0x0000000020000058       0x12 ./User/Drivers/ADC.o
+                0x0000000020000058                ADC_Buffer
+ *fill*         0x000000002000006a        0x2 
+ .bss.DMA_Buffer
+                0x000000002000006c       0x12 ./User/Drivers/ADC.o
+                0x000000002000006c                DMA_Buffer
+ *fill*         0x000000002000007e        0x2 
+ .bss.TIM_OCInitStructure.4096
+                0x0000000020000080       0x10 ./User/Drivers/PWM.o
+ .bss.timer_period
+                0x0000000020000090        0x4 ./User/Drivers/PWM.o
+ .bss.Slot      0x0000000020000094        0x4 ./User/Appl/main.o
+                0x0000000020000094                Slot
  .bss.prev_Slot
-                0x0000000020000084        0x4 ./User/Appl/main.o
-                0x0000000020000084                prev_Slot
+                0x0000000020000098        0x4 ./User/Appl/main.o
+                0x0000000020000098                prev_Slot
  .bss.NVIC_Priority_Group
-                0x0000000020000088        0x4 ./Peripheral/src/ch32v00x_misc.o
-                0x0000000020000088                NVIC_Priority_Group
+                0x000000002000009c        0x4 ./Peripheral/src/ch32v00x_misc.o
+                0x000000002000009c                NVIC_Priority_Group
  *(.gnu.linkonce.b.*)
  *(COMMON*)
-                0x000000002000008c                . = ALIGN (0x4)
-                0x000000002000008c                PROVIDE (_ebss = .)
-                0x000000002000008c                PROVIDE (_end = _ebss)
+                0x00000000200000a0                . = ALIGN (0x4)
+                0x00000000200000a0                PROVIDE (_ebss = .)
+                0x00000000200000a0                PROVIDE (_end = _ebss)
                 [!provide]                        PROVIDE (end = .)
 
 .stack          0x0000000020000700      0x100
@@ -1275,148 +1294,167 @@ END GROUP
                 0x0000000020000800                PROVIDE (_eusrstack = .)
 OUTPUT(ProjetoFinalAAM.elf elf32-littleriscv)
 
-.debug_info     0x0000000000000000     0xc53e
- .debug_info    0x0000000000000000      0xb2a ./User/Hal/Hal.o
- .debug_info    0x0000000000000b2a     0x137d ./User/Drivers/ADC.o
- .debug_info    0x0000000000001ea7      0xf15 ./User/Drivers/SysTick.o
- .debug_info    0x0000000000002dbc      0xbc2 ./User/Appl/main.o
- .debug_info    0x000000000000397e      0xbc0 ./User/ch32v00x_it.o
- .debug_info    0x000000000000453e      0xc94 ./User/system_ch32v00x.o
- .debug_info    0x00000000000051d2       0x22 ./Startup/startup_ch32v00x.o
- .debug_info    0x00000000000051f4     0x1526 ./Peripheral/src/ch32v00x_adc.o
- .debug_info    0x000000000000671a      0xd17 ./Peripheral/src/ch32v00x_dma.o
- .debug_info    0x0000000000007431     0x1034 ./Peripheral/src/ch32v00x_gpio.o
- .debug_info    0x0000000000008465      0xdc5 ./Peripheral/src/ch32v00x_misc.o
- .debug_info    0x000000000000922a     0x108c ./Peripheral/src/ch32v00x_rcc.o
- .debug_info    0x000000000000a2b6     0x1351 ./Peripheral/src/ch32v00x_usart.o
- .debug_info    0x000000000000b607      0xf37 ./Debug/debug.o
+.debug_info     0x0000000000000000     0xfff7
+ .debug_info    0x0000000000000000      0xf15 ./User/System/SysTick.o
+ .debug_info    0x0000000000000f15      0xb2a ./User/Hal/Hal.o
+ .debug_info    0x0000000000001a3f     0x137d ./User/Drivers/ADC.o
+ .debug_info    0x0000000000002dbc     0x1125 ./User/Drivers/PWM.o
+ .debug_info    0x0000000000003ee1      0xbd7 ./User/Appl/main.o
+ .debug_info    0x0000000000004ab8      0xbc0 ./User/ch32v00x_it.o
+ .debug_info    0x0000000000005678      0xc94 ./User/system_ch32v00x.o
+ .debug_info    0x000000000000630c       0x22 ./Startup/startup_ch32v00x.o
+ .debug_info    0x000000000000632e     0x1526 ./Peripheral/src/ch32v00x_adc.o
+ .debug_info    0x0000000000007854      0xd17 ./Peripheral/src/ch32v00x_dma.o
+ .debug_info    0x000000000000856b     0x1034 ./Peripheral/src/ch32v00x_gpio.o
+ .debug_info    0x000000000000959f      0xdc5 ./Peripheral/src/ch32v00x_misc.o
+ .debug_info    0x000000000000a364     0x108c ./Peripheral/src/ch32v00x_rcc.o
+ .debug_info    0x000000000000b3f0     0x297f ./Peripheral/src/ch32v00x_tim.o
+ .debug_info    0x000000000000dd6f     0x1351 ./Peripheral/src/ch32v00x_usart.o
+ .debug_info    0x000000000000f0c0      0xf37 ./Debug/debug.o
 
-.debug_abbrev   0x0000000000000000     0x26a3
- .debug_abbrev  0x0000000000000000      0x2a1 ./User/Hal/Hal.o
- .debug_abbrev  0x00000000000002a1      0x359 ./User/Drivers/ADC.o
- .debug_abbrev  0x00000000000005fa      0x368 ./User/Drivers/SysTick.o
- .debug_abbrev  0x0000000000000962      0x267 ./User/Appl/main.o
- .debug_abbrev  0x0000000000000bc9      0x22c ./User/ch32v00x_it.o
- .debug_abbrev  0x0000000000000df5      0x2ee ./User/system_ch32v00x.o
- .debug_abbrev  0x00000000000010e3       0x12 ./Startup/startup_ch32v00x.o
- .debug_abbrev  0x00000000000010f5      0x307 ./Peripheral/src/ch32v00x_adc.o
- .debug_abbrev  0x00000000000013fc      0x302 ./Peripheral/src/ch32v00x_dma.o
- .debug_abbrev  0x00000000000016fe      0x309 ./Peripheral/src/ch32v00x_gpio.o
- .debug_abbrev  0x0000000000001a07      0x2e1 ./Peripheral/src/ch32v00x_misc.o
- .debug_abbrev  0x0000000000001ce8      0x389 ./Peripheral/src/ch32v00x_rcc.o
- .debug_abbrev  0x0000000000002071      0x323 ./Peripheral/src/ch32v00x_usart.o
- .debug_abbrev  0x0000000000002394      0x30f ./Debug/debug.o
+.debug_abbrev   0x0000000000000000     0x2dff
+ .debug_abbrev  0x0000000000000000      0x368 ./User/System/SysTick.o
+ .debug_abbrev  0x0000000000000368      0x2a1 ./User/Hal/Hal.o
+ .debug_abbrev  0x0000000000000609      0x359 ./User/Drivers/ADC.o
+ .debug_abbrev  0x0000000000000962      0x354 ./User/Drivers/PWM.o
+ .debug_abbrev  0x0000000000000cb6      0x267 ./User/Appl/main.o
+ .debug_abbrev  0x0000000000000f1d      0x22c ./User/ch32v00x_it.o
+ .debug_abbrev  0x0000000000001149      0x2ee ./User/system_ch32v00x.o
+ .debug_abbrev  0x0000000000001437       0x12 ./Startup/startup_ch32v00x.o
+ .debug_abbrev  0x0000000000001449      0x307 ./Peripheral/src/ch32v00x_adc.o
+ .debug_abbrev  0x0000000000001750      0x302 ./Peripheral/src/ch32v00x_dma.o
+ .debug_abbrev  0x0000000000001a52      0x309 ./Peripheral/src/ch32v00x_gpio.o
+ .debug_abbrev  0x0000000000001d5b      0x2e1 ./Peripheral/src/ch32v00x_misc.o
+ .debug_abbrev  0x000000000000203c      0x389 ./Peripheral/src/ch32v00x_rcc.o
+ .debug_abbrev  0x00000000000023c5      0x408 ./Peripheral/src/ch32v00x_tim.o
+ .debug_abbrev  0x00000000000027cd      0x323 ./Peripheral/src/ch32v00x_usart.o
+ .debug_abbrev  0x0000000000002af0      0x30f ./Debug/debug.o
 
-.debug_loc      0x0000000000000000     0x2431
- .debug_loc     0x0000000000000000       0x21 ./User/Hal/Hal.o
- .debug_loc     0x0000000000000021      0x247 ./User/Drivers/ADC.o
- .debug_loc     0x0000000000000268       0xff ./User/Drivers/SysTick.o
- .debug_loc     0x0000000000000367       0x54 ./User/Appl/main.o
- .debug_loc     0x00000000000003bb       0x55 ./User/system_ch32v00x.o
- .debug_loc     0x0000000000000410      0x9fa ./Peripheral/src/ch32v00x_adc.o
- .debug_loc     0x0000000000000e0a      0x14a ./Peripheral/src/ch32v00x_dma.o
- .debug_loc     0x0000000000000f54      0x5e2 ./Peripheral/src/ch32v00x_gpio.o
- .debug_loc     0x0000000000001536       0x47 ./Peripheral/src/ch32v00x_misc.o
- .debug_loc     0x000000000000157d      0x5e3 ./Peripheral/src/ch32v00x_rcc.o
- .debug_loc     0x0000000000001b60      0x735 ./Peripheral/src/ch32v00x_usart.o
- .debug_loc     0x0000000000002295      0x19c ./Debug/debug.o
+.debug_loc      0x0000000000000000     0x3f49
+ .debug_loc     0x0000000000000000       0xff ./User/System/SysTick.o
+ .debug_loc     0x00000000000000ff       0x21 ./User/Hal/Hal.o
+ .debug_loc     0x0000000000000120      0x247 ./User/Drivers/ADC.o
+ .debug_loc     0x0000000000000367      0x1e2 ./User/Drivers/PWM.o
+ .debug_loc     0x0000000000000549       0x54 ./User/Appl/main.o
+ .debug_loc     0x000000000000059d       0x55 ./User/system_ch32v00x.o
+ .debug_loc     0x00000000000005f2      0x9fa ./Peripheral/src/ch32v00x_adc.o
+ .debug_loc     0x0000000000000fec      0x14a ./Peripheral/src/ch32v00x_dma.o
+ .debug_loc     0x0000000000001136      0x5e2 ./Peripheral/src/ch32v00x_gpio.o
+ .debug_loc     0x0000000000001718       0x47 ./Peripheral/src/ch32v00x_misc.o
+ .debug_loc     0x000000000000175f      0x5e3 ./Peripheral/src/ch32v00x_rcc.o
+ .debug_loc     0x0000000000001d42     0x1936 ./Peripheral/src/ch32v00x_tim.o
+ .debug_loc     0x0000000000003678      0x735 ./Peripheral/src/ch32v00x_usart.o
+ .debug_loc     0x0000000000003dad      0x19c ./Debug/debug.o
 
-.debug_aranges  0x0000000000000000      0x600
+.debug_aranges  0x0000000000000000      0x908
  .debug_aranges
-                0x0000000000000000       0x38 ./User/Hal/Hal.o
+                0x0000000000000000       0x68 ./User/System/SysTick.o
  .debug_aranges
-                0x0000000000000038       0x38 ./User/Drivers/ADC.o
+                0x0000000000000068       0x38 ./User/Hal/Hal.o
  .debug_aranges
-                0x0000000000000070       0x68 ./User/Drivers/SysTick.o
+                0x00000000000000a0       0x38 ./User/Drivers/ADC.o
  .debug_aranges
-                0x00000000000000d8       0x20 ./User/Appl/main.o
+                0x00000000000000d8       0x30 ./User/Drivers/PWM.o
  .debug_aranges
-                0x00000000000000f8       0x28 ./User/ch32v00x_it.o
+                0x0000000000000108       0x20 ./User/Appl/main.o
  .debug_aranges
-                0x0000000000000120       0x28 ./User/system_ch32v00x.o
+                0x0000000000000128       0x28 ./User/ch32v00x_it.o
  .debug_aranges
-                0x0000000000000148       0x30 ./Startup/startup_ch32v00x.o
+                0x0000000000000150       0x28 ./User/system_ch32v00x.o
  .debug_aranges
-                0x0000000000000178      0x138 ./Peripheral/src/ch32v00x_adc.o
+                0x0000000000000178       0x30 ./Startup/startup_ch32v00x.o
  .debug_aranges
-                0x00000000000002b0       0x60 ./Peripheral/src/ch32v00x_dma.o
+                0x00000000000001a8      0x138 ./Peripheral/src/ch32v00x_adc.o
  .debug_aranges
-                0x0000000000000310       0x98 ./Peripheral/src/ch32v00x_gpio.o
+                0x00000000000002e0       0x60 ./Peripheral/src/ch32v00x_dma.o
  .debug_aranges
-                0x00000000000003a8       0x28 ./Peripheral/src/ch32v00x_misc.o
+                0x0000000000000340       0x98 ./Peripheral/src/ch32v00x_gpio.o
  .debug_aranges
-                0x00000000000003d0       0xe0 ./Peripheral/src/ch32v00x_rcc.o
+                0x00000000000003d8       0x28 ./Peripheral/src/ch32v00x_misc.o
  .debug_aranges
-                0x00000000000004b0      0x100 ./Peripheral/src/ch32v00x_usart.o
+                0x0000000000000400       0xe0 ./Peripheral/src/ch32v00x_rcc.o
  .debug_aranges
-                0x00000000000005b0       0x50 ./Debug/debug.o
+                0x00000000000004e0      0x2d8 ./Peripheral/src/ch32v00x_tim.o
+ .debug_aranges
+                0x00000000000007b8      0x100 ./Peripheral/src/ch32v00x_usart.o
+ .debug_aranges
+                0x00000000000008b8       0x50 ./Debug/debug.o
 
-.debug_ranges   0x0000000000000000      0x610
- .debug_ranges  0x0000000000000000       0x28 ./User/Hal/Hal.o
- .debug_ranges  0x0000000000000028       0xc0 ./User/Drivers/ADC.o
- .debug_ranges  0x00000000000000e8       0x58 ./User/Drivers/SysTick.o
- .debug_ranges  0x0000000000000140       0x10 ./User/Appl/main.o
- .debug_ranges  0x0000000000000150       0x18 ./User/ch32v00x_it.o
- .debug_ranges  0x0000000000000168       0x50 ./User/system_ch32v00x.o
- .debug_ranges  0x00000000000001b8       0x28 ./Startup/startup_ch32v00x.o
- .debug_ranges  0x00000000000001e0      0x128 ./Peripheral/src/ch32v00x_adc.o
- .debug_ranges  0x0000000000000308       0x50 ./Peripheral/src/ch32v00x_dma.o
- .debug_ranges  0x0000000000000358       0x88 ./Peripheral/src/ch32v00x_gpio.o
- .debug_ranges  0x00000000000003e0       0x30 ./Peripheral/src/ch32v00x_misc.o
- .debug_ranges  0x0000000000000410       0xd0 ./Peripheral/src/ch32v00x_rcc.o
- .debug_ranges  0x00000000000004e0       0xf0 ./Peripheral/src/ch32v00x_usart.o
- .debug_ranges  0x00000000000005d0       0x40 ./Debug/debug.o
+.debug_ranges   0x0000000000000000      0x928
+ .debug_ranges  0x0000000000000000       0x58 ./User/System/SysTick.o
+ .debug_ranges  0x0000000000000058       0x28 ./User/Hal/Hal.o
+ .debug_ranges  0x0000000000000080       0xc0 ./User/Drivers/ADC.o
+ .debug_ranges  0x0000000000000140       0x20 ./User/Drivers/PWM.o
+ .debug_ranges  0x0000000000000160       0x10 ./User/Appl/main.o
+ .debug_ranges  0x0000000000000170       0x18 ./User/ch32v00x_it.o
+ .debug_ranges  0x0000000000000188       0x50 ./User/system_ch32v00x.o
+ .debug_ranges  0x00000000000001d8       0x28 ./Startup/startup_ch32v00x.o
+ .debug_ranges  0x0000000000000200      0x128 ./Peripheral/src/ch32v00x_adc.o
+ .debug_ranges  0x0000000000000328       0x50 ./Peripheral/src/ch32v00x_dma.o
+ .debug_ranges  0x0000000000000378       0x88 ./Peripheral/src/ch32v00x_gpio.o
+ .debug_ranges  0x0000000000000400       0x30 ./Peripheral/src/ch32v00x_misc.o
+ .debug_ranges  0x0000000000000430       0xd0 ./Peripheral/src/ch32v00x_rcc.o
+ .debug_ranges  0x0000000000000500      0x2f8 ./Peripheral/src/ch32v00x_tim.o
+ .debug_ranges  0x00000000000007f8       0xf0 ./Peripheral/src/ch32v00x_usart.o
+ .debug_ranges  0x00000000000008e8       0x40 ./Debug/debug.o
 
-.debug_line     0x0000000000000000     0x7a83
- .debug_line    0x0000000000000000      0x4b2 ./User/Hal/Hal.o
- .debug_line    0x00000000000004b2      0x9f9 ./User/Drivers/ADC.o
- .debug_line    0x0000000000000eab      0x72c ./User/Drivers/SysTick.o
- .debug_line    0x00000000000015d7      0x4c0 ./User/Appl/main.o
- .debug_line    0x0000000000001a97      0x32d ./User/ch32v00x_it.o
- .debug_line    0x0000000000001dc4      0x761 ./User/system_ch32v00x.o
- .debug_line    0x0000000000002525      0x148 ./Startup/startup_ch32v00x.o
- .debug_line    0x000000000000266d     0x14cd ./Peripheral/src/ch32v00x_adc.o
- .debug_line    0x0000000000003b3a      0x828 ./Peripheral/src/ch32v00x_dma.o
- .debug_line    0x0000000000004362      0xc88 ./Peripheral/src/ch32v00x_gpio.o
- .debug_line    0x0000000000004fea      0x46f ./Peripheral/src/ch32v00x_misc.o
- .debug_line    0x0000000000005459      0xe8f ./Peripheral/src/ch32v00x_rcc.o
- .debug_line    0x00000000000062e8      0xf99 ./Peripheral/src/ch32v00x_usart.o
- .debug_line    0x0000000000007281      0x802 ./Debug/debug.o
+.debug_line     0x0000000000000000     0xb62a
+ .debug_line    0x0000000000000000      0x772 ./User/System/SysTick.o
+ .debug_line    0x0000000000000772      0x4e2 ./User/Hal/Hal.o
+ .debug_line    0x0000000000000c54      0xa41 ./User/Drivers/ADC.o
+ .debug_line    0x0000000000001695      0x6f0 ./User/Drivers/PWM.o
+ .debug_line    0x0000000000001d85      0x517 ./User/Appl/main.o
+ .debug_line    0x000000000000229c      0x35d ./User/ch32v00x_it.o
+ .debug_line    0x00000000000025f9      0x7a9 ./User/system_ch32v00x.o
+ .debug_line    0x0000000000002da2      0x148 ./Startup/startup_ch32v00x.o
+ .debug_line    0x0000000000002eea     0x1515 ./Peripheral/src/ch32v00x_adc.o
+ .debug_line    0x00000000000043ff      0x870 ./Peripheral/src/ch32v00x_dma.o
+ .debug_line    0x0000000000004c6f      0xcd0 ./Peripheral/src/ch32v00x_gpio.o
+ .debug_line    0x000000000000593f      0x4b7 ./Peripheral/src/ch32v00x_misc.o
+ .debug_line    0x0000000000005df6      0xed7 ./Peripheral/src/ch32v00x_rcc.o
+ .debug_line    0x0000000000006ccd     0x3132 ./Peripheral/src/ch32v00x_tim.o
+ .debug_line    0x0000000000009dff      0xfe1 ./Peripheral/src/ch32v00x_usart.o
+ .debug_line    0x000000000000ade0      0x84a ./Debug/debug.o
 
-.debug_str      0x0000000000000000     0x21c3
- .debug_str     0x0000000000000000      0x6a0 ./User/Hal/Hal.o
-                                        0x707 (size before relaxing)
- .debug_str     0x00000000000006a0      0x59c ./User/Drivers/ADC.o
-                                        0xbd3 (size before relaxing)
- .debug_str     0x0000000000000c3c      0x3cd ./User/Drivers/SysTick.o
-                                        0x990 (size before relaxing)
- .debug_str     0x0000000000001009       0xd3 ./User/Appl/main.o
-                                        0x79e (size before relaxing)
- .debug_str     0x00000000000010dc       0x45 ./User/ch32v00x_it.o
-                                        0x695 (size before relaxing)
- .debug_str     0x0000000000001121       0xcd ./User/system_ch32v00x.o
-                                        0x758 (size before relaxing)
- .debug_str     0x00000000000011ee       0x61 ./Startup/startup_ch32v00x.o
- .debug_str     0x000000000000124f      0x3c1 ./Peripheral/src/ch32v00x_adc.o
-                                        0xb9a (size before relaxing)
- .debug_str     0x0000000000001610      0x1aa ./Peripheral/src/ch32v00x_dma.o
-                                        0x803 (size before relaxing)
- .debug_str     0x00000000000017ba      0x1c5 ./Peripheral/src/ch32v00x_gpio.o
-                                        0x953 (size before relaxing)
- .debug_str     0x000000000000197f       0xee ./Peripheral/src/ch32v00x_misc.o
-                                        0x91b (size before relaxing)
- .debug_str     0x0000000000001a6d      0x2b6 ./Peripheral/src/ch32v00x_rcc.o
-                                        0x9c1 (size before relaxing)
- .debug_str     0x0000000000001d23      0x409 ./Peripheral/src/ch32v00x_usart.o
-                                        0xb10 (size before relaxing)
- .debug_str     0x000000000000212c       0x97 ./Debug/debug.o
-                                        0x911 (size before relaxing)
+.debug_str      0x0000000000000000     0x2e71
+ .debug_str     0x0000000000000000      0x929 ./User/System/SysTick.o
+                                        0x9a7 (size before relaxing)
+ .debug_str     0x0000000000000929      0x16f ./User/Hal/Hal.o
+                                        0x71f (size before relaxing)
+ .debug_str     0x0000000000000a98      0x577 ./User/Drivers/ADC.o
+                                        0xbeb (size before relaxing)
+ .debug_str     0x000000000000100f      0x341 ./User/Drivers/PWM.o
+                                        0xae8 (size before relaxing)
+ .debug_str     0x0000000000001350       0xd3 ./User/Appl/main.o
+                                        0x7c6 (size before relaxing)
+ .debug_str     0x0000000000001423       0x45 ./User/ch32v00x_it.o
+                                        0x6ad (size before relaxing)
+ .debug_str     0x0000000000001468       0xcd ./User/system_ch32v00x.o
+                                        0x770 (size before relaxing)
+ .debug_str     0x0000000000001535       0x61 ./Startup/startup_ch32v00x.o
+ .debug_str     0x0000000000001596      0x3c1 ./Peripheral/src/ch32v00x_adc.o
+                                        0xbb2 (size before relaxing)
+ .debug_str     0x0000000000001957      0x1a4 ./Peripheral/src/ch32v00x_dma.o
+                                        0x81b (size before relaxing)
+ .debug_str     0x0000000000001afb      0x1c5 ./Peripheral/src/ch32v00x_gpio.o
+                                        0x96b (size before relaxing)
+ .debug_str     0x0000000000001cc0       0xee ./Peripheral/src/ch32v00x_misc.o
+                                        0x933 (size before relaxing)
+ .debug_str     0x0000000000001dae      0x29f ./Peripheral/src/ch32v00x_rcc.o
+                                        0x9d9 (size before relaxing)
+ .debug_str     0x000000000000204d      0x984 ./Peripheral/src/ch32v00x_tim.o
+                                       0x1293 (size before relaxing)
+ .debug_str     0x00000000000029d1      0x409 ./Peripheral/src/ch32v00x_usart.o
+                                        0xb28 (size before relaxing)
+ .debug_str     0x0000000000002dda       0x97 ./Debug/debug.o
+                                        0x929 (size before relaxing)
 
 .comment        0x0000000000000000       0x33
- .comment       0x0000000000000000       0x33 ./User/Hal/Hal.o
+ .comment       0x0000000000000000       0x33 ./User/System/SysTick.o
                                          0x34 (size before relaxing)
+ .comment       0x0000000000000033       0x34 ./User/Hal/Hal.o
  .comment       0x0000000000000033       0x34 ./User/Drivers/ADC.o
- .comment       0x0000000000000033       0x34 ./User/Drivers/SysTick.o
+ .comment       0x0000000000000033       0x34 ./User/Drivers/PWM.o
  .comment       0x0000000000000033       0x34 ./User/Appl/main.o
  .comment       0x0000000000000033       0x34 ./User/ch32v00x_it.o
  .comment       0x0000000000000033       0x34 ./User/system_ch32v00x.o
@@ -1425,20 +1463,23 @@ OUTPUT(ProjetoFinalAAM.elf elf32-littleriscv)
  .comment       0x0000000000000033       0x34 ./Peripheral/src/ch32v00x_gpio.o
  .comment       0x0000000000000033       0x34 ./Peripheral/src/ch32v00x_misc.o
  .comment       0x0000000000000033       0x34 ./Peripheral/src/ch32v00x_rcc.o
+ .comment       0x0000000000000033       0x34 ./Peripheral/src/ch32v00x_tim.o
  .comment       0x0000000000000033       0x34 ./Peripheral/src/ch32v00x_usart.o
  .comment       0x0000000000000033       0x34 ./Debug/debug.o
 
-.debug_frame    0x0000000000000000      0xc24
- .debug_frame   0x0000000000000000       0x80 ./User/Hal/Hal.o
- .debug_frame   0x0000000000000080       0x90 ./User/Drivers/ADC.o
- .debug_frame   0x0000000000000110       0xe0 ./User/Drivers/SysTick.o
- .debug_frame   0x00000000000001f0       0x2c ./User/Appl/main.o
- .debug_frame   0x000000000000021c       0x30 ./User/ch32v00x_it.o
- .debug_frame   0x000000000000024c       0x58 ./User/system_ch32v00x.o
- .debug_frame   0x00000000000002a4      0x26c ./Peripheral/src/ch32v00x_adc.o
- .debug_frame   0x0000000000000510       0xcc ./Peripheral/src/ch32v00x_dma.o
- .debug_frame   0x00000000000005dc      0x154 ./Peripheral/src/ch32v00x_gpio.o
- .debug_frame   0x0000000000000730       0x30 ./Peripheral/src/ch32v00x_misc.o
- .debug_frame   0x0000000000000760      0x1dc ./Peripheral/src/ch32v00x_rcc.o
- .debug_frame   0x000000000000093c      0x204 ./Peripheral/src/ch32v00x_usart.o
- .debug_frame   0x0000000000000b40       0xe4 ./Debug/debug.o
+.debug_frame    0x0000000000000000     0x12c8
+ .debug_frame   0x0000000000000000       0xe0 ./User/System/SysTick.o
+ .debug_frame   0x00000000000000e0       0x80 ./User/Hal/Hal.o
+ .debug_frame   0x0000000000000160       0x90 ./User/Drivers/ADC.o
+ .debug_frame   0x00000000000001f0       0x80 ./User/Drivers/PWM.o
+ .debug_frame   0x0000000000000270       0x2c ./User/Appl/main.o
+ .debug_frame   0x000000000000029c       0x30 ./User/ch32v00x_it.o
+ .debug_frame   0x00000000000002cc       0x58 ./User/system_ch32v00x.o
+ .debug_frame   0x0000000000000324      0x26c ./Peripheral/src/ch32v00x_adc.o
+ .debug_frame   0x0000000000000590       0xcc ./Peripheral/src/ch32v00x_dma.o
+ .debug_frame   0x000000000000065c      0x154 ./Peripheral/src/ch32v00x_gpio.o
+ .debug_frame   0x00000000000007b0       0x30 ./Peripheral/src/ch32v00x_misc.o
+ .debug_frame   0x00000000000007e0      0x1dc ./Peripheral/src/ch32v00x_rcc.o
+ .debug_frame   0x00000000000009bc      0x624 ./Peripheral/src/ch32v00x_tim.o
+ .debug_frame   0x0000000000000fe0      0x204 ./Peripheral/src/ch32v00x_usart.o
+ .debug_frame   0x00000000000011e4       0xe4 ./Debug/debug.o

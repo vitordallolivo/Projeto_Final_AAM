@@ -7,6 +7,7 @@
 #include "SysTick.h"
 #include "ADC.h"
 #include "Hal.h"
+#include "PWM.h"
 //-------------------------- Defines --------------------------------------
 
 
@@ -37,6 +38,7 @@
     USART_Printf_Init(115200);\
     SysTick_Init();\
     ADC__Initialize();\
+    Pwm__Initialize();\
 }
 
 
