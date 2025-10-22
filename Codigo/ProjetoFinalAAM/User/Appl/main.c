@@ -30,6 +30,7 @@ int main(void)
 
     INITIALIZE_TASKS();
 
+
     int32_t prev_time = SysTick_GetTick(); // previous time
 
     while(1)

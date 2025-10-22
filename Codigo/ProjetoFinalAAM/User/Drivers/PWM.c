@@ -3,13 +3,17 @@
 
 //-------------------------------------- Defines, Enumerations ----------------------------------------------------------------
 
+#define PWM_TIMER1 6
+
+
 const unsigned char PWM_Enable_Table[NUM_OF_PWM] = {
     CONFIG_PWM0, // PD2 - TIM2_CH3
     CONFIG_PWM1, // PD3 - TIM2_CH2  
     CONFIG_PWM2, // PD4 - TIM2_CH1
     CONFIG_PWM3, // PD5 - TIM2_CH4
     CONFIG_PWM4, // PC0 - TIM2_CH3
-    CONFIG_PWM5  // PC1 - TIM2_CH4
+    CONFIG_PWM5,  // PC1 - TIM2_CH4
+    CONFIG_PWM6   // PC7 - TIM1_CH2_
 };
 
 //-------------------------------------- Global Variables  --------------------------------------------------------------------
@@ -32,8 +36,9 @@ void Pwm__Initialize(void)
         if(PWM_Enable_Table[PWM_id] == ENABLED)
         { 
             GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_30MHz;
             
+
             switch(PWM_id)
             {
 
@@ -84,20 +89,44 @@ void Pwm__Initialize(void)
                     GPIO_Init(GPIOC, &GPIO_InitStructure);
                     break;
                 #endif
+
+                #if(CONFIG_PWM6 == ENABLED)
+                    case PWM6:
+
+                    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
+
+                    // CONFIGURA REMAPEAMENTO DO TIM1 PARA USAR PC7
+                    // Bits [7:6] do AFIO_PCFR1 = TIM1_RM[1:0]
+                    // 11 = Complete mapping (CH2/PC7)
+                    AFIO->PCFR1 &= ~(0x3 << 6);  // Limpa bits 6-7
+                    AFIO->PCFR1 |= (0x3 << 6);   // Configura como 11 (Complete mapping)
+
+                    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
+                    GPIO_Init(GPIOC, &GPIO_InitStructure);
+                    break;
+                #endif
                 default:
                     break;
             }
             
-            // Configura duty cycle inicial 0%
-            Pwm__SetTCFrequency(PWM_TIM2,60);
-            Pwm__SetDutyCycle(PWM_id, 10);
+            if(PWM_id<6){
+                // Configura duty cycle inicial 0%
+                Pwm__SetTCFrequency(PWM_TIM2,60);
+                Pwm__SetDutyCycle(PWM_id, 10);
+            }
+            else{
+                Pwm__SetTCFrequency(PWM_TIM1,4000);
+                Pwm__SetDutyCycle(PWM_id,0);
+            }
+
+            
         }
     }
-    
+    TIM_Cmd(TIM1, ENABLE);
     TIM_Cmd(TIM2, ENABLE);
 }
 
-void Pwm__SetTCFrequency(PWM_TIM_TYPE tc, unsigned short frequency)
+void Pwm__SetTCFrequency(PWM_TIM_TYPE tc, uint32_t frequency)
 {
     TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure = {0};
     uint32_t timer_clock = SystemCoreClock; // 48MHz
@@ -109,19 +138,13 @@ void Pwm__SetTCFrequency(PWM_TIM_TYPE tc, unsigned short frequency)
     
     uint32_t arr, psc;
     
-    if(frequency == 60) {
-        // Configuracao especifica para 60Hz (servos/ESC)
-        psc = 799;      // 48,000,000 / 800 = 60,000Hz (60KHz)
-        arr = 999;      // 60,000 / 1000 = 60Hz
-    }
-    else {
-        // C¨¢lculo generico
-        psc = (timer_clock / (frequency * 1000UL)) - 1;
-        if(psc > 0xFFFF) psc = 0xFFFF;
-        
-        arr = (timer_clock / ((psc + 1) * frequency)) - 1;
-        if(arr > 0xFFFF) arr = 0xFFFF;
-    }
+    
+    // Calculo generico
+    psc = (timer_clock / (frequency * 1000UL)) - 1;
+    if(psc > 0xFFFF) psc = 0xFFFF;
+    
+    arr = (timer_clock / ((psc + 1) * frequency)) - 1;
+    if(arr > 0xFFFF) arr = 0xFFFF;
     
     timer_period[tc] = arr;
     
@@ -137,8 +160,6 @@ void Pwm__SetTCFrequency(PWM_TIM_TYPE tc, unsigned short frequency)
                 TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
                 TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;
                 TIM_TimeBaseInit(TIM1, &TIM_TimeBaseInitStructure);
-                TIM_CtrlPWMOutputs(TIM1, ENABLE);
-                TIM_Cmd(TIM1, ENABLE);
                 break;
         #endif
 
@@ -150,7 +171,6 @@ void Pwm__SetTCFrequency(PWM_TIM_TYPE tc, unsigned short frequency)
                 TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
                 TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
                 TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStructure);
-                TIM_Cmd(TIM2, ENABLE);
                 break;
         #endif
 
@@ -176,12 +196,21 @@ void Pwm__SetDutyCycle(PWM_ID_TYPE pwm, unsigned char duty)
     // Calcula pulse width baseado no per¨ªodo do timer
     pulse = (timer_period[PWM_TIM2] * duty) / 100;
     
-    // Configura estrutura do fabricante
-    TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
-    TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-    TIM_OCInitStructure.TIM_Pulse = pulse;
-    TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
-    
+    if(pwm<PWM_TIMER1){ // se estamos lidando com timer2
+        // Configura estrutura do fabricante
+        TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
+        TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+        TIM_OCInitStructure.TIM_Pulse = pulse;
+        TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+    }
+    else {
+        TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
+        TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+        TIM_OCInitStructure.TIM_Pulse = pulse;
+        TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low; // INVERTIDO
+    }
+
+
     switch(pwm)
     {
         #if (CONFIG_PWM0==ENABLED)
@@ -220,9 +249,24 @@ void Pwm__SetDutyCycle(PWM_ID_TYPE pwm, unsigned char duty)
                 TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Enable);
                 break;
         #endif  
+
+        #if(CONFIG_PWM6 == ENABLED)
+            case PWM6:
+                TIM_CtrlPWMOutputs(TIM1, ENABLE );
+                TIM_OC2Init(TIM1, &TIM_OCInitStructure);
+                TIM_OC2PreloadConfig(TIM1, TIM_OCPreload_Enable);
+            break;
+        #endif
         default:
             break;
     }
     
-    TIM_ARRPreloadConfig(TIM2, ENABLE);
+    // Habilita preload para ambos os timers
+    if(pwm < PWM_TIMER1) {
+        TIM_ARRPreloadConfig(TIM2, ENABLE);
+    } else {
+        TIM_ARRPreloadConfig(TIM1, ENABLE);
+    }
+
+    return;
 }

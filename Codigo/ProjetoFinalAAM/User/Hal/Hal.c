@@ -1,6 +1,8 @@
 //------------------------ Include Files ----------------------------------
 #include "../Header/Hal.h"
 #include "../Header/ADC.h"
+#include "../Header/PWM.h"
+
 //------------------------ Global Variables ----------------------------------
 // Vari¨¢veis para ADC
 ANALOG_INPUT_TYPE AD_Channel;
@@ -39,6 +41,44 @@ unsigned short int Hal_GetAnalogInput(ANALOG_INPUT_TYPE input){
     return Hal_Analog_Inputs[input];
 }
 
+
+// Motor
+void Hal_SetMotor(unsigned char state){
+    if(state > 0){
+        Pwm__SetDutyCycle(PWM1,20);
+    }
+    else{
+            Pwm__SetDutyCycle(PWM1,0);
+    }
+}
+void Hal_SetMotorDuty(unsigned char duty){
+    Pwm__SetDutyCycle(PWM1,duty);
+}
+
+
+
+
+// Buzzer
+void Hal__SetBuzzer(unsigned char state){
+    #if (USED_BUZZER == ENABLE)
+
+        if(state > 0){
+            Pwm__SetDutyCycle(PWM6,5);
+        }
+        else{
+            Pwm__SetDutyCycle(PWM6,0);
+        }
+
+    #endif
+}
+void Hal_SetBuzzerDutyCycle(unsigned char duty){
+    Pwm__SetDutyCycle(PWM6,duty);
+}
+void Hal__SetBuzzerFreq(unsigned short int frequency){
+    Pwm__SetTCFrequency(PWM_TIM2,frequency);
+}
+
+
 //=====================================================================================================================
 //-------------------------------------- Private Functions -------------------------------------------------------------
 //=====================================================================================================================
@@ -66,3 +106,4 @@ void ADProcess(void)
         AD_Channel = 0;
     }
 }
+

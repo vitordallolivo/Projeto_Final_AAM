@@ -8,6 +8,8 @@
 #include "ADC.h"
 #include "Hal.h"
 #include "PWM.h"
+#include "SysError.h"
+#include "Sound.h"
 //-------------------------- Defines --------------------------------------
 
 
@@ -37,6 +39,7 @@
     SystemCoreClockUpdate();\
     USART_Printf_Init(115200);\
     SysTick_Init();\
+    Sounds__Initialize();\
     ADC__Initialize();\
     Pwm__Initialize();\
 }
@@ -62,10 +65,12 @@
 
 #define SLOT_4_TASKS()\
 {\
+    Error_Handler();\
 }
 
 #define SLOT_5_TASKS()\
 {\
+    Sounds__Background();\
 }
 
 

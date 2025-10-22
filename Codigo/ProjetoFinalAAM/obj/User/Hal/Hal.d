@@ -23,7 +23,8 @@ User/Hal/Hal.o: ../User/Hal/Hal.c ../User/Hal/../Header/Hal.h \
  /home/kali/Faculdade/Disciplinas/AAM/Projeto_Final_AAM/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_opa.h \
  /home/kali/Faculdade/Disciplinas/AAM/Projeto_Final_AAM/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x.h \
  ../User/Hal/../Header/Hal_prm.h ../User/Hal/../Header/ADC.h \
- ../User/Hal/../Header/ADC_prm.h
+ ../User/Hal/../Header/ADC_prm.h ../User/Hal/../Header/PWM.h \
+ ../User/Hal/../Header/PWM_prm.h
 
 ../User/Hal/../Header/Hal.h:
 
@@ -78,3 +79,7 @@ User/Hal/Hal.o: ../User/Hal/Hal.c ../User/Hal/../Header/Hal.h \
 ../User/Hal/../Header/ADC.h:
 
 ../User/Hal/../Header/ADC_prm.h:
+
+../User/Hal/../Header/PWM.h:
+
+../User/Hal/../Header/PWM_prm.h:

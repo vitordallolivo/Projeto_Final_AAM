@@ -6,7 +6,6 @@
 
 volatile uint32_t SysTick_Count = 0;
 volatile SYSTICK_STATE_TYPE SysTick_State = SYSTICK_DISABLED;
-static SysTick_Callback_t User_Callback = NULL;
 
 // =============================================================================
 // ------------------------FUNCOES PUBLICAS-------------------------------------
@@ -78,23 +77,7 @@ void SysTick_Init_HCLK(uint32_t frequency)
     SysTick_Count = 0;
 }
 
-/*******************************************************************************
- * @brief  Desabilita o SysTick
- * @param  None
- * @retval None
- ******************************************************************************/
-void SysTick_DeInit(void)
-{
-    // Desabilita SysTick
-    SysTick->CTLR = 0;
-    
-    // Desabilita interrupcao no NVIC
-    NVIC_DisableIRQ(SysTicK_IRQn);
-    
-    SysTick_State = SYSTICK_DISABLED;
-    SysTick_Count = 0;
-    User_Callback = NULL;
-}
+
 
 /*******************************************************************************
  * @brief  Obt¨¦m o contador atual do SysTick
@@ -141,15 +124,6 @@ uint32_t SysTick_GetElapsedTime(uint32_t previous_tick)
     return (SysTick_Count - previous_tick);
 }
 
-/*******************************************************************************
- * @brief  Define uma funcao callback para ser chamada a cada tick
- * @param  callback: Ponteiro para a funcao callback
- * @retval None
- ******************************************************************************/
-void SysTick_SetCallback(SysTick_Callback_t callback)
-{
-    User_Callback = callback;
-}
 
 /*******************************************************************************
  * @brief  Handler de interrupcao do SysTick
@@ -164,10 +138,6 @@ void SysTick_Handler(void)
     
     // Incrementa contador global
     SysTick_Count++;
-    
-    if (User_Callback != NULL) {
-        User_Callback();
-    }
 }
 
 /*******************************************************************************
