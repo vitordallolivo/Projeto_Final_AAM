@@ -6,7 +6,7 @@
 // =============================================================================
 
 // Frequ¨ºncia do SysTick em Hz (1000 = 1ms, 100 = 10ms, etc)
-#define SYSTICK_FREQUENCY_HZ         1000
+#define SYSTICK_FREQUENCY_HZ         5000 // 20us
 
 // Prioridade da interrupcao do SysTick (0 = m¨¢xima prioridade)
 #define SYSTICK_PRIORITY             0

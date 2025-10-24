@@ -5,16 +5,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../User/Appl/Appl.c \
 ../User/Appl/main.c 
 
 C_DEPS += \
+./User/Appl/Appl.d \
 ./User/Appl/main.d 
 
 OBJS += \
+./User/Appl/Appl.o \
 ./User/Appl/main.o 
 
 
 EXPANDS += \
+./User/Appl/Appl.c.234r.expand \
 ./User/Appl/main.c.234r.expand 
 
 

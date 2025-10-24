@@ -30,6 +30,8 @@ int main(void)
 
     INITIALIZE_TASKS();
 
+    LoadCellSelect(Thrust_Cell);
+
 
     int32_t prev_time = SysTick_GetTick(); // previous time
 

@@ -1,21 +1,31 @@
 //------------------------ Include Files ----------------------------------
+#include "ch32v00x_gpio.h"
 #include "../Header/Hal.h"
 #include "../Header/ADC.h"
 #include "../Header/PWM.h"
 
 //------------------------ Global Variables ----------------------------------
-// Vari¨¢veis para ADC
-ANALOG_INPUT_TYPE AD_Channel;
+// Variaveis para ADC
+AD_CHANNEL_TYPE AD_Channel;
 unsigned short int AD_Accumulator[NUM_OF_ANALOG_INPUT];
 unsigned short int AD_Sample[NUM_OF_ANALOG_INPUT];
 unsigned char AD_Counter[NUM_OF_ANALOG_INPUT];
 
 unsigned short int Hal_Analog_Inputs[NUM_OF_ANALOG_INPUT];   // buffer da m¨¦dia do valor do ADC de cada canal
 
+uint32_t LoadCellStore[NUM_OF_LOAD_CELL] = {0};
+LOAD_CELL_TYPE SelectCell = NUM_OF_LOAD_CELL;
+
+
 //------------------------ Defines, Enumerations ----------------------------------
 
 
 #define NUM_AD_SAMPLES        8
+
+#define GPIO_HX711_DT  GPIO_Pin_1 // PC1 
+#define GPIO_HX711_SCK  GPIO_Pin_0 // PC0
+
+#define NUM_BYTES_LOAD_CELL 24
 
 
 //------------------------ Private Functions (prototypes) ----------------------------------
@@ -27,18 +37,79 @@ void ADProcess(void);
 //=====================================================================================================================
 
 void Hal__Initialize(void){
+    
+    GPIO_InitTypeDef GPIO_InitStructure = {0};
+
+    // Inicializando celula de carga
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLED);
+    GPIO_InitStructure.GPIO_Mode = GPIO_HX711_DT;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_Init(GPIOC,&GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Mode = GPIO_HX711_SCK;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_Init(GPIOC,&GPIO_InitStructure);
 
 }
 void Hal__BackgroundHandler(void){
     ADProcess();
+    LoadCellRead();
 }
 void Hal__FastHandler(void){
 
 }
 
+//ADC
 
 unsigned short int Hal_GetAnalogInput(ANALOG_INPUT_TYPE input){
     return Hal_Analog_Inputs[input];
+}
+
+// LOAD_CELL
+
+void LoadCellSelect(LOAD_CELL_TYPE cell){
+    SelectCell = cell;
+}
+void LoadCellRead(void){
+    u_int32_t valor = 0;
+    uint8_t i =0;
+    
+    if(!GPIO_ReadInputDataBit(GPIOC,GPIO_HX711_DT)){
+        return;
+    }
+
+    for(i = 0;i < NUM_BYTES_LOAD_CELL; i++){
+        GPIO_WriteBit(GPIOC,GPIO_HX711_SCK,Bit_SET);
+
+        valor<<=1;
+        if(GPIO_ReadInputDataBit(GPIOC, GPIO_HX711_DT)){
+            valor++;
+        }
+        
+        GPIO_WriteBit(GPIOC, GPIO_HX711_SCK, Bit_RESET);
+    }
+
+    uint8_t pulsos = (SelectCell == Thrust_Cell)? 1 : 2;
+
+    for(i = 0; i < pulsos; i++){
+        GPIO_WriteBit(GPIOC, GPIO_HX711_SCK, Bit_SET);
+        GPIO_WriteBit(GPIOC, GPIO_HX711_SCK, Bit_RESET);
+    }
+
+    if(valor & 0x00800000){
+        valor |= 0xFF000000;
+    }
+
+    // Armazena no vetor
+    LoadCellStore[SelectCell] = valor;
+}
+
+
+uint32_t GetCellRead(LOAD_CELL_TYPE cell){
+    return LoadCellStore[SelectCell];
 }
 
 
@@ -84,12 +155,11 @@ void Hal__SetBuzzerFreq(unsigned short int frequency){
 //=====================================================================================================================
 void ADProcess(void)
 {
-    // N?o h¨¢ necessidade de muito processamento extra
     if(Adc_Enable_Table[AD_Channel] == SET)
     {
         if(AD_Counter[AD_Channel] < NUM_AD_SAMPLES)
         {
-            AD_Sample[AD_Channel] = ADC__GetValue(Adc_Enable_Table[AD_Channel]);
+            AD_Sample[AD_Channel] = ADC__GetValue(AD_Channel);
             AD_Accumulator[AD_Channel] += AD_Sample[AD_Channel];
             AD_Counter[AD_Channel]++;
         }
@@ -103,7 +173,7 @@ void ADProcess(void)
     AD_Channel++;
     if(AD_Channel >= NUM_OF_ANALOG_INPUT)
     {
-        AD_Channel = 0;
+        AD_Channel = (AD_CHANNEL_TYPE)Current_pin;
     }
 }
 

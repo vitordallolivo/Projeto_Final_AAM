@@ -21,13 +21,11 @@
 // Each slot in main loop will take SLOT_TIME before switch to next slot 
 // Use _1MS for 1ms, _5MS for 5ms or _10MS for 10ms 
 
-#define _1MS 1 // 1KHz
-#define _2MS 2 // 500Hz
-#define _4MS 4 // 250Hz
-#define _10MS 10 // 100Hz
-#define _1S 1000
-
-
+#define _1MS 5 // 1KHz
+#define _2MS 10 // 500Hz
+#define _4MS 20 // 250Hz
+#define _10MS 50 // 100Hz
+#define _1S 5000
 
 #define SLOT_TIME	_1MS	//_1MS  // _4MS  // _10MS  
 
@@ -61,6 +59,7 @@
 
 #define SLOT_3_TASKS()\
 {\
+    Hal__BackgroundHandler();\
 }
 
 #define SLOT_4_TASKS()\

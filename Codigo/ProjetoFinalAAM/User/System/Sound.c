@@ -58,7 +58,7 @@ SOUND_STATUS ErrorSoundHandler(void){
         static unsigned char state = 0xFF;
         static unsigned char state_buzzer = 1;
 
-        if(SysTick_GetElapsedTime(on_tick) >= 250){ // 250 milisegundos
+        if(SysTick_GetElapsedTime(on_tick) >= 1250){ // 250 milisegundos
             
             if(state == 0xFF){
                 state = 2*id_Sound;
