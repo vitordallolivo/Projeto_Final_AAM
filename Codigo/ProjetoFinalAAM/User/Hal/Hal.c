@@ -163,7 +163,7 @@ void LoadCellTare(LOAD_CELL_TYPE cell){
 // Motor
 void Hal_SetMotor(unsigned char state){
     if(state > 0){
-        Pwm__SetDutyCycle(PWM1,20);
+            Pwm__SetDutyCycle(PWM1,20);
     }
     else{
             Pwm__SetDutyCycle(PWM1,0);

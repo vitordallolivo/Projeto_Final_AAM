@@ -61,7 +61,6 @@
 #define SLOT_2_TASKS()\
 {\
     CMP_BackgroundHandler();\
-    CommunitacionHandle();\
 }
 
 #define SLOT_3_TASKS()\

@@ -60,22 +60,22 @@ OBJS += \
 
 
 EXPANDS += \
-./Peripheral/src/ch32v00x_adc.c.234r.expand \
-./Peripheral/src/ch32v00x_dbgmcu.c.234r.expand \
-./Peripheral/src/ch32v00x_dma.c.234r.expand \
-./Peripheral/src/ch32v00x_exti.c.234r.expand \
-./Peripheral/src/ch32v00x_flash.c.234r.expand \
-./Peripheral/src/ch32v00x_gpio.c.234r.expand \
-./Peripheral/src/ch32v00x_i2c.c.234r.expand \
-./Peripheral/src/ch32v00x_iwdg.c.234r.expand \
-./Peripheral/src/ch32v00x_misc.c.234r.expand \
-./Peripheral/src/ch32v00x_opa.c.234r.expand \
-./Peripheral/src/ch32v00x_pwr.c.234r.expand \
-./Peripheral/src/ch32v00x_rcc.c.234r.expand \
-./Peripheral/src/ch32v00x_spi.c.234r.expand \
-./Peripheral/src/ch32v00x_tim.c.234r.expand \
-./Peripheral/src/ch32v00x_usart.c.234r.expand \
-./Peripheral/src/ch32v00x_wwdg.c.234r.expand 
+./Peripheral/src/ch32v00x_adc.c.253r.expand \
+./Peripheral/src/ch32v00x_dbgmcu.c.253r.expand \
+./Peripheral/src/ch32v00x_dma.c.253r.expand \
+./Peripheral/src/ch32v00x_exti.c.253r.expand \
+./Peripheral/src/ch32v00x_flash.c.253r.expand \
+./Peripheral/src/ch32v00x_gpio.c.253r.expand \
+./Peripheral/src/ch32v00x_i2c.c.253r.expand \
+./Peripheral/src/ch32v00x_iwdg.c.253r.expand \
+./Peripheral/src/ch32v00x_misc.c.253r.expand \
+./Peripheral/src/ch32v00x_opa.c.253r.expand \
+./Peripheral/src/ch32v00x_pwr.c.253r.expand \
+./Peripheral/src/ch32v00x_rcc.c.253r.expand \
+./Peripheral/src/ch32v00x_spi.c.253r.expand \
+./Peripheral/src/ch32v00x_tim.c.253r.expand \
+./Peripheral/src/ch32v00x_usart.c.253r.expand \
+./Peripheral/src/ch32v00x_wwdg.c.253r.expand 
 
 
 
@@ -83,7 +83,7 @@ EXPANDS += \
 Peripheral/src/%.o: ../Peripheral/src/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: GNU RISC-V Cross C Compiler'
-	riscv-none-embed-gcc -march=rv32ecxw -mabi=ilp32e -mtune=size -mcmodel=medlow -msmall-data-limit=0 -msave-restore -fmax-errors=20 -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -fsingle-precision-constant --param=highcode-gen-section-name=1 -pipe -Wunused -Wuninitialized -Wall -Wshadow -Waggregate-return -Wfloat-equal -g -I"/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Debug" -I"/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Core" -I"/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User" -I"/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc" -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	riscv-wch-elf-gcc -march=rv32ecxw -mabi=ilp32e -mtune=size -mcmodel=medlow -msmall-data-limit=0 -msave-restore -fmax-errors=20 -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -fsingle-precision-constant --param=highcode-gen-section-name=1 -pipe -Wunused -Wuninitialized -Wall -Wshadow -Waggregate-return -Wfloat-equal -g -I"/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Debug" -I"/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Core" -I"/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User" -I"/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc" -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@
 

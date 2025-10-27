@@ -33,10 +33,6 @@ typedef struct{
 }Input_data;
 
 
-#define SIZE_OF_OUTPUT_DATA sizeof(Output_data)
-#define SIZE_OF_INPUT_DATA sizeof(Input_data)
-
-
 
 //----------------------- Global Variables ---------------------
 
@@ -54,14 +50,10 @@ uint16_t LenghtPWM = 0;
 uint32_t LastPWM_tick = 0;
 
 uint32_t prev_RPM_tick=0;
-uint16_t rho0 = 1225; // era para ser 1.225 kg
-
-
+uint16_t rho0 = 1225; // Densidade do ar
 
 // ---------------------- Private Functions (prototype) ----------
 ERROR_ID RampDuty(void); // check current, and voltage
-uint8_t USART_send_packet(Output_data *packet);
-uint8_t USART_receive_packet(Input_data *packet);
 int32_t newton_sqrt(int32_t x);
 // --------------------- Interrupcao ------------------
 
@@ -127,6 +119,47 @@ void CMPInitialize(void){
     memset(&data_out, 0, sizeof(Output_data));
     memset(&data_in, 0, sizeof(Input_data));
 
+    DMA_InitTypeDef DMA_InitStructure;
+    
+    // Habilita clock do DMA
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+    
+    // Configura DMA para RX (Canal 5)
+    DMA_DeInit(DMA1_Channel5);
+    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USART1->DATAR;
+    DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&data_in;
+    DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+    DMA_InitStructure.DMA_BufferSize = sizeof(Input_data);
+    DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+    DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+    DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+    DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+    DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+    DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+    DMA_Init(DMA1_Channel5, &DMA_InitStructure);
+    
+    // Configura DMA para TX (Canal 4)
+    DMA_DeInit(DMA1_Channel4);
+    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&USART1->DATAR;
+    DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&data_out;
+    DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
+    DMA_InitStructure.DMA_BufferSize = sizeof(Output_data);
+    DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+    DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+    DMA_Init(DMA1_Channel4, &DMA_InitStructure);
+    
+    // Habilita interrup??es
+    DMA_ITConfig(DMA1_Channel5, DMA_IT_TC, ENABLE);
+    DMA_ITConfig(DMA1_Channel4, DMA_IT_TC, ENABLE);
+    
+    // Habilita os canais
+    DMA_Cmd(DMA1_Channel5, ENABLE);
+    // DMA TX s? habilita quando for transmitir
+    
+    // Configura USART para usar DMA
+    USART_DMACmd(USART1, USART_DMAReq_Rx | USART_DMAReq_Tx, ENABLE);
+    
 }
 
 void CMP_BackgroundHandler(){
@@ -181,7 +214,7 @@ void CMP_BackgroundHandler(){
     power = (current * voltage) / 1000;
 
     if(LenghtPWM>MINIMAL_PWM && LenghtPWM<MAX_PWM){
-        data_out.Duty = LenghtPWM;
+        data_out.Duty = LenghtPWM/2 -MINIMAL_PWM;
     }else{
         Error_Detect(ERROR_MOTOR,RC_RECEIVER_FAILED);
     }
@@ -209,7 +242,7 @@ void ThrustManager_SetMotorAction(MotorAction act){
         Hal_SetMotor(0);
     }
     else{
-        Hal_SetMotor(Duty);
+        Hal_SetMotorDuty(Duty);
     }
 }
 
@@ -234,54 +267,22 @@ void ThrustManager_SetLoadCell(){
 }
 
 
-void CommunitacionHandle(void){
-
-    static unsigned char transmitting = false;
-    static unsigned char receiving = false;
-
-    if(Timer__MsGetStatus(TIMER_MS_COMMUNICATION) == TIMER_EXPIRED){
-        transmitting = true;
-        receiving = true;
-        Timer__MsSet(TIMER_MS_COMMUNICATION,10000); 
-    }
-
-    if(transmitting == true){
-        if(USART_send_packet(&data_out) == true){
-            transmitting = false;
-        }
-
-    }
-
-    if(receiving == true){
-        while(USART_receive_packet(&data_in)!=true);
-        receiving = false;
-    }
-
-
-    return;
-}
-
 
 
 
 void EXTI7_0_IRQHandler(void){
 
     if(EXTI_GetITStatus(EXTI_Line0) != RESET) {
-        // Sua l¨®gica para interrup??o do PD0 (borda de subida)
         RPM_count++;
-        // Limpar flag de interrup??o
         EXTI_ClearITPendingBit(EXTI_Line0);
     }
     
-    // Verificar se EXTI2 (PD2) gerou a interrup??o
     if(EXTI_GetITStatus(EXTI_Line2) != RESET) {
         PWM_tick = SysTick_GetTick();
         if(PWM_tick>LastPWM_tick){
             LenghtPWM = PWM_tick - LastPWM_tick;
             LastPWM_tick = PWM_tick;
         }
-
-        // Limpar flag de interrup??o
         EXTI_ClearITPendingBit(EXTI_Line2);
     }
 }
@@ -295,78 +296,6 @@ ERROR_ID RampDuty(void){
     return NONE;
 }
 
-uint8_t USART_send_packet(Output_data *packet){
-    static uint8_t byte_count = 0;
-    static uint8_t checksum = 0;
-
-    uint8_t* data_bytes = (uint8_t*)packet;
-
-    if(byte_count == 0){ // Primeira etapa
-        checksum = 0; // Reset o checksum
-        USART_SendData(USART1,SYNC_BYTE1); // manda um byte de sincroniza??o
-    }
-    checksum += data_bytes[byte_count];
-    USART_SendData(USART1,data_bytes[byte_count]);
-    byte_count++;
-            
-    if (byte_count >= SIZE_OF_OUTPUT_DATA) { // Mensagem acabou
-        USART_SendData(USART1,checksum); // Manda o Check sum
-        USART_SendData(USART1,'\n'); // Terminador
-        byte_count = 0; // reseta
-
-        return true; // acabou o processo
-    }
-
-    return false; // N?o acabou
-}
-
-uint8_t USART_receive_packet(Input_data *packet) {
-    static ReceiverState state = WAIT_SYNC;
-    static uint8_t byte_count = 0;
-    static uint8_t checksum = 0;
-    static uint8_t temp_buffer[SIZE_OF_INPUT_DATA];
-    
-    uint8_t received_byte = USART_ReceiveData(USART1);
-    
-    switch(state) {
-        case WAIT_SYNC:
-            if(received_byte == SYNC_BYTE1) {
-                state = RECEIVING_DATA;
-                byte_count = 0;
-                checksum = 0;
-            }
-            break;
-
-        case RECEIVING_DATA:
-            temp_buffer[byte_count] = received_byte;
-            checksum += received_byte;
-            byte_count++;
-            
-            if(byte_count >= SIZE_OF_INPUT_DATA) {
-                state = RECEIVE_CHECKSUM;
-            }
-            break;
-
-        case RECEIVE_CHECKSUM:
-            if(checksum == received_byte) {
-                state = RECEIVE_TERMINATOR;
-            } else {
-                state = WAIT_SYNC;
-            }
-            break;
-
-        case RECEIVE_TERMINATOR:
-            state = WAIT_SYNC;
-            if(received_byte == '\n') {
-                // EVITE C?PIA - use memcpy ou atribui??o direta campo a campo
-                *packet = *(Input_data*)temp_buffer;
-                return true;
-            }
-            break;
-    }
-    
-    return false;
-}
 
 int32_t newton_sqrt(int32_t x){
     if (x <= 0) return 0;

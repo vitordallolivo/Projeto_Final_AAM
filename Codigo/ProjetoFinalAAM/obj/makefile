@@ -61,22 +61,22 @@ main-build: ProjetoFinalAAM.elf secondary-outputs
 ProjetoFinalAAM.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU RISC-V Cross C Linker'
-	riscv-none-embed-gcc -march=rv32ecxw -mabi=ilp32e -mtune=size -mcmodel=medlow -msmall-data-limit=0 -msave-restore -fmax-errors=20 -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -fsingle-precision-constant --param=highcode-gen-section-name=1 -pipe -Wunused -Wuninitialized -Wall -Wshadow -Waggregate-return -Wfloat-equal -g -T "/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Ld/Link.ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"ProjetoFinalAAM.map" --specs=nano.specs --specs=nosys.specs -o "ProjetoFinalAAM.elf" $(OBJS)  $(LIBS) -lprintf
+	riscv-wch-elf-gcc -march=rv32ecxw -mabi=ilp32e -mtune=size -mcmodel=medlow -msmall-data-limit=0 -msave-restore -fmax-errors=20 -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -fsingle-precision-constant --param=highcode-gen-section-name=1 -pipe -Wunused -Wuninitialized -Wall -Wshadow -Waggregate-return -Wfloat-equal -g -T "/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Ld/Link.ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"ProjetoFinalAAM.map" --specs=nano.specs --specs=nosys.specs -o "ProjetoFinalAAM.elf" $(OBJS)  $(LIBS) -lprintf
 	@echo 'Finished building target: $@'
 	@
 ProjetoFinalAAM.hex: ProjetoFinalAAM.elf
 	@echo 'Invoking: GNU RISC-V Cross Create Flash Image'
-	@	riscv-none-embed-objcopy -O ihex "ProjetoFinalAAM.elf" "ProjetoFinalAAM.hex"
+	@	riscv-wch-elf-objcopy -O ihex "ProjetoFinalAAM.elf" "ProjetoFinalAAM.hex"
 	@echo 'Finished building $@'
 	@
 ProjetoFinalAAM.lst: ProjetoFinalAAM.elf
 	@echo 'Invoking: GNU RISC-V Cross Create Listing'
-	@	riscv-none-embed-objdump --all-headers --demangle --disassemble -M xw "ProjetoFinalAAM.elf" > "ProjetoFinalAAM.lst"
+	@	riscv-wch-elf-objdump --all-headers --demangle --disassemble -M xw "ProjetoFinalAAM.elf" > "ProjetoFinalAAM.lst"
 	@echo 'Finished building $@'
 	@
 ProjetoFinalAAM.siz: ProjetoFinalAAM.elf
 	@echo 'Invoking: GNU RISC-V Cross Print Size'
-	riscv-none-embed-size --format=berkeley "ProjetoFinalAAM.elf"
+	riscv-wch-elf-size --format=berkeley "ProjetoFinalAAM.elf"
 	@echo 'Finished building $@'
 	@
 

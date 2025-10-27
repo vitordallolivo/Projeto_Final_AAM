@@ -309,7 +309,7 @@
 					"save_restore": true,
 					"other_target_flags": ""
 				},
-				"component_toolchain": "${WCH:Toolchain:GCC8}",
+				"component_toolchain": "${WCH:Toolchain:GCC12}",
 				"name": "obj",
 				"configVariables": []
 			}
@@ -349,7 +349,7 @@
 			"enableNoZeroWaitingAreaFlash": false
 		},
 		"gdbCfg": {
-			"executable": "${WCH:Toolchain:GCC8}",
+			"executable": "${WCH:Toolchain:GCC12}",
 			"options": [],
 			"commands": [
 				"set mem inaccessible-by-default off",

@@ -22,7 +22,6 @@ typedef enum{
 //----------------------------- Public Functions (Prototypes)-----------------------
 void CMPInitialize(void);
 void CMP_BackgroundHandler(void); // Handles outputs/inputs
-void CommunitacionHandle(void); // Handles with back and fourth communication
 
 UserAction SupervisionCMP(void); // check errors
 void CheckCriticalError(void);
