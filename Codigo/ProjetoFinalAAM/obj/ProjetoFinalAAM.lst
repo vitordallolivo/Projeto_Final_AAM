@@ -7,9 +7,9 @@ start address 0x00000000
 
 Program Header:
     LOAD off    0x00001000 vaddr 0x00000000 paddr 0x00000000 align 2**12
-         filesz 0x0000126c memsz 0x0000126c flags r-x
-    LOAD off    0x00003000 vaddr 0x20000000 paddr 0x0000126c align 2**12
-         filesz 0x00000040 memsz 0x000000f4 flags rw-
+         filesz 0x00001754 memsz 0x00001754 flags r-x
+    LOAD off    0x00003000 vaddr 0x20000000 paddr 0x00001754 align 2**12
+         filesz 0x00000040 memsz 0x00000180 flags rw-
     LOAD off    0x00003700 vaddr 0x20000700 paddr 0x20000700 align 2**12
          filesz 0x00000000 memsz 0x00000100 flags rw-
 
@@ -21,46 +21,46 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS
   2 .highcode     00000000  20000000  20000000  00003040  2**0
                   CONTENTS
-  3 .text         000011cc  000000a0  000000a0  000010a0  2**2
+  3 .text         000016b4  000000a0  000000a0  000010a0  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  4 .fini         00000000  0000126c  0000126c  00003040  2**0
+  4 .fini         00000000  00001754  00001754  00003040  2**0
                   CONTENTS, ALLOC, LOAD, CODE
   5 .dalign       00000000  20000000  20000000  00003040  2**0
                   CONTENTS
-  6 .dlalign      00000000  0000126c  0000126c  00003040  2**0
+  6 .dlalign      00000000  00001754  00001754  00003040  2**0
                   CONTENTS
-  7 .data         00000040  20000000  0000126c  00003000  2**2
+  7 .data         00000040  20000000  00001754  00003000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .bss          000000b4  20000040  000012ac  00003040  2**2
+  8 .bss          00000140  20000040  00001794  00003040  2**2
                   ALLOC
   9 .stack        00000100  20000700  20000700  00003700  2**0
                   ALLOC
- 10 .debug_info   00011dbf  00000000  00000000  00003040  2**0
+ 10 .debug_info   0001325a  00000000  00000000  00003040  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_abbrev 000033e8  00000000  00000000  00014dff  2**0
+ 11 .debug_abbrev 00003823  00000000  00000000  0001629a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_aranges 000009a8  00000000  00000000  000181e8  2**3
+ 12 .debug_aranges 00000a28  00000000  00000000  00019ac0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 000009d8  00000000  00000000  00018b90  2**3
+ 13 .debug_ranges 00000a30  00000000  00000000  0001a4e8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   0000c576  00000000  00000000  00019568  2**0
+ 14 .debug_line   0000d27d  00000000  00000000  0001af18  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    00003179  00000000  00000000  00025ade  2**0
+ 15 .debug_str    000034a9  00000000  00000000  00028195  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .comment      00000033  00000000  00000000  00028c57  2**0
+ 16 .comment      00000033  00000000  00000000  0002b63e  2**0
                   CONTENTS, READONLY
- 17 .debug_frame  00001478  00000000  00000000  00028c8c  2**2
+ 17 .debug_frame  00001614  00000000  00000000  0002b674  2**2
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_loc    0000412e  00000000  00000000  0002a104  2**0
+ 18 .debug_loc    000044c4  00000000  00000000  0002cc88  2**0
                   CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 00000000 l    d  .init	00000000 .init
 000000a0 l    d  .highcodelalign	00000000 .highcodelalign
 20000000 l    d  .highcode	00000000 .highcode
 000000a0 l    d  .text	00000000 .text
-0000126c l    d  .fini	00000000 .fini
+00001754 l    d  .fini	00000000 .fini
 20000000 l    d  .dalign	00000000 .dalign
-0000126c l    d  .dlalign	00000000 .dlalign
+00001754 l    d  .dlalign	00000000 .dlalign
 20000000 l    d  .data	00000000 .data
 20000040 l    d  .bss	00000000 .bss
 20000700 l    d  .stack	00000000 .stack
@@ -74,16 +74,25 @@ SYMBOL TABLE:
 00000000 l    d  .debug_frame	00000000 .debug_frame
 00000000 l    d  .debug_loc	00000000 .debug_loc
 00000000 l    df *ABS*	00000000 Sound.c
-20000000 l     O .data	00000001 state.4163
-20000001 l     O .data	00000001 state_buzzer.4164
+20000000 l     O .data	00000001 state.4188
+20000001 l     O .data	00000001 state_buzzer.4189
 00000000 l    df *ABS*	00000000 SysError.c
 00000000 l    df *ABS*	00000000 SysTick.c
+00000000 l    df *ABS*	00000000 ThrustManager.c
+200000c0 l     O .bss	00000001 byte_count.4443
+200000c1 l     O .bss	00000001 byte_count.4450
+200000c2 l     O .bss	00000001 checksum.4444
+200000c3 l     O .bss	00000001 checksum.4451
+200000ec l     O .bss	00000001 receiving.4427
+200000f0 l     O .bss	00000004 state.4449
+200000f4 l     O .bss	00000010 temp_buffer.4452
+20000104 l     O .bss	00000001 transmitting.4426
 00000000 l    df *ABS*	00000000 Hal.c
 00000000 l    df *ABS*	00000000 ADC.c
 00000000 l    df *ABS*	00000000 PWM.c
-0000071a l     F .text	000000a6 Pwm__SetDutyCycle.part.0
-200000d4 l     O .bss	00000010 TIM_OCInitStructure.4099
-200000e4 l     O .bss	00000004 timer_period
+00000b08 l     F .text	000000a8 Pwm__SetDutyCycle.part.0
+20000160 l     O .bss	00000010 TIM_OCInitStructure.4099
+20000170 l     O .bss	00000004 timer_period
 00000000 l    df *ABS*	00000000 main.c
 00000000 l    df *ABS*	00000000 ch32v00x_it.c
 00000000 l    df *ABS*	00000000 system_ch32v00x.c
@@ -97,207 +106,234 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 ch32v00x_tim.c
 00000000 l    df *ABS*	00000000 ch32v00x_usart.c
 00000000 l    df *ABS*	00000000 debug.c
+00000000 l    df *ABS*	00000000 memcpy.c
 2000004c g     O .bss	00000001 err_last
-00000520 g     F .text	00000180 ADC__Initialize
-00000de4 g     F .text	00000014 DMA_Cmd
-200000c0 g     O .bss	00000012 DMA_Buffer
+000008f2 g     F .text	0000019a ADC__Initialize
+000011e8 g     F .text	00000014 DMA_Cmd
+2000014c g     O .bss	00000012 DMA_Buffer
 000001fe g     F .text	00000018 Sounds__PlaySounds
-00000384 g     F .text	00000006 SysTick_GetTick
+0000043a g     F .text	00000006 SysTick_GetTick
 20000840 g       .data	00000000 __global_pointer$
-00000ba6  w      .text	00000000 TIM1_CC_IRQHandler
-000009f6 g     F .text	00000010 HardFault_Handler
-00000cdc g     F .text	00000012 ADC_DMACmd
+00000faa  w      .text	00000000 TIM1_CC_IRQHandler
+00000dfa g     F .text	00000010 HardFault_Handler
+000003c2 g     F .text	0000003a Timer__MsHandler
+000010e0 g     F .text	00000012 ADC_DMACmd
+000006d6 g     F .text	0000005c CommunitacionHandle
 00000286 g     F .text	00000028 Sounds__Background
-000003a2 g     F .text	00000016 SysTick_Handler
-00000d00 g     F .text	0000000a ADC_StartCalibration
-00000ba6  w      .text	00000000 PVD_IRQHandler
-000009f4 g     F .text	00000002 NMI_Handler
-0000038a g     F .text	00000018 SysTick_GetElapsedTime
-2000008c g     O .bss	00000004 AD_Channel
-000006a0 g     F .text	00000062 ADC_Handler
+00000458 g     F .text	00000020 SysTick_Handler
+00001104 g     F .text	0000000a ADC_StartCalibration
+00000faa  w      .text	00000000 PVD_IRQHandler
+200000bc g     O .bss	00000004 RPM_count
+00000df8 g     F .text	00000002 NMI_Handler
+00000440 g     F .text	00000018 SysTick_GetElapsedTime
+00000732 g     F .text	0000000c Hal_GetAnalogInput
+20000110 g     O .bss	00000004 AD_Channel
+00000820 g     F .text	0000000e Hal_SetMotorDuty
+00000a8c g     F .text	00000064 ADC_Handler
 20000040 g       .bss	00000000 _sbss
-200000ac g     O .bss	00000012 ADC_Buffer
+20000138 g     O .bss	00000012 ADC_Buffer
 00000100 g       *ABS*	00000000 __stack_size
-00000702 g     F .text	00000018 ADC__GetValue
-000011ea g     F .text	00000054 USART_Printf_Init
-2000007c g     O .bss	00000004 SysTick_Count
+00000af0 g     F .text	00000018 ADC__GetValue
+000015fe g     F .text	00000056 USART_Printf_Init
+000003fc g     F .text	00000032 Timer__MsSet
+200000a8 g     O .bss	00000004 SysTick_Count
 000000aa g     F .text	0000000a .hidden __riscv_restore_2
-000010c2 g     F .text	00000016 TIM_CtrlPWMOutputs
-00000ccc g     F .text	00000010 ADC_Cmd
-000010aa g     F .text	00000018 TIM_Cmd
+000014c6 g     F .text	00000016 TIM_CtrlPWMOutputs
+00001654 g     F .text	000000d2 memcpy
+000010d0 g     F .text	00000010 ADC_Cmd
+000007fa g     F .text	00000014 LoadCellTare
+000014ae g     F .text	00000018 TIM_Cmd
 20000018 g     O .data	00000004 SystemCoreClock
-0000124c g     O .text	00000007 PWM_Enable_Table
+000015f6 g     F .text	00000008 USART_ReceiveData
+00001734 g     O .text	00000007 PWM_Enable_Table
 000000d4 g     F .text	0000002c .hidden __udivsi3
-200000a4 g     O .bss	00000008 LoadCellStore
+20000130 g     O .bss	00000008 LoadCellStore
 000000a0 g       .init	00000000 _einit
-20000080 g     O .bss	00000004 SysTick_State
-00000f6c g     F .text	0000001e RCC_APB2PeriphClockCmd
-00000e0e g     F .text	0000007c GPIO_Init
-00000eb6 g     F .text	00000014 RCC_ADCCLKConfig
+200000ac g     O .bss	00000004 SysTick_State
+00001370 g     F .text	0000001e RCC_APB2PeriphClockCmd
+00000636 g     F .text	000000a0 USART_receive_packet
+00001212 g     F .text	0000007c GPIO_Init
+000012ba g     F .text	00000014 RCC_ADCCLKConfig
 20000004 g     O .data	00000004 SelectCell
-200000f0 g     O .bss	00000004 NVIC_Priority_Group
-00000ba6  w      .text	00000000 SPI1_IRQHandler
-00000cee g     F .text	0000000a ADC_ResetCalibration
-000011d4 g     F .text	00000016 USART_Cmd
+2000017c g     O .bss	00000004 NVIC_Priority_Group
+00000faa  w      .text	00000000 SPI1_IRQHandler
+000010f2 g     F .text	0000000a ADC_ResetCalibration
+000015d8 g     F .text	00000016 USART_Cmd
 000000a0 g     F .text	0000000a .hidden __riscv_save_1
+0000042e g     F .text	0000000c Timer__MsGetStatus
 000000aa g     F .text	0000000a .hidden __riscv_restore_0
-00000ba6  w      .text	00000000 AWU_IRQHandler
-00000ba6  w      .text	00000000 EXTI7_0_IRQHandler
-00000f8a g     F .text	0000001e RCC_APB1PeriphClockCmd
+00000faa  w      .text	00000000 AWU_IRQHandler
+000005aa g     F .text	0000000e EXTI7_0_IRQHandler
+000004a4 g     F .text	00000106 CMP_BackgroundHandler
+0000138e g     F .text	0000001e RCC_APB1PeriphClockCmd
 20000700 g       .stack	00000000 _heap_end
-00000ba6  w      .text	00000000 DMA1_Channel4_IRQHandler
-00000d2a g     F .text	000000ba ADC_RegularChannelConfig
-00000ba6  w      .text	00000000 ADC1_IRQHandler
-200000ec g     O .bss	00000004 prev_Slot
+200000c4 g     O .bss	00000010 data_in
+00000faa  w      .text	00000000 DMA1_Channel4_IRQHandler
+0000112e g     F .text	000000ba ADC_RegularChannelConfig
+00000faa  w      .text	00000000 ADC1_IRQHandler
+0000080e g     F .text	00000012 Hal_SetMotor
+20000178 g     O .bss	00000004 prev_Slot
 20000078 g     O .bss	00000004 tick_error
-00000df8 g     F .text	0000000e DMA_GetFlagStatus
-00000d0a g     F .text	00000008 ADC_GetCalibrationStatus
-200000f4 g       .bss	00000000 _ebss
-00000ba6  w      .text	00000000 DMA1_Channel7_IRQHandler
-00000d12 g     F .text	00000018 ADC_SoftwareStartConvCmd
-00000cf8 g     F .text	00000008 ADC_GetResetCalibrationStatus
-000003b8 g     F .text	0000000a LoadCellSelect
+000011fc g     F .text	0000000e DMA_GetFlagStatus
+0000110e g     F .text	00000008 ADC_GetCalibrationStatus
+20000180 g       .bss	00000000 _ebss
+00000faa  w      .text	00000000 DMA1_Channel7_IRQHandler
+00001116 g     F .text	00000018 ADC_SoftwareStartConvCmd
+000010fc g     F .text	00000008 ADC_GetResetCalibrationStatus
+0000073e g     F .text	0000000a LoadCellSelect
 20000040 g     O .bss	00000004 PlaySound
+200000b8 g     O .bss	00000001 Mode
 000001f2 g     F .text	0000000c Sounds__Initialize
-000010d8 g     F .text	0000001a TIM_ARRPreloadConfig
-00000e94 g     F .text	0000000a GPIO_WriteBit
+000014dc g     F .text	0000001a TIM_ARRPreloadConfig
+00001298 g     F .text	0000000a GPIO_WriteBit
 00000100 g     F .text	00000008 .hidden __umodsi3
 20000044 g     O .bss	00000004 id_Sound
-00000ba6  w      .text	00000000 I2C1_EV_IRQHandler
+00000faa  w      .text	00000000 I2C1_EV_IRQHandler
 00000216 g     F .text	00000070 ErrorSoundHandler
-00000eca g     F .text	000000a2 RCC_GetClocksFreq
-00000ba6  w      .text	00000000 DMA1_Channel6_IRQHandler
-00001108 g     F .text	000000cc USART_Init
-00000ba6  w      .text	00000000 RCC_IRQHandler
-20000094 g     O .bss	00000008 AD_Sample
+000012ce g     F .text	000000a2 RCC_GetClocksFreq
+00000faa  w      .text	00000000 DMA1_Channel6_IRQHandler
+0000150c g     F .text	000000cc USART_Init
+00000faa  w      .text	00000000 RCC_IRQHandler
+20000118 g     O .bss	00000006 AD_Sample
 20000048 g     O .bss	00000004 on_tick
-00000ba6  w      .text	00000000 TIM1_TRG_COM_IRQHandler
-00000ba6  w      .text	00000000 DMA1_Channel1_IRQHandler
+00000faa  w      .text	00000000 TIM1_TRG_COM_IRQHandler
+00000faa  w      .text	00000000 DMA1_Channel1_IRQHandler
 00000000 g       .init	00000000 _start
 20000008 g     O .data	00000010 AHBPrescTable
-000010f2 g     F .text	00000016 TIM_OC2PreloadConfig
-00001014 g     F .text	00000096 TIM_OC2Init
-2000009c g     O .bss	00000008 Hal_Analog_Inputs
-00000466 g     F .text	00000010 Hal__SetBuzzer
+000014f6 g     F .text	00000016 TIM_OC2PreloadConfig
+00001418 g     F .text	00000096 TIM_OC2Init
+20000120 g     O .bss	00000006 Hal_Analog_Inputs
+0000082e g     F .text	00000012 Hal__SetBuzzer
 20000000 g       .highcode	00000000 _highcode_vma_start
 000000b4 g     F .text	00000014 .hidden __mulsi3
-00000476 g     F .text	000000a0 ADProcess
-000003c2 g     F .text	000000a4 LoadCellRead
-20000090 g     O .bss	00000004 AD_Counter
+00000840 g     F .text	000000a6 ADProcess
+00000748 g     F .text	000000a6 LoadCellRead
+20000114 g     O .bss	00000003 AD_Counter
 20000000 g       .dalign	00000000 _data_vma
+200000d4 g     O .bss	00000014 data_out
 0000014a g     F .text	000000a8 memset
-00000ea4 g     F .text	00000012 RCC_AdjustHSICalibrationValue
-00000954 g     F .text	000000a0 main
-00000336 g     F .text	0000004e SysTick_Init
-00000ba6  w      .text	00000000 DMA1_Channel5_IRQHandler
+000012a8 g     F .text	00000012 RCC_AdjustHSICalibrationValue
+00000d44 g     F .text	000000b4 main
+000007ee g     F .text	0000000c GetCellRead
+00000348 g     F .text	0000007a SysTick_Init
+00000faa  w      .text	00000000 DMA1_Channel5_IRQHandler
 000000cc g     F .text	00000058 .hidden __divsi3
+2000007c g     O .bss	00000001 Flag_tickMS
 000000a0 g       .highcodelalign	00000000 _highcode_lma
-00000a06 g     F .text	00000134 SystemInit
+00000e0a g     F .text	00000134 SystemInit
 00000000 g       .init	00000000 _sinit
-00000ba6  w      .text	00000000 DMA1_Channel3_IRQHandler
-00000ba6  w      .text	00000000 TIM1_UP_IRQHandler
-00000ba6  w      .text	00000000 WWDG_IRQHandler
-00000ba6  w      .text	00000000 TIM2_IRQHandler
+00000faa  w      .text	00000000 DMA1_Channel3_IRQHandler
+00000faa  w      .text	00000000 TIM1_UP_IRQHandler
+00000faa  w      .text	00000000 WWDG_IRQHandler
+00000faa  w      .text	00000000 TIM2_IRQHandler
 20000800 g       .stack	00000000 _eusrstack
 000000a0 g     F .text	0000000a .hidden __riscv_save_2
-00000ba6  w      .text	00000000 SW_Handler
-00000516 g     F .text	0000000a Hal__BackgroundHandler
-00000c58 g     F .text	00000026 ADC_DeInit
-00000ba6  w      .text	00000000 TIM1_BRK_IRQHandler
-00000c7e g     F .text	0000004e ADC_Init
-0000089a g     F .text	000000ba Pwm__Initialize
-000007c0 g     F .text	000000c8 Pwm__SetTCFrequency
+00000faa  w      .text	00000000 SW_Handler
+000008e6 g     F .text	0000000c Hal__BackgroundHandler
+0000105c g     F .text	00000026 ADC_DeInit
+00000336 g     F .text	00000012 Error_GetStatus
+00000faa  w      .text	00000000 TIM1_BRK_IRQHandler
+00001082 g     F .text	0000004e ADC_Init
+000015ee g     F .text	00000008 USART_SendData
+00000c8a g     F .text	000000ba Pwm__Initialize
+00000bb0 g     F .text	000000c8 Pwm__SetTCFrequency
 20000040 g       .data	00000000 _edata
-200000f4 g       .bss	00000000 _end
+20000180 g       .bss	00000000 _end
 20000000 g       .highcode	00000000 _highcode_vma_end
-00000fc6 g     F .text	0000004e TIM_TimeBaseInit
-0000126c g       .dlalign	00000000 _data_lma
+000013ca g     F .text	0000004e TIM_TimeBaseInit
+00001754 g       .dlalign	00000000 _data_lma
+200000e8 g     O .bss	00000004 prev_RPM_tick
 20000050 g     O .bss	00000028 err_vect
-00000b3a g     F .text	0000006c SystemCoreClockUpdate
+00000f3e g     F .text	0000006c SystemCoreClockUpdate
 00000124 g     F .text	00000024 .hidden __modsi3
-00000ba6  w      .text	00000000 DMA1_Channel2_IRQHandler
-00000e06 g     F .text	00000008 DMA_ClearFlag
-00000ba8  w      .text	00000000 handle_reset
-00000ba6  w      .text	00000000 FLASH_IRQHandler
+00000faa  w      .text	00000000 DMA1_Channel2_IRQHandler
+0000120a g     F .text	00000008 DMA_ClearFlag
+00000fac  w      .text	00000000 handle_reset
+00000faa  w      .text	00000000 FLASH_IRQHandler
 000000a0 g     F .text	0000000a .hidden __riscv_save_0
-00000ba6  w      .text	00000000 USART1_IRQHandler
-200000e8 g     O .bss	00000004 Slot
-00000888 g     F .text	00000012 Pwm__SetDutyCycle
-00000fa8 g     F .text	0000001e RCC_APB2PeriphResetCmd
-00000ba6  w      .text	00000000 I2C1_ER_IRQHandler
-00000e9e g     F .text	00000006 NVIC_PriorityGroupConfig
+20000128 g     O .bss	00000008 LoadCellOffset
+00000faa  w      .text	00000000 USART1_IRQHandler
+20000174 g     O .bss	00000004 Slot
+00000c78 g     F .text	00000012 Pwm__SetDutyCycle
+000013ac g     F .text	0000001e RCC_APB2PeriphResetCmd
+00000faa  w      .text	00000000 I2C1_ER_IRQHandler
+000012a2 g     F .text	00000006 NVIC_PriorityGroupConfig
+000005b8 g     F .text	0000007e USART_send_packet
 000000aa g     F .text	0000000a .hidden __riscv_restore_1
-00000e8a g     F .text	0000000a GPIO_ReadInputDataBit
-00001240 g     O .text	00000009 Adc_Enable_Table
+200000b0 g     O .bss	00000008 Calib
+20000080 g     O .bss	00000028 Ms_Timers
+0000128e g     F .text	0000000a GPIO_ReadInputDataBit
+00001728 g     O .text	00000009 Adc_Enable_Table
+00000478 g     F .text	0000002c CMPInitialize
 000002ae g     F .text	00000088 Error_Handler
-20000084 g     O .bss	00000008 AD_Accumulator
+20000108 g     O .bss	00000006 AD_Accumulator
 
 
 
 Disassembly of section .init:
 
 00000000 <_sinit>:
-   0:	3a90006f          	j	ba8 <handle_reset>
+   0:	7ad0006f          	j	fac <handle_reset>
    4:	0000                	unimp
    6:	0000                	unimp
-   8:	09f4                	addi	a3,sp,220
+   8:	0df8                	addi	a4,sp,732
    a:	0000                	unimp
-   c:	09f6                	slli	s3,s3,0x1d
+   c:	0dfa                	slli	s11,s11,0x1e
 	...
   2e:	0000                	unimp
-  30:	03a2                	slli	t2,t2,0x8
+  30:	0458                	addi	a4,sp,516
   32:	0000                	unimp
   34:	0000                	unimp
   36:	0000                	unimp
-  38:	0ba6                	slli	s7,s7,0x9
+  38:	0faa                	slli	t6,t6,0xa
   3a:	0000                	unimp
   3c:	0000                	unimp
   3e:	0000                	unimp
-  40:	0ba6                	slli	s7,s7,0x9
+  40:	0faa                	slli	t6,t6,0xa
   42:	0000                	unimp
-  44:	0ba6                	slli	s7,s7,0x9
+  44:	0faa                	slli	t6,t6,0xa
   46:	0000                	unimp
-  48:	0ba6                	slli	s7,s7,0x9
+  48:	0faa                	slli	t6,t6,0xa
   4a:	0000                	unimp
-  4c:	0ba6                	slli	s7,s7,0x9
+  4c:	0faa                	slli	t6,t6,0xa
   4e:	0000                	unimp
-  50:	0ba6                	slli	s7,s7,0x9
+  50:	05aa                	slli	a1,a1,0xa
   52:	0000                	unimp
-  54:	0ba6                	slli	s7,s7,0x9
+  54:	0faa                	slli	t6,t6,0xa
   56:	0000                	unimp
-  58:	0ba6                	slli	s7,s7,0x9
+  58:	0faa                	slli	t6,t6,0xa
   5a:	0000                	unimp
-  5c:	0ba6                	slli	s7,s7,0x9
+  5c:	0faa                	slli	t6,t6,0xa
   5e:	0000                	unimp
-  60:	0ba6                	slli	s7,s7,0x9
+  60:	0faa                	slli	t6,t6,0xa
   62:	0000                	unimp
-  64:	0ba6                	slli	s7,s7,0x9
+  64:	0faa                	slli	t6,t6,0xa
   66:	0000                	unimp
-  68:	0ba6                	slli	s7,s7,0x9
+  68:	0faa                	slli	t6,t6,0xa
   6a:	0000                	unimp
-  6c:	0ba6                	slli	s7,s7,0x9
+  6c:	0faa                	slli	t6,t6,0xa
   6e:	0000                	unimp
-  70:	0ba6                	slli	s7,s7,0x9
+  70:	0faa                	slli	t6,t6,0xa
   72:	0000                	unimp
-  74:	0ba6                	slli	s7,s7,0x9
+  74:	0faa                	slli	t6,t6,0xa
   76:	0000                	unimp
-  78:	0ba6                	slli	s7,s7,0x9
+  78:	0faa                	slli	t6,t6,0xa
   7a:	0000                	unimp
-  7c:	0ba6                	slli	s7,s7,0x9
+  7c:	0faa                	slli	t6,t6,0xa
   7e:	0000                	unimp
-  80:	0ba6                	slli	s7,s7,0x9
+  80:	0faa                	slli	t6,t6,0xa
   82:	0000                	unimp
-  84:	0ba6                	slli	s7,s7,0x9
+  84:	0faa                	slli	t6,t6,0xa
   86:	0000                	unimp
-  88:	0ba6                	slli	s7,s7,0x9
+  88:	0faa                	slli	t6,t6,0xa
   8a:	0000                	unimp
-  8c:	0ba6                	slli	s7,s7,0x9
+  8c:	0faa                	slli	t6,t6,0xa
   8e:	0000                	unimp
-  90:	0ba6                	slli	s7,s7,0x9
+  90:	0faa                	slli	t6,t6,0xa
   92:	0000                	unimp
-  94:	0ba6                	slli	s7,s7,0x9
+  94:	0faa                	slli	t6,t6,0xa
   96:	0000                	unimp
-  98:	0ba6                	slli	s7,s7,0x9
+  98:	0faa                	slli	t6,t6,0xa
   9a:	0000                	unimp
   9c:	0000                	unimp
 	...
@@ -465,7 +501,7 @@ Disassembly of section .text:
      224:	cf29                	beqz	a4,27e <ErrorSoundHandler+0x68>
      226:	8081a503          	lw	a0,-2040(gp) # 20000048 <on_tick>
      22a:	80818493          	addi	s1,gp,-2040 # 20000048 <on_tick>
-     22e:	2ab1                	jal	38a <SysTick_GetElapsedTime>
+     22e:	2c09                	jal	440 <SysTick_GetElapsedTime>
      230:	4e100713          	li	a4,1249
      234:	4785                	li	a5,1
      236:	04a77463          	bgeu	a4,a0,27e <ErrorSoundHandler+0x68>
@@ -484,12 +520,12 @@ Disassembly of section .text:
      260:	00042023          	sw	zero,0(s0)
      264:	a31c                	sb	a5,0(a4)
      266:	200007b7          	lui	a5,0x20000
-     26a:	00178793          	addi	a5,a5,1 # 20000001 <state_buzzer.4164>
+     26a:	00178793          	addi	a5,a5,1 # 20000001 <state_buzzer.4189>
      26e:	2388                	lbu	a0,0(a5)
      270:	00153513          	seqz	a0,a0
      274:	a388                	sb	a0,0(a5)
-     276:	2ac5                	jal	466 <Hal__SetBuzzer>
-     278:	2231                	jal	384 <SysTick_GetTick>
+     276:	2b65                	jal	82e <Hal__SetBuzzer>
+     278:	22c9                	jal	43a <SysTick_GetTick>
      27a:	c088                	sw	a0,0(s1)
      27c:	4785                	li	a5,1
      27e:	853e                	mv	a0,a5
@@ -512,7 +548,7 @@ Disassembly of section .text:
      2a4:	c01c                	sw	a5,0(s0)
      2a6:	bfdd                	j	29c <Sounds__Background+0x16>
      2a8:	4501                	li	a0,0
-     2aa:	2a75                	jal	466 <Hal__SetBuzzer>
+     2aa:	2351                	jal	82e <Hal__SetBuzzer>
      2ac:	bfc5                	j	29c <Sounds__Background+0x16>
 
 000002ae <Error_Handler>:
@@ -539,16 +575,16 @@ Disassembly of section .text:
      2e4:	c01d                	beqz	s0,30a <Error_Handler+0x5c>
      2e6:	8381a503          	lw	a0,-1992(gp) # 20000078 <tick_error>
      2ea:	83818493          	addi	s1,gp,-1992 # 20000078 <tick_error>
-     2ee:	2871                	jal	38a <SysTick_GetElapsedTime>
+     2ee:	2a89                	jal	440 <SysTick_GetElapsedTime>
      2f0:	6789                	lui	a5,0x2
-     2f2:	71078793          	addi	a5,a5,1808 # 2710 <_data_lma+0x14a4>
+     2f2:	71078793          	addi	a5,a5,1808 # 2710 <_data_lma+0xfbc>
      2f6:	00a7fa63          	bgeu	a5,a0,30a <Error_Handler+0x5c>
      2fa:	4785                	li	a5,1
      2fc:	00f41963          	bne	s0,a5,30e <Error_Handler+0x60>
      300:	800c                	lbu	a1,0(sp)
      302:	4501                	li	a0,0
      304:	3ded                	jal	1fe <Sounds__PlaySounds>
-     306:	28bd                	jal	384 <SysTick_GetTick>
+     306:	2a15                	jal	43a <SysTick_GetTick>
      308:	c088                	sw	a0,0(s1)
      30a:	0131                	addi	sp,sp,12
      30c:	bb79                	j	aa <__riscv_restore_0>
@@ -568,1509 +604,1978 @@ Disassembly of section .text:
      332:	a398                	sb	a4,0(a5)
      334:	bfc9                	j	306 <Error_Handler+0x58>
 
-00000336 <SysTick_Init>:
-     336:	d6bff2ef          	jal	t0,a0 <__riscv_save_0>
-     33a:	e000f7b7          	lui	a5,0xe000f
-     33e:	0007a023          	sw	zero,0(a5) # e000f000 <__global_pointer$+0xc000e7c0>
-     342:	200007b7          	lui	a5,0x20000
-     346:	0187a503          	lw	a0,24(a5) # 20000018 <SystemCoreClock>
-     34a:	65a9                	lui	a1,0xa
-     34c:	c4058593          	addi	a1,a1,-960 # 9c40 <_data_lma+0x89d4>
-     350:	3351                	jal	d4 <__udivsi3>
-     352:	157d                	addi	a0,a0,-1
-     354:	010007b7          	lui	a5,0x1000
-     358:	00f56463          	bltu	a0,a5,360 <SysTick_Init+0x2a>
-     35c:	fff78513          	addi	a0,a5,-1 # ffffff <_data_lma+0xffed93>
-     360:	e000f7b7          	lui	a5,0xe000f
-     364:	0007a423          	sw	zero,8(a5) # e000f008 <__global_pointer$+0xc000e7c8>
-     368:	cb88                	sw	a0,16(a5)
-     36a:	472d                	li	a4,11
-     36c:	c398                	sw	a4,0(a5)
-     36e:	e000e7b7          	lui	a5,0xe000e
-     372:	6705                	lui	a4,0x1
-     374:	10e7a023          	sw	a4,256(a5) # e000e100 <__global_pointer$+0xc000d8c0>
-     378:	4705                	li	a4,1
-     37a:	84e1a023          	sw	a4,-1984(gp) # 20000080 <SysTick_State>
-     37e:	8201ae23          	sw	zero,-1988(gp) # 2000007c <SysTick_Count>
-     382:	b325                	j	aa <__riscv_restore_0>
+00000336 <Error_GetStatus>:
+     336:	050a                	slli	a0,a0,0x2
+     338:	81018793          	addi	a5,gp,-2032 # 20000050 <err_vect>
+     33c:	97aa                	add	a5,a5,a0
+     33e:	4388                	lw	a0,0(a5)
+     340:	157d                	addi	a0,a0,-1
+     342:	00153513          	seqz	a0,a0
+     346:	8082                	ret
 
-00000384 <SysTick_GetTick>:
-     384:	83c1a503          	lw	a0,-1988(gp) # 2000007c <SysTick_Count>
-     388:	8082                	ret
+00000348 <SysTick_Init>:
+     348:	d59ff2ef          	jal	t0,a0 <__riscv_save_0>
+     34c:	e000f7b7          	lui	a5,0xe000f
+     350:	0007a023          	sw	zero,0(a5) # e000f000 <__global_pointer$+0xc000e7c0>
+     354:	200007b7          	lui	a5,0x20000
+     358:	0187a503          	lw	a0,24(a5) # 20000018 <SystemCoreClock>
+     35c:	65d1                	lui	a1,0x14
+     35e:	88058593          	addi	a1,a1,-1920 # 13880 <_data_lma+0x1212c>
+     362:	3b8d                	jal	d4 <__udivsi3>
+     364:	157d                	addi	a0,a0,-1
+     366:	010007b7          	lui	a5,0x1000
+     36a:	00f56463          	bltu	a0,a5,372 <SysTick_Init+0x2a>
+     36e:	fff78513          	addi	a0,a5,-1 # ffffff <_data_lma+0xffe8ab>
+     372:	e000f7b7          	lui	a5,0xe000f
+     376:	0007a423          	sw	zero,8(a5) # e000f008 <__global_pointer$+0xc000e7c8>
+     37a:	cb88                	sw	a0,16(a5)
+     37c:	472d                	li	a4,11
+     37e:	c398                	sw	a4,0(a5)
+     380:	e000e7b7          	lui	a5,0xe000e
+     384:	6705                	lui	a4,0x1
+     386:	10e7a023          	sw	a4,256(a5) # e000e100 <__global_pointer$+0xc000d8c0>
+     38a:	4705                	li	a4,1
+     38c:	86e1a623          	sw	a4,-1940(gp) # 200000ac <SysTick_State>
+     390:	8601a423          	sw	zero,-1944(gp) # 200000a8 <SysTick_Count>
+     394:	84018793          	addi	a5,gp,-1984 # 20000080 <Ms_Timers>
+     398:	0007a023          	sw	zero,0(a5)
+     39c:	00079223          	sh	zero,4(a5)
+     3a0:	0007a423          	sw	zero,8(a5)
+     3a4:	00079623          	sh	zero,12(a5)
+     3a8:	0007a823          	sw	zero,16(a5)
+     3ac:	00079a23          	sh	zero,20(a5)
+     3b0:	0007ac23          	sw	zero,24(a5)
+     3b4:	00079e23          	sh	zero,28(a5)
+     3b8:	0207a023          	sw	zero,32(a5)
+     3bc:	02079223          	sh	zero,36(a5)
+     3c0:	b1ed                	j	aa <__riscv_restore_0>
 
-0000038a <SysTick_GetElapsedTime>:
-     38a:	8401a703          	lw	a4,-1984(gp) # 20000080 <SysTick_State>
-     38e:	4785                	li	a5,1
-     390:	00f71763          	bne	a4,a5,39e <SysTick_GetElapsedTime+0x14>
-     394:	83c1a783          	lw	a5,-1988(gp) # 2000007c <SysTick_Count>
-     398:	40a78533          	sub	a0,a5,a0
-     39c:	8082                	ret
-     39e:	4501                	li	a0,0
-     3a0:	8082                	ret
-
-000003a2 <SysTick_Handler>:
-     3a2:	e000f7b7          	lui	a5,0xe000f
-     3a6:	0007a223          	sw	zero,4(a5) # e000f004 <__global_pointer$+0xc000e7c4>
-     3aa:	83c18793          	addi	a5,gp,-1988 # 2000007c <SysTick_Count>
-     3ae:	4398                	lw	a4,0(a5)
-     3b0:	0705                	addi	a4,a4,1
-     3b2:	c398                	sw	a4,0(a5)
-     3b4:	30200073          	mret
-
-000003b8 <LoadCellSelect>:
-     3b8:	200007b7          	lui	a5,0x20000
-     3bc:	00a7a223          	sw	a0,4(a5) # 20000004 <SelectCell>
-     3c0:	8082                	ret
-
-000003c2 <LoadCellRead>:
-     3c2:	cdfff2ef          	jal	t0,a0 <__riscv_save_0>
-     3c6:	1171                	addi	sp,sp,-4
-     3c8:	4589                	li	a1,2
-     3ca:	40011537          	lui	a0,0x40011
-     3ce:	2bd000ef          	jal	ra,e8a <GPIO_ReadInputDataBit>
-     3d2:	c941                	beqz	a0,462 <LoadCellRead+0xa0>
-     3d4:	44e1                	li	s1,24
-     3d6:	4401                	li	s0,0
+000003c2 <Timer__MsHandler>:
+     3c2:	83c1c603          	lbu	a2,-1988(gp) # 2000007c <Flag_tickMS>
+     3c6:	4729                	li	a4,10
+     3c8:	83c18693          	addi	a3,gp,-1988 # 2000007c <Flag_tickMS>
+     3cc:	02e61763          	bne	a2,a4,3fa <Timer__MsHandler+0x38>
+     3d0:	84018793          	addi	a5,gp,-1984 # 20000080 <Ms_Timers>
+     3d4:	02878613          	addi	a2,a5,40
      3d8:	4585                	li	a1,1
-     3da:	40011537          	lui	a0,0x40011
-     3de:	4605                	li	a2,1
-     3e0:	2b5000ef          	jal	ra,e94 <GPIO_WriteBit>
-     3e4:	4589                	li	a1,2
-     3e6:	40011537          	lui	a0,0x40011
-     3ea:	0406                	slli	s0,s0,0x1
-     3ec:	29f000ef          	jal	ra,e8a <GPIO_ReadInputDataBit>
-     3f0:	c111                	beqz	a0,3f4 <LoadCellRead+0x32>
-     3f2:	0405                	addi	s0,s0,1
-     3f4:	14fd                	addi	s1,s1,-1
-     3f6:	4601                	li	a2,0
-     3f8:	4585                	li	a1,1
-     3fa:	40011537          	lui	a0,0x40011
-     3fe:	0ff4f493          	andi	s1,s1,255
-     402:	293000ef          	jal	ra,e94 <GPIO_WriteBit>
-     406:	f8e9                	bnez	s1,3d8 <LoadCellRead+0x16>
-     408:	200007b7          	lui	a5,0x20000
-     40c:	0047a483          	lw	s1,4(a5) # 20000004 <SelectCell>
-     410:	4781                	li	a5,0
-     412:	009034b3          	snez	s1,s1
-     416:	0485                	addi	s1,s1,1
-     418:	4605                	li	a2,1
-     41a:	4585                	li	a1,1
-     41c:	40011537          	lui	a0,0x40011
-     420:	c03e                	sw	a5,0(sp)
-     422:	273000ef          	jal	ra,e94 <GPIO_WriteBit>
-     426:	4601                	li	a2,0
-     428:	4585                	li	a1,1
-     42a:	40011537          	lui	a0,0x40011
-     42e:	267000ef          	jal	ra,e94 <GPIO_WriteBit>
-     432:	4782                	lw	a5,0(sp)
-     434:	20000737          	lui	a4,0x20000
-     438:	00470713          	addi	a4,a4,4 # 20000004 <SelectCell>
-     43c:	0785                	addi	a5,a5,1
-     43e:	0ff7f793          	andi	a5,a5,255
-     442:	fc979be3          	bne	a5,s1,418 <LoadCellRead+0x56>
-     446:	00841793          	slli	a5,s0,0x8
-     44a:	0007d563          	bgez	a5,454 <LoadCellRead+0x92>
-     44e:	ff0007b7          	lui	a5,0xff000
-     452:	8c5d                	or	s0,s0,a5
-     454:	431c                	lw	a5,0(a4)
-     456:	00279713          	slli	a4,a5,0x2
-     45a:	86418793          	addi	a5,gp,-1948 # 200000a4 <LoadCellStore>
-     45e:	97ba                	add	a5,a5,a4
-     460:	c380                	sw	s0,0(a5)
-     462:	0111                	addi	sp,sp,4
-     464:	b199                	j	aa <__riscv_restore_0>
+     3da:	4398                	lw	a4,0(a5)
+     3dc:	00b71a63          	bne	a4,a1,3f0 <Timer__MsHandler+0x2e>
+     3e0:	23da                	lhu	a4,4(a5)
+     3e2:	177d                	addi	a4,a4,-1
+     3e4:	0742                	slli	a4,a4,0x10
+     3e6:	8341                	srli	a4,a4,0x10
+     3e8:	a3da                	sh	a4,4(a5)
+     3ea:	e319                	bnez	a4,3f0 <Timer__MsHandler+0x2e>
+     3ec:	0007a023          	sw	zero,0(a5)
+     3f0:	07a1                	addi	a5,a5,8
+     3f2:	fec794e3          	bne	a5,a2,3da <Timer__MsHandler+0x18>
+     3f6:	00068023          	sb	zero,0(a3)
+     3fa:	8082                	ret
 
-00000466 <Hal__SetBuzzer>:
-     466:	c3bff2ef          	jal	t0,a0 <__riscv_save_0>
-     46a:	4595                	li	a1,5
-     46c:	e111                	bnez	a0,470 <Hal__SetBuzzer+0xa>
-     46e:	4581                	li	a1,0
-     470:	4519                	li	a0,6
-     472:	2919                	jal	888 <Pwm__SetDutyCycle>
-     474:	b91d                	j	aa <__riscv_restore_0>
+000003fc <Timer__MsSet>:
+     3fc:	4791                	li	a5,4
+     3fe:	02a7e763          	bltu	a5,a0,42c <Timer__MsSet+0x30>
+     402:	c9fff2ef          	jal	t0,a0 <__riscv_save_0>
+     406:	4725                	li	a4,9
+     408:	84018413          	addi	s0,gp,-1984 # 20000080 <Ms_Timers>
+     40c:	00351793          	slli	a5,a0,0x3
+     410:	00b76663          	bltu	a4,a1,41c <Timer__MsSet+0x20>
+     414:	943e                	add	s0,s0,a5
+     416:	00042023          	sw	zero,0(s0)
+     41a:	b941                	j	aa <__riscv_restore_0>
+     41c:	852e                	mv	a0,a1
+     41e:	45a9                	li	a1,10
+     420:	943e                	add	s0,s0,a5
+     422:	394d                	jal	d4 <__udivsi3>
+     424:	4785                	li	a5,1
+     426:	a04a                	sh	a0,4(s0)
+     428:	c01c                	sw	a5,0(s0)
+     42a:	bfc5                	j	41a <Timer__MsSet+0x1e>
+     42c:	8082                	ret
 
-00000476 <ADProcess>:
-     476:	84c1a503          	lw	a0,-1972(gp) # 2000008c <AD_Channel>
-     47a:	6785                	lui	a5,0x1
-     47c:	24078793          	addi	a5,a5,576 # 1240 <Adc_Enable_Table>
-     480:	97aa                	add	a5,a5,a0
-     482:	2394                	lbu	a3,0(a5)
-     484:	4785                	li	a5,1
-     486:	84c18713          	addi	a4,gp,-1972 # 2000008c <AD_Channel>
-     48a:	06f69d63          	bne	a3,a5,504 <ADProcess+0x8e>
-     48e:	c13ff2ef          	jal	t0,a0 <__riscv_save_0>
-     492:	85018493          	addi	s1,gp,-1968 # 20000090 <AD_Counter>
-     496:	00a48633          	add	a2,s1,a0
-     49a:	220c                	lbu	a1,0(a2)
-     49c:	479d                	li	a5,7
-     49e:	1171                	addi	sp,sp,-4
-     4a0:	00151693          	slli	a3,a0,0x1
-     4a4:	84418413          	addi	s0,gp,-1980 # 20000084 <AD_Accumulator>
-     4a8:	04b7e063          	bltu	a5,a1,4e8 <ADProcess+0x72>
-     4ac:	c036                	sw	a3,0(sp)
-     4ae:	2c91                	jal	702 <ADC__GetValue>
-     4b0:	4682                	lw	a3,0(sp)
-     4b2:	84c18713          	addi	a4,gp,-1972 # 2000008c <AD_Channel>
-     4b6:	4310                	lw	a2,0(a4)
-     4b8:	85418793          	addi	a5,gp,-1964 # 20000094 <AD_Sample>
-     4bc:	96be                	add	a3,a3,a5
-     4be:	a28a                	sh	a0,0(a3)
-     4c0:	00161693          	slli	a3,a2,0x1
-     4c4:	9436                	add	s0,s0,a3
-     4c6:	97b6                	add	a5,a5,a3
-     4c8:	239e                	lhu	a5,0(a5)
-     4ca:	2016                	lhu	a3,0(s0)
-     4cc:	94b2                	add	s1,s1,a2
-     4ce:	97b6                	add	a5,a5,a3
-     4d0:	a01e                	sh	a5,0(s0)
-     4d2:	209c                	lbu	a5,0(s1)
-     4d4:	0785                	addi	a5,a5,1
-     4d6:	a09c                	sb	a5,0(s1)
-     4d8:	431c                	lw	a5,0(a4)
-     4da:	468d                	li	a3,3
-     4dc:	0785                	addi	a5,a5,1
-     4de:	02f6e163          	bltu	a3,a5,500 <ADProcess+0x8a>
-     4e2:	c31c                	sw	a5,0(a4)
-     4e4:	0111                	addi	sp,sp,4
-     4e6:	b6d1                	j	aa <__riscv_restore_0>
-     4e8:	9436                	add	s0,s0,a3
-     4ea:	85c18793          	addi	a5,gp,-1956 # 2000009c <Hal_Analog_Inputs>
-     4ee:	97b6                	add	a5,a5,a3
-     4f0:	2016                	lhu	a3,0(s0)
-     4f2:	00060023          	sb	zero,0(a2)
-     4f6:	00041023          	sh	zero,0(s0)
-     4fa:	828d                	srli	a3,a3,0x3
-     4fc:	a396                	sh	a3,0(a5)
-     4fe:	bfe9                	j	4d8 <ADProcess+0x62>
-     500:	4789                	li	a5,2
-     502:	b7c5                	j	4e2 <ADProcess+0x6c>
-     504:	431c                	lw	a5,0(a4)
-     506:	468d                	li	a3,3
-     508:	0785                	addi	a5,a5,1
-     50a:	00f6e463          	bltu	a3,a5,512 <ADProcess+0x9c>
-     50e:	c31c                	sw	a5,0(a4)
-     510:	8082                	ret
-     512:	4789                	li	a5,2
-     514:	bfed                	j	50e <ADProcess+0x98>
+0000042e <Timer__MsGetStatus>:
+     42e:	050e                	slli	a0,a0,0x3
+     430:	84018793          	addi	a5,gp,-1984 # 20000080 <Ms_Timers>
+     434:	97aa                	add	a5,a5,a0
+     436:	4388                	lw	a0,0(a5)
+     438:	8082                	ret
 
-00000516 <Hal__BackgroundHandler>:
-     516:	b8bff2ef          	jal	t0,a0 <__riscv_save_0>
-     51a:	3fb1                	jal	476 <ADProcess>
-     51c:	355d                	jal	3c2 <LoadCellRead>
-     51e:	b671                	j	aa <__riscv_restore_0>
+0000043a <SysTick_GetTick>:
+     43a:	8681a503          	lw	a0,-1944(gp) # 200000a8 <SysTick_Count>
+     43e:	8082                	ret
 
-00000520 <ADC__Initialize>:
-     520:	b81ff2ef          	jal	t0,a0 <__riscv_save_0>
-     524:	fd810113          	addi	sp,sp,-40
-     528:	4661                	li	a2,24
-     52a:	4581                	li	a1,0
-     52c:	0808                	addi	a0,sp,16
-     52e:	3931                	jal	14a <memset>
-     530:	4585                	li	a1,1
-     532:	20000513          	li	a0,512
-     536:	237000ef          	jal	ra,f6c <RCC_APB2PeriphClockCmd>
-     53a:	6531                	lui	a0,0xc
-     53c:	17b000ef          	jal	ra,eb6 <RCC_ADCCLKConfig>
-     540:	4585                	li	a1,1
-     542:	4541                	li	a0,16
-     544:	c202                	sw	zero,4(sp)
-     546:	c402                	sw	zero,8(sp)
-     548:	c602                	sw	zero,12(sp)
-     54a:	223000ef          	jal	ra,f6c <RCC_APB2PeriphClockCmd>
-     54e:	47c1                	li	a5,16
-     550:	004c                	addi	a1,sp,4
-     552:	40011537          	lui	a0,0x40011
-     556:	827c                	sh	a5,4(sp)
-     558:	c602                	sw	zero,12(sp)
-     55a:	0b5000ef          	jal	ra,e0e <GPIO_Init>
-     55e:	4585                	li	a1,1
-     560:	02000513          	li	a0,32
-     564:	209000ef          	jal	ra,f6c <RCC_APB2PeriphClockCmd>
-     568:	40011537          	lui	a0,0x40011
-     56c:	4791                	li	a5,4
-     56e:	004c                	addi	a1,sp,4
-     570:	40050513          	addi	a0,a0,1024 # 40011400 <__global_pointer$+0x20010bc0>
-     574:	827c                	sh	a5,4(sp)
-     576:	c602                	sw	zero,12(sp)
-     578:	6485                	lui	s1,0x1
-     57a:	095000ef          	jal	ra,e0e <GPIO_Init>
-     57e:	4785                	li	a5,1
-     580:	4401                	li	s0,0
-     582:	24048493          	addi	s1,s1,576 # 1240 <Adc_Enable_Table>
-     586:	4685                	li	a3,1
-     588:	4725                	li	a4,9
-     58a:	00f48633          	add	a2,s1,a5
-     58e:	2210                	lbu	a2,0(a2)
-     590:	00d61563          	bne	a2,a3,59a <ADC__Initialize+0x7a>
-     594:	0405                	addi	s0,s0,1
-     596:	0ff47413          	andi	s0,s0,255
-     59a:	0785                	addi	a5,a5,1
-     59c:	fee797e3          	bne	a5,a4,58a <ADC__Initialize+0x6a>
-     5a0:	40021737          	lui	a4,0x40021
-     5a4:	4b5c                	lw	a5,20(a4)
-     5a6:	400206b7          	lui	a3,0x40020
-     5aa:	7671                	lui	a2,0xffffc
-     5ac:	0017e793          	ori	a5,a5,1
-     5b0:	cb5c                	sw	a5,20(a4)
-     5b2:	469c                	lw	a5,8(a3)
-     5b4:	1679                	addi	a2,a2,-2
-     5b6:	40012537          	lui	a0,0x40012
-     5ba:	8ff1                	and	a5,a5,a2
-     5bc:	6609                	lui	a2,0x2
-     5be:	5a060613          	addi	a2,a2,1440 # 25a0 <_data_lma+0x1334>
-     5c2:	8fd1                	or	a5,a5,a2
-     5c4:	c69c                	sw	a5,8(a3)
-     5c6:	c6c0                	sw	s0,12(a3)
-     5c8:	44c50793          	addi	a5,a0,1100 # 4001244c <__global_pointer$+0x20011c0c>
-     5cc:	ca9c                	sw	a5,16(a3)
-     5ce:	88018793          	addi	a5,gp,-1920 # 200000c0 <DMA_Buffer>
-     5d2:	cadc                	sw	a5,20(a3)
-     5d4:	40050513          	addi	a0,a0,1024
-     5d8:	680000ef          	jal	ra,c58 <ADC_DeInit>
-     5dc:	4785                	li	a5,1
-     5de:	ca3e                	sw	a5,20(sp)
-     5e0:	cc3e                	sw	a5,24(sp)
-     5e2:	000e07b7          	lui	a5,0xe0
-     5e6:	02810223          	sb	s0,36(sp)
-     5ea:	c802                	sw	zero,16(sp)
-     5ec:	ce3e                	sw	a5,28(sp)
-     5ee:	d002                	sw	zero,32(sp)
-     5f0:	4705                	li	a4,1
-     5f2:	4405                	li	s0,1
-     5f4:	47a1                	li	a5,8
-     5f6:	0ff77593          	andi	a1,a4,255
-     5fa:	06f71e63          	bne	a4,a5,676 <ADC__Initialize+0x156>
-     5fe:	8622                	mv	a2,s0
-     600:	40012437          	lui	s0,0x40012
-     604:	469d                	li	a3,7
-     606:	45a1                	li	a1,8
-     608:	40040513          	addi	a0,s0,1024 # 40012400 <__global_pointer$+0x20011bc0>
-     60c:	71e000ef          	jal	ra,d2a <ADC_RegularChannelConfig>
-     610:	080c                	addi	a1,sp,16
-     612:	40040513          	addi	a0,s0,1024
-     616:	668000ef          	jal	ra,c7e <ADC_Init>
-     61a:	4585                	li	a1,1
-     61c:	40040513          	addi	a0,s0,1024
-     620:	6bc000ef          	jal	ra,cdc <ADC_DMACmd>
-     624:	4585                	li	a1,1
-     626:	40040513          	addi	a0,s0,1024
-     62a:	6a2000ef          	jal	ra,ccc <ADC_Cmd>
-     62e:	40040513          	addi	a0,s0,1024
-     632:	6bc000ef          	jal	ra,cee <ADC_ResetCalibration>
-     636:	40040493          	addi	s1,s0,1024
-     63a:	8526                	mv	a0,s1
-     63c:	6bc000ef          	jal	ra,cf8 <ADC_GetResetCalibrationStatus>
-     640:	fd6d                	bnez	a0,63a <ADC__Initialize+0x11a>
-     642:	40040513          	addi	a0,s0,1024
-     646:	40012437          	lui	s0,0x40012
-     64a:	6b6000ef          	jal	ra,d00 <ADC_StartCalibration>
-     64e:	40040493          	addi	s1,s0,1024 # 40012400 <__global_pointer$+0x20011bc0>
-     652:	8526                	mv	a0,s1
-     654:	6b6000ef          	jal	ra,d0a <ADC_GetCalibrationStatus>
-     658:	fd6d                	bnez	a0,652 <ADC__Initialize+0x132>
-     65a:	40020537          	lui	a0,0x40020
-     65e:	4585                	li	a1,1
-     660:	0521                	addi	a0,a0,8
-     662:	782000ef          	jal	ra,de4 <DMA_Cmd>
-     666:	4585                	li	a1,1
-     668:	40040513          	addi	a0,s0,1024
-     66c:	6a6000ef          	jal	ra,d12 <ADC_SoftwareStartConvCmd>
-     670:	02810113          	addi	sp,sp,40
-     674:	bc1d                	j	aa <__riscv_restore_0>
-     676:	00e487b3          	add	a5,s1,a4
-     67a:	2394                	lbu	a3,0(a5)
-     67c:	4785                	li	a5,1
-     67e:	00f69f63          	bne	a3,a5,69c <ADC__Initialize+0x17c>
-     682:	40012537          	lui	a0,0x40012
-     686:	8622                	mv	a2,s0
-     688:	469d                	li	a3,7
-     68a:	40050513          	addi	a0,a0,1024 # 40012400 <__global_pointer$+0x20011bc0>
-     68e:	c03a                	sw	a4,0(sp)
-     690:	69a000ef          	jal	ra,d2a <ADC_RegularChannelConfig>
-     694:	4702                	lw	a4,0(sp)
-     696:	0405                	addi	s0,s0,1
-     698:	0ff47413          	andi	s0,s0,255
-     69c:	0705                	addi	a4,a4,1
-     69e:	bf99                	j	5f4 <ADC__Initialize+0xd4>
+00000440 <SysTick_GetElapsedTime>:
+     440:	86c1a703          	lw	a4,-1940(gp) # 200000ac <SysTick_State>
+     444:	4785                	li	a5,1
+     446:	00f71763          	bne	a4,a5,454 <SysTick_GetElapsedTime+0x14>
+     44a:	8681a783          	lw	a5,-1944(gp) # 200000a8 <SysTick_Count>
+     44e:	40a78533          	sub	a0,a5,a0
+     452:	8082                	ret
+     454:	4501                	li	a0,0
+     456:	8082                	ret
 
-000006a0 <ADC_Handler>:
-     6a0:	a01ff2ef          	jal	t0,a0 <__riscv_save_0>
-     6a4:	4509                	li	a0,2
-     6a6:	752000ef          	jal	ra,df8 <DMA_GetFlagStatus>
-     6aa:	c939                	beqz	a0,700 <ADC_Handler+0x60>
-     6ac:	4509                	li	a0,2
-     6ae:	758000ef          	jal	ra,e06 <DMA_ClearFlag>
-     6b2:	6685                	lui	a3,0x1
-     6b4:	4701                	li	a4,0
-     6b6:	4781                	li	a5,0
-     6b8:	24068693          	addi	a3,a3,576 # 1240 <Adc_Enable_Table>
-     6bc:	4385                	li	t2,1
-     6be:	86c18613          	addi	a2,gp,-1940 # 200000ac <ADC_Buffer>
-     6c2:	88018593          	addi	a1,gp,-1920 # 200000c0 <DMA_Buffer>
-     6c6:	42a1                	li	t0,8
-     6c8:	00e68533          	add	a0,a3,a4
-     6cc:	2108                	lbu	a0,0(a0)
-     6ce:	00751f63          	bne	a0,t2,6ec <ADC_Handler+0x4c>
-     6d2:	00179313          	slli	t1,a5,0x1
-     6d6:	932e                	add	t1,t1,a1
-     6d8:	00035303          	lhu	t1,0(t1)
-     6dc:	00171513          	slli	a0,a4,0x1
-     6e0:	9532                	add	a0,a0,a2
-     6e2:	0785                	addi	a5,a5,1
-     6e4:	00651023          	sh	t1,0(a0)
-     6e8:	0ff7f793          	andi	a5,a5,255
-     6ec:	0705                	addi	a4,a4,1
-     6ee:	fc571de3          	bne	a4,t0,6c8 <ADC_Handler+0x28>
-     6f2:	88018713          	addi	a4,gp,-1920 # 200000c0 <DMA_Buffer>
-     6f6:	0786                	slli	a5,a5,0x1
-     6f8:	97ba                	add	a5,a5,a4
-     6fa:	239a                	lhu	a4,0(a5)
-     6fc:	86e19e23          	sh	a4,-1924(gp) # 200000bc <ADC_Buffer+0x10>
-     700:	b26d                	j	aa <__riscv_restore_0>
+00000458 <SysTick_Handler>:
+     458:	e000f7b7          	lui	a5,0xe000f
+     45c:	0007a223          	sw	zero,4(a5) # e000f004 <__global_pointer$+0xc000e7c4>
+     460:	86818793          	addi	a5,gp,-1944 # 200000a8 <SysTick_Count>
+     464:	4398                	lw	a4,0(a5)
+     466:	0705                	addi	a4,a4,1
+     468:	c398                	sw	a4,0(a5)
+     46a:	83c18793          	addi	a5,gp,-1988 # 2000007c <Flag_tickMS>
+     46e:	2398                	lbu	a4,0(a5)
+     470:	0705                	addi	a4,a4,1
+     472:	a398                	sb	a4,0(a5)
+     474:	30200073          	mret
 
-00000702 <ADC__GetValue>:
-     702:	479d                	li	a5,7
-     704:	00a7e963          	bltu	a5,a0,716 <ADC__GetValue+0x14>
-     708:	00151793          	slli	a5,a0,0x1
-     70c:	86c18513          	addi	a0,gp,-1940 # 200000ac <ADC_Buffer>
-     710:	953e                	add	a0,a0,a5
-     712:	210a                	lhu	a0,0(a0)
-     714:	8082                	ret
-     716:	4501                	li	a0,0
-     718:	8082                	ret
+00000478 <CMPInitialize>:
+     478:	c29ff2ef          	jal	t0,a0 <__riscv_save_0>
+     47c:	6571                	lui	a0,0x1c
+     47e:	20050513          	addi	a0,a0,512 # 1c200 <_data_lma+0x1aaac>
+     482:	8601ae23          	sw	zero,-1924(gp) # 200000bc <RPM_count>
+     486:	178010ef          	jal	ra,15fe <USART_Printf_Init>
+     48a:	89418793          	addi	a5,gp,-1900 # 200000d4 <data_out>
+     48e:	0007a023          	sw	zero,0(a5)
+     492:	0007a223          	sw	zero,4(a5)
+     496:	0007a423          	sw	zero,8(a5)
+     49a:	0007a623          	sw	zero,12(a5)
+     49e:	0007a823          	sw	zero,16(a5)
+     4a2:	b121                	j	aa <__riscv_restore_0>
 
-0000071a <Pwm__SetDutyCycle.part.0>:
-     71a:	987ff2ef          	jal	t0,a0 <__riscv_save_0>
-     71e:	06400713          	li	a4,100
-     722:	842a                	mv	s0,a0
-     724:	8a61d503          	lhu	a0,-1882(gp) # 200000e6 <timer_period+0x2>
-     728:	06400793          	li	a5,100
-     72c:	00b76363          	bltu	a4,a1,732 <Pwm__SetDutyCycle.part.0+0x18>
-     730:	87ae                	mv	a5,a1
-     732:	0ff7f593          	andi	a1,a5,255
-     736:	97fff0ef          	jal	ra,b4 <__mulsi3>
-     73a:	06400593          	li	a1,100
-     73e:	3279                	jal	cc <__divsi3>
-     740:	0542                	slli	a0,a0,0x10
-     742:	6741                	lui	a4,0x10
-     744:	89418793          	addi	a5,gp,-1900 # 200000d4 <TIM_OCInitStructure.4099>
-     748:	8141                	srli	a0,a0,0x10
-     74a:	06070713          	addi	a4,a4,96 # 10060 <_data_lma+0xedf4>
-     74e:	4695                	li	a3,5
-     750:	c398                	sw	a4,0(a5)
-     752:	a3ea                	sh	a0,6(a5)
-     754:	0286e963          	bltu	a3,s0,786 <Pwm__SetDutyCycle.part.0+0x6c>
-     758:	00079423          	sh	zero,8(a5) # e0008 <_data_lma+0xded9c>
-     75c:	4785                	li	a5,1
-     75e:	00f41d63          	bne	s0,a5,778 <Pwm__SetDutyCycle.part.0+0x5e>
-     762:	89418593          	addi	a1,gp,-1900 # 200000d4 <TIM_OCInitStructure.4099>
-     766:	40000537          	lui	a0,0x40000
-     76a:	0ab000ef          	jal	ra,1014 <TIM_OC2Init>
-     76e:	45a1                	li	a1,8
-     770:	40000537          	lui	a0,0x40000
-     774:	17f000ef          	jal	ra,10f2 <TIM_OC2PreloadConfig>
-     778:	4585                	li	a1,1
-     77a:	40000537          	lui	a0,0x40000
-     77e:	15b000ef          	jal	ra,10d8 <TIM_ARRPreloadConfig>
-     782:	929ff06f          	j	aa <__riscv_restore_0>
-     786:	4709                	li	a4,2
-     788:	a79a                	sh	a4,8(a5)
-     78a:	4799                	li	a5,6
-     78c:	02f41463          	bne	s0,a5,7b4 <Pwm__SetDutyCycle.part.0+0x9a>
-     790:	40013437          	lui	s0,0x40013
-     794:	4585                	li	a1,1
-     796:	c0040513          	addi	a0,s0,-1024 # 40012c00 <__global_pointer$+0x200123c0>
-     79a:	129000ef          	jal	ra,10c2 <TIM_CtrlPWMOutputs>
-     79e:	89418593          	addi	a1,gp,-1900 # 200000d4 <TIM_OCInitStructure.4099>
-     7a2:	c0040513          	addi	a0,s0,-1024
-     7a6:	06f000ef          	jal	ra,1014 <TIM_OC2Init>
-     7aa:	45a1                	li	a1,8
-     7ac:	c0040513          	addi	a0,s0,-1024
-     7b0:	143000ef          	jal	ra,10f2 <TIM_OC2PreloadConfig>
-     7b4:	40013537          	lui	a0,0x40013
-     7b8:	4585                	li	a1,1
-     7ba:	c0050513          	addi	a0,a0,-1024 # 40012c00 <__global_pointer$+0x200123c0>
-     7be:	b7c1                	j	77e <Pwm__SetDutyCycle.part.0+0x64>
+000004a4 <CMP_BackgroundHandler>:
+     4a4:	bfdff2ef          	jal	t0,a0 <__riscv_save_0>
+     4a8:	8781c703          	lbu	a4,-1928(gp) # 200000b8 <Mode>
+     4ac:	0af00793          	li	a5,175
+     4b0:	1141                	addi	sp,sp,-16
+     4b2:	87018413          	addi	s0,gp,-1936 # 200000b0 <Calib>
+     4b6:	0cf71463          	bne	a4,a5,57e <CMP_BackgroundHandler+0xda>
+     4ba:	4505                	li	a0,1
+     4bc:	3dad                	jal	336 <Error_GetStatus>
+     4be:	0a050d63          	beqz	a0,578 <CMP_BackgroundHandler+0xd4>
+     4c2:	4509                	li	a0,2
+     4c4:	3d8d                	jal	336 <Error_GetStatus>
+     4c6:	0a050963          	beqz	a0,578 <CMP_BackgroundHandler+0xd4>
+     4ca:	450d                	li	a0,3
+     4cc:	35ad                	jal	336 <Error_GetStatus>
+     4ce:	c54d                	beqz	a0,578 <CMP_BackgroundHandler+0xd4>
+     4d0:	8901c503          	lbu	a0,-1904(gp) # 200000d0 <data_in+0xc>
+     4d4:	26b1                	jal	820 <Hal_SetMotorDuty>
+     4d6:	4501                	li	a0,0
+     4d8:	2e19                	jal	7ee <GetCellRead>
+     4da:	00551793          	slli	a5,a0,0x5
+     4de:	8f89                	sub	a5,a5,a0
+     4e0:	078a                	slli	a5,a5,0x2
+     4e2:	400c                	lw	a1,0(s0)
+     4e4:	953e                	add	a0,a0,a5
+     4e6:	050e                	slli	a0,a0,0x3
+     4e8:	36f5                	jal	d4 <__udivsi3>
+     4ea:	c62a                	sw	a0,12(sp)
+     4ec:	4505                	li	a0,1
+     4ee:	2601                	jal	7ee <GetCellRead>
+     4f0:	00551793          	slli	a5,a0,0x5
+     4f4:	8f89                	sub	a5,a5,a0
+     4f6:	404c                	lw	a1,4(s0)
+     4f8:	078a                	slli	a5,a5,0x2
+     4fa:	953e                	add	a0,a0,a5
+     4fc:	050e                	slli	a0,a0,0x3
+     4fe:	3ed9                	jal	d4 <__udivsi3>
+     500:	c42a                	sw	a0,8(sp)
+     502:	4505                	li	a0,1
+     504:	243d                	jal	732 <Hal_GetAnalogInput>
+     506:	4501                	li	a0,0
+     508:	242d                	jal	732 <Hal_GetAnalogInput>
+     50a:	d8f50793          	addi	a5,a0,-625
+     50e:	078a                	slli	a5,a5,0x2
+     510:	00778313          	addi	t1,a5,7
+     514:	87c1a783          	lw	a5,-1924(gp) # 200000bc <RPM_count>
+     518:	8a818413          	addi	s0,gp,-1880 # 200000e8 <prev_RPM_tick>
+     51c:	0017d493          	srli	s1,a5,0x1
+     520:	00249793          	slli	a5,s1,0x2
+     524:	4008                	lw	a0,0(s0)
+     526:	97a6                	add	a5,a5,s1
+     528:	00479493          	slli	s1,a5,0x4
+     52c:	8c9d                	sub	s1,s1,a5
+     52e:	c21a                	sw	t1,4(sp)
+     530:	3f01                	jal	440 <SysTick_GetElapsedTime>
+     532:	c02a                	sw	a0,0(sp)
+     534:	3719                	jal	43a <SysTick_GetTick>
+     536:	4312                	lw	t1,4(sp)
+     538:	c008                	sw	a0,0(s0)
+     53a:	00131793          	slli	a5,t1,0x1
+     53e:	979a                	add	a5,a5,t1
+     540:	078e                	slli	a5,a5,0x3
+     542:	979a                	add	a5,a5,t1
+     544:	0786                	slli	a5,a5,0x1
+     546:	89418613          	addi	a2,gp,-1900 # 200000d4 <data_out>
+     54a:	048e                	slli	s1,s1,0x3
+     54c:	89418413          	addi	s0,gp,-1900 # 200000d4 <data_out>
+     550:	4582                	lw	a1,0(sp)
+     552:	46a2                	lw	a3,8(sp)
+     554:	4732                	lw	a4,12(sp)
+     556:	0007d363          	bgez	a5,55c <CMP_BackgroundHandler+0xb8>
+     55a:	4781                	li	a5,0
+     55c:	c21c                	sw	a5,0(a2)
+     55e:	00041223          	sh	zero,4(s0)
+     562:	00042323          	sw	zero,6(s0)
+     566:	00e42523          	sw	a4,10(s0)
+     56a:	00d42723          	sw	a3,14(s0)
+     56e:	8526                	mv	a0,s1
+     570:	3695                	jal	d4 <__udivsi3>
+     572:	a82a                	sh	a0,18(s0)
+     574:	0141                	addi	sp,sp,16
+     576:	be15                	j	aa <__riscv_restore_0>
+     578:	4501                	li	a0,0
+     57a:	2c51                	jal	80e <Hal_SetMotor>
+     57c:	bfa9                	j	4d6 <CMP_BackgroundHandler+0x32>
+     57e:	88418493          	addi	s1,gp,-1916 # 200000c4 <data_in>
+     582:	209c                	lbu	a5,0(s1)
+     584:	473d                	li	a4,15
+     586:	00e78d63          	beq	a5,a4,5a0 <CMP_BackgroundHandler+0xfc>
+     58a:	0ff00713          	li	a4,255
+     58e:	f4e794e3          	bne	a5,a4,4d6 <CMP_BackgroundHandler+0x32>
+     592:	40dc                	lw	a5,4(s1)
+     594:	c01c                	sw	a5,0(s0)
+     596:	449c                	lw	a5,8(s1)
+     598:	c05c                	sw	a5,4(s0)
+     59a:	00048023          	sb	zero,0(s1)
+     59e:	bf25                	j	4d6 <CMP_BackgroundHandler+0x32>
+     5a0:	4501                	li	a0,0
+     5a2:	2ca1                	jal	7fa <LoadCellTare>
+     5a4:	4505                	li	a0,1
+     5a6:	2c91                	jal	7fa <LoadCellTare>
+     5a8:	bfcd                	j	59a <CMP_BackgroundHandler+0xf6>
 
-000007c0 <Pwm__SetTCFrequency>:
-     7c0:	8e1ff2ef          	jal	t0,a0 <__riscv_save_0>
-     7c4:	87ae                	mv	a5,a1
-     7c6:	200006b7          	lui	a3,0x20000
-     7ca:	0596                	slli	a1,a1,0x5
-     7cc:	0186a403          	lw	s0,24(a3) # 20000018 <SystemCoreClock>
-     7d0:	8d9d                	sub	a1,a1,a5
-     7d2:	058a                	slli	a1,a1,0x2
-     7d4:	1131                	addi	sp,sp,-20
-     7d6:	95be                	add	a1,a1,a5
-     7d8:	c22a                	sw	a0,4(sp)
-     7da:	058e                	slli	a1,a1,0x3
-     7dc:	8522                	mv	a0,s0
-     7de:	c03e                	sw	a5,0(sp)
-     7e0:	c402                	sw	zero,8(sp)
-     7e2:	c602                	sw	zero,12(sp)
-     7e4:	00011823          	sh	zero,16(sp)
-     7e8:	8edff0ef          	jal	ra,d4 <__udivsi3>
-     7ec:	fff50493          	addi	s1,a0,-1
-     7f0:	66c1                	lui	a3,0x10
-     7f2:	4782                	lw	a5,0(sp)
-     7f4:	4712                	lw	a4,4(sp)
-     7f6:	00d4e463          	bltu	s1,a3,7fe <Pwm__SetTCFrequency+0x3e>
-     7fa:	fff68493          	addi	s1,a3,-1 # ffff <_data_lma+0xed93>
-     7fe:	85be                	mv	a1,a5
-     800:	00148513          	addi	a0,s1,1
-     804:	c03a                	sw	a4,0(sp)
-     806:	8afff0ef          	jal	ra,b4 <__mulsi3>
-     80a:	85aa                	mv	a1,a0
-     80c:	8522                	mv	a0,s0
-     80e:	8c7ff0ef          	jal	ra,d4 <__udivsi3>
-     812:	157d                	addi	a0,a0,-1
-     814:	67c1                	lui	a5,0x10
-     816:	4702                	lw	a4,0(sp)
-     818:	00f56463          	bltu	a0,a5,820 <Pwm__SetTCFrequency+0x60>
-     81c:	fff78513          	addi	a0,a5,-1 # ffff <_data_lma+0xed93>
-     820:	01051413          	slli	s0,a0,0x10
-     824:	00171793          	slli	a5,a4,0x1
-     828:	8a418693          	addi	a3,gp,-1884 # 200000e4 <timer_period>
-     82c:	8041                	srli	s0,s0,0x10
-     82e:	97b6                	add	a5,a5,a3
-     830:	a382                	sh	s0,0(a5)
-     832:	c719                	beqz	a4,840 <Pwm__SetTCFrequency+0x80>
-     834:	4785                	li	a5,1
-     836:	02f70b63          	beq	a4,a5,86c <Pwm__SetTCFrequency+0xac>
-     83a:	0151                	addi	sp,sp,20
+000005aa <EXTI7_0_IRQHandler>:
+     5aa:	87c18793          	addi	a5,gp,-1924 # 200000bc <RPM_count>
+     5ae:	4398                	lw	a4,0(a5)
+     5b0:	0705                	addi	a4,a4,1
+     5b2:	c398                	sw	a4,0(a5)
+     5b4:	30200073          	mret
+
+000005b8 <USART_send_packet>:
+     5b8:	ae9ff2ef          	jal	t0,a0 <__riscv_save_0>
+     5bc:	8801c703          	lbu	a4,-1920(gp) # 200000c0 <byte_count.4443>
+     5c0:	1171                	addi	sp,sp,-4
+     5c2:	87aa                	mv	a5,a0
+     5c4:	88018413          	addi	s0,gp,-1920 # 200000c0 <byte_count.4443>
+     5c8:	88218493          	addi	s1,gp,-1918 # 200000c2 <checksum.4444>
+     5cc:	ef09                	bnez	a4,5e6 <USART_send_packet+0x2e>
+     5ce:	c02a                	sw	a0,0(sp)
+     5d0:	40014537          	lui	a0,0x40014
+     5d4:	0aa00593          	li	a1,170
+     5d8:	80050513          	addi	a0,a0,-2048 # 40013800 <__global_pointer$+0x20012fc0>
+     5dc:	00048023          	sb	zero,0(s1)
+     5e0:	00e010ef          	jal	ra,15ee <USART_SendData>
+     5e4:	4782                	lw	a5,0(sp)
+     5e6:	2018                	lbu	a4,0(s0)
+     5e8:	97ba                	add	a5,a5,a4
+     5ea:	238c                	lbu	a1,0(a5)
+     5ec:	209c                	lbu	a5,0(s1)
+     5ee:	40014737          	lui	a4,0x40014
+     5f2:	80070513          	addi	a0,a4,-2048 # 40013800 <__global_pointer$+0x20012fc0>
+     5f6:	97ae                	add	a5,a5,a1
+     5f8:	a09c                	sb	a5,0(s1)
+     5fa:	7f5000ef          	jal	ra,15ee <USART_SendData>
+     5fe:	201c                	lbu	a5,0(s0)
+     600:	46cd                	li	a3,19
+     602:	4501                	li	a0,0
+     604:	0785                	addi	a5,a5,1
+     606:	0ff7f793          	andi	a5,a5,255
+     60a:	a01c                	sb	a5,0(s0)
+     60c:	40014737          	lui	a4,0x40014
+     610:	02f6f163          	bgeu	a3,a5,632 <USART_send_packet+0x7a>
+     614:	208c                	lbu	a1,0(s1)
+     616:	80070513          	addi	a0,a4,-2048 # 40013800 <__global_pointer$+0x20012fc0>
+     61a:	7d5000ef          	jal	ra,15ee <USART_SendData>
+     61e:	40014737          	lui	a4,0x40014
+     622:	80070513          	addi	a0,a4,-2048 # 40013800 <__global_pointer$+0x20012fc0>
+     626:	45a9                	li	a1,10
+     628:	7c7000ef          	jal	ra,15ee <USART_SendData>
+     62c:	4505                	li	a0,1
+     62e:	00040023          	sb	zero,0(s0)
+     632:	0111                	addi	sp,sp,4
+     634:	bc9d                	j	aa <__riscv_restore_0>
+
+00000636 <USART_receive_packet>:
+     636:	a6bff2ef          	jal	t0,a0 <__riscv_save_0>
+     63a:	842a                	mv	s0,a0
+     63c:	40014537          	lui	a0,0x40014
+     640:	80050513          	addi	a0,a0,-2048 # 40013800 <__global_pointer$+0x20012fc0>
+     644:	7b3000ef          	jal	ra,15f6 <USART_ReceiveData>
+     648:	8b018793          	addi	a5,gp,-1872 # 200000f0 <state.4449>
+     64c:	4398                	lw	a4,0(a5)
+     64e:	4685                	li	a3,1
+     650:	0ff57513          	andi	a0,a0,255
+     654:	02d70563          	beq	a4,a3,67e <USART_receive_packet+0x48>
+     658:	cb09                	beqz	a4,66a <USART_receive_packet+0x34>
+     65a:	4689                	li	a3,2
+     65c:	04d70763          	beq	a4,a3,6aa <USART_receive_packet+0x74>
+     660:	468d                	li	a3,3
+     662:	04d70d63          	beq	a4,a3,6bc <USART_receive_packet+0x86>
+     666:	4501                	li	a0,0
+     668:	b489                	j	aa <__riscv_restore_0>
+     66a:	0aa00713          	li	a4,170
+     66e:	fee51ce3          	bne	a0,a4,666 <USART_receive_packet+0x30>
+     672:	c394                	sw	a3,0(a5)
+     674:	880180a3          	sb	zero,-1919(gp) # 200000c1 <byte_count.4450>
+     678:	880181a3          	sb	zero,-1917(gp) # 200000c3 <checksum.4451>
+     67c:	b7ed                	j	666 <USART_receive_packet+0x30>
+     67e:	88118613          	addi	a2,gp,-1919 # 200000c1 <byte_count.4450>
+     682:	2218                	lbu	a4,0(a2)
+     684:	8b418693          	addi	a3,gp,-1868 # 200000f4 <temp_buffer.4452>
+     688:	96ba                	add	a3,a3,a4
+     68a:	a288                	sb	a0,0(a3)
+     68c:	88318693          	addi	a3,gp,-1917 # 200000c3 <checksum.4451>
+     690:	228c                	lbu	a1,0(a3)
+     692:	0705                	addi	a4,a4,1
+     694:	0ff77713          	andi	a4,a4,255
+     698:	952e                	add	a0,a0,a1
+     69a:	a288                	sb	a0,0(a3)
+     69c:	a218                	sb	a4,0(a2)
+     69e:	46bd                	li	a3,15
+     6a0:	fce6f3e3          	bgeu	a3,a4,666 <USART_receive_packet+0x30>
+     6a4:	4709                	li	a4,2
+     6a6:	c398                	sw	a4,0(a5)
+     6a8:	bf7d                	j	666 <USART_receive_packet+0x30>
+     6aa:	8831c703          	lbu	a4,-1917(gp) # 200000c3 <checksum.4451>
+     6ae:	00a71463          	bne	a4,a0,6b6 <USART_receive_packet+0x80>
+     6b2:	470d                	li	a4,3
+     6b4:	bfcd                	j	6a6 <USART_receive_packet+0x70>
+     6b6:	0007a023          	sw	zero,0(a5)
+     6ba:	b775                	j	666 <USART_receive_packet+0x30>
+     6bc:	0007a023          	sw	zero,0(a5)
+     6c0:	47a9                	li	a5,10
+     6c2:	faf512e3          	bne	a0,a5,666 <USART_receive_packet+0x30>
+     6c6:	4641                	li	a2,16
+     6c8:	8b418593          	addi	a1,gp,-1868 # 200000f4 <temp_buffer.4452>
+     6cc:	8522                	mv	a0,s0
+     6ce:	787000ef          	jal	ra,1654 <memcpy>
+     6d2:	4505                	li	a0,1
+     6d4:	bf51                	j	668 <USART_receive_packet+0x32>
+
+000006d6 <CommunitacionHandle>:
+     6d6:	9cbff2ef          	jal	t0,a0 <__riscv_save_0>
+     6da:	1171                	addi	sp,sp,-4
+     6dc:	4511                	li	a0,4
+     6de:	3b81                	jal	42e <Timer__MsGetStatus>
+     6e0:	8c418493          	addi	s1,gp,-1852 # 20000104 <transmitting.4426>
+     6e4:	8ac18413          	addi	s0,gp,-1876 # 200000ec <receiving.4427>
+     6e8:	e909                	bnez	a0,6fa <CommunitacionHandle+0x24>
+     6ea:	6589                	lui	a1,0x2
+     6ec:	4785                	li	a5,1
+     6ee:	71058593          	addi	a1,a1,1808 # 2710 <_data_lma+0xfbc>
+     6f2:	4511                	li	a0,4
+     6f4:	a09c                	sb	a5,0(s1)
+     6f6:	a01c                	sb	a5,0(s0)
+     6f8:	3311                	jal	3fc <Timer__MsSet>
+     6fa:	209c                	lbu	a5,0(s1)
+     6fc:	4705                	li	a4,1
+     6fe:	00e79b63          	bne	a5,a4,714 <CommunitacionHandle+0x3e>
+     702:	89418513          	addi	a0,gp,-1900 # 200000d4 <data_out>
+     706:	c03e                	sw	a5,0(sp)
+     708:	3d45                	jal	5b8 <USART_send_packet>
+     70a:	4782                	lw	a5,0(sp)
+     70c:	00f51463          	bne	a0,a5,714 <CommunitacionHandle+0x3e>
+     710:	00048023          	sb	zero,0(s1)
+     714:	2018                	lbu	a4,0(s0)
+     716:	4785                	li	a5,1
+     718:	00f71a63          	bne	a4,a5,72c <CommunitacionHandle+0x56>
+     71c:	88418513          	addi	a0,gp,-1916 # 200000c4 <data_in>
+     720:	3f19                	jal	636 <USART_receive_packet>
+     722:	4785                	li	a5,1
+     724:	fef51ce3          	bne	a0,a5,71c <CommunitacionHandle+0x46>
+     728:	00040023          	sb	zero,0(s0)
+     72c:	0111                	addi	sp,sp,4
+     72e:	97dff06f          	j	aa <__riscv_restore_0>
+
+00000732 <Hal_GetAnalogInput>:
+     732:	0506                	slli	a0,a0,0x1
+     734:	8e018793          	addi	a5,gp,-1824 # 20000120 <Hal_Analog_Inputs>
+     738:	97aa                	add	a5,a5,a0
+     73a:	238a                	lhu	a0,0(a5)
+     73c:	8082                	ret
+
+0000073e <LoadCellSelect>:
+     73e:	200007b7          	lui	a5,0x20000
+     742:	00a7a223          	sw	a0,4(a5) # 20000004 <SelectCell>
+     746:	8082                	ret
+
+00000748 <LoadCellRead>:
+     748:	959ff2ef          	jal	t0,a0 <__riscv_save_0>
+     74c:	1171                	addi	sp,sp,-4
+     74e:	4589                	li	a1,2
+     750:	40011537          	lui	a0,0x40011
+     754:	33b000ef          	jal	ra,128e <GPIO_ReadInputDataBit>
+     758:	c941                	beqz	a0,7e8 <LoadCellRead+0xa0>
+     75a:	44e1                	li	s1,24
+     75c:	4401                	li	s0,0
+     75e:	4585                	li	a1,1
+     760:	40011537          	lui	a0,0x40011
+     764:	4605                	li	a2,1
+     766:	333000ef          	jal	ra,1298 <GPIO_WriteBit>
+     76a:	4589                	li	a1,2
+     76c:	40011537          	lui	a0,0x40011
+     770:	0406                	slli	s0,s0,0x1
+     772:	31d000ef          	jal	ra,128e <GPIO_ReadInputDataBit>
+     776:	c111                	beqz	a0,77a <LoadCellRead+0x32>
+     778:	0405                	addi	s0,s0,1
+     77a:	14fd                	addi	s1,s1,-1
+     77c:	4601                	li	a2,0
+     77e:	4585                	li	a1,1
+     780:	40011537          	lui	a0,0x40011
+     784:	0ff4f493          	andi	s1,s1,255
+     788:	311000ef          	jal	ra,1298 <GPIO_WriteBit>
+     78c:	f8e9                	bnez	s1,75e <LoadCellRead+0x16>
+     78e:	200007b7          	lui	a5,0x20000
+     792:	0047a483          	lw	s1,4(a5) # 20000004 <SelectCell>
+     796:	4781                	li	a5,0
+     798:	009034b3          	snez	s1,s1
+     79c:	0485                	addi	s1,s1,1
+     79e:	4605                	li	a2,1
+     7a0:	4585                	li	a1,1
+     7a2:	40011537          	lui	a0,0x40011
+     7a6:	c03e                	sw	a5,0(sp)
+     7a8:	2f1000ef          	jal	ra,1298 <GPIO_WriteBit>
+     7ac:	4601                	li	a2,0
+     7ae:	4585                	li	a1,1
+     7b0:	40011537          	lui	a0,0x40011
+     7b4:	2e5000ef          	jal	ra,1298 <GPIO_WriteBit>
+     7b8:	4782                	lw	a5,0(sp)
+     7ba:	20000737          	lui	a4,0x20000
+     7be:	00470713          	addi	a4,a4,4 # 20000004 <SelectCell>
+     7c2:	0785                	addi	a5,a5,1
+     7c4:	0ff7f793          	andi	a5,a5,255
+     7c8:	fc979be3          	bne	a5,s1,79e <LoadCellRead+0x56>
+     7cc:	00841793          	slli	a5,s0,0x8
+     7d0:	0007d563          	bgez	a5,7da <LoadCellRead+0x92>
+     7d4:	ff0007b7          	lui	a5,0xff000
+     7d8:	8c5d                	or	s0,s0,a5
+     7da:	431c                	lw	a5,0(a4)
+     7dc:	00279713          	slli	a4,a5,0x2
+     7e0:	8f018793          	addi	a5,gp,-1808 # 20000130 <LoadCellStore>
+     7e4:	97ba                	add	a5,a5,a4
+     7e6:	c380                	sw	s0,0(a5)
+     7e8:	0111                	addi	sp,sp,4
+     7ea:	8c1ff06f          	j	aa <__riscv_restore_0>
+
+000007ee <GetCellRead>:
+     7ee:	050a                	slli	a0,a0,0x2
+     7f0:	8f018793          	addi	a5,gp,-1808 # 20000130 <LoadCellStore>
+     7f4:	97aa                	add	a5,a5,a0
+     7f6:	4388                	lw	a0,0(a5)
+     7f8:	8082                	ret
+
+000007fa <LoadCellTare>:
+     7fa:	050a                	slli	a0,a0,0x2
+     7fc:	8f018713          	addi	a4,gp,-1808 # 20000130 <LoadCellStore>
+     800:	972a                	add	a4,a4,a0
+     802:	4318                	lw	a4,0(a4)
+     804:	8e818793          	addi	a5,gp,-1816 # 20000128 <LoadCellOffset>
+     808:	97aa                	add	a5,a5,a0
+     80a:	c398                	sw	a4,0(a5)
+     80c:	8082                	ret
+
+0000080e <Hal_SetMotor>:
+     80e:	893ff2ef          	jal	t0,a0 <__riscv_save_0>
+     812:	45d1                	li	a1,20
+     814:	e111                	bnez	a0,818 <Hal_SetMotor+0xa>
+     816:	4581                	li	a1,0
+     818:	4505                	li	a0,1
+     81a:	29b9                	jal	c78 <Pwm__SetDutyCycle>
+     81c:	88fff06f          	j	aa <__riscv_restore_0>
+
+00000820 <Hal_SetMotorDuty>:
+     820:	881ff2ef          	jal	t0,a0 <__riscv_save_0>
+     824:	85aa                	mv	a1,a0
+     826:	4505                	li	a0,1
+     828:	2981                	jal	c78 <Pwm__SetDutyCycle>
+     82a:	881ff06f          	j	aa <__riscv_restore_0>
+
+0000082e <Hal__SetBuzzer>:
+     82e:	873ff2ef          	jal	t0,a0 <__riscv_save_0>
+     832:	4595                	li	a1,5
+     834:	e111                	bnez	a0,838 <Hal__SetBuzzer+0xa>
+     836:	4581                	li	a1,0
+     838:	4519                	li	a0,6
+     83a:	293d                	jal	c78 <Pwm__SetDutyCycle>
      83c:	86fff06f          	j	aa <__riscv_restore_0>
-     840:	6505                	lui	a0,0x1
-     842:	4585                	li	a1,1
-     844:	80050513          	addi	a0,a0,-2048 # 800 <Pwm__SetTCFrequency+0x40>
-     848:	724000ef          	jal	ra,f6c <RCC_APB2PeriphClockCmd>
-     84c:	40013537          	lui	a0,0x40013
-     850:	8660                	sh	s0,12(sp)
-     852:	8464                	sh	s1,8(sp)
-     854:	00011723          	sh	zero,14(sp)
-     858:	00011523          	sh	zero,10(sp)
-     85c:	00010823          	sb	zero,16(sp)
-     860:	002c                	addi	a1,sp,8
-     862:	c0050513          	addi	a0,a0,-1024 # 40012c00 <__global_pointer$+0x200123c0>
-     866:	760000ef          	jal	ra,fc6 <TIM_TimeBaseInit>
-     86a:	bfc1                	j	83a <Pwm__SetTCFrequency+0x7a>
-     86c:	4585                	li	a1,1
-     86e:	4505                	li	a0,1
-     870:	71a000ef          	jal	ra,f8a <RCC_APB1PeriphClockCmd>
-     874:	002c                	addi	a1,sp,8
-     876:	8660                	sh	s0,12(sp)
-     878:	8464                	sh	s1,8(sp)
-     87a:	00011723          	sh	zero,14(sp)
-     87e:	00011523          	sh	zero,10(sp)
-     882:	40000537          	lui	a0,0x40000
-     886:	b7c5                	j	866 <Pwm__SetTCFrequency+0xa6>
 
-00000888 <Pwm__SetDutyCycle>:
-     888:	479d                	li	a5,7
-     88a:	00a7e763          	bltu	a5,a0,898 <Pwm__SetDutyCycle+0x10>
-     88e:	813ff2ef          	jal	t0,a0 <__riscv_save_0>
-     892:	3561                	jal	71a <Pwm__SetDutyCycle.part.0>
-     894:	817ff06f          	j	aa <__riscv_restore_0>
-     898:	8082                	ret
+00000840 <ADProcess>:
+     840:	8d01a503          	lw	a0,-1840(gp) # 20000110 <AD_Channel>
+     844:	6785                	lui	a5,0x1
+     846:	72878793          	addi	a5,a5,1832 # 1728 <Adc_Enable_Table>
+     84a:	97aa                	add	a5,a5,a0
+     84c:	2394                	lbu	a3,0(a5)
+     84e:	4785                	li	a5,1
+     850:	8d018713          	addi	a4,gp,-1840 # 20000110 <AD_Channel>
+     854:	06f69f63          	bne	a3,a5,8d2 <ADProcess+0x92>
+     858:	849ff2ef          	jal	t0,a0 <__riscv_save_0>
+     85c:	8d418493          	addi	s1,gp,-1836 # 20000114 <AD_Counter>
+     860:	00a48633          	add	a2,s1,a0
+     864:	220c                	lbu	a1,0(a2)
+     866:	479d                	li	a5,7
+     868:	1171                	addi	sp,sp,-4
+     86a:	00151693          	slli	a3,a0,0x1
+     86e:	8c818413          	addi	s0,gp,-1848 # 20000108 <AD_Accumulator>
+     872:	04b7e163          	bltu	a5,a1,8b4 <ADProcess+0x74>
+     876:	c036                	sw	a3,0(sp)
+     878:	2ca5                	jal	af0 <ADC__GetValue>
+     87a:	4682                	lw	a3,0(sp)
+     87c:	8d018713          	addi	a4,gp,-1840 # 20000110 <AD_Channel>
+     880:	4310                	lw	a2,0(a4)
+     882:	8d818793          	addi	a5,gp,-1832 # 20000118 <AD_Sample>
+     886:	96be                	add	a3,a3,a5
+     888:	a28a                	sh	a0,0(a3)
+     88a:	00161693          	slli	a3,a2,0x1
+     88e:	9436                	add	s0,s0,a3
+     890:	97b6                	add	a5,a5,a3
+     892:	239e                	lhu	a5,0(a5)
+     894:	2016                	lhu	a3,0(s0)
+     896:	94b2                	add	s1,s1,a2
+     898:	97b6                	add	a5,a5,a3
+     89a:	a01e                	sh	a5,0(s0)
+     89c:	209c                	lbu	a5,0(s1)
+     89e:	0785                	addi	a5,a5,1
+     8a0:	a09c                	sb	a5,0(s1)
+     8a2:	431c                	lw	a5,0(a4)
+     8a4:	4689                	li	a3,2
+     8a6:	0785                	addi	a5,a5,1
+     8a8:	02f6e263          	bltu	a3,a5,8cc <ADProcess+0x8c>
+     8ac:	c31c                	sw	a5,0(a4)
+     8ae:	0111                	addi	sp,sp,4
+     8b0:	ffaff06f          	j	aa <__riscv_restore_0>
+     8b4:	9436                	add	s0,s0,a3
+     8b6:	8e018793          	addi	a5,gp,-1824 # 20000120 <Hal_Analog_Inputs>
+     8ba:	97b6                	add	a5,a5,a3
+     8bc:	2016                	lhu	a3,0(s0)
+     8be:	00060023          	sb	zero,0(a2)
+     8c2:	00041023          	sh	zero,0(s0)
+     8c6:	828d                	srli	a3,a3,0x3
+     8c8:	a396                	sh	a3,0(a5)
+     8ca:	bfe1                	j	8a2 <ADProcess+0x62>
+     8cc:	00072023          	sw	zero,0(a4)
+     8d0:	bff9                	j	8ae <ADProcess+0x6e>
+     8d2:	431c                	lw	a5,0(a4)
+     8d4:	4689                	li	a3,2
+     8d6:	0785                	addi	a5,a5,1
+     8d8:	00f6e463          	bltu	a3,a5,8e0 <ADProcess+0xa0>
+     8dc:	c31c                	sw	a5,0(a4)
+     8de:	8082                	ret
+     8e0:	00072023          	sw	zero,0(a4)
+     8e4:	8082                	ret
 
-0000089a <Pwm__Initialize>:
-     89a:	807ff2ef          	jal	t0,a0 <__riscv_save_0>
-     89e:	1151                	addi	sp,sp,-12
-     8a0:	c002                	sw	zero,0(sp)
-     8a2:	c202                	sw	zero,4(sp)
-     8a4:	c402                	sw	zero,8(sp)
-     8a6:	4401                	li	s0,0
-     8a8:	6485                	lui	s1,0x1
-     8aa:	0405                	addi	s0,s0,1
-     8ac:	479d                	li	a5,7
-     8ae:	02f41163          	bne	s0,a5,8d0 <Pwm__Initialize+0x36>
-     8b2:	40013537          	lui	a0,0x40013
-     8b6:	4585                	li	a1,1
-     8b8:	c0050513          	addi	a0,a0,-1024 # 40012c00 <__global_pointer$+0x200123c0>
-     8bc:	7ee000ef          	jal	ra,10aa <TIM_Cmd>
-     8c0:	4585                	li	a1,1
-     8c2:	40000537          	lui	a0,0x40000
-     8c6:	7e4000ef          	jal	ra,10aa <TIM_Cmd>
-     8ca:	0131                	addi	sp,sp,12
-     8cc:	fdeff06f          	j	aa <__riscv_restore_0>
-     8d0:	24c48793          	addi	a5,s1,588 # 124c <PWM_Enable_Table>
-     8d4:	97a2                	add	a5,a5,s0
-     8d6:	239c                	lbu	a5,0(a5)
-     8d8:	4705                	li	a4,1
-     8da:	fce798e3          	bne	a5,a4,8aa <Pwm__Initialize+0x10>
-     8de:	4761                	li	a4,24
-     8e0:	c43a                	sw	a4,8(sp)
-     8e2:	470d                	li	a4,3
-     8e4:	c23a                	sw	a4,4(sp)
-     8e6:	00f40d63          	beq	s0,a5,900 <Pwm__Initialize+0x66>
-     8ea:	4799                	li	a5,6
-     8ec:	02f40763          	beq	s0,a5,91a <Pwm__Initialize+0x80>
-     8f0:	03c00593          	li	a1,60
-     8f4:	4505                	li	a0,1
-     8f6:	35e9                	jal	7c0 <Pwm__SetTCFrequency>
-     8f8:	45a9                	li	a1,10
-     8fa:	8522                	mv	a0,s0
-     8fc:	3771                	jal	888 <Pwm__SetDutyCycle>
-     8fe:	b775                	j	8aa <Pwm__Initialize+0x10>
-     900:	4585                	li	a1,1
-     902:	02000513          	li	a0,32
-     906:	259d                	jal	f6c <RCC_APB2PeriphClockCmd>
-     908:	40011537          	lui	a0,0x40011
-     90c:	47a1                	li	a5,8
-     90e:	858a                	mv	a1,sp
-     910:	40050513          	addi	a0,a0,1024 # 40011400 <__global_pointer$+0x20010bc0>
-     914:	807c                	sh	a5,0(sp)
-     916:	29e5                	jal	e0e <GPIO_Init>
-     918:	bfe1                	j	8f0 <Pwm__Initialize+0x56>
-     91a:	4585                	li	a1,1
-     91c:	4545                	li	a0,17
-     91e:	25b9                	jal	f6c <RCC_APB2PeriphClockCmd>
-     920:	400107b7          	lui	a5,0x40010
-     924:	43d8                	lw	a4,4(a5)
-     926:	858a                	mv	a1,sp
-     928:	40011537          	lui	a0,0x40011
-     92c:	f3f77713          	andi	a4,a4,-193
-     930:	c3d8                	sw	a4,4(a5)
-     932:	43d8                	lw	a4,4(a5)
-     934:	0c076713          	ori	a4,a4,192
-     938:	c3d8                	sw	a4,4(a5)
-     93a:	08000793          	li	a5,128
-     93e:	807c                	sh	a5,0(sp)
-     940:	21f9                	jal	e0e <GPIO_Init>
-     942:	6585                	lui	a1,0x1
-     944:	fa058593          	addi	a1,a1,-96 # fa0 <RCC_APB1PeriphClockCmd+0x16>
-     948:	4501                	li	a0,0
-     94a:	3d9d                	jal	7c0 <Pwm__SetTCFrequency>
-     94c:	4581                	li	a1,0
-     94e:	4519                	li	a0,6
-     950:	33e9                	jal	71a <Pwm__SetDutyCycle.part.0>
-     952:	bfa1                	j	8aa <Pwm__Initialize+0x10>
+000008e6 <Hal__BackgroundHandler>:
+     8e6:	fbaff2ef          	jal	t0,a0 <__riscv_save_0>
+     8ea:	3f99                	jal	840 <ADProcess>
+     8ec:	3db1                	jal	748 <LoadCellRead>
+     8ee:	fbcff06f          	j	aa <__riscv_restore_0>
 
-00000954 <main>:
-     954:	f4cff2ef          	jal	t0,a0 <__riscv_save_0>
-     958:	1171                	addi	sp,sp,-4
-     95a:	4505                	li	a0,1
-     95c:	8a01a423          	sw	zero,-1880(gp) # 200000e8 <Slot>
-     960:	2b3d                	jal	e9e <NVIC_PriorityGroupConfig>
-     962:	2ae1                	jal	b3a <SystemCoreClockUpdate>
-     964:	6571                	lui	a0,0x1c
-     966:	20050513          	addi	a0,a0,512 # 1c200 <_data_lma+0x1af94>
-     96a:	081000ef          	jal	ra,11ea <USART_Printf_Init>
-     96e:	9c9ff0ef          	jal	ra,336 <SysTick_Init>
-     972:	881ff0ef          	jal	ra,1f2 <Sounds__Initialize>
-     976:	366d                	jal	520 <ADC__Initialize>
-     978:	370d                	jal	89a <Pwm__Initialize>
-     97a:	4501                	li	a0,0
-     97c:	3c35                	jal	3b8 <LoadCellSelect>
-     97e:	a07ff0ef          	jal	ra,384 <SysTick_GetTick>
-     982:	84aa                	mv	s1,a0
-     984:	8a818413          	addi	s0,gp,-1880 # 200000e8 <Slot>
-     988:	3679                	jal	516 <Hal__BackgroundHandler>
-     98a:	3b19                	jal	6a0 <ADC_Handler>
-     98c:	401c                	lw	a5,0(s0)
-     98e:	4715                	li	a4,5
-     990:	04f76563          	bltu	a4,a5,9da <main+0x86>
-     994:	6705                	lui	a4,0x1
-     996:	078a                	slli	a5,a5,0x2
-     998:	25470713          	addi	a4,a4,596 # 1254 <PWM_Enable_Table+0x8>
-     99c:	97ba                	add	a5,a5,a4
-     99e:	439c                	lw	a5,0(a5)
-     9a0:	8782                	jr	a5
-     9a2:	c01c                	sw	a5,0(s0)
-     9a4:	84ba                	mv	s1,a4
-     9a6:	b7cd                	j	988 <main+0x34>
-     9a8:	36bd                	jal	516 <Hal__BackgroundHandler>
-     9aa:	9dbff0ef          	jal	ra,384 <SysTick_GetTick>
-     9ae:	c02a                	sw	a0,0(sp)
-     9b0:	8526                	mv	a0,s1
-     9b2:	9d9ff0ef          	jal	ra,38a <SysTick_GetElapsedTime>
-     9b6:	4691                	li	a3,4
-     9b8:	02a6f463          	bgeu	a3,a0,9e0 <main+0x8c>
-     9bc:	8ac1a783          	lw	a5,-1876(gp) # 200000ec <prev_Slot>
-     9c0:	4702                	lw	a4,0(sp)
-     9c2:	0785                	addi	a5,a5,1
-     9c4:	fcf6ffe3          	bgeu	a3,a5,9a2 <main+0x4e>
-     9c8:	00042023          	sw	zero,0(s0)
-     9cc:	bfe1                	j	9a4 <main+0x50>
-     9ce:	8e1ff0ef          	jal	ra,2ae <Error_Handler>
-     9d2:	bfe1                	j	9aa <main+0x56>
-     9d4:	8b3ff0ef          	jal	ra,286 <Sounds__Background>
-     9d8:	bfc9                	j	9aa <main+0x56>
-     9da:	00042023          	sw	zero,0(s0)
-     9de:	b7f1                	j	9aa <main+0x56>
-     9e0:	401c                	lw	a5,0(s0)
-     9e2:	4715                	li	a4,5
-     9e4:	00e78463          	beq	a5,a4,9ec <main+0x98>
-     9e8:	8af1a623          	sw	a5,-1876(gp) # 200000ec <prev_Slot>
-     9ec:	4795                	li	a5,5
-     9ee:	c01c                	sw	a5,0(s0)
-     9f0:	8726                	mv	a4,s1
-     9f2:	bf4d                	j	9a4 <main+0x50>
+000008f2 <ADC__Initialize>:
+     8f2:	faeff2ef          	jal	t0,a0 <__riscv_save_0>
+     8f6:	fd810113          	addi	sp,sp,-40
+     8fa:	4661                	li	a2,24
+     8fc:	4581                	li	a1,0
+     8fe:	0808                	addi	a0,sp,16
+     900:	84bff0ef          	jal	ra,14a <memset>
+     904:	4585                	li	a1,1
+     906:	20000513          	li	a0,512
+     90a:	267000ef          	jal	ra,1370 <RCC_APB2PeriphClockCmd>
+     90e:	6531                	lui	a0,0xc
+     910:	1ab000ef          	jal	ra,12ba <RCC_ADCCLKConfig>
+     914:	4585                	li	a1,1
+     916:	4511                	li	a0,4
+     918:	40011437          	lui	s0,0x40011
+     91c:	c202                	sw	zero,4(sp)
+     91e:	c402                	sw	zero,8(sp)
+     920:	c602                	sw	zero,12(sp)
+     922:	24f000ef          	jal	ra,1370 <RCC_APB2PeriphClockCmd>
+     926:	4791                	li	a5,4
+     928:	80040513          	addi	a0,s0,-2048 # 40010800 <__global_pointer$+0x2000ffc0>
+     92c:	004c                	addi	a1,sp,4
+     92e:	827c                	sh	a5,4(sp)
+     930:	c602                	sw	zero,12(sp)
+     932:	0e1000ef          	jal	ra,1212 <GPIO_Init>
+     936:	4585                	li	a1,1
+     938:	4511                	li	a0,4
+     93a:	237000ef          	jal	ra,1370 <RCC_APB2PeriphClockCmd>
+     93e:	4789                	li	a5,2
+     940:	80040513          	addi	a0,s0,-2048
+     944:	004c                	addi	a1,sp,4
+     946:	827c                	sh	a5,4(sp)
+     948:	c602                	sw	zero,12(sp)
+     94a:	0c9000ef          	jal	ra,1212 <GPIO_Init>
+     94e:	4585                	li	a1,1
+     950:	02000513          	li	a0,32
+     954:	21d000ef          	jal	ra,1370 <RCC_APB2PeriphClockCmd>
+     958:	47c1                	li	a5,16
+     95a:	40040513          	addi	a0,s0,1024
+     95e:	004c                	addi	a1,sp,4
+     960:	827c                	sh	a5,4(sp)
+     962:	c602                	sw	zero,12(sp)
+     964:	6485                	lui	s1,0x1
+     966:	0ad000ef          	jal	ra,1212 <GPIO_Init>
+     96a:	4781                	li	a5,0
+     96c:	4401                	li	s0,0
+     96e:	72848493          	addi	s1,s1,1832 # 1728 <Adc_Enable_Table>
+     972:	4685                	li	a3,1
+     974:	4725                	li	a4,9
+     976:	00f48633          	add	a2,s1,a5
+     97a:	2210                	lbu	a2,0(a2)
+     97c:	00d61563          	bne	a2,a3,986 <ADC__Initialize+0x94>
+     980:	0405                	addi	s0,s0,1
+     982:	0ff47413          	andi	s0,s0,255
+     986:	0785                	addi	a5,a5,1
+     988:	fee797e3          	bne	a5,a4,976 <ADC__Initialize+0x84>
+     98c:	40021737          	lui	a4,0x40021
+     990:	4b5c                	lw	a5,20(a4)
+     992:	400206b7          	lui	a3,0x40020
+     996:	7671                	lui	a2,0xffffc
+     998:	0017e793          	ori	a5,a5,1
+     99c:	cb5c                	sw	a5,20(a4)
+     99e:	469c                	lw	a5,8(a3)
+     9a0:	1679                	addi	a2,a2,-2
+     9a2:	40012537          	lui	a0,0x40012
+     9a6:	8ff1                	and	a5,a5,a2
+     9a8:	6609                	lui	a2,0x2
+     9aa:	5a060613          	addi	a2,a2,1440 # 25a0 <_data_lma+0xe4c>
+     9ae:	8fd1                	or	a5,a5,a2
+     9b0:	c69c                	sw	a5,8(a3)
+     9b2:	c6c0                	sw	s0,12(a3)
+     9b4:	44c50793          	addi	a5,a0,1100 # 4001244c <__global_pointer$+0x20011c0c>
+     9b8:	ca9c                	sw	a5,16(a3)
+     9ba:	90c18793          	addi	a5,gp,-1780 # 2000014c <DMA_Buffer>
+     9be:	cadc                	sw	a5,20(a3)
+     9c0:	40050513          	addi	a0,a0,1024
+     9c4:	698000ef          	jal	ra,105c <ADC_DeInit>
+     9c8:	4785                	li	a5,1
+     9ca:	ca3e                	sw	a5,20(sp)
+     9cc:	cc3e                	sw	a5,24(sp)
+     9ce:	000e07b7          	lui	a5,0xe0
+     9d2:	02810223          	sb	s0,36(sp)
+     9d6:	c802                	sw	zero,16(sp)
+     9d8:	ce3e                	sw	a5,28(sp)
+     9da:	d002                	sw	zero,32(sp)
+     9dc:	4701                	li	a4,0
+     9de:	4405                	li	s0,1
+     9e0:	00e487b3          	add	a5,s1,a4
+     9e4:	2394                	lbu	a3,0(a5)
+     9e6:	4785                	li	a5,1
+     9e8:	0ff77593          	andi	a1,a4,255
+     9ec:	00f69f63          	bne	a3,a5,a0a <ADC__Initialize+0x118>
+     9f0:	40012537          	lui	a0,0x40012
+     9f4:	8622                	mv	a2,s0
+     9f6:	469d                	li	a3,7
+     9f8:	40050513          	addi	a0,a0,1024 # 40012400 <__global_pointer$+0x20011bc0>
+     9fc:	c03a                	sw	a4,0(sp)
+     9fe:	730000ef          	jal	ra,112e <ADC_RegularChannelConfig>
+     a02:	4702                	lw	a4,0(sp)
+     a04:	0405                	addi	s0,s0,1
+     a06:	0ff47413          	andi	s0,s0,255
+     a0a:	0705                	addi	a4,a4,1
+     a0c:	47a1                	li	a5,8
+     a0e:	fcf719e3          	bne	a4,a5,9e0 <ADC__Initialize+0xee>
+     a12:	8622                	mv	a2,s0
+     a14:	40012437          	lui	s0,0x40012
+     a18:	469d                	li	a3,7
+     a1a:	45a1                	li	a1,8
+     a1c:	40040513          	addi	a0,s0,1024 # 40012400 <__global_pointer$+0x20011bc0>
+     a20:	70e000ef          	jal	ra,112e <ADC_RegularChannelConfig>
+     a24:	080c                	addi	a1,sp,16
+     a26:	40040513          	addi	a0,s0,1024
+     a2a:	658000ef          	jal	ra,1082 <ADC_Init>
+     a2e:	4585                	li	a1,1
+     a30:	40040513          	addi	a0,s0,1024
+     a34:	6ac000ef          	jal	ra,10e0 <ADC_DMACmd>
+     a38:	4585                	li	a1,1
+     a3a:	40040513          	addi	a0,s0,1024
+     a3e:	692000ef          	jal	ra,10d0 <ADC_Cmd>
+     a42:	40040513          	addi	a0,s0,1024
+     a46:	6ac000ef          	jal	ra,10f2 <ADC_ResetCalibration>
+     a4a:	40040493          	addi	s1,s0,1024
+     a4e:	8526                	mv	a0,s1
+     a50:	6ac000ef          	jal	ra,10fc <ADC_GetResetCalibrationStatus>
+     a54:	fd6d                	bnez	a0,a4e <ADC__Initialize+0x15c>
+     a56:	40040513          	addi	a0,s0,1024
+     a5a:	40012437          	lui	s0,0x40012
+     a5e:	6a6000ef          	jal	ra,1104 <ADC_StartCalibration>
+     a62:	40040493          	addi	s1,s0,1024 # 40012400 <__global_pointer$+0x20011bc0>
+     a66:	8526                	mv	a0,s1
+     a68:	6a6000ef          	jal	ra,110e <ADC_GetCalibrationStatus>
+     a6c:	fd6d                	bnez	a0,a66 <ADC__Initialize+0x174>
+     a6e:	40020537          	lui	a0,0x40020
+     a72:	4585                	li	a1,1
+     a74:	0521                	addi	a0,a0,8
+     a76:	772000ef          	jal	ra,11e8 <DMA_Cmd>
+     a7a:	4585                	li	a1,1
+     a7c:	40040513          	addi	a0,s0,1024
+     a80:	696000ef          	jal	ra,1116 <ADC_SoftwareStartConvCmd>
+     a84:	02810113          	addi	sp,sp,40
+     a88:	e22ff06f          	j	aa <__riscv_restore_0>
 
-000009f4 <NMI_Handler>:
-     9f4:	a001                	j	9f4 <NMI_Handler>
+00000a8c <ADC_Handler>:
+     a8c:	e14ff2ef          	jal	t0,a0 <__riscv_save_0>
+     a90:	4509                	li	a0,2
+     a92:	76a000ef          	jal	ra,11fc <DMA_GetFlagStatus>
+     a96:	c939                	beqz	a0,aec <ADC_Handler+0x60>
+     a98:	4509                	li	a0,2
+     a9a:	770000ef          	jal	ra,120a <DMA_ClearFlag>
+     a9e:	6685                	lui	a3,0x1
+     aa0:	4701                	li	a4,0
+     aa2:	4781                	li	a5,0
+     aa4:	72868693          	addi	a3,a3,1832 # 1728 <Adc_Enable_Table>
+     aa8:	4385                	li	t2,1
+     aaa:	8f818613          	addi	a2,gp,-1800 # 20000138 <ADC_Buffer>
+     aae:	90c18593          	addi	a1,gp,-1780 # 2000014c <DMA_Buffer>
+     ab2:	42a1                	li	t0,8
+     ab4:	00e68533          	add	a0,a3,a4
+     ab8:	2108                	lbu	a0,0(a0)
+     aba:	00751f63          	bne	a0,t2,ad8 <ADC_Handler+0x4c>
+     abe:	00179313          	slli	t1,a5,0x1
+     ac2:	932e                	add	t1,t1,a1
+     ac4:	00035303          	lhu	t1,0(t1)
+     ac8:	00171513          	slli	a0,a4,0x1
+     acc:	9532                	add	a0,a0,a2
+     ace:	0785                	addi	a5,a5,1
+     ad0:	00651023          	sh	t1,0(a0) # 40020000 <__global_pointer$+0x2001f7c0>
+     ad4:	0ff7f793          	andi	a5,a5,255
+     ad8:	0705                	addi	a4,a4,1
+     ada:	fc571de3          	bne	a4,t0,ab4 <ADC_Handler+0x28>
+     ade:	90c18713          	addi	a4,gp,-1780 # 2000014c <DMA_Buffer>
+     ae2:	0786                	slli	a5,a5,0x1
+     ae4:	97ba                	add	a5,a5,a4
+     ae6:	239a                	lhu	a4,0(a5)
+     ae8:	90e19423          	sh	a4,-1784(gp) # 20000148 <ADC_Buffer+0x10>
+     aec:	dbeff06f          	j	aa <__riscv_restore_0>
 
-000009f6 <HardFault_Handler>:
-     9f6:	beef07b7          	lui	a5,0xbeef0
-     9fa:	e000e737          	lui	a4,0xe000e
-     9fe:	08078793          	addi	a5,a5,128 # beef0080 <__global_pointer$+0x9eeef840>
-     a02:	c73c                	sw	a5,72(a4)
-     a04:	a001                	j	a04 <HardFault_Handler+0xe>
+00000af0 <ADC__GetValue>:
+     af0:	479d                	li	a5,7
+     af2:	00a7e963          	bltu	a5,a0,b04 <ADC__GetValue+0x14>
+     af6:	00151793          	slli	a5,a0,0x1
+     afa:	8f818513          	addi	a0,gp,-1800 # 20000138 <ADC_Buffer>
+     afe:	953e                	add	a0,a0,a5
+     b00:	210a                	lhu	a0,0(a0)
+     b02:	8082                	ret
+     b04:	4501                	li	a0,0
+     b06:	8082                	ret
 
-00000a06 <SystemInit>:
-     a06:	e9aff2ef          	jal	t0,a0 <__riscv_save_0>
-     a0a:	40021437          	lui	s0,0x40021
-     a0e:	401c                	lw	a5,0(s0)
-     a10:	f8ff0737          	lui	a4,0xf8ff0
-     a14:	1161                	addi	sp,sp,-8
-     a16:	0017e793          	ori	a5,a5,1
-     a1a:	c01c                	sw	a5,0(s0)
-     a1c:	405c                	lw	a5,4(s0)
-     a1e:	4541                	li	a0,16
-     a20:	8ff9                	and	a5,a5,a4
-     a22:	c05c                	sw	a5,4(s0)
-     a24:	401c                	lw	a5,0(s0)
-     a26:	fef70737          	lui	a4,0xfef70
-     a2a:	177d                	addi	a4,a4,-1
-     a2c:	8ff9                	and	a5,a5,a4
-     a2e:	c01c                	sw	a5,0(s0)
-     a30:	401c                	lw	a5,0(s0)
-     a32:	fffc0737          	lui	a4,0xfffc0
-     a36:	177d                	addi	a4,a4,-1
-     a38:	8ff9                	and	a5,a5,a4
-     a3a:	c01c                	sw	a5,0(s0)
-     a3c:	405c                	lw	a5,4(s0)
-     a3e:	7741                	lui	a4,0xffff0
-     a40:	177d                	addi	a4,a4,-1
-     a42:	8ff9                	and	a5,a5,a4
-     a44:	c05c                	sw	a5,4(s0)
-     a46:	009f07b7          	lui	a5,0x9f0
-     a4a:	c41c                	sw	a5,8(s0)
-     a4c:	29a1                	jal	ea4 <RCC_AdjustHSICalibrationValue>
-     a4e:	4c1c                	lw	a5,24(s0)
-     a50:	00020637          	lui	a2,0x20
-     a54:	0207e793          	ori	a5,a5,32
-     a58:	cc1c                	sw	a5,24(s0)
-     a5a:	400117b7          	lui	a5,0x40011
-     a5e:	4007a703          	lw	a4,1024(a5) # 40011400 <__global_pointer$+0x20010bc0>
-     a62:	40078693          	addi	a3,a5,1024
-     a66:	f0f77713          	andi	a4,a4,-241
-     a6a:	40e7a023          	sw	a4,1024(a5)
-     a6e:	4007a703          	lw	a4,1024(a5)
-     a72:	08076713          	ori	a4,a4,128
-     a76:	40e7a023          	sw	a4,1024(a5)
-     a7a:	4789                	li	a5,2
-     a7c:	ca9c                	sw	a5,16(a3)
-     a7e:	c002                	sw	zero,0(sp)
-     a80:	c202                	sw	zero,4(sp)
-     a82:	4c1c                	lw	a5,24(s0)
-     a84:	40010737          	lui	a4,0x40010
-     a88:	66a1                	lui	a3,0x8
-     a8a:	0017e793          	ori	a5,a5,1
-     a8e:	cc1c                	sw	a5,24(s0)
-     a90:	435c                	lw	a5,4(a4)
-     a92:	8fd5                	or	a5,a5,a3
-     a94:	c35c                	sw	a5,4(a4)
-     a96:	401c                	lw	a5,0(s0)
-     a98:	6741                	lui	a4,0x10
-     a9a:	400216b7          	lui	a3,0x40021
-     a9e:	8fd9                	or	a5,a5,a4
-     aa0:	c01c                	sw	a5,0(s0)
-     aa2:	6709                	lui	a4,0x2
-     aa4:	429c                	lw	a5,0(a3)
-     aa6:	8ff1                	and	a5,a5,a2
-     aa8:	c23e                	sw	a5,4(sp)
-     aaa:	4782                	lw	a5,0(sp)
-     aac:	0785                	addi	a5,a5,1
-     aae:	c03e                	sw	a5,0(sp)
-     ab0:	4792                	lw	a5,4(sp)
-     ab2:	e781                	bnez	a5,aba <SystemInit+0xb4>
-     ab4:	4782                	lw	a5,0(sp)
-     ab6:	fee797e3          	bne	a5,a4,aa4 <SystemInit+0x9e>
-     aba:	400217b7          	lui	a5,0x40021
-     abe:	439c                	lw	a5,0(a5)
-     ac0:	00e79713          	slli	a4,a5,0xe
-     ac4:	06075963          	bgez	a4,b36 <SystemInit+0x130>
-     ac8:	4785                	li	a5,1
-     aca:	c23e                	sw	a5,4(sp)
-     acc:	4712                	lw	a4,4(sp)
-     ace:	4785                	li	a5,1
-     ad0:	06f71063          	bne	a4,a5,b30 <SystemInit+0x12a>
-     ad4:	400227b7          	lui	a5,0x40022
-     ad8:	4398                	lw	a4,0(a5)
-     ada:	76c1                	lui	a3,0xffff0
-     adc:	16fd                	addi	a3,a3,-1
-     ade:	9b71                	andi	a4,a4,-4
-     ae0:	c398                	sw	a4,0(a5)
-     ae2:	4398                	lw	a4,0(a5)
-     ae4:	00176713          	ori	a4,a4,1
-     ae8:	c398                	sw	a4,0(a5)
-     aea:	400217b7          	lui	a5,0x40021
-     aee:	43d8                	lw	a4,4(a5)
-     af0:	c3d8                	sw	a4,4(a5)
-     af2:	43d8                	lw	a4,4(a5)
-     af4:	8f75                	and	a4,a4,a3
-     af6:	c3d8                	sw	a4,4(a5)
-     af8:	43d8                	lw	a4,4(a5)
-     afa:	66c1                	lui	a3,0x10
-     afc:	8f55                	or	a4,a4,a3
-     afe:	c3d8                	sw	a4,4(a5)
-     b00:	4398                	lw	a4,0(a5)
-     b02:	010006b7          	lui	a3,0x1000
-     b06:	8f55                	or	a4,a4,a3
-     b08:	c398                	sw	a4,0(a5)
-     b0a:	4398                	lw	a4,0(a5)
-     b0c:	00671693          	slli	a3,a4,0x6
-     b10:	fe06dde3          	bgez	a3,b0a <SystemInit+0x104>
-     b14:	43d8                	lw	a4,4(a5)
-     b16:	400216b7          	lui	a3,0x40021
-     b1a:	9b71                	andi	a4,a4,-4
-     b1c:	c3d8                	sw	a4,4(a5)
-     b1e:	43d8                	lw	a4,4(a5)
-     b20:	00276713          	ori	a4,a4,2
-     b24:	c3d8                	sw	a4,4(a5)
-     b26:	4721                	li	a4,8
-     b28:	42dc                	lw	a5,4(a3)
-     b2a:	8bb1                	andi	a5,a5,12
-     b2c:	fee79ee3          	bne	a5,a4,b28 <SystemInit+0x122>
-     b30:	0121                	addi	sp,sp,8
-     b32:	d78ff06f          	j	aa <__riscv_restore_0>
-     b36:	c202                	sw	zero,4(sp)
-     b38:	bf51                	j	acc <SystemInit+0xc6>
+00000b08 <Pwm__SetDutyCycle.part.0>:
+     b08:	d98ff2ef          	jal	t0,a0 <__riscv_save_0>
+     b0c:	06400713          	li	a4,100
+     b10:	842a                	mv	s0,a0
+     b12:	9321d503          	lhu	a0,-1742(gp) # 20000172 <timer_period+0x2>
+     b16:	06400793          	li	a5,100
+     b1a:	00b76363          	bltu	a4,a1,b20 <Pwm__SetDutyCycle.part.0+0x18>
+     b1e:	87ae                	mv	a5,a1
+     b20:	0ff7f593          	andi	a1,a5,255
+     b24:	d90ff0ef          	jal	ra,b4 <__mulsi3>
+     b28:	06400593          	li	a1,100
+     b2c:	da0ff0ef          	jal	ra,cc <__divsi3>
+     b30:	0542                	slli	a0,a0,0x10
+     b32:	6741                	lui	a4,0x10
+     b34:	92018793          	addi	a5,gp,-1760 # 20000160 <TIM_OCInitStructure.4099>
+     b38:	8141                	srli	a0,a0,0x10
+     b3a:	06070713          	addi	a4,a4,96 # 10060 <_data_lma+0xe90c>
+     b3e:	4695                	li	a3,5
+     b40:	c398                	sw	a4,0(a5)
+     b42:	a3ea                	sh	a0,6(a5)
+     b44:	0286e963          	bltu	a3,s0,b76 <Pwm__SetDutyCycle.part.0+0x6e>
+     b48:	00079423          	sh	zero,8(a5) # e0008 <_data_lma+0xde8b4>
+     b4c:	4785                	li	a5,1
+     b4e:	00f41d63          	bne	s0,a5,b68 <Pwm__SetDutyCycle.part.0+0x60>
+     b52:	92018593          	addi	a1,gp,-1760 # 20000160 <TIM_OCInitStructure.4099>
+     b56:	40000537          	lui	a0,0x40000
+     b5a:	0bf000ef          	jal	ra,1418 <TIM_OC2Init>
+     b5e:	45a1                	li	a1,8
+     b60:	40000537          	lui	a0,0x40000
+     b64:	193000ef          	jal	ra,14f6 <TIM_OC2PreloadConfig>
+     b68:	4585                	li	a1,1
+     b6a:	40000537          	lui	a0,0x40000
+     b6e:	16f000ef          	jal	ra,14dc <TIM_ARRPreloadConfig>
+     b72:	d38ff06f          	j	aa <__riscv_restore_0>
+     b76:	4709                	li	a4,2
+     b78:	a79a                	sh	a4,8(a5)
+     b7a:	4799                	li	a5,6
+     b7c:	02f41463          	bne	s0,a5,ba4 <Pwm__SetDutyCycle.part.0+0x9c>
+     b80:	40013437          	lui	s0,0x40013
+     b84:	4585                	li	a1,1
+     b86:	c0040513          	addi	a0,s0,-1024 # 40012c00 <__global_pointer$+0x200123c0>
+     b8a:	13d000ef          	jal	ra,14c6 <TIM_CtrlPWMOutputs>
+     b8e:	92018593          	addi	a1,gp,-1760 # 20000160 <TIM_OCInitStructure.4099>
+     b92:	c0040513          	addi	a0,s0,-1024
+     b96:	083000ef          	jal	ra,1418 <TIM_OC2Init>
+     b9a:	45a1                	li	a1,8
+     b9c:	c0040513          	addi	a0,s0,-1024
+     ba0:	157000ef          	jal	ra,14f6 <TIM_OC2PreloadConfig>
+     ba4:	40013537          	lui	a0,0x40013
+     ba8:	4585                	li	a1,1
+     baa:	c0050513          	addi	a0,a0,-1024 # 40012c00 <__global_pointer$+0x200123c0>
+     bae:	b7c1                	j	b6e <Pwm__SetDutyCycle.part.0+0x66>
 
-00000b3a <SystemCoreClockUpdate>:
-     b3a:	d66ff2ef          	jal	t0,a0 <__riscv_save_0>
-     b3e:	40021737          	lui	a4,0x40021
-     b42:	435c                	lw	a5,4(a4)
-     b44:	20000437          	lui	s0,0x20000
-     b48:	4691                	li	a3,4
-     b4a:	8bb1                	andi	a5,a5,12
-     b4c:	01840413          	addi	s0,s0,24 # 20000018 <SystemCoreClock>
-     b50:	00d78563          	beq	a5,a3,b5a <SystemCoreClockUpdate+0x20>
-     b54:	46a1                	li	a3,8
-     b56:	04d78263          	beq	a5,a3,b9a <SystemCoreClockUpdate+0x60>
-     b5a:	016e37b7          	lui	a5,0x16e3
-     b5e:	60078793          	addi	a5,a5,1536 # 16e3600 <_data_lma+0x16e2394>
-     b62:	c01c                	sw	a5,0(s0)
-     b64:	400216b7          	lui	a3,0x40021
-     b68:	42dc                	lw	a5,4(a3)
-     b6a:	4008                	lw	a0,0(s0)
-     b6c:	8391                	srli	a5,a5,0x4
-     b6e:	00f7f713          	andi	a4,a5,15
-     b72:	200007b7          	lui	a5,0x20000
-     b76:	00878793          	addi	a5,a5,8 # 20000008 <AHBPrescTable>
-     b7a:	97ba                	add	a5,a5,a4
-     b7c:	238c                	lbu	a1,0(a5)
-     b7e:	42dc                	lw	a5,4(a3)
-     b80:	0ff5f593          	andi	a1,a1,255
-     b84:	0807f793          	andi	a5,a5,128
-     b88:	00b55733          	srl	a4,a0,a1
-     b8c:	e781                	bnez	a5,b94 <SystemCoreClockUpdate+0x5a>
-     b8e:	d46ff0ef          	jal	ra,d4 <__udivsi3>
-     b92:	872a                	mv	a4,a0
-     b94:	c018                	sw	a4,0(s0)
-     b96:	d14ff06f          	j	aa <__riscv_restore_0>
-     b9a:	435c                	lw	a5,4(a4)
-     b9c:	02dc77b7          	lui	a5,0x2dc7
-     ba0:	c0078793          	addi	a5,a5,-1024 # 2dc6c00 <_data_lma+0x2dc5994>
-     ba4:	bf7d                	j	b62 <SystemCoreClockUpdate+0x28>
+00000bb0 <Pwm__SetTCFrequency>:
+     bb0:	cf0ff2ef          	jal	t0,a0 <__riscv_save_0>
+     bb4:	87ae                	mv	a5,a1
+     bb6:	200006b7          	lui	a3,0x20000
+     bba:	0596                	slli	a1,a1,0x5
+     bbc:	0186a403          	lw	s0,24(a3) # 20000018 <SystemCoreClock>
+     bc0:	8d9d                	sub	a1,a1,a5
+     bc2:	058a                	slli	a1,a1,0x2
+     bc4:	1131                	addi	sp,sp,-20
+     bc6:	95be                	add	a1,a1,a5
+     bc8:	c22a                	sw	a0,4(sp)
+     bca:	058e                	slli	a1,a1,0x3
+     bcc:	8522                	mv	a0,s0
+     bce:	c03e                	sw	a5,0(sp)
+     bd0:	c402                	sw	zero,8(sp)
+     bd2:	c602                	sw	zero,12(sp)
+     bd4:	00011823          	sh	zero,16(sp)
+     bd8:	cfcff0ef          	jal	ra,d4 <__udivsi3>
+     bdc:	fff50493          	addi	s1,a0,-1
+     be0:	66c1                	lui	a3,0x10
+     be2:	4782                	lw	a5,0(sp)
+     be4:	4712                	lw	a4,4(sp)
+     be6:	00d4e463          	bltu	s1,a3,bee <Pwm__SetTCFrequency+0x3e>
+     bea:	fff68493          	addi	s1,a3,-1 # ffff <_data_lma+0xe8ab>
+     bee:	85be                	mv	a1,a5
+     bf0:	00148513          	addi	a0,s1,1
+     bf4:	c03a                	sw	a4,0(sp)
+     bf6:	cbeff0ef          	jal	ra,b4 <__mulsi3>
+     bfa:	85aa                	mv	a1,a0
+     bfc:	8522                	mv	a0,s0
+     bfe:	cd6ff0ef          	jal	ra,d4 <__udivsi3>
+     c02:	157d                	addi	a0,a0,-1
+     c04:	67c1                	lui	a5,0x10
+     c06:	4702                	lw	a4,0(sp)
+     c08:	00f56463          	bltu	a0,a5,c10 <Pwm__SetTCFrequency+0x60>
+     c0c:	fff78513          	addi	a0,a5,-1 # ffff <_data_lma+0xe8ab>
+     c10:	01051413          	slli	s0,a0,0x10
+     c14:	00171793          	slli	a5,a4,0x1
+     c18:	93018693          	addi	a3,gp,-1744 # 20000170 <timer_period>
+     c1c:	8041                	srli	s0,s0,0x10
+     c1e:	97b6                	add	a5,a5,a3
+     c20:	a382                	sh	s0,0(a5)
+     c22:	c719                	beqz	a4,c30 <Pwm__SetTCFrequency+0x80>
+     c24:	4785                	li	a5,1
+     c26:	02f70b63          	beq	a4,a5,c5c <Pwm__SetTCFrequency+0xac>
+     c2a:	0151                	addi	sp,sp,20
+     c2c:	c7eff06f          	j	aa <__riscv_restore_0>
+     c30:	6505                	lui	a0,0x1
+     c32:	4585                	li	a1,1
+     c34:	80050513          	addi	a0,a0,-2048 # 800 <LoadCellTare+0x6>
+     c38:	738000ef          	jal	ra,1370 <RCC_APB2PeriphClockCmd>
+     c3c:	40013537          	lui	a0,0x40013
+     c40:	8660                	sh	s0,12(sp)
+     c42:	8464                	sh	s1,8(sp)
+     c44:	00011723          	sh	zero,14(sp)
+     c48:	00011523          	sh	zero,10(sp)
+     c4c:	00010823          	sb	zero,16(sp)
+     c50:	002c                	addi	a1,sp,8
+     c52:	c0050513          	addi	a0,a0,-1024 # 40012c00 <__global_pointer$+0x200123c0>
+     c56:	774000ef          	jal	ra,13ca <TIM_TimeBaseInit>
+     c5a:	bfc1                	j	c2a <Pwm__SetTCFrequency+0x7a>
+     c5c:	4585                	li	a1,1
+     c5e:	4505                	li	a0,1
+     c60:	72e000ef          	jal	ra,138e <RCC_APB1PeriphClockCmd>
+     c64:	002c                	addi	a1,sp,8
+     c66:	8660                	sh	s0,12(sp)
+     c68:	8464                	sh	s1,8(sp)
+     c6a:	00011723          	sh	zero,14(sp)
+     c6e:	00011523          	sh	zero,10(sp)
+     c72:	40000537          	lui	a0,0x40000
+     c76:	b7c5                	j	c56 <Pwm__SetTCFrequency+0xa6>
 
-00000ba6 <ADC1_IRQHandler>:
-     ba6:	a001                	j	ba6 <ADC1_IRQHandler>
+00000c78 <Pwm__SetDutyCycle>:
+     c78:	479d                	li	a5,7
+     c7a:	00a7e763          	bltu	a5,a0,c88 <Pwm__SetDutyCycle+0x10>
+     c7e:	c22ff2ef          	jal	t0,a0 <__riscv_save_0>
+     c82:	3559                	jal	b08 <Pwm__SetDutyCycle.part.0>
+     c84:	c26ff06f          	j	aa <__riscv_restore_0>
+     c88:	8082                	ret
 
-00000ba8 <handle_reset>:
-     ba8:	20000197          	auipc	gp,0x20000
-     bac:	c9818193          	addi	gp,gp,-872 # 20000840 <__global_pointer$>
-     bb0:	fc018113          	addi	sp,gp,-64 # 20000800 <_eusrstack>
-     bb4:	0a000513          	li	a0,160
-     bb8:	1ffff597          	auipc	a1,0x1ffff
-     bbc:	44858593          	addi	a1,a1,1096 # 20000000 <_highcode_vma_end>
-     bc0:	1ffff617          	auipc	a2,0x1ffff
-     bc4:	44060613          	addi	a2,a2,1088 # 20000000 <_highcode_vma_end>
-     bc8:	00c5fa63          	bgeu	a1,a2,bdc <handle_reset+0x34>
-     bcc:	00052283          	lw	t0,0(a0)
-     bd0:	0055a023          	sw	t0,0(a1)
-     bd4:	0511                	addi	a0,a0,4
-     bd6:	0591                	addi	a1,a1,4
-     bd8:	fec5eae3          	bltu	a1,a2,bcc <handle_reset+0x24>
-     bdc:	00000517          	auipc	a0,0x0
-     be0:	69050513          	addi	a0,a0,1680 # 126c <_data_lma>
-     be4:	1ffff597          	auipc	a1,0x1ffff
-     be8:	41c58593          	addi	a1,a1,1052 # 20000000 <_highcode_vma_end>
-     bec:	1ffff617          	auipc	a2,0x1ffff
-     bf0:	45460613          	addi	a2,a2,1108 # 20000040 <_edata>
-     bf4:	00c5fa63          	bgeu	a1,a2,c08 <handle_reset+0x60>
-     bf8:	00052283          	lw	t0,0(a0)
-     bfc:	0055a023          	sw	t0,0(a1)
-     c00:	0511                	addi	a0,a0,4
-     c02:	0591                	addi	a1,a1,4
-     c04:	fec5eae3          	bltu	a1,a2,bf8 <handle_reset+0x50>
-     c08:	1ffff517          	auipc	a0,0x1ffff
-     c0c:	43850513          	addi	a0,a0,1080 # 20000040 <_edata>
-     c10:	8b418593          	addi	a1,gp,-1868 # 200000f4 <_ebss>
-     c14:	00b57763          	bgeu	a0,a1,c22 <handle_reset+0x7a>
-     c18:	00052023          	sw	zero,0(a0)
-     c1c:	0511                	addi	a0,a0,4
-     c1e:	feb56de3          	bltu	a0,a1,c18 <handle_reset+0x70>
-     c22:	000022b7          	lui	t0,0x2
-     c26:	88028293          	addi	t0,t0,-1920 # 1880 <_data_lma+0x614>
-     c2a:	30029073          	csrw	mstatus,t0
-     c2e:	428d                	li	t0,3
-     c30:	80429073          	csrw	0x804,t0
-     c34:	fffff297          	auipc	t0,0xfffff
-     c38:	3cc28293          	addi	t0,t0,972 # 0 <_sinit>
-     c3c:	0032e293          	ori	t0,t0,3
-     c40:	30529073          	csrw	mtvec,t0
-     c44:	dc3ff0ef          	jal	ra,a06 <SystemInit>
-     c48:	00000297          	auipc	t0,0x0
-     c4c:	d0c28293          	addi	t0,t0,-756 # 954 <main>
-     c50:	34129073          	csrw	mepc,t0
-     c54:	30200073          	mret
+00000c8a <Pwm__Initialize>:
+     c8a:	c16ff2ef          	jal	t0,a0 <__riscv_save_0>
+     c8e:	1151                	addi	sp,sp,-12
+     c90:	c002                	sw	zero,0(sp)
+     c92:	c202                	sw	zero,4(sp)
+     c94:	c402                	sw	zero,8(sp)
+     c96:	4401                	li	s0,0
+     c98:	6485                	lui	s1,0x1
+     c9a:	0405                	addi	s0,s0,1
+     c9c:	479d                	li	a5,7
+     c9e:	02f41163          	bne	s0,a5,cc0 <Pwm__Initialize+0x36>
+     ca2:	40013537          	lui	a0,0x40013
+     ca6:	4585                	li	a1,1
+     ca8:	c0050513          	addi	a0,a0,-1024 # 40012c00 <__global_pointer$+0x200123c0>
+     cac:	003000ef          	jal	ra,14ae <TIM_Cmd>
+     cb0:	4585                	li	a1,1
+     cb2:	40000537          	lui	a0,0x40000
+     cb6:	7f8000ef          	jal	ra,14ae <TIM_Cmd>
+     cba:	0131                	addi	sp,sp,12
+     cbc:	beeff06f          	j	aa <__riscv_restore_0>
+     cc0:	73448793          	addi	a5,s1,1844 # 1734 <PWM_Enable_Table>
+     cc4:	97a2                	add	a5,a5,s0
+     cc6:	239c                	lbu	a5,0(a5)
+     cc8:	4705                	li	a4,1
+     cca:	fce798e3          	bne	a5,a4,c9a <Pwm__Initialize+0x10>
+     cce:	4761                	li	a4,24
+     cd0:	c43a                	sw	a4,8(sp)
+     cd2:	470d                	li	a4,3
+     cd4:	c23a                	sw	a4,4(sp)
+     cd6:	00f40d63          	beq	s0,a5,cf0 <Pwm__Initialize+0x66>
+     cda:	4799                	li	a5,6
+     cdc:	02f40763          	beq	s0,a5,d0a <Pwm__Initialize+0x80>
+     ce0:	03c00593          	li	a1,60
+     ce4:	4505                	li	a0,1
+     ce6:	35e9                	jal	bb0 <Pwm__SetTCFrequency>
+     ce8:	45a9                	li	a1,10
+     cea:	8522                	mv	a0,s0
+     cec:	3771                	jal	c78 <Pwm__SetDutyCycle>
+     cee:	b775                	j	c9a <Pwm__Initialize+0x10>
+     cf0:	4585                	li	a1,1
+     cf2:	02000513          	li	a0,32
+     cf6:	2dad                	jal	1370 <RCC_APB2PeriphClockCmd>
+     cf8:	40011537          	lui	a0,0x40011
+     cfc:	47a1                	li	a5,8
+     cfe:	858a                	mv	a1,sp
+     d00:	40050513          	addi	a0,a0,1024 # 40011400 <__global_pointer$+0x20010bc0>
+     d04:	807c                	sh	a5,0(sp)
+     d06:	2331                	jal	1212 <GPIO_Init>
+     d08:	bfe1                	j	ce0 <Pwm__Initialize+0x56>
+     d0a:	4585                	li	a1,1
+     d0c:	4545                	li	a0,17
+     d0e:	258d                	jal	1370 <RCC_APB2PeriphClockCmd>
+     d10:	400107b7          	lui	a5,0x40010
+     d14:	43d8                	lw	a4,4(a5)
+     d16:	858a                	mv	a1,sp
+     d18:	40011537          	lui	a0,0x40011
+     d1c:	f3f77713          	andi	a4,a4,-193
+     d20:	c3d8                	sw	a4,4(a5)
+     d22:	43d8                	lw	a4,4(a5)
+     d24:	0c076713          	ori	a4,a4,192
+     d28:	c3d8                	sw	a4,4(a5)
+     d2a:	08000793          	li	a5,128
+     d2e:	807c                	sh	a5,0(sp)
+     d30:	21cd                	jal	1212 <GPIO_Init>
+     d32:	6585                	lui	a1,0x1
+     d34:	fa058593          	addi	a1,a1,-96 # fa0 <SystemCoreClockUpdate+0x62>
+     d38:	4501                	li	a0,0
+     d3a:	3d9d                	jal	bb0 <Pwm__SetTCFrequency>
+     d3c:	4581                	li	a1,0
+     d3e:	4519                	li	a0,6
+     d40:	33e1                	jal	b08 <Pwm__SetDutyCycle.part.0>
+     d42:	bfa1                	j	c9a <Pwm__Initialize+0x10>
 
-00000c58 <ADC_DeInit>:
-     c58:	400127b7          	lui	a5,0x40012
-     c5c:	40078793          	addi	a5,a5,1024 # 40012400 <__global_pointer$+0x20011bc0>
-     c60:	00f51e63          	bne	a0,a5,c7c <ADC_DeInit+0x24>
-     c64:	c3cff2ef          	jal	t0,a0 <__riscv_save_0>
-     c68:	4585                	li	a1,1
-     c6a:	20000513          	li	a0,512
-     c6e:	2e2d                	jal	fa8 <RCC_APB2PeriphResetCmd>
-     c70:	4581                	li	a1,0
-     c72:	20000513          	li	a0,512
-     c76:	2e0d                	jal	fa8 <RCC_APB2PeriphResetCmd>
-     c78:	c32ff06f          	j	aa <__riscv_restore_0>
-     c7c:	8082                	ret
+00000d44 <main>:
+     d44:	b5cff2ef          	jal	t0,a0 <__riscv_save_0>
+     d48:	1171                	addi	sp,sp,-4
+     d4a:	4505                	li	a0,1
+     d4c:	9201aa23          	sw	zero,-1740(gp) # 20000174 <Slot>
+     d50:	2b89                	jal	12a2 <NVIC_PriorityGroupConfig>
+     d52:	22f5                	jal	f3e <SystemCoreClockUpdate>
+     d54:	df4ff0ef          	jal	ra,348 <SysTick_Init>
+     d58:	c9aff0ef          	jal	ra,1f2 <Sounds__Initialize>
+     d5c:	b97ff0ef          	jal	ra,8f2 <ADC__Initialize>
+     d60:	372d                	jal	c8a <Pwm__Initialize>
+     d62:	f16ff0ef          	jal	ra,478 <CMPInitialize>
+     d66:	4501                	li	a0,0
+     d68:	9d7ff0ef          	jal	ra,73e <LoadCellSelect>
+     d6c:	eceff0ef          	jal	ra,43a <SysTick_GetTick>
+     d70:	84aa                	mv	s1,a0
+     d72:	93418413          	addi	s0,gp,-1740 # 20000174 <Slot>
+     d76:	e4cff0ef          	jal	ra,3c2 <Timer__MsHandler>
+     d7a:	b6dff0ef          	jal	ra,8e6 <Hal__BackgroundHandler>
+     d7e:	3339                	jal	a8c <ADC_Handler>
+     d80:	401c                	lw	a5,0(s0)
+     d82:	4715                	li	a4,5
+     d84:	04f76d63          	bltu	a4,a5,dde <main+0x9a>
+     d88:	6705                	lui	a4,0x1
+     d8a:	078a                	slli	a5,a5,0x2
+     d8c:	73c70713          	addi	a4,a4,1852 # 173c <PWM_Enable_Table+0x8>
+     d90:	97ba                	add	a5,a5,a4
+     d92:	439c                	lw	a5,0(a5)
+     d94:	8782                	jr	a5
+     d96:	c01c                	sw	a5,0(s0)
+     d98:	84ba                	mv	s1,a4
+     d9a:	bff1                	j	d76 <main+0x32>
+     d9c:	93bff0ef          	jal	ra,6d6 <CommunitacionHandle>
+     da0:	e9aff0ef          	jal	ra,43a <SysTick_GetTick>
+     da4:	c02a                	sw	a0,0(sp)
+     da6:	8526                	mv	a0,s1
+     da8:	e98ff0ef          	jal	ra,440 <SysTick_GetElapsedTime>
+     dac:	47a5                	li	a5,9
+     dae:	02a7fb63          	bgeu	a5,a0,de4 <main+0xa0>
+     db2:	9381a783          	lw	a5,-1736(gp) # 20000178 <prev_Slot>
+     db6:	4691                	li	a3,4
+     db8:	4702                	lw	a4,0(sp)
+     dba:	0785                	addi	a5,a5,1
+     dbc:	fcf6fde3          	bgeu	a3,a5,d96 <main+0x52>
+     dc0:	00042023          	sw	zero,0(s0)
+     dc4:	bfd1                	j	d98 <main+0x54>
+     dc6:	edeff0ef          	jal	ra,4a4 <CMP_BackgroundHandler>
+     dca:	bfd9                	j	da0 <main+0x5c>
+     dcc:	b1bff0ef          	jal	ra,8e6 <Hal__BackgroundHandler>
+     dd0:	bfc1                	j	da0 <main+0x5c>
+     dd2:	cdcff0ef          	jal	ra,2ae <Error_Handler>
+     dd6:	b7e9                	j	da0 <main+0x5c>
+     dd8:	caeff0ef          	jal	ra,286 <Sounds__Background>
+     ddc:	b7d1                	j	da0 <main+0x5c>
+     dde:	00042023          	sw	zero,0(s0)
+     de2:	bf7d                	j	da0 <main+0x5c>
+     de4:	401c                	lw	a5,0(s0)
+     de6:	4715                	li	a4,5
+     de8:	00e78463          	beq	a5,a4,df0 <main+0xac>
+     dec:	92f1ac23          	sw	a5,-1736(gp) # 20000178 <prev_Slot>
+     df0:	4795                	li	a5,5
+     df2:	c01c                	sw	a5,0(s0)
+     df4:	8726                	mv	a4,s1
+     df6:	b74d                	j	d98 <main+0x54>
 
-00000c7e <ADC_Init>:
-     c7e:	415c                	lw	a5,4(a0)
-     c80:	fff10737          	lui	a4,0xfff10
-     c84:	eff70713          	addi	a4,a4,-257 # fff0feff <__global_pointer$+0xdff0f6bf>
-     c88:	8f7d                	and	a4,a4,a5
-     c8a:	41dc                	lw	a5,4(a1)
-     c8c:	4194                	lw	a3,0(a1)
-     c8e:	07a2                	slli	a5,a5,0x8
-     c90:	8fd5                	or	a5,a5,a3
-     c92:	8fd9                	or	a5,a5,a4
-     c94:	c15c                	sw	a5,4(a0)
-     c96:	451c                	lw	a5,8(a0)
-     c98:	fff1f737          	lui	a4,0xfff1f
-     c9c:	7fd70713          	addi	a4,a4,2045 # fff1f7fd <__global_pointer$+0xdff1efbd>
-     ca0:	45d4                	lw	a3,12(a1)
-     ca2:	8f7d                	and	a4,a4,a5
-     ca4:	499c                	lw	a5,16(a1)
-     ca6:	8fd5                	or	a5,a5,a3
-     ca8:	4594                	lw	a3,8(a1)
-     caa:	0686                	slli	a3,a3,0x1
-     cac:	8fd5                	or	a5,a5,a3
-     cae:	8fd9                	or	a5,a5,a4
-     cb0:	c51c                	sw	a5,8(a0)
-     cb2:	555c                	lw	a5,44(a0)
-     cb4:	ff100737          	lui	a4,0xff100
-     cb8:	177d                	addi	a4,a4,-1
-     cba:	8f7d                	and	a4,a4,a5
-     cbc:	29dc                	lbu	a5,20(a1)
-     cbe:	17fd                	addi	a5,a5,-1
-     cc0:	0ff7f793          	andi	a5,a5,255
-     cc4:	07d2                	slli	a5,a5,0x14
-     cc6:	8fd9                	or	a5,a5,a4
-     cc8:	d55c                	sw	a5,44(a0)
-     cca:	8082                	ret
+00000df8 <NMI_Handler>:
+     df8:	a001                	j	df8 <NMI_Handler>
 
-00000ccc <ADC_Cmd>:
-     ccc:	451c                	lw	a5,8(a0)
-     cce:	c589                	beqz	a1,cd8 <ADC_Cmd+0xc>
-     cd0:	0017e793          	ori	a5,a5,1
-     cd4:	c51c                	sw	a5,8(a0)
-     cd6:	8082                	ret
-     cd8:	9bf9                	andi	a5,a5,-2
-     cda:	bfed                	j	cd4 <ADC_Cmd+0x8>
+00000dfa <HardFault_Handler>:
+     dfa:	beef07b7          	lui	a5,0xbeef0
+     dfe:	e000e737          	lui	a4,0xe000e
+     e02:	08078793          	addi	a5,a5,128 # beef0080 <__global_pointer$+0x9eeef840>
+     e06:	c73c                	sw	a5,72(a4)
+     e08:	a001                	j	e08 <HardFault_Handler+0xe>
 
-00000cdc <ADC_DMACmd>:
-     cdc:	451c                	lw	a5,8(a0)
-     cde:	c589                	beqz	a1,ce8 <ADC_DMACmd+0xc>
-     ce0:	1007e793          	ori	a5,a5,256
-     ce4:	c51c                	sw	a5,8(a0)
-     ce6:	8082                	ret
-     ce8:	eff7f793          	andi	a5,a5,-257
-     cec:	bfe5                	j	ce4 <ADC_DMACmd+0x8>
+00000e0a <SystemInit>:
+     e0a:	a96ff2ef          	jal	t0,a0 <__riscv_save_0>
+     e0e:	40021437          	lui	s0,0x40021
+     e12:	401c                	lw	a5,0(s0)
+     e14:	f8ff0737          	lui	a4,0xf8ff0
+     e18:	1161                	addi	sp,sp,-8
+     e1a:	0017e793          	ori	a5,a5,1
+     e1e:	c01c                	sw	a5,0(s0)
+     e20:	405c                	lw	a5,4(s0)
+     e22:	4541                	li	a0,16
+     e24:	8ff9                	and	a5,a5,a4
+     e26:	c05c                	sw	a5,4(s0)
+     e28:	401c                	lw	a5,0(s0)
+     e2a:	fef70737          	lui	a4,0xfef70
+     e2e:	177d                	addi	a4,a4,-1
+     e30:	8ff9                	and	a5,a5,a4
+     e32:	c01c                	sw	a5,0(s0)
+     e34:	401c                	lw	a5,0(s0)
+     e36:	fffc0737          	lui	a4,0xfffc0
+     e3a:	177d                	addi	a4,a4,-1
+     e3c:	8ff9                	and	a5,a5,a4
+     e3e:	c01c                	sw	a5,0(s0)
+     e40:	405c                	lw	a5,4(s0)
+     e42:	7741                	lui	a4,0xffff0
+     e44:	177d                	addi	a4,a4,-1
+     e46:	8ff9                	and	a5,a5,a4
+     e48:	c05c                	sw	a5,4(s0)
+     e4a:	009f07b7          	lui	a5,0x9f0
+     e4e:	c41c                	sw	a5,8(s0)
+     e50:	29a1                	jal	12a8 <RCC_AdjustHSICalibrationValue>
+     e52:	4c1c                	lw	a5,24(s0)
+     e54:	00020637          	lui	a2,0x20
+     e58:	0207e793          	ori	a5,a5,32
+     e5c:	cc1c                	sw	a5,24(s0)
+     e5e:	400117b7          	lui	a5,0x40011
+     e62:	4007a703          	lw	a4,1024(a5) # 40011400 <__global_pointer$+0x20010bc0>
+     e66:	40078693          	addi	a3,a5,1024
+     e6a:	f0f77713          	andi	a4,a4,-241
+     e6e:	40e7a023          	sw	a4,1024(a5)
+     e72:	4007a703          	lw	a4,1024(a5)
+     e76:	08076713          	ori	a4,a4,128
+     e7a:	40e7a023          	sw	a4,1024(a5)
+     e7e:	4789                	li	a5,2
+     e80:	ca9c                	sw	a5,16(a3)
+     e82:	c002                	sw	zero,0(sp)
+     e84:	c202                	sw	zero,4(sp)
+     e86:	4c1c                	lw	a5,24(s0)
+     e88:	40010737          	lui	a4,0x40010
+     e8c:	66a1                	lui	a3,0x8
+     e8e:	0017e793          	ori	a5,a5,1
+     e92:	cc1c                	sw	a5,24(s0)
+     e94:	435c                	lw	a5,4(a4)
+     e96:	8fd5                	or	a5,a5,a3
+     e98:	c35c                	sw	a5,4(a4)
+     e9a:	401c                	lw	a5,0(s0)
+     e9c:	6741                	lui	a4,0x10
+     e9e:	400216b7          	lui	a3,0x40021
+     ea2:	8fd9                	or	a5,a5,a4
+     ea4:	c01c                	sw	a5,0(s0)
+     ea6:	6709                	lui	a4,0x2
+     ea8:	429c                	lw	a5,0(a3)
+     eaa:	8ff1                	and	a5,a5,a2
+     eac:	c23e                	sw	a5,4(sp)
+     eae:	4782                	lw	a5,0(sp)
+     eb0:	0785                	addi	a5,a5,1
+     eb2:	c03e                	sw	a5,0(sp)
+     eb4:	4792                	lw	a5,4(sp)
+     eb6:	e781                	bnez	a5,ebe <SystemInit+0xb4>
+     eb8:	4782                	lw	a5,0(sp)
+     eba:	fee797e3          	bne	a5,a4,ea8 <SystemInit+0x9e>
+     ebe:	400217b7          	lui	a5,0x40021
+     ec2:	439c                	lw	a5,0(a5)
+     ec4:	00e79713          	slli	a4,a5,0xe
+     ec8:	06075963          	bgez	a4,f3a <SystemInit+0x130>
+     ecc:	4785                	li	a5,1
+     ece:	c23e                	sw	a5,4(sp)
+     ed0:	4712                	lw	a4,4(sp)
+     ed2:	4785                	li	a5,1
+     ed4:	06f71063          	bne	a4,a5,f34 <SystemInit+0x12a>
+     ed8:	400227b7          	lui	a5,0x40022
+     edc:	4398                	lw	a4,0(a5)
+     ede:	76c1                	lui	a3,0xffff0
+     ee0:	16fd                	addi	a3,a3,-1
+     ee2:	9b71                	andi	a4,a4,-4
+     ee4:	c398                	sw	a4,0(a5)
+     ee6:	4398                	lw	a4,0(a5)
+     ee8:	00176713          	ori	a4,a4,1
+     eec:	c398                	sw	a4,0(a5)
+     eee:	400217b7          	lui	a5,0x40021
+     ef2:	43d8                	lw	a4,4(a5)
+     ef4:	c3d8                	sw	a4,4(a5)
+     ef6:	43d8                	lw	a4,4(a5)
+     ef8:	8f75                	and	a4,a4,a3
+     efa:	c3d8                	sw	a4,4(a5)
+     efc:	43d8                	lw	a4,4(a5)
+     efe:	66c1                	lui	a3,0x10
+     f00:	8f55                	or	a4,a4,a3
+     f02:	c3d8                	sw	a4,4(a5)
+     f04:	4398                	lw	a4,0(a5)
+     f06:	010006b7          	lui	a3,0x1000
+     f0a:	8f55                	or	a4,a4,a3
+     f0c:	c398                	sw	a4,0(a5)
+     f0e:	4398                	lw	a4,0(a5)
+     f10:	00671693          	slli	a3,a4,0x6
+     f14:	fe06dde3          	bgez	a3,f0e <SystemInit+0x104>
+     f18:	43d8                	lw	a4,4(a5)
+     f1a:	400216b7          	lui	a3,0x40021
+     f1e:	9b71                	andi	a4,a4,-4
+     f20:	c3d8                	sw	a4,4(a5)
+     f22:	43d8                	lw	a4,4(a5)
+     f24:	00276713          	ori	a4,a4,2
+     f28:	c3d8                	sw	a4,4(a5)
+     f2a:	4721                	li	a4,8
+     f2c:	42dc                	lw	a5,4(a3)
+     f2e:	8bb1                	andi	a5,a5,12
+     f30:	fee79ee3          	bne	a5,a4,f2c <SystemInit+0x122>
+     f34:	0121                	addi	sp,sp,8
+     f36:	974ff06f          	j	aa <__riscv_restore_0>
+     f3a:	c202                	sw	zero,4(sp)
+     f3c:	bf51                	j	ed0 <SystemInit+0xc6>
 
-00000cee <ADC_ResetCalibration>:
-     cee:	451c                	lw	a5,8(a0)
-     cf0:	0087e793          	ori	a5,a5,8
-     cf4:	c51c                	sw	a5,8(a0)
-     cf6:	8082                	ret
+00000f3e <SystemCoreClockUpdate>:
+     f3e:	962ff2ef          	jal	t0,a0 <__riscv_save_0>
+     f42:	40021737          	lui	a4,0x40021
+     f46:	435c                	lw	a5,4(a4)
+     f48:	20000437          	lui	s0,0x20000
+     f4c:	4691                	li	a3,4
+     f4e:	8bb1                	andi	a5,a5,12
+     f50:	01840413          	addi	s0,s0,24 # 20000018 <SystemCoreClock>
+     f54:	00d78563          	beq	a5,a3,f5e <SystemCoreClockUpdate+0x20>
+     f58:	46a1                	li	a3,8
+     f5a:	04d78263          	beq	a5,a3,f9e <SystemCoreClockUpdate+0x60>
+     f5e:	016e37b7          	lui	a5,0x16e3
+     f62:	60078793          	addi	a5,a5,1536 # 16e3600 <_data_lma+0x16e1eac>
+     f66:	c01c                	sw	a5,0(s0)
+     f68:	400216b7          	lui	a3,0x40021
+     f6c:	42dc                	lw	a5,4(a3)
+     f6e:	4008                	lw	a0,0(s0)
+     f70:	8391                	srli	a5,a5,0x4
+     f72:	00f7f713          	andi	a4,a5,15
+     f76:	200007b7          	lui	a5,0x20000
+     f7a:	00878793          	addi	a5,a5,8 # 20000008 <AHBPrescTable>
+     f7e:	97ba                	add	a5,a5,a4
+     f80:	238c                	lbu	a1,0(a5)
+     f82:	42dc                	lw	a5,4(a3)
+     f84:	0ff5f593          	andi	a1,a1,255
+     f88:	0807f793          	andi	a5,a5,128
+     f8c:	00b55733          	srl	a4,a0,a1
+     f90:	e781                	bnez	a5,f98 <SystemCoreClockUpdate+0x5a>
+     f92:	942ff0ef          	jal	ra,d4 <__udivsi3>
+     f96:	872a                	mv	a4,a0
+     f98:	c018                	sw	a4,0(s0)
+     f9a:	910ff06f          	j	aa <__riscv_restore_0>
+     f9e:	435c                	lw	a5,4(a4)
+     fa0:	02dc77b7          	lui	a5,0x2dc7
+     fa4:	c0078793          	addi	a5,a5,-1024 # 2dc6c00 <_data_lma+0x2dc54ac>
+     fa8:	bf7d                	j	f66 <SystemCoreClockUpdate+0x28>
 
-00000cf8 <ADC_GetResetCalibrationStatus>:
-     cf8:	4508                	lw	a0,8(a0)
-     cfa:	810d                	srli	a0,a0,0x3
-     cfc:	8905                	andi	a0,a0,1
-     cfe:	8082                	ret
+00000faa <ADC1_IRQHandler>:
+     faa:	a001                	j	faa <ADC1_IRQHandler>
 
-00000d00 <ADC_StartCalibration>:
-     d00:	451c                	lw	a5,8(a0)
-     d02:	0047e793          	ori	a5,a5,4
-     d06:	c51c                	sw	a5,8(a0)
-     d08:	8082                	ret
+00000fac <handle_reset>:
+     fac:	20000197          	auipc	gp,0x20000
+     fb0:	89418193          	addi	gp,gp,-1900 # 20000840 <__global_pointer$>
+     fb4:	fc018113          	addi	sp,gp,-64 # 20000800 <_eusrstack>
+     fb8:	0a000513          	li	a0,160
+     fbc:	1ffff597          	auipc	a1,0x1ffff
+     fc0:	04458593          	addi	a1,a1,68 # 20000000 <_highcode_vma_end>
+     fc4:	1ffff617          	auipc	a2,0x1ffff
+     fc8:	03c60613          	addi	a2,a2,60 # 20000000 <_highcode_vma_end>
+     fcc:	00c5fa63          	bgeu	a1,a2,fe0 <handle_reset+0x34>
+     fd0:	00052283          	lw	t0,0(a0) # 40011000 <__global_pointer$+0x200107c0>
+     fd4:	0055a023          	sw	t0,0(a1)
+     fd8:	0511                	addi	a0,a0,4
+     fda:	0591                	addi	a1,a1,4
+     fdc:	fec5eae3          	bltu	a1,a2,fd0 <handle_reset+0x24>
+     fe0:	00000517          	auipc	a0,0x0
+     fe4:	77450513          	addi	a0,a0,1908 # 1754 <_data_lma>
+     fe8:	1ffff597          	auipc	a1,0x1ffff
+     fec:	01858593          	addi	a1,a1,24 # 20000000 <_highcode_vma_end>
+     ff0:	1ffff617          	auipc	a2,0x1ffff
+     ff4:	05060613          	addi	a2,a2,80 # 20000040 <_edata>
+     ff8:	00c5fa63          	bgeu	a1,a2,100c <handle_reset+0x60>
+     ffc:	00052283          	lw	t0,0(a0)
+    1000:	0055a023          	sw	t0,0(a1)
+    1004:	0511                	addi	a0,a0,4
+    1006:	0591                	addi	a1,a1,4
+    1008:	fec5eae3          	bltu	a1,a2,ffc <handle_reset+0x50>
+    100c:	1ffff517          	auipc	a0,0x1ffff
+    1010:	03450513          	addi	a0,a0,52 # 20000040 <_edata>
+    1014:	94018593          	addi	a1,gp,-1728 # 20000180 <_ebss>
+    1018:	00b57763          	bgeu	a0,a1,1026 <handle_reset+0x7a>
+    101c:	00052023          	sw	zero,0(a0)
+    1020:	0511                	addi	a0,a0,4
+    1022:	feb56de3          	bltu	a0,a1,101c <handle_reset+0x70>
+    1026:	000022b7          	lui	t0,0x2
+    102a:	88028293          	addi	t0,t0,-1920 # 1880 <_data_lma+0x12c>
+    102e:	30029073          	csrw	mstatus,t0
+    1032:	428d                	li	t0,3
+    1034:	80429073          	csrw	0x804,t0
+    1038:	fffff297          	auipc	t0,0xfffff
+    103c:	fc828293          	addi	t0,t0,-56 # 0 <_sinit>
+    1040:	0032e293          	ori	t0,t0,3
+    1044:	30529073          	csrw	mtvec,t0
+    1048:	dc3ff0ef          	jal	ra,e0a <SystemInit>
+    104c:	00000297          	auipc	t0,0x0
+    1050:	cf828293          	addi	t0,t0,-776 # d44 <main>
+    1054:	34129073          	csrw	mepc,t0
+    1058:	30200073          	mret
 
-00000d0a <ADC_GetCalibrationStatus>:
-     d0a:	4508                	lw	a0,8(a0)
-     d0c:	8109                	srli	a0,a0,0x2
-     d0e:	8905                	andi	a0,a0,1
-     d10:	8082                	ret
+0000105c <ADC_DeInit>:
+    105c:	400127b7          	lui	a5,0x40012
+    1060:	40078793          	addi	a5,a5,1024 # 40012400 <__global_pointer$+0x20011bc0>
+    1064:	00f51e63          	bne	a0,a5,1080 <ADC_DeInit+0x24>
+    1068:	838ff2ef          	jal	t0,a0 <__riscv_save_0>
+    106c:	4585                	li	a1,1
+    106e:	20000513          	li	a0,512
+    1072:	2e2d                	jal	13ac <RCC_APB2PeriphResetCmd>
+    1074:	4581                	li	a1,0
+    1076:	20000513          	li	a0,512
+    107a:	2e0d                	jal	13ac <RCC_APB2PeriphResetCmd>
+    107c:	82eff06f          	j	aa <__riscv_restore_0>
+    1080:	8082                	ret
 
-00000d12 <ADC_SoftwareStartConvCmd>:
-     d12:	451c                	lw	a5,8(a0)
-     d14:	c591                	beqz	a1,d20 <ADC_SoftwareStartConvCmd+0xe>
-     d16:	00500737          	lui	a4,0x500
-     d1a:	8fd9                	or	a5,a5,a4
-     d1c:	c51c                	sw	a5,8(a0)
-     d1e:	8082                	ret
-     d20:	ffb00737          	lui	a4,0xffb00
-     d24:	177d                	addi	a4,a4,-1
-     d26:	8ff9                	and	a5,a5,a4
-     d28:	bfd5                	j	d1c <ADC_SoftwareStartConvCmd+0xa>
-
-00000d2a <ADC_RegularChannelConfig>:
-     d2a:	47a5                	li	a5,9
-     d2c:	04b7f863          	bgeu	a5,a1,d7c <ADC_RegularChannelConfig+0x52>
-     d30:	ff658713          	addi	a4,a1,-10
-     d34:	00171793          	slli	a5,a4,0x1
-     d38:	00c52283          	lw	t0,12(a0)
-     d3c:	97ba                	add	a5,a5,a4
-     d3e:	431d                	li	t1,7
-     d40:	00f31333          	sll	t1,t1,a5
-     d44:	fff34313          	not	t1,t1
-     d48:	00537333          	and	t1,t1,t0
-     d4c:	00f697b3          	sll	a5,a3,a5
-     d50:	0067e7b3          	or	a5,a5,t1
-     d54:	c55c                	sw	a5,12(a0)
-     d56:	4799                	li	a5,6
-     d58:	04c7e363          	bltu	a5,a2,d9e <ADC_RegularChannelConfig+0x74>
-     d5c:	167d                	addi	a2,a2,-1
-     d5e:	00261793          	slli	a5,a2,0x2
-     d62:	963e                	add	a2,a2,a5
-     d64:	5958                	lw	a4,52(a0)
-     d66:	47fd                	li	a5,31
-     d68:	00c797b3          	sll	a5,a5,a2
-     d6c:	fff7c793          	not	a5,a5
-     d70:	8ff9                	and	a5,a5,a4
-     d72:	00c595b3          	sll	a1,a1,a2
-     d76:	8ddd                	or	a1,a1,a5
-     d78:	d94c                	sw	a1,52(a0)
-     d7a:	8082                	ret
-     d7c:	00159793          	slli	a5,a1,0x1
-     d80:	01052303          	lw	t1,16(a0)
-     d84:	97ae                	add	a5,a5,a1
-     d86:	471d                	li	a4,7
-     d88:	00f71733          	sll	a4,a4,a5
-     d8c:	fff74713          	not	a4,a4
-     d90:	00677733          	and	a4,a4,t1
-     d94:	00f697b3          	sll	a5,a3,a5
-     d98:	8f5d                	or	a4,a4,a5
-     d9a:	c918                	sw	a4,16(a0)
-     d9c:	bf6d                	j	d56 <ADC_RegularChannelConfig+0x2c>
-     d9e:	47b1                	li	a5,12
-     da0:	02c7e263          	bltu	a5,a2,dc4 <ADC_RegularChannelConfig+0x9a>
-     da4:	1665                	addi	a2,a2,-7
-     da6:	00261793          	slli	a5,a2,0x2
-     daa:	963e                	add	a2,a2,a5
-     dac:	5918                	lw	a4,48(a0)
-     dae:	47fd                	li	a5,31
-     db0:	00c797b3          	sll	a5,a5,a2
-     db4:	fff7c793          	not	a5,a5
-     db8:	8ff9                	and	a5,a5,a4
-     dba:	00c595b3          	sll	a1,a1,a2
-     dbe:	8ddd                	or	a1,a1,a5
-     dc0:	d90c                	sw	a1,48(a0)
-     dc2:	8082                	ret
-     dc4:	164d                	addi	a2,a2,-13
-     dc6:	00261713          	slli	a4,a2,0x2
-     dca:	5554                	lw	a3,44(a0)
-     dcc:	963a                	add	a2,a2,a4
-     dce:	47fd                	li	a5,31
-     dd0:	00c797b3          	sll	a5,a5,a2
-     dd4:	fff7c793          	not	a5,a5
-     dd8:	8ff5                	and	a5,a5,a3
-     dda:	00c595b3          	sll	a1,a1,a2
-     dde:	8ddd                	or	a1,a1,a5
-     de0:	d54c                	sw	a1,44(a0)
-     de2:	8082                	ret
-
-00000de4 <DMA_Cmd>:
-     de4:	411c                	lw	a5,0(a0)
-     de6:	c589                	beqz	a1,df0 <DMA_Cmd+0xc>
-     de8:	0017e793          	ori	a5,a5,1
-     dec:	c11c                	sw	a5,0(a0)
-     dee:	8082                	ret
-     df0:	6741                	lui	a4,0x10
-     df2:	1779                	addi	a4,a4,-2
-     df4:	8ff9                	and	a5,a5,a4
-     df6:	bfdd                	j	dec <DMA_Cmd+0x8>
-
-00000df8 <DMA_GetFlagStatus>:
-     df8:	400207b7          	lui	a5,0x40020
-     dfc:	439c                	lw	a5,0(a5)
-     dfe:	8d7d                	and	a0,a0,a5
-     e00:	00a03533          	snez	a0,a0
-     e04:	8082                	ret
-
-00000e06 <DMA_ClearFlag>:
-     e06:	400207b7          	lui	a5,0x40020
-     e0a:	c3c8                	sw	a0,4(a5)
-     e0c:	8082                	ret
-
-00000e0e <GPIO_Init>:
-     e0e:	4594                	lw	a3,8(a1)
-     e10:	0106f793          	andi	a5,a3,16
-     e14:	00f6f293          	andi	t0,a3,15
-     e18:	c781                	beqz	a5,e20 <GPIO_Init+0x12>
-     e1a:	41dc                	lw	a5,4(a1)
-     e1c:	00f2e2b3          	or	t0,t0,a5
-     e20:	0005d383          	lhu	t2,0(a1)
-     e24:	0ff3f793          	andi	a5,t2,255
-     e28:	c3a5                	beqz	a5,e88 <GPIO_Init+0x7a>
-     e2a:	00052303          	lw	t1,0(a0)
-     e2e:	1161                	addi	sp,sp,-8
-     e30:	c222                	sw	s0,4(sp)
-     e32:	c026                	sw	s1,0(sp)
-     e34:	4781                	li	a5,0
-     e36:	02800413          	li	s0,40
-     e3a:	04800493          	li	s1,72
-     e3e:	4705                	li	a4,1
-     e40:	00f71633          	sll	a2,a4,a5
-     e44:	00c3f733          	and	a4,t2,a2
-     e48:	02e61263          	bne	a2,a4,e6c <GPIO_Init+0x5e>
-     e4c:	00279593          	slli	a1,a5,0x2
-     e50:	473d                	li	a4,15
-     e52:	00b71733          	sll	a4,a4,a1
-     e56:	fff74713          	not	a4,a4
-     e5a:	00677333          	and	t1,a4,t1
-     e5e:	00b295b3          	sll	a1,t0,a1
-     e62:	0065e333          	or	t1,a1,t1
-     e66:	00869d63          	bne	a3,s0,e80 <GPIO_Init+0x72>
-     e6a:	c950                	sw	a2,20(a0)
-     e6c:	0785                	addi	a5,a5,1
-     e6e:	4721                	li	a4,8
-     e70:	fce797e3          	bne	a5,a4,e3e <GPIO_Init+0x30>
-     e74:	4412                	lw	s0,4(sp)
-     e76:	00652023          	sw	t1,0(a0)
-     e7a:	4482                	lw	s1,0(sp)
-     e7c:	0121                	addi	sp,sp,8
-     e7e:	8082                	ret
-     e80:	fe9696e3          	bne	a3,s1,e6c <GPIO_Init+0x5e>
-     e84:	c910                	sw	a2,16(a0)
-     e86:	b7dd                	j	e6c <GPIO_Init+0x5e>
-     e88:	8082                	ret
-
-00000e8a <GPIO_ReadInputDataBit>:
-     e8a:	4508                	lw	a0,8(a0)
-     e8c:	8d6d                	and	a0,a0,a1
-     e8e:	00a03533          	snez	a0,a0
-     e92:	8082                	ret
-
-00000e94 <GPIO_WriteBit>:
-     e94:	c219                	beqz	a2,e9a <GPIO_WriteBit+0x6>
-     e96:	c90c                	sw	a1,16(a0)
-     e98:	8082                	ret
-     e9a:	c94c                	sw	a1,20(a0)
-     e9c:	8082                	ret
-
-00000e9e <NVIC_PriorityGroupConfig>:
-     e9e:	8aa1a823          	sw	a0,-1872(gp) # 200000f0 <NVIC_Priority_Group>
-     ea2:	8082                	ret
-
-00000ea4 <RCC_AdjustHSICalibrationValue>:
-     ea4:	40021737          	lui	a4,0x40021
-     ea8:	431c                	lw	a5,0(a4)
-     eaa:	050e                	slli	a0,a0,0x3
-     eac:	f077f793          	andi	a5,a5,-249
-     eb0:	8d5d                	or	a0,a0,a5
-     eb2:	c308                	sw	a0,0(a4)
-     eb4:	8082                	ret
-
-00000eb6 <RCC_ADCCLKConfig>:
-     eb6:	400216b7          	lui	a3,0x40021
-     eba:	42dc                	lw	a5,4(a3)
-     ebc:	7741                	lui	a4,0xffff0
-     ebe:	7ff70713          	addi	a4,a4,2047 # ffff07ff <__global_pointer$+0xdffeffbf>
-     ec2:	8ff9                	and	a5,a5,a4
-     ec4:	8d5d                	or	a0,a0,a5
-     ec6:	c2c8                	sw	a0,4(a3)
-     ec8:	8082                	ret
-
-00000eca <RCC_GetClocksFreq>:
-     eca:	9d6ff2ef          	jal	t0,a0 <__riscv_save_0>
-     ece:	40021737          	lui	a4,0x40021
-     ed2:	435c                	lw	a5,4(a4)
-     ed4:	4691                	li	a3,4
-     ed6:	842a                	mv	s0,a0
-     ed8:	8bb1                	andi	a5,a5,12
-     eda:	00d78563          	beq	a5,a3,ee4 <RCC_GetClocksFreq+0x1a>
-     ede:	46a1                	li	a3,8
-     ee0:	08d78063          	beq	a5,a3,f60 <RCC_GetClocksFreq+0x96>
-     ee4:	016e37b7          	lui	a5,0x16e3
-     ee8:	60078793          	addi	a5,a5,1536 # 16e3600 <_data_lma+0x16e2394>
-     eec:	c01c                	sw	a5,0(s0)
-     eee:	400216b7          	lui	a3,0x40021
-     ef2:	42dc                	lw	a5,4(a3)
-     ef4:	8391                	srli	a5,a5,0x4
-     ef6:	00f7f713          	andi	a4,a5,15
-     efa:	200007b7          	lui	a5,0x20000
-     efe:	03078793          	addi	a5,a5,48 # 20000030 <APBAHBPrescTable>
-     f02:	97ba                	add	a5,a5,a4
-     f04:	238c                	lbu	a1,0(a5)
-     f06:	42dc                	lw	a5,4(a3)
-     f08:	4018                	lw	a4,0(s0)
-     f0a:	0ff5f593          	andi	a1,a1,255
-     f0e:	0807f793          	andi	a5,a5,128
-     f12:	00b75533          	srl	a0,a4,a1
-     f16:	e781                	bnez	a5,f1e <RCC_GetClocksFreq+0x54>
-     f18:	853a                	mv	a0,a4
-     f1a:	9baff0ef          	jal	ra,d4 <__udivsi3>
-     f1e:	c048                	sw	a0,4(s0)
-     f20:	c408                	sw	a0,8(s0)
-     f22:	c448                	sw	a0,12(s0)
-     f24:	400217b7          	lui	a5,0x40021
-     f28:	43dc                	lw	a5,4(a5)
-     f2a:	468d                	li	a3,3
-     f2c:	83ad                	srli	a5,a5,0xb
-     f2e:	8bfd                	andi	a5,a5,31
-     f30:	0037d713          	srli	a4,a5,0x3
-     f34:	078a                	slli	a5,a5,0x2
-     f36:	8bf1                	andi	a5,a5,28
-     f38:	8fd9                	or	a5,a5,a4
-     f3a:	0137f613          	andi	a2,a5,19
-     f3e:	0037f713          	andi	a4,a5,3
-     f42:	00c6f463          	bgeu	a3,a2,f4a <RCC_GetClocksFreq+0x80>
-     f46:	ff478713          	addi	a4,a5,-12 # 40020ff4 <__global_pointer$+0x200207b4>
-     f4a:	200007b7          	lui	a5,0x20000
-     f4e:	01c78793          	addi	a5,a5,28 # 2000001c <ADCPrescTable>
-     f52:	97ba                	add	a5,a5,a4
-     f54:	238c                	lbu	a1,0(a5)
-     f56:	97eff0ef          	jal	ra,d4 <__udivsi3>
-     f5a:	c808                	sw	a0,16(s0)
-     f5c:	94eff06f          	j	aa <__riscv_restore_0>
-     f60:	435c                	lw	a5,4(a4)
-     f62:	02dc77b7          	lui	a5,0x2dc7
-     f66:	c0078793          	addi	a5,a5,-1024 # 2dc6c00 <_data_lma+0x2dc5994>
-     f6a:	b749                	j	eec <RCC_GetClocksFreq+0x22>
-
-00000f6c <RCC_APB2PeriphClockCmd>:
-     f6c:	c599                	beqz	a1,f7a <RCC_APB2PeriphClockCmd+0xe>
-     f6e:	40021737          	lui	a4,0x40021
-     f72:	4f1c                	lw	a5,24(a4)
-     f74:	8d5d                	or	a0,a0,a5
-     f76:	cf08                	sw	a0,24(a4)
-     f78:	8082                	ret
-     f7a:	400217b7          	lui	a5,0x40021
-     f7e:	4f98                	lw	a4,24(a5)
-     f80:	fff54513          	not	a0,a0
-     f84:	8d79                	and	a0,a0,a4
-     f86:	cf88                	sw	a0,24(a5)
-     f88:	8082                	ret
-
-00000f8a <RCC_APB1PeriphClockCmd>:
-     f8a:	c599                	beqz	a1,f98 <RCC_APB1PeriphClockCmd+0xe>
-     f8c:	40021737          	lui	a4,0x40021
-     f90:	4f5c                	lw	a5,28(a4)
-     f92:	8d5d                	or	a0,a0,a5
-     f94:	cf48                	sw	a0,28(a4)
-     f96:	8082                	ret
-     f98:	400217b7          	lui	a5,0x40021
-     f9c:	4fd8                	lw	a4,28(a5)
-     f9e:	fff54513          	not	a0,a0
-     fa2:	8d79                	and	a0,a0,a4
-     fa4:	cfc8                	sw	a0,28(a5)
-     fa6:	8082                	ret
-
-00000fa8 <RCC_APB2PeriphResetCmd>:
-     fa8:	c599                	beqz	a1,fb6 <RCC_APB2PeriphResetCmd+0xe>
-     faa:	40021737          	lui	a4,0x40021
-     fae:	475c                	lw	a5,12(a4)
-     fb0:	8d5d                	or	a0,a0,a5
-     fb2:	c748                	sw	a0,12(a4)
-     fb4:	8082                	ret
-     fb6:	400217b7          	lui	a5,0x40021
-     fba:	47d8                	lw	a4,12(a5)
-     fbc:	fff54513          	not	a0,a0
-     fc0:	8d79                	and	a0,a0,a4
-     fc2:	c7c8                	sw	a0,12(a5)
-     fc4:	8082                	ret
-
-00000fc6 <TIM_TimeBaseInit>:
-     fc6:	211e                	lhu	a5,0(a0)
-     fc8:	40013737          	lui	a4,0x40013
-     fcc:	c0070713          	addi	a4,a4,-1024 # 40012c00 <__global_pointer$+0x200123c0>
-     fd0:	07c2                	slli	a5,a5,0x10
-     fd2:	83c1                	srli	a5,a5,0x10
-     fd4:	00e50663          	beq	a0,a4,fe0 <TIM_TimeBaseInit+0x1a>
-     fd8:	40000737          	lui	a4,0x40000
-     fdc:	00e51663          	bne	a0,a4,fe8 <TIM_TimeBaseInit+0x22>
-     fe0:	21ba                	lhu	a4,2(a1)
-     fe2:	f8f7f793          	andi	a5,a5,-113
-     fe6:	8fd9                	or	a5,a5,a4
-     fe8:	21fa                	lhu	a4,6(a1)
-     fea:	cff7f793          	andi	a5,a5,-769
-     fee:	07c2                	slli	a5,a5,0x10
-     ff0:	83c1                	srli	a5,a5,0x10
-     ff2:	8fd9                	or	a5,a5,a4
-     ff4:	a11e                	sh	a5,0(a0)
-     ff6:	21de                	lhu	a5,4(a1)
-     ff8:	b55e                	sh	a5,44(a0)
-     ffa:	219e                	lhu	a5,0(a1)
-     ffc:	b51e                	sh	a5,40(a0)
-     ffe:	400137b7          	lui	a5,0x40013
-    1002:	c0078793          	addi	a5,a5,-1024 # 40012c00 <__global_pointer$+0x200123c0>
-    1006:	00f51463          	bne	a0,a5,100e <TIM_TimeBaseInit+0x48>
-    100a:	259c                	lbu	a5,8(a1)
-    100c:	b91e                	sh	a5,48(a0)
-    100e:	4785                	li	a5,1
-    1010:	a95e                	sh	a5,20(a0)
-    1012:	8082                	ret
-
-00001014 <TIM_OC2Init>:
-    1014:	311e                	lhu	a5,32(a0)
-    1016:	7765                	lui	a4,0xffff9
-    1018:	cff70713          	addi	a4,a4,-769 # ffff8cff <__global_pointer$+0xdfff84bf>
-    101c:	07c2                	slli	a5,a5,0x10
-    101e:	83c1                	srli	a5,a5,0x10
-    1020:	9bbd                	andi	a5,a5,-17
-    1022:	07c2                	slli	a5,a5,0x10
-    1024:	83c1                	srli	a5,a5,0x10
-    1026:	b11e                	sh	a5,32(a0)
-    1028:	311e                	lhu	a5,32(a0)
-    102a:	2156                	lhu	a3,4(a0)
-    102c:	0085d303          	lhu	t1,8(a1)
-    1030:	07c2                	slli	a5,a5,0x10
-    1032:	01069613          	slli	a2,a3,0x10
-    1036:	2d16                	lhu	a3,24(a0)
-    1038:	83c1                	srli	a5,a5,0x10
-    103a:	fdf7f793          	andi	a5,a5,-33
-    103e:	8f75                	and	a4,a4,a3
-    1040:	2196                	lhu	a3,0(a1)
-    1042:	8241                	srli	a2,a2,0x10
-    1044:	06a2                	slli	a3,a3,0x8
-    1046:	8f55                	or	a4,a4,a3
-    1048:	21b6                	lhu	a3,2(a1)
-    104a:	0742                	slli	a4,a4,0x10
-    104c:	8341                	srli	a4,a4,0x10
-    104e:	0066e6b3          	or	a3,a3,t1
-    1052:	0692                	slli	a3,a3,0x4
-    1054:	8fd5                	or	a5,a5,a3
-    1056:	400136b7          	lui	a3,0x40013
-    105a:	07c2                	slli	a5,a5,0x10
-    105c:	c0068693          	addi	a3,a3,-1024 # 40012c00 <__global_pointer$+0x200123c0>
-    1060:	83c1                	srli	a5,a5,0x10
-    1062:	02d51e63          	bne	a0,a3,109e <TIM_OC2Init+0x8a>
-    1066:	25b6                	lhu	a3,10(a1)
-    1068:	f7f7f793          	andi	a5,a5,-129
-    106c:	00c5d303          	lhu	t1,12(a1)
-    1070:	0692                	slli	a3,a3,0x4
-    1072:	8fd5                	or	a5,a5,a3
-    1074:	21d6                	lhu	a3,4(a1)
-    1076:	07c2                	slli	a5,a5,0x10
-    1078:	83c1                	srli	a5,a5,0x10
-    107a:	0692                	slli	a3,a3,0x4
-    107c:	fbf7f793          	andi	a5,a5,-65
-    1080:	8fd5                	or	a5,a5,a3
-    1082:	76fd                	lui	a3,0xfffff
-    1084:	3ff68693          	addi	a3,a3,1023 # fffff3ff <__global_pointer$+0xdfffebbf>
-    1088:	8ef1                	and	a3,a3,a2
-    108a:	25f2                	lhu	a2,14(a1)
-    108c:	07c2                	slli	a5,a5,0x10
-    108e:	83c1                	srli	a5,a5,0x10
-    1090:	00666633          	or	a2,a2,t1
-    1094:	060a                	slli	a2,a2,0x2
-    1096:	8ed1                	or	a3,a3,a2
-    1098:	01069613          	slli	a2,a3,0x10
-    109c:	8241                	srli	a2,a2,0x10
-    109e:	a152                	sh	a2,4(a0)
-    10a0:	ad1a                	sh	a4,24(a0)
-    10a2:	21fa                	lhu	a4,6(a1)
-    10a4:	dd18                	sw	a4,56(a0)
-    10a6:	b11e                	sh	a5,32(a0)
-    10a8:	8082                	ret
-
-000010aa <TIM_Cmd>:
-    10aa:	211e                	lhu	a5,0(a0)
-    10ac:	c589                	beqz	a1,10b6 <TIM_Cmd+0xc>
-    10ae:	0017e793          	ori	a5,a5,1
-    10b2:	a11e                	sh	a5,0(a0)
-    10b4:	8082                	ret
-    10b6:	07c2                	slli	a5,a5,0x10
-    10b8:	83c1                	srli	a5,a5,0x10
-    10ba:	9bf9                	andi	a5,a5,-2
-    10bc:	07c2                	slli	a5,a5,0x10
-    10be:	83c1                	srli	a5,a5,0x10
-    10c0:	bfcd                	j	10b2 <TIM_Cmd+0x8>
-
-000010c2 <TIM_CtrlPWMOutputs>:
-    10c2:	04455783          	lhu	a5,68(a0)
-    10c6:	c591                	beqz	a1,10d2 <TIM_CtrlPWMOutputs+0x10>
-    10c8:	6721                	lui	a4,0x8
+00001082 <ADC_Init>:
+    1082:	415c                	lw	a5,4(a0)
+    1084:	fff10737          	lui	a4,0xfff10
+    1088:	eff70713          	addi	a4,a4,-257 # fff0feff <__global_pointer$+0xdff0f6bf>
+    108c:	8f7d                	and	a4,a4,a5
+    108e:	41dc                	lw	a5,4(a1)
+    1090:	4194                	lw	a3,0(a1)
+    1092:	07a2                	slli	a5,a5,0x8
+    1094:	8fd5                	or	a5,a5,a3
+    1096:	8fd9                	or	a5,a5,a4
+    1098:	c15c                	sw	a5,4(a0)
+    109a:	451c                	lw	a5,8(a0)
+    109c:	fff1f737          	lui	a4,0xfff1f
+    10a0:	7fd70713          	addi	a4,a4,2045 # fff1f7fd <__global_pointer$+0xdff1efbd>
+    10a4:	45d4                	lw	a3,12(a1)
+    10a6:	8f7d                	and	a4,a4,a5
+    10a8:	499c                	lw	a5,16(a1)
+    10aa:	8fd5                	or	a5,a5,a3
+    10ac:	4594                	lw	a3,8(a1)
+    10ae:	0686                	slli	a3,a3,0x1
+    10b0:	8fd5                	or	a5,a5,a3
+    10b2:	8fd9                	or	a5,a5,a4
+    10b4:	c51c                	sw	a5,8(a0)
+    10b6:	555c                	lw	a5,44(a0)
+    10b8:	ff100737          	lui	a4,0xff100
+    10bc:	177d                	addi	a4,a4,-1
+    10be:	8f7d                	and	a4,a4,a5
+    10c0:	29dc                	lbu	a5,20(a1)
+    10c2:	17fd                	addi	a5,a5,-1
+    10c4:	0ff7f793          	andi	a5,a5,255
+    10c8:	07d2                	slli	a5,a5,0x14
     10ca:	8fd9                	or	a5,a5,a4
-    10cc:	04f51223          	sh	a5,68(a0)
-    10d0:	8082                	ret
-    10d2:	07c6                	slli	a5,a5,0x11
-    10d4:	83c5                	srli	a5,a5,0x11
-    10d6:	bfdd                	j	10cc <TIM_CtrlPWMOutputs+0xa>
+    10cc:	d55c                	sw	a5,44(a0)
+    10ce:	8082                	ret
 
-000010d8 <TIM_ARRPreloadConfig>:
-    10d8:	211e                	lhu	a5,0(a0)
-    10da:	c589                	beqz	a1,10e4 <TIM_ARRPreloadConfig+0xc>
-    10dc:	0807e793          	ori	a5,a5,128
-    10e0:	a11e                	sh	a5,0(a0)
-    10e2:	8082                	ret
-    10e4:	07c2                	slli	a5,a5,0x10
-    10e6:	83c1                	srli	a5,a5,0x10
-    10e8:	f7f7f793          	andi	a5,a5,-129
-    10ec:	07c2                	slli	a5,a5,0x10
-    10ee:	83c1                	srli	a5,a5,0x10
-    10f0:	bfc5                	j	10e0 <TIM_ARRPreloadConfig+0x8>
+000010d0 <ADC_Cmd>:
+    10d0:	451c                	lw	a5,8(a0)
+    10d2:	c589                	beqz	a1,10dc <ADC_Cmd+0xc>
+    10d4:	0017e793          	ori	a5,a5,1
+    10d8:	c51c                	sw	a5,8(a0)
+    10da:	8082                	ret
+    10dc:	9bf9                	andi	a5,a5,-2
+    10de:	bfed                	j	10d8 <ADC_Cmd+0x8>
 
-000010f2 <TIM_OC2PreloadConfig>:
-    10f2:	2d1a                	lhu	a4,24(a0)
-    10f4:	77fd                	lui	a5,0xfffff
-    10f6:	7ff78793          	addi	a5,a5,2047 # fffff7ff <__global_pointer$+0xdfffefbf>
-    10fa:	8ff9                	and	a5,a5,a4
-    10fc:	05a2                	slli	a1,a1,0x8
-    10fe:	8fcd                	or	a5,a5,a1
-    1100:	07c2                	slli	a5,a5,0x10
-    1102:	83c1                	srli	a5,a5,0x10
-    1104:	ad1e                	sh	a5,24(a0)
-    1106:	8082                	ret
+000010e0 <ADC_DMACmd>:
+    10e0:	451c                	lw	a5,8(a0)
+    10e2:	c589                	beqz	a1,10ec <ADC_DMACmd+0xc>
+    10e4:	1007e793          	ori	a5,a5,256
+    10e8:	c51c                	sw	a5,8(a0)
+    10ea:	8082                	ret
+    10ec:	eff7f793          	andi	a5,a5,-257
+    10f0:	bfe5                	j	10e8 <ADC_DMACmd+0x8>
 
-00001108 <USART_Init>:
-    1108:	f99fe2ef          	jal	t0,a0 <__riscv_save_0>
-    110c:	2916                	lhu	a3,16(a0)
-    110e:	77f5                	lui	a5,0xffffd
-    1110:	17fd                	addi	a5,a5,-1
-    1112:	8ff5                	and	a5,a5,a3
-    1114:	21f6                	lhu	a3,6(a1)
-    1116:	25da                	lhu	a4,12(a1)
-    1118:	1121                	addi	sp,sp,-24
-    111a:	8fd5                	or	a5,a5,a3
-    111c:	a91e                	sh	a5,16(a0)
-    111e:	2556                	lhu	a3,12(a0)
-    1120:	77fd                	lui	a5,0xfffff
-    1122:	9f378793          	addi	a5,a5,-1549 # ffffe9f3 <__global_pointer$+0xdfffe1b3>
-    1126:	8ff5                	and	a5,a5,a3
-    1128:	21d6                	lhu	a3,4(a1)
-    112a:	842a                	mv	s0,a0
-    112c:	c02e                	sw	a1,0(sp)
-    112e:	8fd5                	or	a5,a5,a3
-    1130:	2596                	lhu	a3,8(a1)
-    1132:	8fd5                	or	a5,a5,a3
-    1134:	25b6                	lhu	a3,10(a1)
-    1136:	8fd5                	or	a5,a5,a3
-    1138:	a55e                	sh	a5,12(a0)
-    113a:	295e                	lhu	a5,20(a0)
-    113c:	07c2                	slli	a5,a5,0x10
-    113e:	83c1                	srli	a5,a5,0x10
-    1140:	cff7f793          	andi	a5,a5,-769
-    1144:	8f5d                	or	a4,a4,a5
-    1146:	a95a                	sh	a4,20(a0)
-    1148:	0048                	addi	a0,sp,4
-    114a:	3341                	jal	eca <RCC_GetClocksFreq>
-    114c:	400147b7          	lui	a5,0x40014
-    1150:	80078793          	addi	a5,a5,-2048 # 40013800 <__global_pointer$+0x20012fc0>
-    1154:	4582                	lw	a1,0(sp)
-    1156:	06f41263          	bne	s0,a5,11ba <USART_Init+0xb2>
-    115a:	47c2                	lw	a5,16(sp)
-    115c:	245a                	lhu	a4,12(s0)
-    115e:	00179513          	slli	a0,a5,0x1
-    1162:	953e                	add	a0,a0,a5
-    1164:	0742                	slli	a4,a4,0x10
-    1166:	050e                	slli	a0,a0,0x3
-    1168:	8741                	srai	a4,a4,0x10
-    116a:	953e                	add	a0,a0,a5
-    116c:	418c                	lw	a1,0(a1)
-    116e:	04075863          	bgez	a4,11be <USART_Init+0xb6>
-    1172:	0586                	slli	a1,a1,0x1
-    1174:	f61fe0ef          	jal	ra,d4 <__udivsi3>
-    1178:	06400593          	li	a1,100
-    117c:	c02a                	sw	a0,0(sp)
-    117e:	f57fe0ef          	jal	ra,d4 <__udivsi3>
-    1182:	4782                	lw	a5,0(sp)
-    1184:	00451493          	slli	s1,a0,0x4
-    1188:	06400593          	li	a1,100
-    118c:	853e                	mv	a0,a5
-    118e:	f73fe0ef          	jal	ra,100 <__umodsi3>
-    1192:	245e                	lhu	a5,12(s0)
-    1194:	07c2                	slli	a5,a5,0x10
-    1196:	87c1                	srai	a5,a5,0x10
-    1198:	0207d563          	bgez	a5,11c2 <USART_Init+0xba>
-    119c:	050e                	slli	a0,a0,0x3
-    119e:	06400593          	li	a1,100
-    11a2:	03250513          	addi	a0,a0,50
-    11a6:	f2ffe0ef          	jal	ra,d4 <__udivsi3>
-    11aa:	891d                	andi	a0,a0,7
-    11ac:	8cc9                	or	s1,s1,a0
-    11ae:	04c2                	slli	s1,s1,0x10
-    11b0:	80c1                	srli	s1,s1,0x10
-    11b2:	a406                	sh	s1,8(s0)
-    11b4:	0161                	addi	sp,sp,24
-    11b6:	ef5fe06f          	j	aa <__riscv_restore_0>
-    11ba:	47b2                	lw	a5,12(sp)
-    11bc:	b745                	j	115c <USART_Init+0x54>
-    11be:	058a                	slli	a1,a1,0x2
-    11c0:	bf55                	j	1174 <USART_Init+0x6c>
-    11c2:	0512                	slli	a0,a0,0x4
-    11c4:	06400593          	li	a1,100
-    11c8:	03250513          	addi	a0,a0,50
-    11cc:	f09fe0ef          	jal	ra,d4 <__udivsi3>
-    11d0:	893d                	andi	a0,a0,15
-    11d2:	bfe9                	j	11ac <USART_Init+0xa4>
+000010f2 <ADC_ResetCalibration>:
+    10f2:	451c                	lw	a5,8(a0)
+    10f4:	0087e793          	ori	a5,a5,8
+    10f8:	c51c                	sw	a5,8(a0)
+    10fa:	8082                	ret
 
-000011d4 <USART_Cmd>:
-    11d4:	c591                	beqz	a1,11e0 <USART_Cmd+0xc>
-    11d6:	255e                	lhu	a5,12(a0)
-    11d8:	6709                	lui	a4,0x2
-    11da:	8fd9                	or	a5,a5,a4
-    11dc:	a55e                	sh	a5,12(a0)
-    11de:	8082                	ret
-    11e0:	255a                	lhu	a4,12(a0)
-    11e2:	77f9                	lui	a5,0xffffe
-    11e4:	17fd                	addi	a5,a5,-1
-    11e6:	8ff9                	and	a5,a5,a4
-    11e8:	bfd5                	j	11dc <USART_Cmd+0x8>
+000010fc <ADC_GetResetCalibrationStatus>:
+    10fc:	4508                	lw	a0,8(a0)
+    10fe:	810d                	srli	a0,a0,0x3
+    1100:	8905                	andi	a0,a0,1
+    1102:	8082                	ret
 
-000011ea <USART_Printf_Init>:
-    11ea:	eb7fe2ef          	jal	t0,a0 <__riscv_save_0>
-    11ee:	842a                	mv	s0,a0
-    11f0:	6511                	lui	a0,0x4
-    11f2:	1111                	addi	sp,sp,-28
-    11f4:	4585                	li	a1,1
-    11f6:	02050513          	addi	a0,a0,32 # 4020 <_data_lma+0x2db4>
-    11fa:	3b8d                	jal	f6c <RCC_APB2PeriphClockCmd>
-    11fc:	02000793          	li	a5,32
-    1200:	807c                	sh	a5,0(sp)
-    1202:	40011537          	lui	a0,0x40011
-    1206:	478d                	li	a5,3
-    1208:	c23e                	sw	a5,4(sp)
-    120a:	858a                	mv	a1,sp
-    120c:	47e1                	li	a5,24
-    120e:	40050513          	addi	a0,a0,1024 # 40011400 <__global_pointer$+0x20010bc0>
-    1212:	c43e                	sw	a5,8(sp)
-    1214:	3eed                	jal	e0e <GPIO_Init>
-    1216:	c622                	sw	s0,12(sp)
-    1218:	40014437          	lui	s0,0x40014
-    121c:	000807b7          	lui	a5,0x80
-    1220:	006c                	addi	a1,sp,12
-    1222:	80040513          	addi	a0,s0,-2048 # 40013800 <__global_pointer$+0x20012fc0>
-    1226:	ca3e                	sw	a5,20(sp)
-    1228:	c802                	sw	zero,16(sp)
-    122a:	00011c23          	sh	zero,24(sp)
-    122e:	3de9                	jal	1108 <USART_Init>
-    1230:	4585                	li	a1,1
-    1232:	80040513          	addi	a0,s0,-2048
-    1236:	3f79                	jal	11d4 <USART_Cmd>
-    1238:	0171                	addi	sp,sp,28
-    123a:	e71fe06f          	j	aa <__riscv_restore_0>
+00001104 <ADC_StartCalibration>:
+    1104:	451c                	lw	a5,8(a0)
+    1106:	0047e793          	ori	a5,a5,4
+    110a:	c51c                	sw	a5,8(a0)
+    110c:	8082                	ret
+
+0000110e <ADC_GetCalibrationStatus>:
+    110e:	4508                	lw	a0,8(a0)
+    1110:	8109                	srli	a0,a0,0x2
+    1112:	8905                	andi	a0,a0,1
+    1114:	8082                	ret
+
+00001116 <ADC_SoftwareStartConvCmd>:
+    1116:	451c                	lw	a5,8(a0)
+    1118:	c591                	beqz	a1,1124 <ADC_SoftwareStartConvCmd+0xe>
+    111a:	00500737          	lui	a4,0x500
+    111e:	8fd9                	or	a5,a5,a4
+    1120:	c51c                	sw	a5,8(a0)
+    1122:	8082                	ret
+    1124:	ffb00737          	lui	a4,0xffb00
+    1128:	177d                	addi	a4,a4,-1
+    112a:	8ff9                	and	a5,a5,a4
+    112c:	bfd5                	j	1120 <ADC_SoftwareStartConvCmd+0xa>
+
+0000112e <ADC_RegularChannelConfig>:
+    112e:	47a5                	li	a5,9
+    1130:	04b7f863          	bgeu	a5,a1,1180 <ADC_RegularChannelConfig+0x52>
+    1134:	ff658713          	addi	a4,a1,-10
+    1138:	00171793          	slli	a5,a4,0x1
+    113c:	00c52283          	lw	t0,12(a0)
+    1140:	97ba                	add	a5,a5,a4
+    1142:	431d                	li	t1,7
+    1144:	00f31333          	sll	t1,t1,a5
+    1148:	fff34313          	not	t1,t1
+    114c:	00537333          	and	t1,t1,t0
+    1150:	00f697b3          	sll	a5,a3,a5
+    1154:	0067e7b3          	or	a5,a5,t1
+    1158:	c55c                	sw	a5,12(a0)
+    115a:	4799                	li	a5,6
+    115c:	04c7e363          	bltu	a5,a2,11a2 <ADC_RegularChannelConfig+0x74>
+    1160:	167d                	addi	a2,a2,-1
+    1162:	00261793          	slli	a5,a2,0x2
+    1166:	963e                	add	a2,a2,a5
+    1168:	5958                	lw	a4,52(a0)
+    116a:	47fd                	li	a5,31
+    116c:	00c797b3          	sll	a5,a5,a2
+    1170:	fff7c793          	not	a5,a5
+    1174:	8ff9                	and	a5,a5,a4
+    1176:	00c595b3          	sll	a1,a1,a2
+    117a:	8ddd                	or	a1,a1,a5
+    117c:	d94c                	sw	a1,52(a0)
+    117e:	8082                	ret
+    1180:	00159793          	slli	a5,a1,0x1
+    1184:	01052303          	lw	t1,16(a0)
+    1188:	97ae                	add	a5,a5,a1
+    118a:	471d                	li	a4,7
+    118c:	00f71733          	sll	a4,a4,a5
+    1190:	fff74713          	not	a4,a4
+    1194:	00677733          	and	a4,a4,t1
+    1198:	00f697b3          	sll	a5,a3,a5
+    119c:	8f5d                	or	a4,a4,a5
+    119e:	c918                	sw	a4,16(a0)
+    11a0:	bf6d                	j	115a <ADC_RegularChannelConfig+0x2c>
+    11a2:	47b1                	li	a5,12
+    11a4:	02c7e263          	bltu	a5,a2,11c8 <ADC_RegularChannelConfig+0x9a>
+    11a8:	1665                	addi	a2,a2,-7
+    11aa:	00261793          	slli	a5,a2,0x2
+    11ae:	963e                	add	a2,a2,a5
+    11b0:	5918                	lw	a4,48(a0)
+    11b2:	47fd                	li	a5,31
+    11b4:	00c797b3          	sll	a5,a5,a2
+    11b8:	fff7c793          	not	a5,a5
+    11bc:	8ff9                	and	a5,a5,a4
+    11be:	00c595b3          	sll	a1,a1,a2
+    11c2:	8ddd                	or	a1,a1,a5
+    11c4:	d90c                	sw	a1,48(a0)
+    11c6:	8082                	ret
+    11c8:	164d                	addi	a2,a2,-13
+    11ca:	00261713          	slli	a4,a2,0x2
+    11ce:	5554                	lw	a3,44(a0)
+    11d0:	963a                	add	a2,a2,a4
+    11d2:	47fd                	li	a5,31
+    11d4:	00c797b3          	sll	a5,a5,a2
+    11d8:	fff7c793          	not	a5,a5
+    11dc:	8ff5                	and	a5,a5,a3
+    11de:	00c595b3          	sll	a1,a1,a2
+    11e2:	8ddd                	or	a1,a1,a5
+    11e4:	d54c                	sw	a1,44(a0)
+    11e6:	8082                	ret
+
+000011e8 <DMA_Cmd>:
+    11e8:	411c                	lw	a5,0(a0)
+    11ea:	c589                	beqz	a1,11f4 <DMA_Cmd+0xc>
+    11ec:	0017e793          	ori	a5,a5,1
+    11f0:	c11c                	sw	a5,0(a0)
+    11f2:	8082                	ret
+    11f4:	6741                	lui	a4,0x10
+    11f6:	1779                	addi	a4,a4,-2
+    11f8:	8ff9                	and	a5,a5,a4
+    11fa:	bfdd                	j	11f0 <DMA_Cmd+0x8>
+
+000011fc <DMA_GetFlagStatus>:
+    11fc:	400207b7          	lui	a5,0x40020
+    1200:	439c                	lw	a5,0(a5)
+    1202:	8d7d                	and	a0,a0,a5
+    1204:	00a03533          	snez	a0,a0
+    1208:	8082                	ret
+
+0000120a <DMA_ClearFlag>:
+    120a:	400207b7          	lui	a5,0x40020
+    120e:	c3c8                	sw	a0,4(a5)
+    1210:	8082                	ret
+
+00001212 <GPIO_Init>:
+    1212:	4594                	lw	a3,8(a1)
+    1214:	0106f793          	andi	a5,a3,16
+    1218:	00f6f293          	andi	t0,a3,15
+    121c:	c781                	beqz	a5,1224 <GPIO_Init+0x12>
+    121e:	41dc                	lw	a5,4(a1)
+    1220:	00f2e2b3          	or	t0,t0,a5
+    1224:	0005d383          	lhu	t2,0(a1)
+    1228:	0ff3f793          	andi	a5,t2,255
+    122c:	c3a5                	beqz	a5,128c <GPIO_Init+0x7a>
+    122e:	00052303          	lw	t1,0(a0)
+    1232:	1161                	addi	sp,sp,-8
+    1234:	c222                	sw	s0,4(sp)
+    1236:	c026                	sw	s1,0(sp)
+    1238:	4781                	li	a5,0
+    123a:	02800413          	li	s0,40
+    123e:	04800493          	li	s1,72
+    1242:	4705                	li	a4,1
+    1244:	00f71633          	sll	a2,a4,a5
+    1248:	00c3f733          	and	a4,t2,a2
+    124c:	02e61263          	bne	a2,a4,1270 <GPIO_Init+0x5e>
+    1250:	00279593          	slli	a1,a5,0x2
+    1254:	473d                	li	a4,15
+    1256:	00b71733          	sll	a4,a4,a1
+    125a:	fff74713          	not	a4,a4
+    125e:	00677333          	and	t1,a4,t1
+    1262:	00b295b3          	sll	a1,t0,a1
+    1266:	0065e333          	or	t1,a1,t1
+    126a:	00869d63          	bne	a3,s0,1284 <GPIO_Init+0x72>
+    126e:	c950                	sw	a2,20(a0)
+    1270:	0785                	addi	a5,a5,1
+    1272:	4721                	li	a4,8
+    1274:	fce797e3          	bne	a5,a4,1242 <GPIO_Init+0x30>
+    1278:	4412                	lw	s0,4(sp)
+    127a:	00652023          	sw	t1,0(a0)
+    127e:	4482                	lw	s1,0(sp)
+    1280:	0121                	addi	sp,sp,8
+    1282:	8082                	ret
+    1284:	fe9696e3          	bne	a3,s1,1270 <GPIO_Init+0x5e>
+    1288:	c910                	sw	a2,16(a0)
+    128a:	b7dd                	j	1270 <GPIO_Init+0x5e>
+    128c:	8082                	ret
+
+0000128e <GPIO_ReadInputDataBit>:
+    128e:	4508                	lw	a0,8(a0)
+    1290:	8d6d                	and	a0,a0,a1
+    1292:	00a03533          	snez	a0,a0
+    1296:	8082                	ret
+
+00001298 <GPIO_WriteBit>:
+    1298:	c219                	beqz	a2,129e <GPIO_WriteBit+0x6>
+    129a:	c90c                	sw	a1,16(a0)
+    129c:	8082                	ret
+    129e:	c94c                	sw	a1,20(a0)
+    12a0:	8082                	ret
+
+000012a2 <NVIC_PriorityGroupConfig>:
+    12a2:	92a1ae23          	sw	a0,-1732(gp) # 2000017c <NVIC_Priority_Group>
+    12a6:	8082                	ret
+
+000012a8 <RCC_AdjustHSICalibrationValue>:
+    12a8:	40021737          	lui	a4,0x40021
+    12ac:	431c                	lw	a5,0(a4)
+    12ae:	050e                	slli	a0,a0,0x3
+    12b0:	f077f793          	andi	a5,a5,-249
+    12b4:	8d5d                	or	a0,a0,a5
+    12b6:	c308                	sw	a0,0(a4)
+    12b8:	8082                	ret
+
+000012ba <RCC_ADCCLKConfig>:
+    12ba:	400216b7          	lui	a3,0x40021
+    12be:	42dc                	lw	a5,4(a3)
+    12c0:	7741                	lui	a4,0xffff0
+    12c2:	7ff70713          	addi	a4,a4,2047 # ffff07ff <__global_pointer$+0xdffeffbf>
+    12c6:	8ff9                	and	a5,a5,a4
+    12c8:	8d5d                	or	a0,a0,a5
+    12ca:	c2c8                	sw	a0,4(a3)
+    12cc:	8082                	ret
+
+000012ce <RCC_GetClocksFreq>:
+    12ce:	dd3fe2ef          	jal	t0,a0 <__riscv_save_0>
+    12d2:	40021737          	lui	a4,0x40021
+    12d6:	435c                	lw	a5,4(a4)
+    12d8:	4691                	li	a3,4
+    12da:	842a                	mv	s0,a0
+    12dc:	8bb1                	andi	a5,a5,12
+    12de:	00d78563          	beq	a5,a3,12e8 <RCC_GetClocksFreq+0x1a>
+    12e2:	46a1                	li	a3,8
+    12e4:	08d78063          	beq	a5,a3,1364 <RCC_GetClocksFreq+0x96>
+    12e8:	016e37b7          	lui	a5,0x16e3
+    12ec:	60078793          	addi	a5,a5,1536 # 16e3600 <_data_lma+0x16e1eac>
+    12f0:	c01c                	sw	a5,0(s0)
+    12f2:	400216b7          	lui	a3,0x40021
+    12f6:	42dc                	lw	a5,4(a3)
+    12f8:	8391                	srli	a5,a5,0x4
+    12fa:	00f7f713          	andi	a4,a5,15
+    12fe:	200007b7          	lui	a5,0x20000
+    1302:	03078793          	addi	a5,a5,48 # 20000030 <APBAHBPrescTable>
+    1306:	97ba                	add	a5,a5,a4
+    1308:	238c                	lbu	a1,0(a5)
+    130a:	42dc                	lw	a5,4(a3)
+    130c:	4018                	lw	a4,0(s0)
+    130e:	0ff5f593          	andi	a1,a1,255
+    1312:	0807f793          	andi	a5,a5,128
+    1316:	00b75533          	srl	a0,a4,a1
+    131a:	e781                	bnez	a5,1322 <RCC_GetClocksFreq+0x54>
+    131c:	853a                	mv	a0,a4
+    131e:	db7fe0ef          	jal	ra,d4 <__udivsi3>
+    1322:	c048                	sw	a0,4(s0)
+    1324:	c408                	sw	a0,8(s0)
+    1326:	c448                	sw	a0,12(s0)
+    1328:	400217b7          	lui	a5,0x40021
+    132c:	43dc                	lw	a5,4(a5)
+    132e:	468d                	li	a3,3
+    1330:	83ad                	srli	a5,a5,0xb
+    1332:	8bfd                	andi	a5,a5,31
+    1334:	0037d713          	srli	a4,a5,0x3
+    1338:	078a                	slli	a5,a5,0x2
+    133a:	8bf1                	andi	a5,a5,28
+    133c:	8fd9                	or	a5,a5,a4
+    133e:	0137f613          	andi	a2,a5,19
+    1342:	0037f713          	andi	a4,a5,3
+    1346:	00c6f463          	bgeu	a3,a2,134e <RCC_GetClocksFreq+0x80>
+    134a:	ff478713          	addi	a4,a5,-12 # 40020ff4 <__global_pointer$+0x200207b4>
+    134e:	200007b7          	lui	a5,0x20000
+    1352:	01c78793          	addi	a5,a5,28 # 2000001c <ADCPrescTable>
+    1356:	97ba                	add	a5,a5,a4
+    1358:	238c                	lbu	a1,0(a5)
+    135a:	d7bfe0ef          	jal	ra,d4 <__udivsi3>
+    135e:	c808                	sw	a0,16(s0)
+    1360:	d4bfe06f          	j	aa <__riscv_restore_0>
+    1364:	435c                	lw	a5,4(a4)
+    1366:	02dc77b7          	lui	a5,0x2dc7
+    136a:	c0078793          	addi	a5,a5,-1024 # 2dc6c00 <_data_lma+0x2dc54ac>
+    136e:	b749                	j	12f0 <RCC_GetClocksFreq+0x22>
+
+00001370 <RCC_APB2PeriphClockCmd>:
+    1370:	c599                	beqz	a1,137e <RCC_APB2PeriphClockCmd+0xe>
+    1372:	40021737          	lui	a4,0x40021
+    1376:	4f1c                	lw	a5,24(a4)
+    1378:	8d5d                	or	a0,a0,a5
+    137a:	cf08                	sw	a0,24(a4)
+    137c:	8082                	ret
+    137e:	400217b7          	lui	a5,0x40021
+    1382:	4f98                	lw	a4,24(a5)
+    1384:	fff54513          	not	a0,a0
+    1388:	8d79                	and	a0,a0,a4
+    138a:	cf88                	sw	a0,24(a5)
+    138c:	8082                	ret
+
+0000138e <RCC_APB1PeriphClockCmd>:
+    138e:	c599                	beqz	a1,139c <RCC_APB1PeriphClockCmd+0xe>
+    1390:	40021737          	lui	a4,0x40021
+    1394:	4f5c                	lw	a5,28(a4)
+    1396:	8d5d                	or	a0,a0,a5
+    1398:	cf48                	sw	a0,28(a4)
+    139a:	8082                	ret
+    139c:	400217b7          	lui	a5,0x40021
+    13a0:	4fd8                	lw	a4,28(a5)
+    13a2:	fff54513          	not	a0,a0
+    13a6:	8d79                	and	a0,a0,a4
+    13a8:	cfc8                	sw	a0,28(a5)
+    13aa:	8082                	ret
+
+000013ac <RCC_APB2PeriphResetCmd>:
+    13ac:	c599                	beqz	a1,13ba <RCC_APB2PeriphResetCmd+0xe>
+    13ae:	40021737          	lui	a4,0x40021
+    13b2:	475c                	lw	a5,12(a4)
+    13b4:	8d5d                	or	a0,a0,a5
+    13b6:	c748                	sw	a0,12(a4)
+    13b8:	8082                	ret
+    13ba:	400217b7          	lui	a5,0x40021
+    13be:	47d8                	lw	a4,12(a5)
+    13c0:	fff54513          	not	a0,a0
+    13c4:	8d79                	and	a0,a0,a4
+    13c6:	c7c8                	sw	a0,12(a5)
+    13c8:	8082                	ret
+
+000013ca <TIM_TimeBaseInit>:
+    13ca:	211e                	lhu	a5,0(a0)
+    13cc:	40013737          	lui	a4,0x40013
+    13d0:	c0070713          	addi	a4,a4,-1024 # 40012c00 <__global_pointer$+0x200123c0>
+    13d4:	07c2                	slli	a5,a5,0x10
+    13d6:	83c1                	srli	a5,a5,0x10
+    13d8:	00e50663          	beq	a0,a4,13e4 <TIM_TimeBaseInit+0x1a>
+    13dc:	40000737          	lui	a4,0x40000
+    13e0:	00e51663          	bne	a0,a4,13ec <TIM_TimeBaseInit+0x22>
+    13e4:	21ba                	lhu	a4,2(a1)
+    13e6:	f8f7f793          	andi	a5,a5,-113
+    13ea:	8fd9                	or	a5,a5,a4
+    13ec:	21fa                	lhu	a4,6(a1)
+    13ee:	cff7f793          	andi	a5,a5,-769
+    13f2:	07c2                	slli	a5,a5,0x10
+    13f4:	83c1                	srli	a5,a5,0x10
+    13f6:	8fd9                	or	a5,a5,a4
+    13f8:	a11e                	sh	a5,0(a0)
+    13fa:	21de                	lhu	a5,4(a1)
+    13fc:	b55e                	sh	a5,44(a0)
+    13fe:	219e                	lhu	a5,0(a1)
+    1400:	b51e                	sh	a5,40(a0)
+    1402:	400137b7          	lui	a5,0x40013
+    1406:	c0078793          	addi	a5,a5,-1024 # 40012c00 <__global_pointer$+0x200123c0>
+    140a:	00f51463          	bne	a0,a5,1412 <TIM_TimeBaseInit+0x48>
+    140e:	259c                	lbu	a5,8(a1)
+    1410:	b91e                	sh	a5,48(a0)
+    1412:	4785                	li	a5,1
+    1414:	a95e                	sh	a5,20(a0)
+    1416:	8082                	ret
+
+00001418 <TIM_OC2Init>:
+    1418:	311e                	lhu	a5,32(a0)
+    141a:	7765                	lui	a4,0xffff9
+    141c:	cff70713          	addi	a4,a4,-769 # ffff8cff <__global_pointer$+0xdfff84bf>
+    1420:	07c2                	slli	a5,a5,0x10
+    1422:	83c1                	srli	a5,a5,0x10
+    1424:	9bbd                	andi	a5,a5,-17
+    1426:	07c2                	slli	a5,a5,0x10
+    1428:	83c1                	srli	a5,a5,0x10
+    142a:	b11e                	sh	a5,32(a0)
+    142c:	311e                	lhu	a5,32(a0)
+    142e:	2156                	lhu	a3,4(a0)
+    1430:	0085d303          	lhu	t1,8(a1)
+    1434:	07c2                	slli	a5,a5,0x10
+    1436:	01069613          	slli	a2,a3,0x10
+    143a:	2d16                	lhu	a3,24(a0)
+    143c:	83c1                	srli	a5,a5,0x10
+    143e:	fdf7f793          	andi	a5,a5,-33
+    1442:	8f75                	and	a4,a4,a3
+    1444:	2196                	lhu	a3,0(a1)
+    1446:	8241                	srli	a2,a2,0x10
+    1448:	06a2                	slli	a3,a3,0x8
+    144a:	8f55                	or	a4,a4,a3
+    144c:	21b6                	lhu	a3,2(a1)
+    144e:	0742                	slli	a4,a4,0x10
+    1450:	8341                	srli	a4,a4,0x10
+    1452:	0066e6b3          	or	a3,a3,t1
+    1456:	0692                	slli	a3,a3,0x4
+    1458:	8fd5                	or	a5,a5,a3
+    145a:	400136b7          	lui	a3,0x40013
+    145e:	07c2                	slli	a5,a5,0x10
+    1460:	c0068693          	addi	a3,a3,-1024 # 40012c00 <__global_pointer$+0x200123c0>
+    1464:	83c1                	srli	a5,a5,0x10
+    1466:	02d51e63          	bne	a0,a3,14a2 <TIM_OC2Init+0x8a>
+    146a:	25b6                	lhu	a3,10(a1)
+    146c:	f7f7f793          	andi	a5,a5,-129
+    1470:	00c5d303          	lhu	t1,12(a1)
+    1474:	0692                	slli	a3,a3,0x4
+    1476:	8fd5                	or	a5,a5,a3
+    1478:	21d6                	lhu	a3,4(a1)
+    147a:	07c2                	slli	a5,a5,0x10
+    147c:	83c1                	srli	a5,a5,0x10
+    147e:	0692                	slli	a3,a3,0x4
+    1480:	fbf7f793          	andi	a5,a5,-65
+    1484:	8fd5                	or	a5,a5,a3
+    1486:	76fd                	lui	a3,0xfffff
+    1488:	3ff68693          	addi	a3,a3,1023 # fffff3ff <__global_pointer$+0xdfffebbf>
+    148c:	8ef1                	and	a3,a3,a2
+    148e:	25f2                	lhu	a2,14(a1)
+    1490:	07c2                	slli	a5,a5,0x10
+    1492:	83c1                	srli	a5,a5,0x10
+    1494:	00666633          	or	a2,a2,t1
+    1498:	060a                	slli	a2,a2,0x2
+    149a:	8ed1                	or	a3,a3,a2
+    149c:	01069613          	slli	a2,a3,0x10
+    14a0:	8241                	srli	a2,a2,0x10
+    14a2:	a152                	sh	a2,4(a0)
+    14a4:	ad1a                	sh	a4,24(a0)
+    14a6:	21fa                	lhu	a4,6(a1)
+    14a8:	dd18                	sw	a4,56(a0)
+    14aa:	b11e                	sh	a5,32(a0)
+    14ac:	8082                	ret
+
+000014ae <TIM_Cmd>:
+    14ae:	211e                	lhu	a5,0(a0)
+    14b0:	c589                	beqz	a1,14ba <TIM_Cmd+0xc>
+    14b2:	0017e793          	ori	a5,a5,1
+    14b6:	a11e                	sh	a5,0(a0)
+    14b8:	8082                	ret
+    14ba:	07c2                	slli	a5,a5,0x10
+    14bc:	83c1                	srli	a5,a5,0x10
+    14be:	9bf9                	andi	a5,a5,-2
+    14c0:	07c2                	slli	a5,a5,0x10
+    14c2:	83c1                	srli	a5,a5,0x10
+    14c4:	bfcd                	j	14b6 <TIM_Cmd+0x8>
+
+000014c6 <TIM_CtrlPWMOutputs>:
+    14c6:	04455783          	lhu	a5,68(a0)
+    14ca:	c591                	beqz	a1,14d6 <TIM_CtrlPWMOutputs+0x10>
+    14cc:	6721                	lui	a4,0x8
+    14ce:	8fd9                	or	a5,a5,a4
+    14d0:	04f51223          	sh	a5,68(a0)
+    14d4:	8082                	ret
+    14d6:	07c6                	slli	a5,a5,0x11
+    14d8:	83c5                	srli	a5,a5,0x11
+    14da:	bfdd                	j	14d0 <TIM_CtrlPWMOutputs+0xa>
+
+000014dc <TIM_ARRPreloadConfig>:
+    14dc:	211e                	lhu	a5,0(a0)
+    14de:	c589                	beqz	a1,14e8 <TIM_ARRPreloadConfig+0xc>
+    14e0:	0807e793          	ori	a5,a5,128
+    14e4:	a11e                	sh	a5,0(a0)
+    14e6:	8082                	ret
+    14e8:	07c2                	slli	a5,a5,0x10
+    14ea:	83c1                	srli	a5,a5,0x10
+    14ec:	f7f7f793          	andi	a5,a5,-129
+    14f0:	07c2                	slli	a5,a5,0x10
+    14f2:	83c1                	srli	a5,a5,0x10
+    14f4:	bfc5                	j	14e4 <TIM_ARRPreloadConfig+0x8>
+
+000014f6 <TIM_OC2PreloadConfig>:
+    14f6:	2d1a                	lhu	a4,24(a0)
+    14f8:	77fd                	lui	a5,0xfffff
+    14fa:	7ff78793          	addi	a5,a5,2047 # fffff7ff <__global_pointer$+0xdfffefbf>
+    14fe:	8ff9                	and	a5,a5,a4
+    1500:	05a2                	slli	a1,a1,0x8
+    1502:	8fcd                	or	a5,a5,a1
+    1504:	07c2                	slli	a5,a5,0x10
+    1506:	83c1                	srli	a5,a5,0x10
+    1508:	ad1e                	sh	a5,24(a0)
+    150a:	8082                	ret
+
+0000150c <USART_Init>:
+    150c:	b95fe2ef          	jal	t0,a0 <__riscv_save_0>
+    1510:	2916                	lhu	a3,16(a0)
+    1512:	77f5                	lui	a5,0xffffd
+    1514:	17fd                	addi	a5,a5,-1
+    1516:	8ff5                	and	a5,a5,a3
+    1518:	21f6                	lhu	a3,6(a1)
+    151a:	25da                	lhu	a4,12(a1)
+    151c:	1121                	addi	sp,sp,-24
+    151e:	8fd5                	or	a5,a5,a3
+    1520:	a91e                	sh	a5,16(a0)
+    1522:	2556                	lhu	a3,12(a0)
+    1524:	77fd                	lui	a5,0xfffff
+    1526:	9f378793          	addi	a5,a5,-1549 # ffffe9f3 <__global_pointer$+0xdfffe1b3>
+    152a:	8ff5                	and	a5,a5,a3
+    152c:	21d6                	lhu	a3,4(a1)
+    152e:	842a                	mv	s0,a0
+    1530:	c02e                	sw	a1,0(sp)
+    1532:	8fd5                	or	a5,a5,a3
+    1534:	2596                	lhu	a3,8(a1)
+    1536:	8fd5                	or	a5,a5,a3
+    1538:	25b6                	lhu	a3,10(a1)
+    153a:	8fd5                	or	a5,a5,a3
+    153c:	a55e                	sh	a5,12(a0)
+    153e:	295e                	lhu	a5,20(a0)
+    1540:	07c2                	slli	a5,a5,0x10
+    1542:	83c1                	srli	a5,a5,0x10
+    1544:	cff7f793          	andi	a5,a5,-769
+    1548:	8f5d                	or	a4,a4,a5
+    154a:	a95a                	sh	a4,20(a0)
+    154c:	0048                	addi	a0,sp,4
+    154e:	3341                	jal	12ce <RCC_GetClocksFreq>
+    1550:	400147b7          	lui	a5,0x40014
+    1554:	80078793          	addi	a5,a5,-2048 # 40013800 <__global_pointer$+0x20012fc0>
+    1558:	4582                	lw	a1,0(sp)
+    155a:	06f41263          	bne	s0,a5,15be <USART_Init+0xb2>
+    155e:	47c2                	lw	a5,16(sp)
+    1560:	245a                	lhu	a4,12(s0)
+    1562:	00179513          	slli	a0,a5,0x1
+    1566:	953e                	add	a0,a0,a5
+    1568:	0742                	slli	a4,a4,0x10
+    156a:	050e                	slli	a0,a0,0x3
+    156c:	8741                	srai	a4,a4,0x10
+    156e:	953e                	add	a0,a0,a5
+    1570:	418c                	lw	a1,0(a1)
+    1572:	04075863          	bgez	a4,15c2 <USART_Init+0xb6>
+    1576:	0586                	slli	a1,a1,0x1
+    1578:	b5dfe0ef          	jal	ra,d4 <__udivsi3>
+    157c:	06400593          	li	a1,100
+    1580:	c02a                	sw	a0,0(sp)
+    1582:	b53fe0ef          	jal	ra,d4 <__udivsi3>
+    1586:	4782                	lw	a5,0(sp)
+    1588:	00451493          	slli	s1,a0,0x4
+    158c:	06400593          	li	a1,100
+    1590:	853e                	mv	a0,a5
+    1592:	b6ffe0ef          	jal	ra,100 <__umodsi3>
+    1596:	245e                	lhu	a5,12(s0)
+    1598:	07c2                	slli	a5,a5,0x10
+    159a:	87c1                	srai	a5,a5,0x10
+    159c:	0207d563          	bgez	a5,15c6 <USART_Init+0xba>
+    15a0:	050e                	slli	a0,a0,0x3
+    15a2:	06400593          	li	a1,100
+    15a6:	03250513          	addi	a0,a0,50
+    15aa:	b2bfe0ef          	jal	ra,d4 <__udivsi3>
+    15ae:	891d                	andi	a0,a0,7
+    15b0:	8cc9                	or	s1,s1,a0
+    15b2:	04c2                	slli	s1,s1,0x10
+    15b4:	80c1                	srli	s1,s1,0x10
+    15b6:	a406                	sh	s1,8(s0)
+    15b8:	0161                	addi	sp,sp,24
+    15ba:	af1fe06f          	j	aa <__riscv_restore_0>
+    15be:	47b2                	lw	a5,12(sp)
+    15c0:	b745                	j	1560 <USART_Init+0x54>
+    15c2:	058a                	slli	a1,a1,0x2
+    15c4:	bf55                	j	1578 <USART_Init+0x6c>
+    15c6:	0512                	slli	a0,a0,0x4
+    15c8:	06400593          	li	a1,100
+    15cc:	03250513          	addi	a0,a0,50
+    15d0:	b05fe0ef          	jal	ra,d4 <__udivsi3>
+    15d4:	893d                	andi	a0,a0,15
+    15d6:	bfe9                	j	15b0 <USART_Init+0xa4>
+
+000015d8 <USART_Cmd>:
+    15d8:	c591                	beqz	a1,15e4 <USART_Cmd+0xc>
+    15da:	255e                	lhu	a5,12(a0)
+    15dc:	6709                	lui	a4,0x2
+    15de:	8fd9                	or	a5,a5,a4
+    15e0:	a55e                	sh	a5,12(a0)
+    15e2:	8082                	ret
+    15e4:	255a                	lhu	a4,12(a0)
+    15e6:	77f9                	lui	a5,0xffffe
+    15e8:	17fd                	addi	a5,a5,-1
+    15ea:	8ff9                	and	a5,a5,a4
+    15ec:	bfd5                	j	15e0 <USART_Cmd+0x8>
+
+000015ee <USART_SendData>:
+    15ee:	1ff5f593          	andi	a1,a1,511
+    15f2:	a14e                	sh	a1,4(a0)
+    15f4:	8082                	ret
+
+000015f6 <USART_ReceiveData>:
+    15f6:	214a                	lhu	a0,4(a0)
+    15f8:	1ff57513          	andi	a0,a0,511
+    15fc:	8082                	ret
+
+000015fe <USART_Printf_Init>:
+    15fe:	aa3fe2ef          	jal	t0,a0 <__riscv_save_0>
+    1602:	842a                	mv	s0,a0
+    1604:	6511                	lui	a0,0x4
+    1606:	1111                	addi	sp,sp,-28
+    1608:	4585                	li	a1,1
+    160a:	02050513          	addi	a0,a0,32 # 4020 <_data_lma+0x28cc>
+    160e:	338d                	jal	1370 <RCC_APB2PeriphClockCmd>
+    1610:	02000793          	li	a5,32
+    1614:	807c                	sh	a5,0(sp)
+    1616:	40011537          	lui	a0,0x40011
+    161a:	478d                	li	a5,3
+    161c:	c23e                	sw	a5,4(sp)
+    161e:	858a                	mv	a1,sp
+    1620:	47e1                	li	a5,24
+    1622:	40050513          	addi	a0,a0,1024 # 40011400 <__global_pointer$+0x20010bc0>
+    1626:	c43e                	sw	a5,8(sp)
+    1628:	bebff0ef          	jal	ra,1212 <GPIO_Init>
+    162c:	c622                	sw	s0,12(sp)
+    162e:	40014437          	lui	s0,0x40014
+    1632:	000807b7          	lui	a5,0x80
+    1636:	006c                	addi	a1,sp,12
+    1638:	80040513          	addi	a0,s0,-2048 # 40013800 <__global_pointer$+0x20012fc0>
+    163c:	ca3e                	sw	a5,20(sp)
+    163e:	c802                	sw	zero,16(sp)
+    1640:	00011c23          	sh	zero,24(sp)
+    1644:	35e1                	jal	150c <USART_Init>
+    1646:	4585                	li	a1,1
+    1648:	80040513          	addi	a0,s0,-2048
+    164c:	3771                	jal	15d8 <USART_Cmd>
+    164e:	0171                	addi	sp,sp,28
+    1650:	a5bfe06f          	j	aa <__riscv_restore_0>
+
+00001654 <memcpy>:
+    1654:	00a5c7b3          	xor	a5,a1,a0
+    1658:	8b8d                	andi	a5,a5,3
+    165a:	00c50733          	add	a4,a0,a2
+    165e:	e781                	bnez	a5,1666 <memcpy+0x12>
+    1660:	478d                	li	a5,3
+    1662:	02c7e763          	bltu	a5,a2,1690 <memcpy+0x3c>
+    1666:	87aa                	mv	a5,a0
+    1668:	0ae57e63          	bgeu	a0,a4,1724 <memcpy+0xd0>
+    166c:	2194                	lbu	a3,0(a1)
+    166e:	0785                	addi	a5,a5,1
+    1670:	0585                	addi	a1,a1,1
+    1672:	fed78fa3          	sb	a3,-1(a5) # 7ffff <_data_lma+0x7e8ab>
+    1676:	fee7ebe3          	bltu	a5,a4,166c <memcpy+0x18>
+    167a:	8082                	ret
+    167c:	2194                	lbu	a3,0(a1)
+    167e:	0785                	addi	a5,a5,1
+    1680:	0585                	addi	a1,a1,1
+    1682:	fed78fa3          	sb	a3,-1(a5)
+    1686:	fee7ebe3          	bltu	a5,a4,167c <memcpy+0x28>
+    168a:	4402                	lw	s0,0(sp)
+    168c:	0111                	addi	sp,sp,4
+    168e:	8082                	ret
+    1690:	00357693          	andi	a3,a0,3
+    1694:	87aa                	mv	a5,a0
+    1696:	ca89                	beqz	a3,16a8 <memcpy+0x54>
+    1698:	2194                	lbu	a3,0(a1)
+    169a:	0785                	addi	a5,a5,1
+    169c:	0585                	addi	a1,a1,1
+    169e:	fed78fa3          	sb	a3,-1(a5)
+    16a2:	0037f693          	andi	a3,a5,3
+    16a6:	bfc5                	j	1696 <memcpy+0x42>
+    16a8:	ffc77693          	andi	a3,a4,-4
+    16ac:	fe068613          	addi	a2,a3,-32
+    16b0:	06c7f563          	bgeu	a5,a2,171a <memcpy+0xc6>
+    16b4:	1171                	addi	sp,sp,-4
+    16b6:	c022                	sw	s0,0(sp)
+    16b8:	49c0                	lw	s0,20(a1)
+    16ba:	0005a303          	lw	t1,0(a1)
+    16be:	0085a383          	lw	t2,8(a1)
+    16c2:	cbc0                	sw	s0,20(a5)
+    16c4:	4d80                	lw	s0,24(a1)
+    16c6:	0067a023          	sw	t1,0(a5)
+    16ca:	0045a303          	lw	t1,4(a1)
+    16ce:	cf80                	sw	s0,24(a5)
+    16d0:	4dc0                	lw	s0,28(a1)
+    16d2:	0067a223          	sw	t1,4(a5)
+    16d6:	00c5a283          	lw	t0,12(a1)
+    16da:	0105a303          	lw	t1,16(a1)
+    16de:	02458593          	addi	a1,a1,36
+    16e2:	cfc0                	sw	s0,28(a5)
+    16e4:	ffc5a403          	lw	s0,-4(a1)
+    16e8:	0077a423          	sw	t2,8(a5)
+    16ec:	0057a623          	sw	t0,12(a5)
+    16f0:	0067a823          	sw	t1,16(a5)
+    16f4:	02478793          	addi	a5,a5,36
+    16f8:	fe87ae23          	sw	s0,-4(a5)
+    16fc:	fac7eee3          	bltu	a5,a2,16b8 <memcpy+0x64>
+    1700:	f8d7f3e3          	bgeu	a5,a3,1686 <memcpy+0x32>
+    1704:	4190                	lw	a2,0(a1)
+    1706:	0791                	addi	a5,a5,4
+    1708:	0591                	addi	a1,a1,4
+    170a:	fec7ae23          	sw	a2,-4(a5)
+    170e:	bfcd                	j	1700 <memcpy+0xac>
+    1710:	4190                	lw	a2,0(a1)
+    1712:	0791                	addi	a5,a5,4
+    1714:	0591                	addi	a1,a1,4
+    1716:	fec7ae23          	sw	a2,-4(a5)
+    171a:	fed7ebe3          	bltu	a5,a3,1710 <memcpy+0xbc>
+    171e:	f4e7e7e3          	bltu	a5,a4,166c <memcpy+0x18>
+    1722:	8082                	ret
+    1724:	8082                	ret
 	...
 
-00001240 <Adc_Enable_Table>:
-    1240:	01010000 00000000 00000001              ............
+00001728 <Adc_Enable_Table>:
+    1728:	0101 0000 0000 0100 0001 0000               ............
 
-0000124c <PWM_Enable_Table>:
-    124c:	00000100 00010000 000009aa 000009aa     ................
-    125c:	000009a8 000009ce 000009d4 000009aa     ................
+00001734 <PWM_Enable_Table>:
+    1734:	0100 0000 0000 0001 0d9c 0000 0dc6 0000     ................
+    1744:	0dcc 0000 0dd2 0000 0dd8 0000 0da0 0000     ................

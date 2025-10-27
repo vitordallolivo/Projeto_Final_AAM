@@ -10,6 +10,7 @@
 #include "PWM.h"
 #include "SysError.h"
 #include "Sound.h"
+#include "ThrustManager.h"
 //-------------------------- Defines --------------------------------------
 
 
@@ -21,11 +22,11 @@
 // Each slot in main loop will take SLOT_TIME before switch to next slot 
 // Use _1MS for 1ms, _5MS for 5ms or _10MS for 10ms 
 
-#define _1MS 5 // 1KHz
-#define _2MS 10 // 500Hz
-#define _4MS 20 // 250Hz
-#define _10MS 50 // 100Hz
-#define _1S 5000
+#define _1MS 10 // 1KHz
+#define _2MS 20 // 500Hz
+#define _4MS 40 // 250Hz
+#define _10MS 100 // 100Hz
+#define _1S 10000
 
 #define SLOT_TIME	_1MS	//_1MS  // _4MS  // _10MS  
 
@@ -35,26 +36,29 @@
 {\
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);\
     SystemCoreClockUpdate();\
-    USART_Printf_Init(115200);\
     SysTick_Init();\
     Sounds__Initialize();\
     ADC__Initialize();\
     Pwm__Initialize();\
+    CMPInitialize();\
 }
 
 
 #define ALL_SLOTS_TASKS()\
 {\
+    Timer__MsHandler();\
 	Hal__BackgroundHandler();\
     ADC_Handler();\
 }
 
 #define SLOT_1_TASKS()\
 {\
+    CommunitacionHandle();\
 }
 
 #define SLOT_2_TASKS()\
 {\
+    CMP_BackgroundHandler();\
 }
 
 #define SLOT_3_TASKS()\

@@ -7,9 +7,10 @@
 //---------------------  Defines, Enumerations----------------------
 
 typedef enum{
-    Current_pin = 2,
-    Voltage_pin,
-    NUM_OF_ANALOG_INPUT
+    Current_pin = 0,
+    Voltage_pin =1,
+    Pitot_pin = 7,
+    NUM_OF_ANALOG_INPUT=3
 }ANALOG_INPUT_TYPE;
 
 typedef enum{
@@ -17,6 +18,9 @@ typedef enum{
     Torque_Cell,
     NUM_OF_LOAD_CELL
 }LOAD_CELL_TYPE;
+
+#define true 1
+#define false 0
 
 //=====================================================================================================================
 //--------------------------------------Funcoes Publicas (Function Prototypes) -------------------------------------------------
@@ -31,7 +35,10 @@ unsigned short int Hal_GetAnalogInput(ANALOG_INPUT_TYPE input);
 // HX711
 void LoadCellSelect(LOAD_CELL_TYPE cell);
 void LoadCellRead(void);
+void LoadCellTare(LOAD_CELL_TYPE cell);
+void LoadCellCalibrationFactor(LOAD_CELL_TYPE cell, double Calib);
 uint32_t GetCellRead(LOAD_CELL_TYPE cell);
+
 
 // Motor
 void Hal_SetMotor(unsigned char state);

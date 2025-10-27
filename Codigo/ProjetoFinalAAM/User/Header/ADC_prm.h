@@ -6,14 +6,14 @@
 // =============================================================================
 
 // Defina como 1 para habilitar o canal, 0 para desabilitar
-#define CONFIG_AD_CH0                0  // PA2 - Canal 0
-#define CONFIG_AD_CH1                0  // PA1 - Canal 1  
-#define CONFIG_AD_CH2                1  // PC4 - Canal 2
-#define CONFIG_AD_CH3                1  // PD2 - Canal 3
+#define CONFIG_AD_CH0                1  // PA2 - Canal 0
+#define CONFIG_AD_CH1                1  // PA1 - Canal 1  
+#define CONFIG_AD_CH2                0  // PC4 - Canal 2
+#define CONFIG_AD_CH3                0  // PD2 - Canal 3
 #define CONFIG_AD_CH4                0  // PD3 - Canal 4
 #define CONFIG_AD_CH5                0  // PD5 - Canal 5
 #define CONFIG_AD_CH6                0  // PD6 - Canal 6
-#define CONFIG_AD_CH7                0  // PD4 - Canal 7
+#define CONFIG_AD_CH7                1  // PD4 - Canal 7
 
 // Canal interno da refer¨ºncia de tens?o (1 para habilitar)
 #define CONFIG_AD_CH_VREFINT         1

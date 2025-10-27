@@ -25,8 +25,11 @@ typedef enum {
     SYSTICK_RUNNING
 } SYSTICK_STATE_TYPE;
 
-// Callback function type
-typedef void (*SysTick_Callback_t)(void);
+typedef enum                                            
+{
+	TIMER_EXPIRED = 0,
+	TIMER_IS_RUNNING = 1,
+}TIMER_STATUS;
 
 // =============================================================================
 // -------------------VARIAVEIS PUBLICAS--------------------------------------
@@ -41,8 +44,13 @@ extern volatile SYSTICK_STATE_TYPE SysTick_State;
 
 void SysTick_Init(void);
 uint32_t SysTick_GetTick(void);
-void SysTick_Delay(uint32_t ms);
 uint32_t SysTick_GetElapsedTime(uint32_t previous_tick);
 void SysTick_Handler(void);
+
+
+void Timer__MsHandler(void);
+void Timer__MsSet(MS_TIMER_NAME, unsigned short int);
+void Timer__MsExpire(MS_TIMER_NAME);
+TIMER_STATUS Timer__MsGetStatus(MS_TIMER_NAME);
 
 #endif

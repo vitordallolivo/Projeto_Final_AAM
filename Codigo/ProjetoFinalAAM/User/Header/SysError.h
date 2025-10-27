@@ -2,7 +2,7 @@
 #define SYS_ERROR_H
 
 //----------------------------- Include Files -------------------------------------
-
+#include "../Header/Hal.h"
 //----------------------------- Defines, Enumerations -----------------------------
 
 typedef enum {
@@ -29,5 +29,6 @@ typedef enum {
 //------------------- Functions Prototypes ------------------------
 void Error_Detect(ERROR_TYPE err, ERROR_ID id); // Fills the error vector
 void Error_Handler(void);
+uint8_t Error_GetStatus(ERROR_ID id);
 
 #endif

@@ -31,9 +31,6 @@ void Error_Detect(ERROR_TYPE err,ERROR_ID id){
     if(id != NONE){
         err_vect[id] = DETECT; // ERRO DETECTADO
     }
-    else{
-        err_vect[id] = NONE_DETECT;
-    }
 }
 void Error_Handler(void){
 
@@ -74,6 +71,13 @@ void Error_Handler(void){
     }
 
 }
+uint8_t Error_GetStatus(ERROR_ID id){
+    if(err_vect[id] == DETECT){
+        return true;
+    }
+    return false;
+}
+
 // =============================================================================
 //                          FUNCOES PRIVADA
 // =============================================================================

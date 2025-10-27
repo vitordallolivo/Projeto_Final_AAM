@@ -14,6 +14,8 @@ unsigned char AD_Counter[NUM_OF_ANALOG_INPUT];
 unsigned short int Hal_Analog_Inputs[NUM_OF_ANALOG_INPUT];   // buffer da m¨¦dia do valor do ADC de cada canal
 
 uint32_t LoadCellStore[NUM_OF_LOAD_CELL] = {0};
+uint32_t LoadCellOffset[NUM_OF_LOAD_CELL] = {0};
+
 LOAD_CELL_TYPE SelectCell = NUM_OF_LOAD_CELL;
 
 
@@ -109,8 +111,14 @@ void LoadCellRead(void){
 
 
 uint32_t GetCellRead(LOAD_CELL_TYPE cell){
-    return LoadCellStore[SelectCell];
+    return LoadCellStore[cell];
 }
+
+void LoadCellTare(LOAD_CELL_TYPE cell){
+    LoadCellOffset[cell] = LoadCellStore[cell];
+}
+
+
 
 
 // Motor
@@ -169,7 +177,7 @@ void ADProcess(void)
             AD_Accumulator[AD_Channel] = 0;
             AD_Counter[AD_Channel] = 0;
         }
-    } 
+    }
     AD_Channel++;
     if(AD_Channel >= NUM_OF_ANALOG_INPUT)
     {

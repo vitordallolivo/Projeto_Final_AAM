@@ -3,9 +3,17 @@
 // =============================================================================
 // -----------------------VARIAVEIS GLOBAIS------------------------------------
 // =============================================================================
-
+unsigned char Flag_tickMS = 0;
 volatile uint32_t SysTick_Count = 0;
 volatile SYSTICK_STATE_TYPE SysTick_State = SYSTICK_DISABLED;
+
+typedef struct
+{
+	TIMER_STATUS Status;
+    unsigned short int Count;
+}TYPE_MSTIMER;
+
+TYPE_MSTIMER Ms_Timers[NUM_OF_MS_TIMERS];
 
 // =============================================================================
 // ------------------------FUNCOES PUBLICAS-------------------------------------
@@ -44,6 +52,11 @@ void SysTick_Init()
     
     SysTick_State = SYSTICK_RUNNING;
     SysTick_Count = 0;
+
+     for(uint8_t i = 0; i < NUM_OF_MS_TIMERS; i++) {
+        Ms_Timers[i].Status = TIMER_EXPIRED;
+        Ms_Timers[i].Count = 0;
+    }
 }
 
 /*******************************************************************************
@@ -75,8 +88,84 @@ void SysTick_Init_HCLK(uint32_t frequency)
     
     SysTick_State = SYSTICK_RUNNING;
     SysTick_Count = 0;
+    for(uint8_t i = 0; i < NUM_OF_MS_TIMERS; i++) {
+        Ms_Timers[i].Status = TIMER_EXPIRED;
+        Ms_Timers[i].Count = 0;
+    }
 }
 
+//===================================== MillisecondTimers ==========================+=====================
+/**
+ *
+ */
+
+
+void Timer__MsHandler(void)
+{
+    
+    if(Flag_tickMS == MS_TIMERS_RESOLUTION){
+        unsigned char i;                                	
+
+        for(i=0; i < NUM_OF_MS_TIMERS; i++)                       
+        {
+            if(Ms_Timers[i].Status == TIMER_IS_RUNNING) 	//Is this timer running?
+            {
+                Ms_Timers[i].Count--;                   
+                if(!(Ms_Timers[i].Count))               
+                {
+                    Ms_Timers[i].Status = TIMER_EXPIRED;   //Set timer timeout
+                }
+            }
+        }
+
+        Flag_tickMS =0;
+    }
+}
+ 
+void Timer__MsSet(MS_TIMER_NAME id, unsigned short int ms_value)
+{
+	unsigned long time;                           
+
+	if (id < NUM_OF_MS_TIMERS)
+	{
+		if (ms_value < MS_TIMERS_RESOLUTION)                     
+		{
+			Ms_Timers[id].Status = TIMER_EXPIRED;                   
+		}
+		else                                        
+		{
+			Ms_Timers[id].Status = TIMER_EXPIRED;      
+			time = ms_value / MS_TIMERS_RESOLUTION;
+			Ms_Timers[id].Count = (unsigned short int)time;  
+			if (Ms_Timers[id].Count != 0)
+			{
+				Ms_Timers[id].Status = TIMER_IS_RUNNING;		
+			}
+		}
+	}
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+/**
+ * 
+ */
+void Timer__MsExpire(MS_TIMER_NAME id)
+{
+	if (id < NUM_OF_MS_TIMERS)
+	{
+		Ms_Timers[id].Count = 0;
+		Ms_Timers[id].Status = TIMER_EXPIRED;
+	}
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+/**
+ * 
+ */
+TIMER_STATUS Timer__MsGetStatus (MS_TIMER_NAME id)
+{
+	return (Ms_Timers[id].Status);
+}
 
 
 /*******************************************************************************
@@ -89,25 +178,6 @@ uint32_t SysTick_GetTick(void)
     return SysTick_Count;
 }
 
-/*******************************************************************************
- * @brief  Delay bloqueante em milissegundos
- * @param  ms: Tempo em milissegundos
- * @retval None
- ******************************************************************************/
-void SysTick_Delay(uint32_t ms)
-{
-    if (SysTick_State != SYSTICK_RUNNING) {
-        return;
-    }
-    
-    uint32_t start_tick = SysTick_Count;
-    
-    // Espera at¨¦ que o tempo passe (tratando overflow)
-    while (SysTick_GetElapsedTime(start_tick) < ms) {
-        // Wait For Interrupt - economiza energia
-        __asm__ volatile ("wfi");
-    }
-}
 
 /*******************************************************************************
  * @brief  Calcula o tempo decorrido desde um tick anterior
@@ -138,6 +208,7 @@ void SysTick_Handler(void)
     
     // Incrementa contador global
     SysTick_Count++;
+    Flag_tickMS++;
 }
 
 /*******************************************************************************
@@ -148,14 +219,4 @@ void SysTick_Handler(void)
 uint32_t SysTick_GetCurrentValue(void)
 {
     return SysTick->CNT;
-}
-
-/*******************************************************************************
- * @brief  Define manualmente o valor do contador
- * @param  value: Valor a ser definido
- * @retval None
- ******************************************************************************/
-void SysTick_SetCurrentValue(uint32_t value)
-{
-    SysTick->CNT = value & 0xFFFFFF; // Apenas 24 bits
 }
