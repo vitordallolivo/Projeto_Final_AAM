@@ -25,7 +25,7 @@ LOAD_CELL_TYPE SelectCell = NUM_OF_LOAD_CELL;
 #define NUM_AD_SAMPLES        8
 
 #define GPIO_HX711_DT  GPIO_Pin_1 // PC1 
-#define GPIO_HX711_SCK  GPIO_Pin_0 // PC0
+#define GPIO_HX711_SCK  GPIO_Pin_2 // PC0
 
 #define NUM_BYTES_LOAD_CELL 24
 
@@ -55,6 +55,45 @@ void Hal__Initialize(void){
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(GPIOC,&GPIO_InitStructure);
 
+    // Inicializando interrup??es por pino
+    EXTI_InitTypeDef EXTI_InitStructure = {0};
+    NVIC_InitTypeDef NVIC_InitStructure = {0};
+    
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
+    
+    // 2. Configurar PD0 como entrada pull-up
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+    
+    // 3. Configurar PD2 como entrada pull-up
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+    
+    // 4. Configurar PD0 para EXTI0 (borda de subida)
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOD, GPIO_PinSource0);
+    
+    EXTI_InitStructure.EXTI_Line = EXTI_Line0;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
+    
+    // 5. Configurar PD2 para EXTI2 (borda de subida e descida)
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOD, GPIO_PinSource2);
+    
+    EXTI_InitStructure.EXTI_Line = EXTI_Line2;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
+    
+    // 6. Configurar NVIC para EXTI0
+    NVIC_InitStructure.NVIC_IRQChannel = EXTI7_0_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
 }
 void Hal__BackgroundHandler(void){
     ADProcess();

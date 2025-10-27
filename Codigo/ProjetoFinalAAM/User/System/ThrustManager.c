@@ -1,5 +1,6 @@
 #include "../Header/ThrustManager.h"
 #include "../Header/SysTick.h"
+#include "../Header/Sound.h"
 #include "ch32v00x_usart.h"
 #include <math.h>
 #include <string.h>
@@ -19,6 +20,8 @@ typedef struct __attribute__((packed)){ // Output Data
     uint32_t Torque;
     uint16_t RPM;
     uint32_t velocity; // 10 vezes a velocidae
+    uint16_t Duty;
+    uint8_t Err_table;
 }Output_data;
 
 
@@ -42,11 +45,18 @@ uint32_t RPM_count = 0;
 Input_data data_in = {0};
 Output_data data_out ={0};
 uint8_t Mode = 0;
+uint8_t Duty = 0;
 
 uint32_t Calib[NUM_OF_LOAD_CELL] = {0};
-uint32_t prev_RPM_tick=0;
 
+uint32_t PWM_tick = 0;
+uint16_t LenghtPWM = 0;
+uint32_t LastPWM_tick = 0;
+
+uint32_t prev_RPM_tick=0;
 uint16_t rho0 = 1225; // era para ser 1.225 kg
+
+
 
 // ---------------------- Private Functions (prototype) ----------
 ERROR_ID RampDuty(void); // check current, and voltage
@@ -55,44 +65,72 @@ uint8_t USART_receive_packet(Input_data *packet);
 int32_t newton_sqrt(int32_t x);
 // --------------------- Interrupcao ------------------
 
+
+// ==============================================================
+//                      Public Functions
+// ==============================================================
+
+void CheckCriticalError(void){
+    ERROR_ID id;
+
+    data_out.Err_table = 0x00;
+
+    for (id = NO_VOLTAGE; id < NUM_ERRORS; id++) {
+        data_out.Err_table|=(Error_GetStatus(id)<<(id-1)) ; // Escreve na tabela de erros
+    }
+
+    if(data_out.Err_table & (1<<(NO_VOLTAGE-1))){
+        Sounds__PlaySounds(PLAY_ERROR,NO_VOLTAGE);
+    }
+    else {
+        if(data_out.Err_table & (1<<(NO_CURRENT-1))){
+            Sounds__PlaySounds(PLAY_ERROR,NO_CURRENT);
+        }
+        else{
+            Sounds__PlaySounds(PLAY_NO_SOUND,NONE);
+        }   
+    }
+    
+}
+
+UserAction SupervisionCMP(void){
+    
+
+    switch (data_in.Mode) {
+        case NOTHING_MODE:
+            return NO_EVENT;
+        break;
+        case CALIBRATION_MODE:
+            return Configuration;
+        break;
+
+        case TARE_MODE:
+            return Configuration;
+        break;
+
+        case MOTOR_MODE:
+            return Released_Action;
+        break;
+
+        default:
+            return NO_EVENT;
+            break;
+    }
+}
+
 void CMPInitialize(void){
     RPM_count = 0;
     // Initialize Communication
     USART_Printf_Init(115200);
+    
+    // Clear the packet's
     memset(&data_out, 0, sizeof(Output_data));
+    memset(&data_in, 0, sizeof(Input_data));
+
 }
 
 void CMP_BackgroundHandler(){
 
-    if(Mode == MOTOR_MODE){
-
-        if(Error_GetStatus(NO_VOLTAGE) && Error_GetStatus(NO_CURRENT) && Error_GetStatus(MOTOR_NOT_SET)){
-            Hal_SetMotorDuty(data_in.Duty);
-        }
-        else{
-            Hal_SetMotor(0);
-        }
-    }
-    else{
-        
-        switch (data_in.Mode) {
-            case CALIBRATION_MODE:
-                Calib[Thrust_Cell]=data_in.CalibrationFactorThrust;
-                Calib[Torque_Cell]=data_in.CalibrationFactorTorque;
-                data_in.Mode = NOTHING_MODE;
-            break;
-
-            case TARE_MODE:
-                LoadCellTare(Thrust_Cell);
-                LoadCellTare(Torque_Cell);
-                data_in.Mode = NOTHING_MODE;
-            break;
-            
-            default:
-            break;
-        }
-
-    }
 
     /*
     * Note: The use of floats and doubles has been completely avoided in this code,
@@ -108,7 +146,7 @@ void CMP_BackgroundHandler(){
         Error_Detect(ERROR_LOAD_CELL,LOAD_CELL_NOT_CALIBRATED);
     }
     if(Thrust > 0xffff || Torque > 0xffff ) {
-        Error_Detect(ERROR_LOAD_CELL,LOAD_CELL_NOT_CALIBRATED);
+        Error_Detect(ERROR_LOAD_CELL,LOAD_CELL_NOT_CONNECTED);
     }
 
     int16_t raw_voltage = (((SCALE_VOLTAGE*ADC_REF_VOLTAGE)*Hal_GetAnalogInput(Voltage_pin)*VOLTAGE_COEFF)/ADC_RESOLUTION);
@@ -142,6 +180,13 @@ void CMP_BackgroundHandler(){
     }
     power = (current * voltage) / 1000;
 
+    if(LenghtPWM>MINIMAL_PWM && LenghtPWM<MAX_PWM){
+        data_out.Duty = LenghtPWM;
+    }else{
+        Error_Detect(ERROR_MOTOR,RC_RECEIVER_FAILED);
+    }
+
+
     data_out.current = current;
     data_out.voltage = voltage;
     data_out.power = power;
@@ -149,12 +194,46 @@ void CMP_BackgroundHandler(){
     data_out.Torque = Torque;
     data_out.RPM = RPM;
     data_out.velocity = newton_sqrt((2 * raw_pressure) / rho0);
+
+    if(data_out.Duty > data_in.Duty){
+        Duty = data_out.Duty;
+    }
+    else{
+        Duty = data_in.Duty;
+    }
 }
 
 
-ERROR_TYPE SupervisionCMP(){
-    return NUM_ERROR_TYPES;
+void ThrustManager_SetMotorAction(MotorAction act){
+    if(act == Turn_off){
+        Hal_SetMotor(0);
+    }
+    else{
+        Hal_SetMotor(Duty);
+    }
 }
+
+void ThrustManager_SetLoadCell(){
+    
+    switch (data_in.Mode) {
+        case CALIBRATION_MODE:
+            Calib[Thrust_Cell]=data_in.CalibrationFactorThrust;
+            Calib[Torque_Cell]=data_in.CalibrationFactorTorque;
+            data_in.Mode = NOTHING_MODE;
+        break;
+
+        case TARE_MODE:
+            LoadCellTare(Thrust_Cell);
+            LoadCellTare(Torque_Cell);
+            data_in.Mode = NOTHING_MODE;
+        break;
+        
+        default:
+        break;
+    }
+}
+
+
 void CommunitacionHandle(void){
 
     static unsigned char transmitting = false;
@@ -186,7 +265,25 @@ void CommunitacionHandle(void){
 
 
 void EXTI7_0_IRQHandler(void){
-    RPM_count++;
+
+    if(EXTI_GetITStatus(EXTI_Line0) != RESET) {
+        // Sua l¨®gica para interrup??o do PD0 (borda de subida)
+        RPM_count++;
+        // Limpar flag de interrup??o
+        EXTI_ClearITPendingBit(EXTI_Line0);
+    }
+    
+    // Verificar se EXTI2 (PD2) gerou a interrup??o
+    if(EXTI_GetITStatus(EXTI_Line2) != RESET) {
+        PWM_tick = SysTick_GetTick();
+        if(PWM_tick>LastPWM_tick){
+            LenghtPWM = PWM_tick - LastPWM_tick;
+            LastPWM_tick = PWM_tick;
+        }
+
+        // Limpar flag de interrup??o
+        EXTI_ClearITPendingBit(EXTI_Line2);
+    }
 }
 
 //=======================================================================

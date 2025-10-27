@@ -23,12 +23,13 @@ User/Appl/main.o: ../User/Appl/main.c ../User/Appl/../Header/main.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_wwdg.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_opa.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x.h \
- ../User/Appl/../Header/SysTick.h ../User/Appl/../Header/SysTick_prm.h \
- ../User/Appl/../Header/ADC.h ../User/Appl/../Header/ADC_prm.h \
- ../User/Appl/../Header/Hal.h ../User/Appl/../Header/Hal_prm.h \
- ../User/Appl/../Header/PWM.h ../User/Appl/../Header/PWM_prm.h \
- ../User/Appl/../Header/SysError.h ../User/Appl/../Header/../Header/Hal.h \
- ../User/Appl/../Header/Sound.h ../User/Appl/../Header/Sound_prm.h \
+ ../User/Appl/../Header/Appl.h ../User/Appl/../Header/SysTick.h \
+ ../User/Appl/../Header/SysTick_prm.h ../User/Appl/../Header/ADC.h \
+ ../User/Appl/../Header/ADC_prm.h ../User/Appl/../Header/Hal.h \
+ ../User/Appl/../Header/Hal_prm.h ../User/Appl/../Header/PWM.h \
+ ../User/Appl/../Header/PWM_prm.h ../User/Appl/../Header/SysError.h \
+ ../User/Appl/../Header/../Header/Hal.h ../User/Appl/../Header/Sound.h \
+ ../User/Appl/../Header/Sound_prm.h \
  ../User/Appl/../Header/ThrustManager.h \
  ../User/Appl/../Header/ThrustManager_prm.h
 
@@ -81,6 +82,8 @@ User/Appl/main.o: ../User/Appl/main.c ../User/Appl/../Header/main.h \
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_opa.h:
 
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x.h:
+
+../User/Appl/../Header/Appl.h:
 
 ../User/Appl/../Header/SysTick.h:
 

@@ -4,6 +4,7 @@
 
 //-------------------------- Include Files ---------------------------------
 #include "ch32v00x.h"
+#include "Appl.h"
 #include "SysTick.h"
 #include "ADC.h"
 #include "Hal.h"
@@ -41,6 +42,7 @@
     ADC__Initialize();\
     Pwm__Initialize();\
     CMPInitialize();\
+    Appl__Initialize();\
 }
 
 
@@ -53,12 +55,13 @@
 
 #define SLOT_1_TASKS()\
 {\
-    CommunitacionHandle();\
+    Appl__Handler();\
 }
 
 #define SLOT_2_TASKS()\
 {\
     CMP_BackgroundHandler();\
+    CommunitacionHandle();\
 }
 
 #define SLOT_3_TASKS()\

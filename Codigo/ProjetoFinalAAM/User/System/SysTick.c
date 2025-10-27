@@ -122,7 +122,7 @@ void Timer__MsHandler(void)
     }
 }
  
-void Timer__MsSet(MS_TIMER_NAME id, unsigned short int ms_value)
+void Timer__MsSet(MS_TIMER_NAME id, uint32_t ms_value)
 {
 	unsigned long time;                           
 

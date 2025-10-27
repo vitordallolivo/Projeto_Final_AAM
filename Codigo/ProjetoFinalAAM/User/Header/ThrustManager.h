@@ -8,13 +8,28 @@
 
 //----------------------------- Define, Enumerations -------------------------------
 
+typedef enum{
+    Configuration,
+    Released_Action,
+    NO_EVENT
+}UserAction;
+
+typedef enum{
+    Released,
+    Turn_off
+}MotorAction;
 
 //----------------------------- Public Functions (Prototypes)-----------------------
 void CMPInitialize(void);
 void CMP_BackgroundHandler(void); // Handles outputs/inputs
 void CommunitacionHandle(void); // Handles with back and fourth communication
 
-ERROR_TYPE SupervisionCMP(void); // check errors
+UserAction SupervisionCMP(void); // check errors
+void CheckCriticalError(void);
+
+
+void ThrustManager_SetMotorAction(MotorAction act);
+void ThrustManager_SetLoadCell(void);
 
 // RPM handler
 void EXTI7_0_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));

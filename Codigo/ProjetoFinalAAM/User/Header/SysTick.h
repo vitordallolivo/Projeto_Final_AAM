@@ -49,8 +49,8 @@ void SysTick_Handler(void);
 
 
 void Timer__MsHandler(void);
-void Timer__MsSet(MS_TIMER_NAME, unsigned short int);
-void Timer__MsExpire(MS_TIMER_NAME);
-TIMER_STATUS Timer__MsGetStatus(MS_TIMER_NAME);
+void Timer__MsSet(MS_TIMER_NAME, uint32_t ms_value);
+void Timer__MsExpire(MS_TIMER_NAME id);
+TIMER_STATUS Timer__MsGetStatus(MS_TIMER_NAME id);
 
 #endif

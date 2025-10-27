@@ -11,10 +11,14 @@
 #define SYNC_BYTE1 0xAA
 
 
+// PWM RC receiver
+
+#define MINIMAL_PWM 100
+#define MAX_PWM 200
+
 
 
 // Sensores
-
 #define ADC_REF_VOLTAGE 5 // 5V
 #define ADC_RESOLUTION 1023
 

@@ -1,0 +1,5 @@
+Verificar o duty cycle de entrada
+Verificar o PWM para um servo 
+Clock interno de 48MHz
+Criar um programa novo no matlab
+Criar o packet de dados, e processar ele no struct

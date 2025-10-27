@@ -6,7 +6,7 @@
 // =============================================================================
 
 // Frequ¨ºncia do SysTick em Hz (1000 = 1ms, 100 = 10ms, etc)
-#define SYSTICK_FREQUENCY_HZ         10000 // 100us
+#define SYSTICK_FREQUENCY_HZ         100000 // 10us
 
 
 // Prioridade da interrupcao do SysTick (0 = m¨¢xima prioridade)
@@ -34,8 +34,8 @@ typedef enum
  *
  * Recommended values in ms: 1, 5, 20, 25, 50, 100, or 1000
  */
-#define MS_TIMERS_RESOLUTION      10 //1ms , para 10khz -> 1 ms s?o 10 ticks
+#define MS_TIMERS_RESOLUTION      100 //1ms , para 10khz -> 1 ms s?o 10 ticks
 
-#define HMS_TIMERS_RESOLUTION     50//5
+#define HMS_TIMERS_RESOLUTION     500//5
 
 #endif
