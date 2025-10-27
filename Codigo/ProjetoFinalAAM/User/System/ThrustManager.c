@@ -1,6 +1,7 @@
 #include "../Header/ThrustManager.h"
 #include "../Header/SysTick.h"
 #include "ch32v00x_usart.h"
+#include <math.h>
 #include <string.h>
 // ---------------------- Defines, Enumeration ---------------
 typedef enum {
@@ -17,6 +18,7 @@ typedef struct __attribute__((packed)){ // Output Data
     uint32_t Thrust;
     uint32_t Torque;
     uint16_t RPM;
+    uint32_t velocity; // 10 vezes a velocidae
 }Output_data;
 
 
@@ -44,12 +46,13 @@ uint8_t Mode = 0;
 uint32_t Calib[NUM_OF_LOAD_CELL] = {0};
 uint32_t prev_RPM_tick=0;
 
+uint16_t rho0 = 1225; // era para ser 1.225 kg
+
 // ---------------------- Private Functions (prototype) ----------
-ERROR_ID TestSensors(void); // check connection of sensor's
 ERROR_ID RampDuty(void); // check current, and voltage
 uint8_t USART_send_packet(Output_data *packet);
 uint8_t USART_receive_packet(Input_data *packet);
-void test(float current, float voltage);
+int32_t newton_sqrt(int32_t x);
 // --------------------- Interrupcao ------------------
 
 void CMPInitialize(void){
@@ -98,12 +101,23 @@ void CMP_BackgroundHandler(){
     */
 
 
-    int32_t Thrust = (GetCellRead(Thrust_Cell) * SCALE_THRUST) / Calib[Thrust_Cell];
-    int32_t Torque = (GetCellRead(Torque_Cell) * SCALE_TORQUE) / Calib[Torque_Cell];
+    int32_t Thrust = (GetCellRead(Thrust_Cell)) / Calib[Thrust_Cell];
+    int32_t Torque = (GetCellRead(Torque_Cell)) / Calib[Torque_Cell];
 
-    int16_t raw_voltage = (Hal_GetAnalogInput(Voltage_pin) * (5000 / 1023) * Divider_coeff) / 1000;
-    int32_t raw_current = ((Hal_GetAnalogInput(Current_pin) * (5000 / 1023) - (int32_t)(QOV * 1000) + 7));
-    raw_current = (raw_current * (int32_t)(Sensitivity_Sens * 1000)) / 1000;
+    if(Thrust < 0 || Thrust > 50){
+        Error_Detect(ERROR_LOAD_CELL,LOAD_CELL_NOT_CALIBRATED);
+    }
+    if(Thrust > 0xffff || Torque > 0xffff ) {
+        Error_Detect(ERROR_LOAD_CELL,LOAD_CELL_NOT_CALIBRATED);
+    }
+
+    int16_t raw_voltage = (((SCALE_VOLTAGE*ADC_REF_VOLTAGE)*Hal_GetAnalogInput(Voltage_pin)*VOLTAGE_COEFF)/ADC_RESOLUTION);
+    int32_t raw_current = ((SCALE_CURRENT*(ADC_REF_VOLTAGE*Hal_GetAnalogInput(Current_pin))/ADC_RESOLUTION)-CURRENT_OFFSET)*CURRENT_COEFF;
+    int32_t raw_pressure = (SCALE_PRESSURE * ADC_REF_VOLTAGE * (Hal_GetAnalogInput(Pitot_pin)) / (ADC_RESOLUTION*PITOT_COEFF));
+    
+    if(raw_pressure < MINIMAL_PITOT){
+        Error_Detect(ERROR_PITOT,PITOT_NOT_ENGAGED);
+    }
 
     uint16_t RPM = (RPM_count / 2) * (60 * MS_TIMERS_RESOLUTION) / SysTick_GetElapsedTime(prev_RPM_tick);
     prev_RPM_tick = SysTick_GetTick();
@@ -111,10 +125,22 @@ void CMP_BackgroundHandler(){
     int32_t current, power;
     int16_t voltage;
 
-    current = (raw_current < 0) ? 0 : raw_current;
-    voltage = (raw_voltage > (MINIMAL_VOLTAGE * 1000)) ? raw_voltage : 0;
-    power = (current * voltage) / 1000;  
+    if(raw_current < 0){
+        current = 0;
+        Error_Detect(ERROR_MOTOR,NO_CURRENT);
+    }
+    else{
+        current = raw_current;
+    }
 
+    if(raw_voltage > MINIMAL_VOLTAGE){
+        voltage = raw_voltage;
+    }
+    else{
+        voltage = 0;
+        Error_Detect(ERROR_MOTOR,NO_VOLTAGE);
+    }
+    power = (current * voltage) / 1000;
 
     data_out.current = current;
     data_out.voltage = voltage;
@@ -122,17 +148,11 @@ void CMP_BackgroundHandler(){
     data_out.Thrust = Thrust;
     data_out.Torque = Torque;
     data_out.RPM = RPM;
-
+    data_out.velocity = newton_sqrt((2 * raw_pressure) / rho0);
 }
 
 
 ERROR_TYPE SupervisionCMP(){
-    ERROR_ID err=TestSensors();
-
-
-    if(err != NONE){
-        
-    }
     return NUM_ERROR_TYPES;
 }
 void CommunitacionHandle(void){
@@ -143,7 +163,7 @@ void CommunitacionHandle(void){
     if(Timer__MsGetStatus(TIMER_MS_COMMUNICATION) == TIMER_EXPIRED){
         transmitting = true;
         receiving = true;
-        Timer__MsSet(TIMER_MS_COMMUNICATION,10000);
+        Timer__MsSet(TIMER_MS_COMMUNICATION,10000); 
     }
 
     if(transmitting == true){
@@ -173,9 +193,7 @@ void EXTI7_0_IRQHandler(void){
 //                          Private Functions
 //=======================================================================
 
-ERROR_ID TestSensors(void){
-    return NONE;
-}
+
 ERROR_ID RampDuty(void){
     return NONE;
 }
@@ -253,7 +271,19 @@ uint8_t USART_receive_packet(Input_data *packet) {
     return false;
 }
 
-void test(float current, float voltage){
-    data_out.current = current;
-    data_out.voltage = voltage;
+int32_t newton_sqrt(int32_t x){
+    if (x <= 0) return 0;
+    
+    // Escala para precis?o
+    int64_t scaled_x = (int64_t)x * 100;
+    int32_t r = x / 2;
+    if (r <= 0) r = 1;
+    
+    for (int i = 0; i < 10; i++) {
+        int32_t r2 = (r + (scaled_x / r)) / 2;
+        if (r2 == r) break;
+        r = r2;
+    }
+    
+    return r;
 }
