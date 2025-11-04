@@ -59,3 +59,7 @@ dkms.conf
 *.gbr
 *.pdf
 *.drl
+
+# GUI
+
+*.csv
