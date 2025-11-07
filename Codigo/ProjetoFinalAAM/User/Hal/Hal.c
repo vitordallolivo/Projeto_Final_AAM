@@ -1,8 +1,11 @@
 //------------------------ Include Files ----------------------------------
 #include "ch32v00x_gpio.h"
+#include "ch32v00x_dma.h"
+#include "ch32v00x_usart.h"
 #include "../Header/Hal.h"
 #include "../Header/ADC.h"
 #include "../Header/PWM.h"
+#include <string.h>
 
 //------------------------ Global Variables ----------------------------------
 // Variaveis para ADC
@@ -22,17 +25,18 @@ LOAD_CELL_TYPE SelectCell = NUM_OF_LOAD_CELL;
 //------------------------ Defines, Enumerations ----------------------------------
 
 
-#define NUM_AD_SAMPLES        8
 
+#define NUM_AD_SAMPLES        8
 #define GPIO_HX711_DT  GPIO_Pin_1 // PC1 
 #define GPIO_HX711_SCK  GPIO_Pin_2 // PC0
-
 #define NUM_BYTES_LOAD_CELL 24
 
 
 //------------------------ Private Functions (prototypes) ----------------------------------
 void ADProcess(void);
-
+void USARTx_CFG(void);
+void DMA_INIT(void);
+void SendNewMessage(const char* message);
 
 //=====================================================================================================================
 //-------------------------------------- Public Functions -------------------------------------------------------------
@@ -61,10 +65,10 @@ void Hal__Initialize(void){
     
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_AFIO, ENABLE);
     
+
     // 2. Configurar PD0 como entrada pull-up
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(GPIOD, &GPIO_InitStructure);
     
     // 3. Configurar PD2 como entrada pull-up
@@ -84,17 +88,34 @@ void Hal__Initialize(void){
     GPIO_EXTILineConfig(GPIO_PortSourceGPIOD, GPIO_PinSource2);
     
     EXTI_InitStructure.EXTI_Line = EXTI_Line2;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
     EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
     EXTI_InitStructure.EXTI_LineCmd = ENABLE;
     EXTI_Init(&EXTI_InitStructure);
     
     // 6. Configurar NVIC para EXTI0
     NVIC_InitStructure.NVIC_IRQChannel = EXTI7_0_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
+
+    // Configurar Pinos da USART
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+
+
 }
+
+
+
+
 void Hal__BackgroundHandler(void){
     ADProcess();
     LoadCellRead();
@@ -223,4 +244,3 @@ void ADProcess(void)
         AD_Channel = (AD_CHANNEL_TYPE)Current_pin;
     }
 }
-

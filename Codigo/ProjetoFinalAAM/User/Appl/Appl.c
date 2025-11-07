@@ -1,9 +1,11 @@
 //---------------------------------------- Include Files ---------------------------------
 #include "../Header/ThrustManager.h"
+#include "../Header/Hal.h"
 #include "../Header/SysError.h"
 #include "../Header/SysTick.h"
 #include "../Header/Hal.h"
 #include "../Header/Sound.h"
+#include "../Header/Comunication.h"
 //-------------------------------------- PUBLIC (Variables) -----------------------------------------------------------
 
 //-------------------------------------- Defines, Enumerations ----------------------------------------------------------------
@@ -46,5 +48,9 @@ void Appl__Handler(void){
     }
 
     CheckCriticalError();
+    if(Timer__MsGetStatus(TIMER_MS_COMMUNICATION) == TIMER_EXPIRED){
+        Thrust_UpdateData();
+        Timer__MsSet(TIMER_MS_COMMUNICATION,100);
+    }
 
 }

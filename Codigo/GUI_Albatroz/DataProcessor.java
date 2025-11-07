@@ -5,13 +5,13 @@ public class DataProcessor {
     public static final int STRUCT_SIZE = 27; // 4+2+4+4+4+2+4+2+1 = 27 bytes (packed)
     
     public static class OutputData {
-        public long current;
+        public int current;
         public int voltage;
-        public long power;
-        public long thrust;
-        public long torque;
+        public int power;
+        public int thrust;
+        public int torque;
         public int rpm;
-        public long velocity;
+        public int velocity;
         public int duty;
         public short errTable;
         
@@ -24,6 +24,58 @@ public class DataProcessor {
         }
     }
     
+    // Método para parsear o formato string "0;8416;0;-1;-1;0;0;0;103.\r\n"
+    // No DataProcessor, substitua o método parseStringFormat por este:
+    public static OutputData parseStringFormat(String dataString) {
+        try {
+            System.out.println("🔧 Processando string: '" + dataString + "'");
+            
+            // Remove .\r\n, \r\n, . e espaços no final
+            dataString = dataString.trim();
+            if (dataString.endsWith(".\r\n")) {
+                dataString = dataString.substring(0, dataString.length() - 3);
+            } else if (dataString.endsWith("\r\n")) {
+                dataString = dataString.substring(0, dataString.length() - 2);
+            } else if (dataString.endsWith(".")) {
+                dataString = dataString.substring(0, dataString.length() - 1);
+            }
+            
+            System.out.println("🔧 String após limpeza: '" + dataString + "'");
+            
+            String[] parts = dataString.split(";");
+            
+            System.out.println("🔧 Número de partes: " + parts.length);
+            for (int i = 0; i < parts.length; i++) {
+                System.out.println("   Parte " + i + ": '" + parts[i] + "'");
+            }
+            
+            if (parts.length != 9) {
+                throw new IllegalArgumentException("Número de campos inválido: " + parts.length + ", esperado: 9");
+            }
+            
+            OutputData output = new OutputData();
+            output.current = Integer.parseInt(parts[0].trim());
+            output.voltage = Integer.parseInt(parts[1].trim());
+            output.power = Integer.parseInt(parts[2].trim());
+            output.thrust = Integer.parseInt(parts[3].trim());
+            output.torque = Integer.parseInt(parts[4].trim());
+            output.rpm = Integer.parseInt(parts[5].trim());
+            output.velocity = Integer.parseInt(parts[6].trim());
+            output.duty = Integer.parseInt(parts[7].trim());
+            output.errTable = Short.parseShort(parts[8].trim());
+            
+            System.out.println("✅ Parse realizado com sucesso!");
+            return output;
+            
+        } catch (Exception e) {
+            System.err.println("❌ Erro detalhado no parse:");
+            System.err.println("   - String: '" + dataString + "'");
+            System.err.println("   - Mensagem: " + e.getMessage());
+            e.printStackTrace();
+            throw new IllegalArgumentException("Formato string inválido: " + dataString, e);
+        }
+    }
+    // Método original para dados binários (mantido para compatibilidade)
     public static OutputData parseData(byte[] data) {
         if (data.length < STRUCT_SIZE) {
             throw new IllegalArgumentException("Dados insuficientes. Esperado: " + STRUCT_SIZE + ", Recebido: " + data.length);
@@ -34,23 +86,21 @@ public class DataProcessor {
         
         OutputData output = new OutputData();
         
-        output.current = Integer.toUnsignedLong(buffer.getInt());    // uint32_t
-        output.voltage = Short.toUnsignedInt(buffer.getShort());     // uint16_t
-        output.power = Integer.toUnsignedLong(buffer.getInt());      // uint32_t
-        output.thrust = Integer.toUnsignedLong(buffer.getInt());     // uint32_t
-        output.torque = Integer.toUnsignedLong(buffer.getInt());     // uint32_t
-        output.rpm = Short.toUnsignedInt(buffer.getShort());         // uint16_t
-        output.velocity = Integer.toUnsignedLong(buffer.getInt());   // uint32_t
-        output.duty = Short.toUnsignedInt(buffer.getShort());        // uint16_t
-        output.errTable = (short) (buffer.get() & 0xFF);             // uint8_t
+        output.current = (buffer.getInt())/1000;
+        output.voltage = (buffer.getShort() & 0xFFFF)/1000;
+        output.power = (buffer.getInt())    ;
+        output.thrust = buffer.getInt();
+        output.torque = buffer.getInt();
+        output.rpm = buffer.getShort() & 0xFFFF;
+        output.velocity = buffer.getInt();
+        output.duty = buffer.getShort() & 0xFFFF;
+        output.errTable = (short) (buffer.get() & 0xFF);
         
         return output;
     }
     
     public static int findStructStart(byte[] data) {
-        // Procura por uma struct válida (implementação básica)
         for (int i = 0; i <= data.length - STRUCT_SIZE; i++) {
-            // Verifica se os próximos bytes formam uma struct plausível
             if (isPlausibleStruct(data, i)) {
                 return i;
             }
@@ -58,18 +108,18 @@ public class DataProcessor {
         return -1;
     }
     
-    private static boolean isPlausibleStruct(byte[] data, int start) {
-        // Verificações básicas de plausibilidade
+    public static boolean isPlausibleStruct(byte[] data, int start) {
         try {
             ByteBuffer buffer = ByteBuffer.wrap(data, start, STRUCT_SIZE);
             buffer.order(ByteOrder.LITTLE_ENDIAN);
             
-            // Verifica ranges plausíveis
-            long current = Integer.toUnsignedLong(buffer.getInt());
-            int voltage = Short.toUnsignedInt(buffer.getShort());
-            long power = Integer.toUnsignedLong(buffer.getInt());
+            int current = buffer.getInt();
+            int voltage = buffer.getShort() & 0xFFFF;
+            int power = buffer.getInt();
             
-            return current <= 100000 && voltage <= 50000 && power <= 5000000;
+            return current >= -1000 && current <= 100000 && 
+                   voltage >= 0 && voltage <= 20000 && 
+                   power >= -1000000 && power <= 1000000;
         } catch (Exception e) {
             return false;
         }

@@ -51,4 +51,8 @@ void Hal_SetBuzzerDutyCycle(unsigned char duty);
 void Hal__SetBuzzerFreq(unsigned short int frequency);
 
 
+// Data
+void HAL_SendData(void* data, uint16_t size);
+void HAL_ReceiveData(void* data, uint16_t size);
+void Hal_SendNewMessage(const char* message);
 #endif

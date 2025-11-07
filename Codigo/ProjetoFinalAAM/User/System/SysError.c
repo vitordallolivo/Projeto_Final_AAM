@@ -32,6 +32,12 @@ void Error_Detect(ERROR_TYPE err,ERROR_ID id){
         err_vect[id] = DETECT; // ERRO DETECTADO
     }
 }
+
+void Error_Erase(ERROR_TYPE err,ERROR_ID id){
+    if(id != NONE){
+        err_vect[id] = NONE_DETECT; // ERRO DETECTADO
+    }
+}
 void Error_Handler(void){
 
     uint8_t  error_to_play[NUM_ERRORS] = {0};

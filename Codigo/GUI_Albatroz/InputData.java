@@ -77,4 +77,13 @@ public class InputData {
             calibrationFactorTorque, duty
         );
     }
+
+    public String toSerialString() {
+        return String.format("0x73.%d;%d;%d;%d.0x84\r\n", 
+            mode & 0xFF,           // Converte para unsigned
+            calibrationFactorThrust, 
+            calibrationFactorTorque, 
+            duty
+        );
+    }
 }

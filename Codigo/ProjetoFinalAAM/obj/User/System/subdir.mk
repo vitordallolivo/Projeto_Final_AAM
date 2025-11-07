@@ -5,18 +5,21 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../User/System/Comunication.c \
 ../User/System/Sound.c \
 ../User/System/SysError.c \
 ../User/System/SysTick.c \
 ../User/System/ThrustManager.c 
 
 C_DEPS += \
+./User/System/Comunication.d \
 ./User/System/Sound.d \
 ./User/System/SysError.d \
 ./User/System/SysTick.d \
 ./User/System/ThrustManager.d 
 
 OBJS += \
+./User/System/Comunication.o \
 ./User/System/Sound.o \
 ./User/System/SysError.o \
 ./User/System/SysTick.o \
@@ -24,6 +27,7 @@ OBJS += \
 
 
 EXPANDS += \
+./User/System/Comunication.c.253r.expand \
 ./User/System/Sound.c.253r.expand \
 ./User/System/SysError.c.253r.expand \
 ./User/System/SysTick.c.253r.expand \

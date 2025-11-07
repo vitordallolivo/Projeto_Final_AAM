@@ -74,7 +74,6 @@ int main(void)
         int32_t current_time = SysTick_GetTick();
 
         if (SysTick_GetElapsedTime(prev_time) >= SLOT_TIME) {
-            
             prev_time = current_time;            
             Slot = prev_Slot;
             Slot++;

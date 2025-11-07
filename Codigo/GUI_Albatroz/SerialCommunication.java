@@ -1,5 +1,5 @@
 import com.fazecast.jSerialComm.*;
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
 
 public class SerialCommunication {
     private SerialPort serialPort;
@@ -7,6 +7,9 @@ public class SerialCommunication {
     private String[] portasDisponiveis;
     private byte[] buffer = new byte[1024];
     private int bufferIndex = 0;
+    private int totalPacotesRecebidos = 0;
+    private StringBuilder bufferBrutos = new StringBuilder();
+    private final Object lockBrutos = new Object();
 
     public SerialCommunication() {
         atualizarPortas();
@@ -40,9 +43,12 @@ public class SerialCommunication {
 
         if (serialPort.openPort()) {
             conectado = true;
-            bufferIndex = 0; // Reseta buffer
+            bufferIndex = 0;
+            totalPacotesRecebidos = 0;
+            System.out.println("✅ Conectado na porta: " + nomePorta + " | Baud rate: " + baudRate);
             return true;
         }
+        System.out.println("❌ Falha ao conectar na porta: " + nomePorta);
         return false;
     }
 
@@ -50,6 +56,7 @@ public class SerialCommunication {
         if (serialPort != null && conectado) {
             serialPort.closePort();
             conectado = false;
+            System.out.println("🔌 Desconectado da porta serial");
         }
     }
 
@@ -62,80 +69,175 @@ public class SerialCommunication {
             return null;
         }
         
-        int bytesAvailable = serialPort.bytesAvailable();
-        if (bytesAvailable > 0) {
-            byte[] tempBuffer = new byte[bytesAvailable];
-            int bytesRead = serialPort.readBytes(tempBuffer, bytesAvailable);
-            
-            // Adiciona ao buffer
-            if (bufferIndex + bytesRead > buffer.length) {
-                // Buffer cheio, mantém apenas os últimos bytes
-                int keep = Math.min(buffer.length - bytesRead, bufferIndex);
-                System.arraycopy(buffer, bufferIndex - keep, buffer, 0, keep);
-                bufferIndex = keep;
+        try {
+            int bytesAvailable = serialPort.bytesAvailable();
+            if (bytesAvailable <= 0) {
+                return null;
             }
             
+            // Limita a leitura ao espaço disponível no buffer
+            int bytesToRead = Math.min(bytesAvailable, buffer.length - bufferIndex);
+            if (bytesToRead <= 0) {
+                System.out.println("🔄 Buffer cheio, limpando...");
+                bufferIndex = 0;
+                bytesToRead = Math.min(bytesAvailable, buffer.length);
+            }
+            
+            byte[] tempBuffer = new byte[bytesToRead];
+            int bytesRead = serialPort.readBytes(tempBuffer, bytesToRead);
+            
+            if (bytesRead <= 0) {
+                return null;
+            }
+            
+            // ⭐⭐ ARMAZENA DADOS BRUTOS ⭐⭐
+            synchronized(lockBrutos) {
+                String dadosRaw = new String(tempBuffer, 0, bytesRead, StandardCharsets.US_ASCII);
+                bufferBrutos.append(dadosRaw);
+                
+                // Limita o tamanho do buffer para não consumir muita memória
+                if (bufferBrutos.length() > 10000) {
+                    bufferBrutos.delete(0, 5000);
+                }
+            }
+            
+            System.out.println("📥 Bytes disponíveis: " + bytesAvailable + 
+                             " | Lidos: " + bytesRead + 
+                             " | Buffer index: " + bufferIndex);
+            
+            // Adiciona ao buffer
             System.arraycopy(tempBuffer, 0, buffer, bufferIndex, bytesRead);
             bufferIndex += bytesRead;
             
-            // Procura por struct válida
-            int start = DataProcessor.findStructStart(Arrays.copyOf(buffer, bufferIndex));
-            if (start >= 0 && start + DataProcessor.STRUCT_SIZE <= bufferIndex) {
+            // Converte o buffer para string para procurar por linhas completas
+            String bufferStr = new String(buffer, 0, bufferIndex, StandardCharsets.US_ASCII);
+            
+            // Procura por linhas completas (terminadas com \r\n)
+            int lineEnd = bufferStr.indexOf("\r\n");
+            if (lineEnd != -1) {
+                String line = bufferStr.substring(0, lineEnd);
+                System.out.println("📨 Linha recebida: " + line);
+                
                 try {
-                    DataProcessor.OutputData data = DataProcessor.parseData(
-                        Arrays.copyOfRange(buffer, start, start + DataProcessor.STRUCT_SIZE)
-                    );
+                    DataProcessor.OutputData data = DataProcessor.parseStringFormat(line);
                     
-                    // Remove dados processados do buffer
-                    int remaining = bufferIndex - (start + DataProcessor.STRUCT_SIZE);
+                    totalPacotesRecebidos++;
+                    // System.out.println("📊 PACOTE #" + totalPacotesRecebidos + " RECEBIDO:");
+                    // System.out.println("   - Current: " + data.current);
+                    // System.out.println("   - Voltage: " + data.voltage);
+                    // System.out.println("   - Power: " + data.power);
+                    // System.out.println("   - Thrust: " + data.thrust);
+                    // System.out.println("   - Torque: " + data.torque);
+                    // System.out.println("   - RPM: " + data.rpm);
+                    // System.out.println("   - Velocity: " + data.velocity);
+                    // System.out.println("   - Duty: " + data.duty);
+                    // System.out.println("   - Err: " + data.errTable);
+                    
+                    // Remove a linha processada do buffer
+                    int bytesToRemove = lineEnd + 2; // +2 para \r\n
+                    int remaining = bufferIndex - bytesToRemove;
                     if (remaining > 0) {
-                        System.arraycopy(buffer, start + DataProcessor.STRUCT_SIZE, buffer, 0, remaining);
+                        System.arraycopy(buffer, bytesToRemove, buffer, 0, remaining);
                     }
-                    bufferIndex = remaining;
+                    bufferIndex = Math.max(0, remaining);
                     
                     return data;
+                    
                 } catch (Exception e) {
-                    System.err.println("Erro ao parsear dados: " + e.getMessage());
-                    bufferIndex = 0; // Reset em caso de erro
+                    System.err.println("❌ Erro ao parsear linha: " + e.getMessage());
+                    // Remove a linha problemática do buffer
+                    int bytesToRemove = lineEnd + 2;
+                    int remaining = bufferIndex - bytesToRemove;
+                    if (remaining > 0) {
+                        System.arraycopy(buffer, bytesToRemove, buffer, 0, remaining);
+                    }
+                    bufferIndex = Math.max(0, remaining);
                 }
             }
+            
+            // Se o buffer está cheio e não encontrou linha completa, limpa
+            if (bufferIndex >= buffer.length * 0.8) {
+                System.out.println("🔄 Buffer 80% cheio sem linhas completas, limpando...");
+                bufferIndex = 0;
+            }
+            
+        } catch (Exception e) {
+            System.err.println("❌ Erro na leitura serial: " + e.getMessage());
+            bufferIndex = 0;
         }
+        
         return null;
     }
     
     public boolean haDadosDisponiveis() {
-        return conectado && serialPort != null && serialPort.bytesAvailable() >= DataProcessor.STRUCT_SIZE;
+        boolean disponivel = conectado && serialPort != null && serialPort.bytesAvailable() > 0;
+        return disponivel;
     }
 
     public String getStatus() {
         if (conectado && serialPort != null) {
-            return serialPort.getSystemPortName();
+            return serialPort.getSystemPortName() + " | Pacotes: " + totalPacotesRecebidos;
         }
         return "Desconectado";
     }
 
-   public boolean enviarDadosConfiguracao(InputData inputData) {
-    if (!conectado || serialPort == null) {
-        return false;
+    public boolean enviarDadosConfiguracao(InputData inputData) {
+        if (!conectado || serialPort == null) {
+            return false;
+        }
+        
+        try {
+            String comando = inputData.toSerialString();
+            byte[] dados = comando.getBytes(StandardCharsets.US_ASCII);
+            
+            System.out.println("📤 ENVIANDO 10 VEZES:");
+            System.out.println("   - Comando: " + comando.trim());
+            System.out.println("   - Modo: " + inputData.getModeDescription());
+            
+            boolean algumSucesso = false;
+            
+            for(int i = 0; i < 10; i++) {
+                int bytesEscritos = serialPort.writeBytes(dados, dados.length);
+                boolean sucesso = (bytesEscritos == dados.length);
+                
+                if(sucesso) {
+                    algumSucesso = true;
+                    System.out.println("   ✅ Envio " + (i + 1) + ": OK");
+                } else {
+                    System.out.println("   ❌ Envio " + (i + 1) + ": FALHA");
+                }
+                
+                // Delay de 50ms entre envios
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            
+            return algumSucesso;
+            
+        } catch (Exception e) {
+            System.err.println("❌ Erro ao enviar dados: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Converte para formato string para envio (mais simples de debuggar)
+     * Formato: "modo;thrustCal;torqueCal;duty\r\n"
+     */
+
+    public String getDadosBrutos() {
+        synchronized(lockBrutos) {
+            if (bufferBrutos.length() == 0) {
+                return null;
+            }
+            String dados = bufferBrutos.toString();
+            bufferBrutos.setLength(0); // Limpa o buffer após ler
+            return dados;
+        }
     }
     
-    try {
-        byte[] dados = inputData.toByteArray();
-        int bytesEscritos = serialPort.writeBytes(dados, dados.length);
-        
-        System.out.println("📤 Enviados " + bytesEscritos + " bytes: " + inputData.toString());
-        
-        // Log detalhado do que foi enviado
-        System.out.println("📋 Detalhes do comando:");
-        System.out.println("   - Modo: " + inputData.getModeDescription() + " (0x" + String.format("%02X", inputData.getMode()) + ")");
-        System.out.println("   - Thrust Cal: " + inputData.getCalibrationFactorThrust());
-        System.out.println("   - Torque Cal: " + inputData.getCalibrationFactorTorque());
-        System.out.println("   - Duty: " + inputData.getDuty() + "%");
-        
-        return bytesEscritos == dados.length;
-    } catch (Exception e) {
-        System.err.println("❌ Erro ao enviar dados: " + e.getMessage());
-        return false;
-    }
-}
+
 }

@@ -26,6 +26,7 @@ typedef enum {
 
 //------------------- Functions Prototypes ------------------------
 void Error_Detect(ERROR_TYPE err, ERROR_ID id); // Fills the error vector
+void Error_Erase(ERROR_TYPE err, ERROR_ID id); // Fills the error vector
 void Error_Handler(void);
 uint8_t Error_GetStatus(ERROR_ID id);
 

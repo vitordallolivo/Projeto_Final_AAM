@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,7 +16,7 @@ public class SerialGUIAlbatroz {
     private JComboBox<String> portaComboBox;
     private JComboBox<Integer> baudComboBox;
     private JButton conectarBtn, desconectarBtn, atualizarBtn;
-    private JButton iniciarBtn, pararBtn, salvarBtn, pararSalvarBtn;
+    private JButton iniciarBtn, pararBtn, salvarBtn, pararSalvarBtn,dadosBrutosBtn;
     private JButton tareBtn, calibrarBtn, motorBtn;
     private JTextArea logArea;
     private JLabel statusLabel, dadosLabel, modoLabel;
@@ -125,6 +128,7 @@ public class SerialGUIAlbatroz {
         pararBtn = new JButton("⏸️ Parar Captura");
         salvarBtn = new JButton("💾 Iniciar CSV");
         pararSalvarBtn = new JButton("💾 Parar CSV");
+        dadosBrutosBtn = new JButton("📡 Dados Brutos");
         
         dadosLabel = new JLabel("Aguardando dados...");
         dadosLabel.setFont(new Font("Monospaced", Font.PLAIN, 12));
@@ -134,6 +138,7 @@ public class SerialGUIAlbatroz {
         dadosControlPanel.add(pararBtn);
         dadosControlPanel.add(salvarBtn);
         dadosControlPanel.add(pararSalvarBtn);
+        dadosControlPanel.add(dadosBrutosBtn);
         dadosControlPanel.add(dadosLabel);
 
         topPanel.add(conexaoPanel, BorderLayout.NORTH);
@@ -143,13 +148,13 @@ public class SerialGUIAlbatroz {
         // === PAINEL CENTRAL - GRÁFICOS ===
         JPanel graficosPanel = new JPanel(new GridLayout(3, 3, 5, 5));
         
-        graficoCurrent = new RealTimeChart("Current (mA)", "mA");
-        graficoVoltage = new RealTimeChart("Voltage (mV)", "mV");
-        graficoPower = new RealTimeChart("Power (mW)", "mW");
-        graficoThrust = new RealTimeChart("Thrust (cN)", "cN");
-        graficoTorque = new RealTimeChart("Torque (mNm)", "mNm");
+        graficoCurrent = new RealTimeChart("Current ", "A");
+        graficoVoltage = new RealTimeChart("Voltage V", "V");
+        graficoPower = new RealTimeChart("Power W", "W");
+        graficoThrust = new RealTimeChart("Thrust N", "N");
+        graficoTorque = new RealTimeChart("Torque Nm", "Nm");
         graficoRPM = new RealTimeChart("RPM", "RPM");
-        graficoVelocity = new RealTimeChart("Velocity (cm/s)", "cm/s");
+        graficoVelocity = new RealTimeChart("Velocity m/s", "m/s");
         graficoDuty = new RealTimeChart("Duty Cycle (%)", "%");
         
         graficosPanel.add(graficoCurrent);
@@ -259,6 +264,11 @@ public class SerialGUIAlbatroz {
                 abrirDialogoMotor();
             }
         });
+        dadosBrutosBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                abrirJanelaDadosBrutos();
+            }
+        });
     }
 
     private void configurarTimer() {
@@ -300,34 +310,45 @@ public class SerialGUIAlbatroz {
         
         // Atualiza label de dados
         dadosLabel.setText(String.format(
-            "I:%6d mA | V:%5d mV | P:%7d mW | Th:%5d cN | Tr:%5d mNm | RPM:%5d | Vel:%6.1f cm/s | Duty:%3d %% | Err:%2d",
-            data.current, data.voltage, data.power, data.thrust, data.torque, 
-            data.rpm, velocityReal, data.duty, data.errTable
+            "I:%6.2f A | V:%5.1f V | P:%7.1f W | Th:%5.1f N | Tr:%5.3f Nm | RPM:%5d | Vel:%6.2f m/s | Duty:%3d %% | Err:%2d",
+            data.current / 1000.0,           // mA → A
+            data.voltage / 1000.0,           // mV → V
+            data.power / 1000.0,             // mW → W
+            data.thrust / 100.0,             // cN → N (centiNewton para Newton)
+            data.torque / 1000.0,            // mNm → Nm
+            data.rpm,                        // RPM
+            data.velocity / 100.0,           // cm/s → m/s
+            data.duty,                       // %
+            data.errTable                    // código
         ));
         
-        // Atualiza Error Table
-        errLabel.setText(String.valueOf(data.errTable));
+        // Atualiza Error Table com descrição dos erros
+        String descricaoErro = interpretarErro(data.errTable);
+        
         if (data.errTable != 0) {
+            // MOSTRA A DESCRIÇÃO DO ERRO EM VEZ DO NÚMERO
+            errLabel.setText(descricaoErro);
             errLabel.setForeground(Color.RED);
             errLabel.setBackground(new Color(255, 200, 200));
-            errLabel.setToolTipText("Código de erro: " + data.errTable);
+            errLabel.setToolTipText("Código: " + data.errTable + " - " + descricaoErro);
+            
+            // Log do erro
+            adicionarLog("⚠️  " + descricaoErro + " (Código: " + data.errTable + ")");
         } else {
+            errLabel.setText("SEM ERROS");
             errLabel.setForeground(Color.GREEN);
             errLabel.setBackground(Color.WHITE);
-            errLabel.setToolTipText("Sem erros");
+            errLabel.setToolTipText("Sistema operando normalmente");
         }
         
         // Salva no CSV se estiver ativo
         if (salvandoCSV && csvWriter != null && csvWriter.isAberto()) {
             String timestamp = timeFormat.format(new Date());
             csvWriter.escreverDados(timestamp, data, ultimoComandoEnviado, ultimoModoEnviado, 
-                                  ultimoThrustCalEnviado, ultimoTorqueCalEnviado, ultimoDutyEnviado);
+                                ultimoThrustCalEnviado, ultimoTorqueCalEnviado, ultimoDutyEnviado);
         }
         
-        // Log de erro se necessário
-        if (data.errTable != 0) {
-            adicionarLog("⚠️  Erro detectado na tabela: " + data.errTable);
-        }
+        
     }
 
     private void iniciarCaptura() {
@@ -768,4 +789,171 @@ public class SerialGUIAlbatroz {
             }
         });
     }
+
+    private String interpretarErro(short errCode) {
+        if (errCode == 0) return "SEM ERROS";
+        
+        StringBuilder erros = new StringBuilder();
+        
+        // Verifica cada bit e adiciona a descrição correspondente
+        if ((errCode & (1 << 0)) != 0) erros.append("SEM TENSÃO");
+        if ((errCode & (1 << 1)) != 0) erros.append(erros.length() > 0 ? " | SEM CORRENTE" : "SEM CORRENTE");
+        if ((errCode & (1 << 2)) != 0) erros.append(erros.length() > 0 ? " | FALHA RC" : "FALHA RC");
+        if ((errCode & (1 << 3)) != 0) erros.append(erros.length() > 0 ? " | PITOT SOLTO" : "PITOT SOLTO");
+        if ((errCode & (1 << 4)) != 0) erros.append(erros.length() > 0 ? " | SEM RPM" : "SEM RPM");
+        if ((errCode & (1 << 5)) != 0) erros.append(erros.length() > 0 ? " | CÉLULA DESCONECT." : "CÉLULA DESCONECT.");
+        if ((errCode & (1 << 6)) != 0) erros.append(erros.length() > 0 ? " | CÉLULA NÃO CALIB." : "CÉLULA NÃO CALIB.");
+        
+        
+        return erros.toString();
+    }
+
+    private void abrirJanelaDadosBrutos() {
+        if (!serial.isConectado()) {
+            JOptionPane.showMessageDialog(frame, "Conecte-se primeiro!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JFrame janelaBrutos = new JFrame("Dados Brutos - USART");
+        janelaBrutos.setSize(700, 500);
+        janelaBrutos.setLocationRelativeTo(frame);
+        janelaBrutos.setLayout(new BorderLayout());
+        
+        // Área de texto para mostrar dados brutos
+        JTextArea areaBrutos = new JTextArea();
+        areaBrutos.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        areaBrutos.setEditable(false);
+        areaBrutos.setBackground(Color.WHITE);
+        areaBrutos.setForeground(Color.BLACK);
+        
+        JScrollPane scrollPane = new JScrollPane(areaBrutos);
+        
+        // Painel de controles
+        JPanel painelControles = new JPanel(new FlowLayout());
+        
+        JButton limparBtn = new JButton("🧹 Limpar");
+        JButton pausarBtn = new JButton("⏸️ Pausar");
+        JButton hexBtn = new JButton("🔢 Modo Hex");
+        JCheckBox autoScroll = new JCheckBox("Auto-scroll", true);
+        JButton salvarBtn = new JButton("💾 Salvar");
+        
+        painelControles.add(limparBtn);
+        painelControles.add(pausarBtn);
+        painelControles.add(hexBtn);
+        painelControles.add(autoScroll);
+        painelControles.add(salvarBtn);
+        
+        // Status
+        JLabel statusBrutos = new JLabel("Capturando dados brutos...");
+        statusBrutos.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        
+        janelaBrutos.add(scrollPane, BorderLayout.CENTER);
+        janelaBrutos.add(painelControles, BorderLayout.NORTH);
+        janelaBrutos.add(statusBrutos, BorderLayout.SOUTH);
+        
+        // Variáveis de controle
+        final boolean[] pausado = {false};
+        final boolean[] modoHex = {false};
+        final int[] contadorBytes = {0};
+        
+        // Timer para capturar dados brutos - CORRIGIDO
+        Timer timerBrutos = new Timer(100, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (!pausado[0]) {
+                    String dadosRaw = serial.getDadosBrutos();
+                    if (dadosRaw != null && !dadosRaw.isEmpty()) {
+                        contadorBytes[0] += dadosRaw.length();
+                        
+                        // ⭐⭐ APENAS OS DADOS BRUTOS - SEM LOGS ⭐⭐
+                        if (modoHex[0]) {
+                            // Converte para hex
+                            StringBuilder hex = new StringBuilder();
+                            byte[] bytes = dadosRaw.getBytes(StandardCharsets.US_ASCII);
+                            for (int i = 0; i < bytes.length; i++) {
+                                hex.append(String.format("%02X ", bytes[i]));
+                                // Quebra de linha a cada 16 bytes
+                                if ((i + 1) % 16 == 0) {
+                                    hex.append("\n");
+                                }
+                            }
+                            areaBrutos.append(hex.toString() + "\n");
+                        } else {
+                            // Mostra como texto puro - SEM adicionar "[TXT]" ou outros textos
+                            areaBrutos.append(dadosRaw);
+                        }
+                        
+                        statusBrutos.setText("Bytes totais: " + contadorBytes[0] + " | Última atualização: " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
+                        
+                        if (autoScroll.isSelected()) {
+                            areaBrutos.setCaretPosition(areaBrutos.getDocument().getLength());
+                        }
+                    } else {
+                        statusBrutos.setText("Aguardando dados... | Bytes totais: " + contadorBytes[0]);
+                    }
+                }
+            }
+        });
+        
+        // Eventos dos botões (mantenha igual)
+        limparBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                areaBrutos.setText("");
+                contadorBytes[0] = 0;
+                statusBrutos.setText("Buffer limpo");
+            }
+        });
+        
+        pausarBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                pausado[0] = !pausado[0];
+                pausarBtn.setText(pausado[0] ? "▶️ Retomar" : "⏸️ Pausar");
+                statusBrutos.setText(pausado[0] ? "PAUSADO" : "Capturando...");
+            }
+        });
+        
+        hexBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                modoHex[0] = !modoHex[0];
+                hexBtn.setText(modoHex[0] ? "🔤 Modo Texto" : "🔢 Modo Hex");
+                // Limpa ao mudar de modo para evitar mistura
+                areaBrutos.setText("");
+            }
+        });
+        
+        salvarBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    JFileChooser fileChooser = new JFileChooser();
+                    fileChooser.setDialogTitle("Salvar dados brutos");
+                    if (fileChooser.showSaveDialog(janelaBrutos) == JFileChooser.APPROVE_OPTION) {
+                        File file = fileChooser.getSelectedFile();
+                        try (PrintWriter writer = new PrintWriter(file)) {
+                            writer.write(areaBrutos.getText());
+                            JOptionPane.showMessageDialog(janelaBrutos, "Dados salvos com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(janelaBrutos, "Erro ao salvar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        
+        // Quando fechar a janela, para o timer
+        janelaBrutos.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                timerBrutos.stop();
+            }
+        });
+        
+        // Mensagem inicial limpa
+        areaBrutos.setText("=== Iniciando captura de dados brutos ===\n");
+        areaBrutos.append("Conectado em: " + serial.getStatus() + "\n");
+        areaBrutos.append("==========================================\n\n");
+        
+        timerBrutos.start();
+        janelaBrutos.setVisible(true);
+    }
+
+
 }

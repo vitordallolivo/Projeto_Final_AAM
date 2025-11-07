@@ -29,8 +29,7 @@
 #define _10MS 100 // 100Hz
 #define _1S 10000
 
-#define SLOT_TIME	_1MS	//_1MS  // _4MS  // _10MS  
-
+#define SLOT_TIME	_10MS	//_1MS  // _4MS  // _10MS  
 
 
 #define INITIALIZE_TASKS()\
@@ -38,10 +37,12 @@
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);\
     SystemCoreClockUpdate();\
     SysTick_Init();\
+    Hal__Initialize();\
     Sounds__Initialize();\
     ADC__Initialize();\
     Pwm__Initialize();\
     CMPInitialize();\
+    Comunication_Init();\
     Appl__Initialize();\
 }
 
