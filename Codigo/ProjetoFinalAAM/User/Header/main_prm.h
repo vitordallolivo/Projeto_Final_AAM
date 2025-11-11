@@ -11,6 +11,7 @@
 #include "PWM.h"
 #include "SysError.h"
 #include "Sound.h"
+#include "Comunication.h"
 #include "ThrustManager.h"
 //-------------------------- Defines --------------------------------------
 
@@ -72,6 +73,7 @@
 #define SLOT_4_TASKS()\
 {\
     Error_Handler();\
+    ProcessReceivedData();\
 }
 
 #define SLOT_5_TASKS()\

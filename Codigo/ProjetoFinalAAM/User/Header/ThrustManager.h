@@ -7,6 +7,26 @@
 #include "ThrustManager_prm.h"
 
 //----------------------------- Define, Enumerations -------------------------------
+#pragma pack(push,1)
+typedef struct __attribute__((packed)){ // Output Data
+    int32_t current;
+    int32_t voltage;
+    int32_t power;
+    int32_t Thrust;
+    int32_t Torque;
+    int16_t RPM;
+    int16_t velocity; // 10 vezes a velocidae
+    int16_t Duty;
+    int8_t Err_table;
+}Output_data;
+#pragma pack(pop)
+
+typedef struct{
+    uint8_t Mode; // Calibration Mode, or Active Mode 
+    uint32_t CalibrationFactorThrust;
+    uint32_t CalibrationFactorTorque;
+    uint16_t Duty;
+}Input_data;
 
 typedef enum{
     Configuration,

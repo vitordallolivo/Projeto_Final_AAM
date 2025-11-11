@@ -171,7 +171,7 @@ void LoadCellRead(void){
 
 
 uint32_t GetCellRead(LOAD_CELL_TYPE cell){
-    return LoadCellStore[cell];
+    return (LoadCellStore[cell]-LoadCellOffset[cell]);
 }
 
 void LoadCellTare(LOAD_CELL_TYPE cell){

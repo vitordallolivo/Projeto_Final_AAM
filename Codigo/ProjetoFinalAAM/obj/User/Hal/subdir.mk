@@ -5,16 +5,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../User/Hal/Comunication.c \
 ../User/Hal/Hal.c 
 
 C_DEPS += \
+./User/Hal/Comunication.d \
 ./User/Hal/Hal.d 
 
 OBJS += \
+./User/Hal/Comunication.o \
 ./User/Hal/Hal.o 
 
 
 EXPANDS += \
+./User/Hal/Comunication.c.253r.expand \
 ./User/Hal/Hal.c.253r.expand 
 
 

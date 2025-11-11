@@ -35,10 +35,10 @@ public class CSVWriter {
                 escreverCabecalho();
             }
             
-            String linha = String.format("%s,%d,%d,%d,%d,%d,%d,%.1f,%d,%d,%s,%s,%d,%d,%d",
+            String linha = String.format("%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s,%s,%d,%d,%d",
                 timestamp,
                 data.current, data.voltage, data.power, data.thrust, data.torque,
-                data.rpm, data.velocity / 10.0, data.duty, data.errTable,
+                data.rpm, data.velocity, data.duty, data.errTable,
                 comandoEnviado, modoEnviado, thrustCalEnviado, torqueCalEnviado, dutyEnviado
             );
             writer.println(linha);

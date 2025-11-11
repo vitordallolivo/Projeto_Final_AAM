@@ -3,6 +3,7 @@
 
 
 // Modos do ThrustManager
+#define RESET_MODE 0xCF
 #define NOTHING_MODE 0x00
 #define CALIBRATION_MODE 0xff
 #define TARE_MODE 0x0f

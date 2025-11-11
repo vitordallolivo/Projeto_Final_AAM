@@ -51,10 +51,16 @@ public class SerialGUIAlbatroz {
     private long ultimoTorqueCalEnviado = 0;
     private int ultimoDutyEnviado = 0;
 
+    private DataProcessor.OutputData ultimoDadoRecebido = null;
+    private final Object dadoLock = new Object(); // Para sincronização thread-safe
+    private Timer timerAutoNothing;
+    private final int TEMPO_AUTO_NOTHING = 1000; // 5 segundos
+
     public SerialGUIAlbatroz() {
         serial = new SerialCommunication();
         inicializarCollectors();
         criarGUI();
+        configurarTimerAutoNothing();
         atualizarPortas();
         atualizarStatus();
         atualizarModoDisplay();
@@ -203,6 +209,16 @@ public class SerialGUIAlbatroz {
         frame.setVisible(true);
     }
 
+    private void configurarTimerAutoNothing() {
+        timerAutoNothing = new Timer(TEMPO_AUTO_NOTHING, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                voltarParaNothingMode();
+            }
+        });
+        timerAutoNothing.setRepeats(false); // Executa apenas uma vez
+    }
+
+
     private void configurarEventos() {
         conectarBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -274,21 +290,38 @@ public class SerialGUIAlbatroz {
     private void configurarTimer() {
         timerGrafico = new Timer(50, new ActionListener() { // 20 Hz
             public void actionPerformed(ActionEvent e) {
-                if (capturandoDados && serial.haDadosDisponiveis()) {
-                    DataProcessor.OutputData data = serial.lerOutputData();
-                    if (data != null) {
-                        processarDados(data);
+                if (capturandoDados) {
+                    // Lê todos os dados disponíveis, mas mantém apenas o mais recente
+                    DataProcessor.OutputData dadoMaisRecente = null;
+                    
+                    while (serial.haDadosDisponiveis()) {
+                        DataProcessor.OutputData data = serial.lerOutputData();
+                        if (data != null) {
+                            dadoMaisRecente = data;
+                        }
+                    }
+                    
+                    // Atualiza com o dado mais recente (se houver)
+                    if (dadoMaisRecente != null) {
+                        synchronized (dadoLock) {
+                            ultimoDadoRecebido = dadoMaisRecente;
+                        }
+                        processarDados(dadoMaisRecente);
+                    } else if (ultimoDadoRecebido != null) {
+                        // Se não há novos dados, usa o último disponível
+                        processarDados(ultimoDadoRecebido);
                     }
                 }
             }
         });
     }
 
-  private void processarDados(DataProcessor.OutputData data) {
+
+    private void processarDados(DataProcessor.OutputData data) {
         // Calcula velocity dividido por 10
         double velocityReal = data.velocity / 10.0;
         
-        // Atualiza gráficos
+        // Atualiza gráficos com o dado atual (não do buffer)
         graficoCurrent.adicionarPonto(data.current);
         graficoVoltage.adicionarPonto(data.voltage);
         graficoPower.adicionarPonto(data.power);
@@ -326,7 +359,6 @@ public class SerialGUIAlbatroz {
         String descricaoErro = interpretarErro(data.errTable);
         
         if (data.errTable != 0) {
-            // MOSTRA A DESCRIÇÃO DO ERRO EM VEZ DO NÚMERO
             errLabel.setText(descricaoErro);
             errLabel.setForeground(Color.RED);
             errLabel.setBackground(new Color(255, 200, 200));
@@ -347,8 +379,6 @@ public class SerialGUIAlbatroz {
             csvWriter.escreverDados(timestamp, data, ultimoComandoEnviado, ultimoModoEnviado, 
                                 ultimoThrustCalEnviado, ultimoTorqueCalEnviado, ultimoDutyEnviado);
         }
-        
-        
     }
 
     private void iniciarCaptura() {
@@ -411,15 +441,7 @@ public class SerialGUIAlbatroz {
             adicionarLog("⚖️ Comando TARE enviado - Zerando sensores (Calibração mantida: Thrust=" + calibracaoThrust + ", Torque=" + calibracaoTorque + ")");
             atualizarModoDisplay();
             
-            // Volta para NOTHING_MODE após 2 segundos
-            Timer timerTare = new Timer(2000, new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    modoAtual = InputData.NOTHING_MODE;
-                    atualizarModoDisplay();
-                }
-            });
-            timerTare.setRepeats(false);
-            timerTare.start();
+            reiniciarTimerAutoNothing();
             
         } else {
             adicionarLog("❌ Falha ao enviar comando TARE");
@@ -490,15 +512,7 @@ public class SerialGUIAlbatroz {
                         atualizarModoDisplay();
                         dialog.dispose();
                         
-                        // Volta para NOTHING_MODE após 3 segundos
-                        Timer timerCal = new Timer(3000, new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                modoAtual = InputData.NOTHING_MODE;
-                                atualizarModoDisplay();
-                            }
-                        });
-                        timerCal.setRepeats(false);
-                        timerCal.start();
+                        reiniciarTimerAutoNothing();
                         
                     } else {
                         JOptionPane.showMessageDialog(dialog, "Falha no envio!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -518,6 +532,14 @@ public class SerialGUIAlbatroz {
         dialog.setVisible(true);
     }
 
+
+    public DataProcessor.OutputData getUltimoDadoRecebido() {
+        synchronized (dadoLock) {
+            return ultimoDadoRecebido;
+        }
+    }
+
+    
 
     private void abrirDialogoMotor() {
         if (!serial.isConectado()) {
@@ -605,6 +627,8 @@ public class SerialGUIAlbatroz {
             adicionarLog("🚀 Motor ligado - Duty: " + duty + "% (Calibração: Thrust=" + calibracaoThrust + ", Torque=" + calibracaoTorque + ")");
             atualizarModoDisplay();
             atualizarBotoes();
+
+            reiniciarTimerAutoNothing();
         } else {
             adicionarLog("❌ Falha ao ligar motor");
         }
@@ -630,6 +654,8 @@ public class SerialGUIAlbatroz {
             adicionarLog("🛑 Motor desligado (Calibração mantida: Thrust=" + calibracaoThrust + ", Torque=" + calibracaoTorque + ")");
             atualizarModoDisplay();
             atualizarBotoes();
+
+            reiniciarTimerAutoNothing();
         } else {
             adicionarLog("❌ Falha ao desligar motor");
         }
@@ -726,9 +752,63 @@ public class SerialGUIAlbatroz {
 
         if (serial.conectar(porta, baudRate)) {
             adicionarLog("✅ Conectado com sucesso!");
+
+            // ⭐⭐ ENVIO DO RESET_MODE APÓS CONEXÃO ⭐⭐
+            InputData inputData = new InputData();
+            inputData.setMode(InputData.RESET_MODE);
+            inputData.setCalibrationFactorThrust(calibracaoThrust);
+            inputData.setCalibrationFactorTorque(calibracaoTorque);
+            inputData.setDuty(0);
+
+            if (serial.enviarDadosConfiguracao(inputData)) {
+                // Atualiza último comando enviado
+                ultimoComandoEnviado = "RESET_INICIAL";
+                ultimoModoEnviado = "RESET_MODE";
+                ultimoThrustCalEnviado = calibracaoThrust;
+                ultimoTorqueCalEnviado = calibracaoTorque;
+                ultimoDutyEnviado = 0;
+
+                modoAtual = InputData.RESET_MODE;
+                motorLigado = false;
+                
+                adicionarLog("🔄 Comando RESET enviado - Inicializando sistema...");
+                atualizarModoDisplay();
+                
+                // Aguarda um breve momento para o reset processar
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+                
+                // ⭐⭐ VOLTA AUTOMATICAMENTE PARA NOTHING_MODE APÓS RESET ⭐⭐
+                InputData nothingData = new InputData();
+                nothingData.setMode(InputData.NOTHING_MODE);
+                nothingData.setCalibrationFactorThrust(calibracaoThrust);
+                nothingData.setCalibrationFactorTorque(calibracaoTorque);
+                nothingData.setDuty(0);
+                
+                if (serial.enviarDadosConfiguracao(nothingData)) {
+                    ultimoComandoEnviado = "NOTHING_MODE";
+                    ultimoModoEnviado = "NOTHING_MODE";
+                    modoAtual = InputData.NOTHING_MODE;
+                    
+                    adicionarLog("✅ Sistema inicializado em NOTHING_MODE");
+                    atualizarModoDisplay();
+                } else {
+                    adicionarLog("⚠️ Reset realizado, mas falha ao voltar para NOTHING_MODE");
+                }
+                
+            } else {
+                adicionarLog("❌ Falha ao enviar comando RESET inicial");
+            }
+
             atualizarStatus();
+            atualizarBotoes();
+            
         } else {
             adicionarLog("❌ Falha na conexão com " + porta);
+            atualizarStatus();
         }
     }
 
@@ -737,13 +817,18 @@ public class SerialGUIAlbatroz {
         if (motorLigado) {
             pararMotor();
         }
+
+        if (timerAutoNothing != null) {
+            timerAutoNothing.stop();
+        }
+        
         
         pararCaptura();
         if (salvandoCSV) {
             pararSalvarCSV();
         }
         
-        serial.desconectar();
+        serial.shutdown();
         adicionarLog("🔌 Desconectado da porta serial");
         
         // Reseta estados
@@ -785,10 +870,22 @@ public class SerialGUIAlbatroz {
         // Garante que a GUI seja criada na EDT do Swing
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new SerialGUIAlbatroz();
+                SerialGUIAlbatroz gui = new SerialGUIAlbatroz();
+                
+                // ⭐⭐ ADICIONE ESTA PARTE PARA SHUTDOWN AUTOMÁTICO
+                configurarShutdownHook(gui);
             }
         });
     }
+
+    private static void configurarShutdownHook(SerialGUIAlbatroz gui) {
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+        System.out.println("🔴 Fechando aplicação...");
+        if (gui != null && gui.serial != null) {
+            gui.serial.shutdownCompleto();
+        }
+    }));
+}
 
     private String interpretarErro(short errCode) {
         if (errCode == 0) return "SEM ERROS";
@@ -955,5 +1052,39 @@ public class SerialGUIAlbatroz {
         janelaBrutos.setVisible(true);
     }
 
-
+    private void voltarParaNothingMode() {
+        if (!serial.isConectado()) {
+            return; // Só executa se estiver conectado
+        }
+        
+        InputData inputData = new InputData();
+        inputData.setMode(InputData.NOTHING_MODE);
+        inputData.setCalibrationFactorThrust(calibracaoThrust);
+        inputData.setCalibrationFactorTorque(calibracaoTorque);
+        inputData.setDuty(ultimoDutyEnviado);
+        
+        if (serial.enviarDadosConfiguracao(inputData)) {
+            // Atualiza último comando enviado
+            ultimoComandoEnviado = "AUTO_NOTHING";
+            ultimoModoEnviado = "NOTHING_MODE";
+            ultimoThrustCalEnviado = calibracaoThrust;
+            ultimoTorqueCalEnviado = calibracaoTorque;
+            ultimoDutyEnviado = 0;
+            
+            modoAtual = InputData.NOTHING_MODE;
+            motorLigado = false;
+            
+            adicionarLog("🔄 Modo automático: Voltando para NOTHING_MODE");
+            atualizarModoDisplay();
+            atualizarBotoes();
+        } else {
+            adicionarLog("❌ Falha ao voltar para NOTHING_MODE automaticamente");
+        }
+    }
+    private void reiniciarTimerAutoNothing() {
+        if (timerAutoNothing != null) {
+            timerAutoNothing.stop();
+            timerAutoNothing.start();
+        }
+    }
 }

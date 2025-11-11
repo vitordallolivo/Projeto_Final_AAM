@@ -29,9 +29,11 @@ User/Appl/main.o: ../User/Appl/main.c ../User/Appl/../Header/main.h \
  ../User/Appl/../Header/Hal_prm.h ../User/Appl/../Header/PWM.h \
  ../User/Appl/../Header/PWM_prm.h ../User/Appl/../Header/SysError.h \
  ../User/Appl/../Header/../Header/Hal.h ../User/Appl/../Header/Sound.h \
- ../User/Appl/../Header/Sound_prm.h \
- ../User/Appl/../Header/ThrustManager.h \
- ../User/Appl/../Header/ThrustManager_prm.h
+ ../User/Appl/../Header/Sound_prm.h ../User/Appl/../Header/Comunication.h \
+ ../User/Appl/../Header/../Header/ThrustManager.h \
+ ../User/Appl/../Header/../Header/SysError.h \
+ ../User/Appl/../Header/../Header/ThrustManager_prm.h \
+ ../User/Appl/../Header/ThrustManager.h
 ../User/Appl/../Header/main.h:
 ../User/Appl/../Header/main_prm.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x.h:
@@ -70,5 +72,8 @@ User/Appl/main.o: ../User/Appl/main.c ../User/Appl/../Header/main.h \
 ../User/Appl/../Header/../Header/Hal.h:
 ../User/Appl/../Header/Sound.h:
 ../User/Appl/../Header/Sound_prm.h:
+../User/Appl/../Header/Comunication.h:
+../User/Appl/../Header/../Header/ThrustManager.h:
+../User/Appl/../Header/../Header/SysError.h:
+../User/Appl/../Header/../Header/ThrustManager_prm.h:
 ../User/Appl/../Header/ThrustManager.h:
-../User/Appl/../Header/ThrustManager_prm.h:

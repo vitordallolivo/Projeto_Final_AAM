@@ -4,6 +4,7 @@ import java.nio.ByteOrder;
 public class InputData {
     // Definições dos modos
     public static final byte NOTHING_MODE = 0x00;
+    public static final byte RESET_MODE = (byte)0xCF;
     public static final byte CALIBRATION_MODE = (byte) 0xFF;
     public static final byte TARE_MODE = 0x0F;
     public static final byte MOTOR_MODE = (byte) 0xAF;
@@ -62,6 +63,7 @@ public class InputData {
     public String getModeDescription() {
         switch (mode) {
             case NOTHING_MODE: return "NOTHING MODE";
+            case RESET_MODE: return "RESET MODE";
             case CALIBRATION_MODE: return "CALIBRATION MODE";
             case TARE_MODE: return "TARE MODE";
             case MOTOR_MODE: return "MOTOR MODE";

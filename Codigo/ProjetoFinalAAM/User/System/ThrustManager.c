@@ -15,27 +15,6 @@ typedef enum {
     RECEIVE_TERMINATOR
 } ReceiverState;
 
-#pragma pack(push,1)
-typedef struct __attribute__((packed)){ // Output Data
-    int32_t current;
-    int32_t voltage;
-    int32_t power;
-    int32_t Thrust;
-    int32_t Torque;
-    int16_t RPM;
-    int16_t velocity; // 10 vezes a velocidae
-    int16_t Duty;
-    int8_t Err_table;
-}Output_data;
-#pragma pack(pop)
-
-typedef struct{
-    uint8_t Mode; // Calibration Mode, or Active Mode 
-    uint32_t CalibrationFactorThrust;
-    uint32_t CalibrationFactorTorque;
-    uint16_t Duty;
-}Input_data;
-
 //----------------------- Global Variables ---------------------
 
 uint32_t RPM_count = 0;
@@ -43,7 +22,7 @@ uint32_t RPM_count = 0;
 Input_data data_in = {0};
 Output_data data_out ={0};
 uint8_t Mode = 0;
-uint8_t Duty = 0;
+uint16_t Duty = 0;
 
 uint32_t Calib[NUM_OF_LOAD_CELL] = {1};
 
@@ -94,10 +73,7 @@ void CheckCriticalError(void){
 
 UserAction SupervisionCMP(void){
 
-    if(ReceiveData(Rxbuffer,64)){
-        // SendData((void*)Rxbuffer,64);
-    }
-
+    GetInputData(&data_in);
 
     switch (data_in.Mode) {
         case NOTHING_MODE:
@@ -161,7 +137,7 @@ void CMP_BackgroundHandler() {
     uint32_t elapsed_time = SysTick_GetElapsedTime(prev_RPM_tick);
 
 
-    uint16_t RPM = (RPM_count / 2) * (60 * MS_TIMERS_RESOLUTION) / elapsed_time;
+    int64_t RPM = (RPM_count / 2) * (60 * MS_TIMERS_RESOLUTION) / elapsed_time;
     prev_RPM_tick = SysTick_GetTick();
 
     int32_t current, power;
@@ -212,14 +188,11 @@ void CMP_BackgroundHandler() {
     data_out.velocity = velocity_temp;
 
 
-    uint16_t local_duty_out = data_out.Duty;
-    uint16_t local_duty_in = data_in.Duty;
-
-    if(local_duty_out > local_duty_in){
-        Duty = local_duty_out;
+    if(data_out.Duty > data_in.Duty){
+        Duty = data_out.Duty;
     }
     else{
-        Duty = local_duty_in;
+        Duty = data_in.Duty;
     }
 }
 
@@ -247,6 +220,13 @@ void ThrustManager_SetLoadCell(){
             data_in.Mode = NOTHING_MODE;
         break;
         
+        case NOTHING_MODE:
+        break;
+
+        case RESET_MODE:
+            NVIC_SystemReset();
+        break;
+
         default:
         break;
     }
@@ -254,8 +234,8 @@ void ThrustManager_SetLoadCell(){
 
 
 void Thrust_UpdateData(void){
-    char buffer[30];
-    sprintf(buffer,"%d;%d;%d;%d;%d;%d;%d;%d;%d.\r\n",data_out.current,data_out.voltage,data_out.power,data_out.Thrust,data_out.Torque,data_out.RPM,data_out.velocity,data_out.Duty,data_out.Err_table);
+    static char buffer[64];
+    sprintf(buffer,"%d;%d;%d;%d;%d;%d;%d;%d;%d.\r\n",data_out.current,data_out.voltage,data_out.power,data_out.Thrust,data_out.Torque,data_out.RPM,data_out.velocity,Duty,data_out.Err_table);
     SendData((void*)buffer,64);
 }
 
@@ -265,9 +245,6 @@ void Thrust_UpdateData(void){
 //=======================================================================
 
 
-ERROR_ID RampDuty(void){
-    return NONE;
-}
 
 
 int32_t newton_sqrt(int32_t x){
