@@ -45,6 +45,7 @@
     CMPInitialize();\
     Comunication_Init();\
     Appl__Initialize();\
+    PPM_Initialize();\
 }
 
 

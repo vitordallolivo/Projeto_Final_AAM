@@ -14,9 +14,10 @@
 
 // PWM RC receiver
 
-#define MINIMAL_PWM 100
+#define MINIMAL_PWM 50
 #define MAX_PWM 200
-
+#define DUTY_CONST 57333
+#define DUTY_COEFF 66333
 
 
 // Sensores

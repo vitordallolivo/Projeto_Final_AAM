@@ -48,9 +48,5 @@ void Appl__Handler(void){
     }
 
     CheckCriticalError();
-    if(Timer__MsGetStatus(TIMER_MS_COMMUNICATION) == TIMER_EXPIRED){
-        Thrust_UpdateData();
-        Timer__MsSet(TIMER_MS_COMMUNICATION,100);
-    }
-
+    Thrust_UpdateData();
 }

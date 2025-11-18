@@ -1,4 +1,5 @@
 //------------------------ Include Files ----------------------------------
+#include "Header/PPM.h"
 #include "ch32v00x_gpio.h"
 #include "ch32v00x_dma.h"
 #include "ch32v00x_usart.h"
@@ -181,17 +182,8 @@ void LoadCellTare(LOAD_CELL_TYPE cell){
 
 
 
-// Motor
-void Hal_SetMotor(unsigned char state){
-    if(state > 0){
-            Pwm__SetDutyCycle(PWM1,20);
-    }
-    else{
-            Pwm__SetDutyCycle(PWM1,0);
-    }
-}
 void Hal_SetMotorDuty(unsigned char duty){
-    Pwm__SetDutyCycle(PWM1,duty);
+    PPM_SetValue(duty);
 }
 
 

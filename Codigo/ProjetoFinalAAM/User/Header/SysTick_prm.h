@@ -19,7 +19,7 @@
 typedef enum
 {
     //Add MsTimers here
-    TIMER_MS_PWM = 0,
+    TIMER_MS_PPM = 0,
     TIMER_MS_LOADCELL,
     TIMER_MS_RPM,         
     TIMER_MS_SOUND,
@@ -34,8 +34,6 @@ typedef enum
  *
  * Recommended values in ms: 1, 5, 20, 25, 50, 100, or 1000
  */
-#define MS_TIMERS_RESOLUTION      100 //1ms , para 10khz -> 1 ms s?o 10 ticks
-
-#define HMS_TIMERS_RESOLUTION     500//5
+#define MS_TIMERS_RESOLUTION      100
 
 #endif

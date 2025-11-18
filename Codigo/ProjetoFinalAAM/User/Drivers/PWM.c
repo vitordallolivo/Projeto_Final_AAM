@@ -111,8 +111,8 @@ void Pwm__Initialize(void)
             
             if(PWM_id<6){
                 // Configura duty cycle inicial 0%
-                Pwm__SetTCFrequency(PWM_TIM2,60);
-                Pwm__SetDutyCycle(PWM_id, 10);
+                Pwm__SetTCFrequency(PWM_TIM2,50);
+                Pwm__SetDutyCycle(PWM_id, 3);
             }
             else{
                 Pwm__SetTCFrequency(PWM_TIM1,4000);
@@ -193,7 +193,7 @@ void Pwm__SetDutyCycle(PWM_ID_TYPE pwm, unsigned char duty)
         duty = 100;
     }
     
-    // Calcula pulse width baseado no per¨ªodo do timer
+    // Calcula pulse width baseado no periodo do timer
     pulse = (timer_period[PWM_TIM2] * duty) / 100;
     
     if(pwm<PWM_TIMER1){ // se estamos lidando com timer2

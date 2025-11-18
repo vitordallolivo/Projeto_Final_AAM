@@ -1,5 +1,5 @@
 User/Hal/Hal.o: ../User/Hal/Hal.c \
- /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_gpio.h \
+ /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/Header/PPM.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Core/core_riscv.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/system_ch32v00x.h \
@@ -9,6 +9,7 @@ User/Hal/Hal.o: ../User/Hal/Hal.c \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_dma.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_exti.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_flash.h \
+ /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_gpio.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_i2c.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/ch32v00x_it.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Debug/debug.h \
@@ -22,10 +23,12 @@ User/Hal/Hal.o: ../User/Hal/Hal.c \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_wwdg.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_opa.h \
  /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x.h \
+ /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/Header/SysTick.h \
+ /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/Header/SysTick_prm.h \
  ../User/Hal/../Header/Hal.h ../User/Hal/../Header/Hal_prm.h \
  ../User/Hal/../Header/ADC.h ../User/Hal/../Header/ADC_prm.h \
  ../User/Hal/../Header/PWM.h ../User/Hal/../Header/PWM_prm.h
-/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_gpio.h:
+/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/Header/PPM.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Core/core_riscv.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/system_ch32v00x.h:
@@ -35,6 +38,7 @@ User/Hal/Hal.o: ../User/Hal/Hal.c \
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_dma.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_exti.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_flash.h:
+/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_gpio.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_i2c.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/ch32v00x_it.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Debug/debug.h:
@@ -48,6 +52,8 @@ User/Hal/Hal.o: ../User/Hal/Hal.c \
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_wwdg.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x_opa.h:
 /home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/Peripheral/inc/ch32v00x.h:
+/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/Header/SysTick.h:
+/home/vitor/Documentos/Facul/AAM/Projeto_final/Codigo/ProjetoFinalAAM/User/Header/SysTick_prm.h:
 ../User/Hal/../Header/Hal.h:
 ../User/Hal/../Header/Hal_prm.h:
 ../User/Hal/../Header/ADC.h:

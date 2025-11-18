@@ -2,6 +2,7 @@
 #include "../Header/Comunication.h"
 #include "../Header/SysTick.h"
 #include "../Header/Sound.h"
+#include "Header/PPM.h"
 #include "ch32v00x_dma.h"
 #include "ch32v00x_usart.h"
 #include <math.h>
@@ -102,6 +103,7 @@ void CMPInitialize(void){
 }
 
 void CMP_BackgroundHandler() {
+   
     /*
     * Note: The use of floats and doubles has been completely avoided in this code,
     * as the compiler cannot handle these values efficiently. Therefore, all
@@ -166,7 +168,7 @@ void CMP_BackgroundHandler() {
     power = big_power / 1000;
 
     if(LenghtPWM > MINIMAL_PWM && LenghtPWM < MAX_PWM){
-        data_out.Duty = LenghtPWM/2 - MINIMAL_PWM;
+        data_out.Duty = (uint16_t)((uint32_t)(((uint32_t)LenghtPWM - 89)));
         Error_Erase(ERROR_MOTOR,RC_RECEIVER_FAILED);
     } else {
         Error_Detect(ERROR_MOTOR,RC_RECEIVER_FAILED);
@@ -198,10 +200,10 @@ void CMP_BackgroundHandler() {
 
 void ThrustManager_SetMotorAction(MotorAction act){
     if(act == Turn_off){
-        Hal_SetMotor(0);
+        PPM_SetValue(Duty);
     }
     else{
-        Hal_SetMotorDuty(Duty);
+        PPM_SetValue(Duty);
     }
 }
 
@@ -278,8 +280,11 @@ void EXTI7_0_IRQHandler(void){
     if(EXTI_GetITStatus(EXTI_Line2) != RESET) {
         PWM_tick = SysTick_GetTick();
         if(PWM_tick>LastPWM_tick){
-            LenghtPWM = PWM_tick - LastPWM_tick;
+            if((PWM_tick - LastPWM_tick) < 500){
+                LenghtPWM = PWM_tick - LastPWM_tick;
+            }
             LastPWM_tick = PWM_tick;
+
         }
         EXTI_ClearITPendingBit(EXTI_Line2);
     }

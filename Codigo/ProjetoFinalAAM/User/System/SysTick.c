@@ -10,7 +10,7 @@ volatile SYSTICK_STATE_TYPE SysTick_State = SYSTICK_DISABLED;
 typedef struct
 {
 	TIMER_STATUS Status;
-    unsigned short int Count;
+    uint32_t Count;
 }TYPE_MSTIMER;
 
 TYPE_MSTIMER Ms_Timers[NUM_OF_MS_TIMERS];
@@ -102,8 +102,7 @@ void SysTick_Init_HCLK(uint32_t frequency)
 
 void Timer__MsHandler(void)
 {
-    
-    if(Flag_tickMS == MS_TIMERS_RESOLUTION){
+    if(Flag_tickMS >= MS_TIMERS_RESOLUTION){
         unsigned char i;                                	
 
         for(i=0; i < NUM_OF_MS_TIMERS; i++)                       
@@ -124,19 +123,17 @@ void Timer__MsHandler(void)
  
 void Timer__MsSet(MS_TIMER_NAME id, uint32_t ms_value)
 {
-	unsigned long time;                           
 
 	if (id < NUM_OF_MS_TIMERS)
 	{
-		if (ms_value < MS_TIMERS_RESOLUTION)                     
+		if (ms_value < 0)                     
 		{
 			Ms_Timers[id].Status = TIMER_EXPIRED;                   
 		}
 		else                                        
 		{
 			Ms_Timers[id].Status = TIMER_EXPIRED;      
-			time = ms_value / MS_TIMERS_RESOLUTION;
-			Ms_Timers[id].Count = (unsigned short int)time;  
+			Ms_Timers[id].Count = (uint32_t)ms_value*MS_TIMERS_RESOLUTION;  
 			if (Ms_Timers[id].Count != 0)
 			{
 				Ms_Timers[id].Status = TIMER_IS_RUNNING;		
@@ -144,6 +141,8 @@ void Timer__MsSet(MS_TIMER_NAME id, uint32_t ms_value)
 		}
 	}
 }
+
+
 
 //-----------------------------------------------------------------------------------------------------------------
 /**
