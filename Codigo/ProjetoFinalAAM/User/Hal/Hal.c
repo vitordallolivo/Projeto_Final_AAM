@@ -194,10 +194,10 @@ void Hal__SetBuzzer(unsigned char state){
     #if (USED_BUZZER == ENABLE)
 
         if(state > 0){
-            Pwm__SetDutyCycle(PWM6,5);
+            Pwm__SetDutyCycle(PWM6,10);
         }
         else{
-            Pwm__SetDutyCycle(PWM6,0);
+            TIM1->CH2CVR = 0;
         }
 
     #endif

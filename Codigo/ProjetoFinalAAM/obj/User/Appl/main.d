@@ -27,9 +27,10 @@ User/Appl/main.o: ../User/Appl/main.c ../User/Appl/../Header/main.h \
  ../User/Appl/../Header/SysTick_prm.h ../User/Appl/../Header/ADC.h \
  ../User/Appl/../Header/ADC_prm.h ../User/Appl/../Header/Hal.h \
  ../User/Appl/../Header/Hal_prm.h ../User/Appl/../Header/PWM.h \
- ../User/Appl/../Header/PWM_prm.h ../User/Appl/../Header/SysError.h \
- ../User/Appl/../Header/../Header/Hal.h ../User/Appl/../Header/Sound.h \
- ../User/Appl/../Header/Sound_prm.h ../User/Appl/../Header/Comunication.h \
+ ../User/Appl/../Header/PWM_prm.h ../User/Appl/../Header/PPM.h \
+ ../User/Appl/../Header/SysError.h ../User/Appl/../Header/../Header/Hal.h \
+ ../User/Appl/../Header/Sound.h ../User/Appl/../Header/Sound_prm.h \
+ ../User/Appl/../Header/Comunication.h \
  ../User/Appl/../Header/../Header/ThrustManager.h \
  ../User/Appl/../Header/../Header/SysError.h \
  ../User/Appl/../Header/../Header/ThrustManager_prm.h \
@@ -68,6 +69,7 @@ User/Appl/main.o: ../User/Appl/main.c ../User/Appl/../Header/main.h \
 ../User/Appl/../Header/Hal_prm.h:
 ../User/Appl/../Header/PWM.h:
 ../User/Appl/../Header/PWM_prm.h:
+../User/Appl/../Header/PPM.h:
 ../User/Appl/../Header/SysError.h:
 ../User/Appl/../Header/../Header/Hal.h:
 ../User/Appl/../Header/Sound.h:

@@ -115,7 +115,7 @@ void Pwm__Initialize(void)
                 Pwm__SetDutyCycle(PWM_id, 3);
             }
             else{
-                Pwm__SetTCFrequency(PWM_TIM1,4000);
+                Pwm__SetTCFrequency(PWM_TIM1,1000);
                 Pwm__SetDutyCycle(PWM_id,0);
             }
 

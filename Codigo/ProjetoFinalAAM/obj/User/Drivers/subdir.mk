@@ -5,21 +5,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../User/Drivers/ADC.c \
-../User/Drivers/PWM.c 
+../User/Drivers/ADC.c 
 
 C_DEPS += \
-./User/Drivers/ADC.d \
-./User/Drivers/PWM.d 
+./User/Drivers/ADC.d 
 
 OBJS += \
-./User/Drivers/ADC.o \
-./User/Drivers/PWM.o 
+./User/Drivers/ADC.o 
 
 
 EXPANDS += \
-./User/Drivers/ADC.c.253r.expand \
-./User/Drivers/PWM.c.253r.expand 
+./User/Drivers/ADC.c.253r.expand 
 
 
 

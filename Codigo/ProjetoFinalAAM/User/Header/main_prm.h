@@ -9,6 +9,7 @@
 #include "ADC.h"
 #include "Hal.h"
 #include "PWM.h"
+#include "PPM.h"
 #include "SysError.h"
 #include "Sound.h"
 #include "Comunication.h"

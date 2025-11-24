@@ -74,7 +74,7 @@
 			(mirror no)
 			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "")
+			(outputdirectory "./")
 		)
 	)
 	(net 0 "")
@@ -933,7 +933,7 @@
 		(descr "Through hole straight pin header, 1x03, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x03 2.54mm single row")
 		(property "Reference" "J8"
-			(at 0 -2.38 0)
+			(at -2.9 6 0)
 			(layer "F.SilkS")
 			(uuid "9b12de7c-d391-443c-9040-4f2f8e0af5a9")
 			(effects
@@ -6614,7 +6614,7 @@
 		(descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOIC SO")
 		(property "Reference" "U3"
-			(at 0 3.4 90)
+			(at -0.66 -3.79 90)
 			(layer "B.SilkS")
 			(uuid "ff58cc3e-2ae5-45ba-92d5-b17350cc3cd2")
 			(effects
@@ -9047,7 +9047,7 @@
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
 		(tags "capacitor handsolder")
 		(property "Reference" "C7"
-			(at -2.6125 -1.375 90)
+			(at 0.0525 -1.575 90)
 			(layer "B.SilkS")
 			(uuid "411cae61-549b-43f4-beb4-2f2d2f0955d1")
 			(effects
@@ -10272,82 +10272,6 @@
 		(fill no)
 		(layer "Edge.Cuts")
 		(uuid "9812dd79-37e3-45d7-9236-595b2fcb2f19")
-	)
-	(dimension
-		(type orthogonal)
-		(layer "User.1")
-		(uuid "0915e067-b6db-4834-ae40-821abd125f06")
-		(pts
-			(xy 95.925 49.375) (xy 95.925 129.375)
-		)
-		(height 40.075)
-		(orientation 1)
-		(format
-			(prefix "")
-			(suffix "")
-			(units 3)
-			(units_format 0)
-			(precision 4)
-			(suppress_zeroes yes)
-		)
-		(style
-			(thickness 0.1)
-			(arrow_length 1.27)
-			(text_position_mode 0)
-			(arrow_direction outward)
-			(extension_height 0.58642)
-			(extension_offset 0.5)
-			(keep_text_aligned yes)
-		)
-		(gr_text "80"
-			(at 134.85 89.375 90)
-			(layer "User.1")
-			(uuid "0915e067-b6db-4834-ae40-821abd125f06")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-	)
-	(dimension
-		(type orthogonal)
-		(layer "User.1")
-		(uuid "c11980d9-fe26-459d-af79-e829a439c7a2")
-		(pts
-			(xy 45.925 129.375) (xy 95.925 129.375)
-		)
-		(height 9.625)
-		(orientation 0)
-		(format
-			(prefix "")
-			(suffix "")
-			(units 3)
-			(units_format 0)
-			(precision 4)
-			(suppress_zeroes yes)
-		)
-		(style
-			(thickness 0.1)
-			(arrow_length 1.27)
-			(text_position_mode 0)
-			(arrow_direction outward)
-			(extension_height 0.58642)
-			(extension_offset 0.5)
-			(keep_text_aligned yes)
-		)
-		(gr_text "50"
-			(at 70.925 137.85 0)
-			(layer "User.1")
-			(uuid "c11980d9-fe26-459d-af79-e829a439c7a2")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 	)
 	(segment
 		(start 54.53 86.95)

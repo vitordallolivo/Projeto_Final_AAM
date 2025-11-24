@@ -10,7 +10,6 @@ RM := rm -rf
 -include sources.mk
 -include User/System/subdir.mk
 -include User/Hal/subdir.mk
--include User/Drivers/subdir.mk
 -include User/Appl/subdir.mk
 -include User/subdir.mk
 -include Startup/subdir.mk

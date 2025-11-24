@@ -57,18 +57,6 @@ void CheckCriticalError(void){
     for (id = NO_VOLTAGE; id < NUM_ERRORS; id++) {
         data_out.Err_table|=(Error_GetStatus(id)<<(id-1)) ; // Escreve na tabela de erros
     }
-
-    if(data_out.Err_table & (1<<(NO_VOLTAGE-1))){
-        Sounds__PlaySounds(PLAY_ERROR,NO_VOLTAGE);
-    }
-    else {
-        if(data_out.Err_table & (1<<(NO_CURRENT-1))){
-            Sounds__PlaySounds(PLAY_ERROR,NO_CURRENT);
-        }
-        else{
-            Sounds__PlaySounds(PLAY_NO_SOUND,NONE);
-        }   
-    }
     
 }
 

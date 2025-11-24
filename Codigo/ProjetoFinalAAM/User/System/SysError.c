@@ -11,7 +11,7 @@
 #define MESSAGE_ERROR_ID 0
 #define MESSAGE_ERROR_TYPE 1
 
-#define ERROR_PLAY_INTERVAL 10000  
+#define ERROR_PLAY_INTERVAL 100000
 
 // ------------------------------- Global Variables ------------------------------- 
 
