@@ -1,0 +1,39 @@
+#ifndef SYSTICK_PRM_H
+#define SYSTICK_PRM_H
+
+// =============================================================================
+// CONFIGURA??O DO SYSTICK
+// =============================================================================
+
+// Frequ¨ºncia do SysTick em Hz (1000 = 1ms, 100 = 10ms, etc)
+#define SYSTICK_FREQUENCY_HZ         100000 // 10us
+
+
+// Prioridade da interrupcao do SysTick (0 = m¨¢xima prioridade)
+#define SYSTICK_PRIORITY             0
+
+// Habilita/desabilita funcoes de debug
+#define SYSTICK_DEBUG_ENABLED        1
+
+//------------------------- Defines, Enumerations --------------------------------
+typedef enum
+{
+    //Add MsTimers here
+    TIMER_MS_PPM = 0,
+    TIMER_MS_LOADCELL,
+    TIMER_MS_RPM,         
+    TIMER_MS_SOUND,
+    TIMER_MS_COMMUNICATION,
+    // Do NOT REMOVE the line below
+    NUM_OF_MS_TIMERS			// Total timers installed -- DON?T remove it
+} MS_TIMER_NAME;
+
+
+/**
+ * TIMERS RESOLUTION
+ *
+ * Recommended values in ms: 1, 5, 20, 25, 50, 100, or 1000
+ */
+#define MS_TIMERS_RESOLUTION      100
+
+#endif

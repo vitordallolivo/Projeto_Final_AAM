@@ -1,0 +1,19 @@
+CH32V003F4P6:
+
+PA1 -> ADC1
+PA2 -> ADC2
+PC4 -> ADC3
+
+PC0 -> HX711 DT
+PC1 -> HX711 SCK
+PC2 -> HX711 (reserva/função extra)
+PC3 -> HX711 (reserva/função extra)
+
+PD0 -> RPM (Interrupção EXTI0)
+PD2 -> PWM Input (TIM1_CH1)
+PD3 -> Servo PWM Out (TIM2_CH2)
+PD5 -> USART_TX
+PD6 -> USART_RX
+
+Pinos Livres:
+PC5, PC6, PC7, PD1, PD7
